@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="192"
+		 cornerRadius="5" backgroundAlpha=".5" borderAlpha=".8" borderColor="0xf9f9fa"
+		 creationComplete="bordercontainer1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.greensock.TweenLite;
+			import com.greensock.easing.*;
+			
+			import cycle.Color;
+			
+			import fl.core.UIComponent;
+			
+			import flash.filters.BitmapFilter;
+			import flash.filters.BitmapFilterQuality;
+			import flash.filters.DropShadowFilter;
+			
+			import mx.events.FlexEvent;
+			
+			import resource.WebResource;
+			
+			private var iconW:uint;
+			private var iconH:uint;
+			private var vgap:uint = 8;
+			private var hgap:uint = 8;
+			private var row:uint;
+			private var _com:String = null;
+			private var _curColorList:Array;
+			private var configXML:XML;
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				TweenLite.to(this, .3, {transformAroundCenter:{scaleX:0, scaleY: 0}, ease:Cubic.easeIn, alpha:0, onComplete:hideSelf});
+			}
+			
+			private function hideSelf():void
+			{
+				this.visible = false;
+			}
+
+			protected function bordercontainer1_creationCompleteHandler(event:FlexEvent):void
+			{
+				var filter:BitmapFilter = getBitmapFilter();
+				var myFilters:Array = new Array();
+				myFilters.push(filter);
+				this.filters = myFilters;
+			}
+			public function setConfigXML(xml:XML):void
+			{
+				configXML = xml;
+				iconW = configXML.@width;
+				iconH = configXML.@height;
+			}
+			private function getBitmapFilter(co:Number = 0x000000, an:Number = 0, al:Number = 0.8, bx:Number = 8, by:Number = 8, dis:Number = 1, str:Number = 0.65):BitmapFilter {
+				var color:Number = co;
+				var angle:Number = an;
+				var alpha:Number = al;
+				var blurX:Number = bx;
+				var blurY:Number = by;
+				var distance:Number = dis;
+				var strength:Number = str;
+				var inner:Boolean = false;
+				var knockout:Boolean = false;
+				var quality:Number = BitmapFilterQuality.HIGH;
+				return new DropShadowFilter(distance,
+					angle,
+					color,
+					alpha,
+					blurX,
+					blurY,
+					strength,
+					quality,
+					inner,
+					knockout);
+			}
+			public function listColor():void
+			{
+				if(istage){
+				
+					if(istage.numChildren){
+						
+						while(istage.numChildren){
+							
+							istage.removeChildAt(0);
+							
+						}
+						
+					}
+					
+				}
+				var comXML:XML = XML(configXML[_com]);
+				
+				_curColorList = [];
+				_curColorList = String(configXML[_com].@colorValue).split(",");
+				
+				var column:uint = uint(154 / (hgap + iconW));
+				
+				var len:uint = comXML.@colorNum;
+				row = Math.ceil(len / column);
+				for (var i:uint = 0; i < len; i++){
+					
+					var colorIcon:Color = new Color(_com, i, Number(_curColorList[i]));
+					colorIcon.mouseChildren = false;
+					istage.addChild(colorIcon);
+					colorIcon.addEventListener(MouseEvent.MOUSE_OVER, scaleOut);
+					colorIcon.addEventListener(MouseEvent.MOUSE_OUT, scaleIn);
+					colorIcon.addEventListener(MouseEvent.CLICK, changeButtonColor);
+					colorIcon.x = (i % column) * (hgap + iconW) + 17;
+					colorIcon.y = uint(i / column) * (vgap + iconH) + 63;
+					this.dispatchEvent(new Event(Event.RENDER));
+					
+				}
+				layoutSize();
+			}
+			private function layoutSize():void
+			{
+				rect.height = row * iconH + (row - 1) * vgap + 10 + rect.y;
+				this.height = rect.height + 5 + rect.y;
+			}
+			private function scaleOut(event:MouseEvent):void
+			{
+				var colorIcon:Color = event.target as Color;
+				TweenLite.to(colorIcon, .3, {transformAroundCenter:{scaleX:1.2, scaleY: 1.2}});
+			}
+			private function scaleIn(event:MouseEvent):void
+			{
+				var colorIcon:Color = event.target as Color;
+				TweenLite.to(colorIcon, .3, {transformAroundCenter:{scaleX:1, scaleY: 1}});
+			}
+			private function changeButtonColor(event:MouseEvent):void
+			{
+				YongJiuC.app.changeButtonColor((event.target as Color).value);
+				YongJiuC.app.changeArrayColor((event.target as Color).order);
+				YongJiuC.app.loadCom((event.target as Color).order);
+			}
+			public function chooseRandomColor():void
+			{
+				var allColors:Object = {"body": getColorList("body"), "brake": getColorList("brake"), "chain": getColorList("chain"),
+					"crankset": getColorList("crankset"), "group": getColorList("group"), "hand": getColorList("hand"), "innerRound": getColorList("innerRound"),
+					"round": getColorList("round"), "seat": getColorList("seat")};
+				for (var key:String in allColors){
+					
+					if(key == "crankset" || key == "chain"){
+						
+						continue;
+						
+					}
+					var ran:Number = Math.random();
+					var coo:uint = uint(allColors[key] * ran);
+					YongJiuC.app.changeArrayColor(coo, key);
+					
+				}
+				YongJiuC.app.loadComponents();
+				
+			}
+			private function getColorList(name:String):Number
+			{
+				return configXML[name].@colorNum;
+			}
+			public function set com(str:String):void
+			{
+				_com = str;
+			}
+			public function get com():String{
+				
+				return _com;
+				
+			}
+
+			protected function bordercontainer2_mouseDownHandler(event:MouseEvent):void
+			{
+				this.startDrag();
+			}
+			
+			protected function bordercontainer2_mouseUpHandler(event:MouseEvent):void
+			{
+				this.stopDrag();
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Rect width="184" bottomLeftRadiusX="5" bottomRightRadiusX="5" x="3" y="32" id="rect">
+		<s:fill>
+			<s:SolidColor color="0xf9f9fa" />
+		</s:fill>
+	</s:Rect>
+	<s:Label text="选择一种颜色" x="15" y="40" />
+	<s:BorderContainer width="190" backgroundImage="{WebResource.BlackTop}" height="29" borderVisible="false"
+					   mouseDown="bordercontainer2_mouseDownHandler(event)" mouseUp="bordercontainer2_mouseUpHandler(event)">
+		<s:layout>
+			<s:HorizontalLayout verticalAlign="middle" gap="110" paddingLeft="10" />
+		</s:layout>
+		<s:Label text="颜色/图案" fontSize="12" color="0xffffff" />
+		<s:Button skinClass="skins.CloseButton" width="9" height="9" buttonMode="true" click="button1_clickHandler(event)" />
+	</s:BorderContainer>
+	<s:SpriteVisualElement id="istage" width="100%" height="100%" />
+</s:BorderContainer>

@@ -1,0 +1,13 @@
+<colors width = "14" height = "14">
+<color icon = "resource/color0.png" value = "0xff0000" />
+<color icon = "resource/color1.png" value = "0x00ffff" />
+<color icon = "resource/color2.png" value = "0x00ff00" />
+<color icon = "resource/color3.png" value = "0x00ddee" />
+<color icon = "resource/color4.png" value = "0xddeeff" />
+<color icon = "resource/color5.png" value = "0xffeedd" />
+<color icon = "resource/color6.png" value = "0xaaeeff" />
+<color icon = "resource/color7.png" value = "0xbbffee" />
+<color icon = "resource/color8.png" value = "0xabcef" />
+<color icon = "resource/color9.png" value = "0xdefab" />
+<color icon = "resource/color10.png" value = "0xfdabd" />
+</colors>

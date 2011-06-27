@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="960" minHeight="600"
+			   backgroundColor="#CACCCF" width="960" height="600" creationComplete="application1_creationCompleteHandler(event)" xmlns:local="*" usePreloader="false">
+	<fx:Script>
+		<![CDATA[
+			import cycle.*;
+			import cycle.IDirection;
+			
+			import fl.controls.Label;
+			
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			import mx.preloaders.Preloader;
+			
+			import resource.WebResource;
+			
+			import skins.BikeBrake;
+			import skins.BikeGroupButton;
+			import skins.BodyButton;
+			import skins.PreorderButton;
+			import skins.RandomButton;
+			
+			import spark.primitives.Rect;
+			
+			public static var app:YongJiuC = null;
+			
+			private var loading:MovieClip = new (WebResource.Loading)();
+			
+			private var curSelected:BottomButton;
+			
+			private var preSelected:BottomButton;
+			
+			private var curColor:Number = undefined;
+			private var curColorIndex:uint = 0;
+			//                        部位     颜色
+			private var arr:Array = [["body", "0"], ["hand", "0"], ["group", "0"], ["round", "0"],
+									["innerRound", "0"], ["crankset", "0"], ["seat", "0"],
+									["brake", "0"], ["chain", "0"]];
+			
+			private var dir:uint = 0;
+			private var loader:Loader;
+			
+			private var colorPickr:ColorPickr = new ColorPickr();
+			
+			private var obj:Object;
+			private var index:uint = 0;
+			
+			private var bike:IDirection;
+			
+			private var colorXML:URLRequest = new URLRequest("config.xml");
+			private var urlLoader:URLLoader = new URLLoader();
+
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				app = this;
+				this.addElement(colorPickr);
+				colorPickr.visible = false;
+				colorPickr.x = 10;
+				colorPickr.y = 100;
+				loadConfigXML();
+				loadComponents();
+			}
+			private function loadConfigXML():void
+			{
+				urlLoader.addEventListener(Event.COMPLETE, colorXML_loadCompleteHandler);
+				urlLoader.load(colorXML);
+			}
+			private function colorXML_loadCompleteHandler(event:Event):void{
+				
+				urlLoader.removeEventListener(Event.COMPLETE, colorXML_loadCompleteHandler);
+				var configXML:XML = XML(event.target.data);
+				urlLoader = null;
+				colorXML = null;
+				colorPickr.setConfigXML(configXML);
+				
+			}
+			public function changeArrayColor(num:uint, name:String = null):void
+			{
+				var curN:String;
+				if(curSelected){
+					
+					curN = curSelected.id;
+					
+				}
+				if(name){
+					
+					curN = name;
+					
+				}
+				for each(var item:Array in arr){
+					
+					if(item[0] == curN){
+						
+						item[1] = num + "";
+						return;
+						
+					}
+					
+				}
+			}
+			public function loadCom(o:uint):void
+			{
+				if(!curSelected){
+					
+					return;
+					
+				}
+				var name:String = curSelected.id;
+				if(!loader){
+					
+					loader = new Loader();
+					loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loadSingleCom);
+					
+				}
+				loader.load(new URLRequest(Config.resPath + name + "/" + dir + "/" + o + Config.comFormat));
+			}
+			private function loadSingleCom(event:Event):void
+			{
+				loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadSingleCom);
+				var mc:MovieClip = event.target.content as MovieClip;
+				loader = null;
+				bike.replaceComponent(curSelected.id, mc);
+			}
+			private function startLoading():void
+			{
+				istage.mouseEnabled = false;
+				istage.mouseChildren = false;
+				istage.addChild(loading);
+				loading.x = (this.width - loading.width) / 2;
+				loading.y = 201;
+			}
+			private function finishLoading():void
+			{
+				istage.mouseEnabled = true;
+				istage.mouseChildren = true;
+				istage.removeChild(loading);
+			}
+			public function loadComponents():void
+			{
+				startLoading();
+				var len:uint = arr.length;
+				if(index >= len){
+					
+					// 大爷的 这里纯粹是为了让compiler把各个方向的类编译进去 凸囧凸
+					var shit:Direction;
+					// 申明完了
+					if(bike){
+						
+						istage.removeChild(bike as Sprite);
+						
+					}
+					bike = new (getDefinitionByName("cycle.Direction") as Class)();
+					bike.addComponents(dir, obj);
+					var nb:Sprite = bike as Sprite;
+					var ui:UIComponent = new UIComponent();
+					ui.addChild(nb);
+					istage.addChild(nb);
+					nb.y = 100;
+					nb.x = (this.width - nb.width) / 2;
+					finishLoading();
+					index = 0;
+					if(loader){
+						
+						loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadComplete_handler);
+						loader = null;
+						
+					}
+					return;
+					
+				}
+				if(!loader){
+					
+					loader = new Loader();
+					loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loadComplete_handler);
+					
+				}
+				loader.load(new URLRequest(Config.resPath + arr[index][0] + "/" + dir + "/" + arr[index][1] + Config.comFormat));
+			}
+			public function showColorPickr(c:String):void
+			{
+				if(!colorPickr){
+					
+					colorPickr = new ColorPickr();
+					
+				}
+				colorPickr.com = c;
+				colorPickr.listColor();
+				colorPickr.scaleX = 1;
+				colorPickr.scaleY = 1;
+				colorPickr.alpha = 1;
+				colorPickr.visible = true;
+				colorPickr.x = 10;
+				colorPickr.y = 100;
+				setCurSelected(c);
+			}
+			private function loadComplete_handler(event:Event):void{
+				
+				var mc:MovieClip = event.target.content as MovieClip;
+				if(!obj){
+					
+					obj = {};
+					
+				}
+				obj[arr[index][0]] = mc;
+				index++;
+				loadComponents();
+				
+			}
+			protected function bottombutton1_clickHandler(event:MouseEvent):void
+			{
+				curSelected = event.currentTarget as BottomButton;
+				showColorPickr(curSelected.id);
+				setPreSelected(curSelected);
+			}
+
+			protected function bottombutton2_clickHandler(event:MouseEvent):void
+			{
+				curSelected = event.currentTarget as BottomButton;
+				showColorPickr(curSelected.id);
+				setPreSelected(curSelected);
+			}
+
+			protected function bottombutton3_clickHandler(event:MouseEvent):void
+			{
+				curSelected = event.currentTarget as BottomButton;
+				showColorPickr(curSelected.id);
+				setPreSelected(curSelected);
+			}
+
+			protected function bottombutton4_clickHandler(event:MouseEvent):void
+			{
+				curSelected = event.currentTarget as BottomButton;
+				showColorPickr(curSelected.id);
+				setPreSelected(curSelected);
+			}
+
+			protected function bottombutton5_clickHandler(event:MouseEvent):void
+			{
+				curSelected = event.currentTarget as BottomButton;
+				showColorPickr(curSelected.id);
+				setPreSelected(curSelected);
+			}
+
+			protected function bottombutton6_clickHandler(event:MouseEvent):void
+			{
+				curSelected = event.currentTarget as BottomButton;
+				showColorPickr(curSelected.id);
+				setPreSelected(curSelected);
+			}
+
+			protected function bottombutton7_clickHandler(event:MouseEvent):void
+			{
+				curSelected = event.currentTarget as BottomButton;
+				showColorPickr(curSelected.id);
+				setPreSelected(curSelected);
+			}
+
+			protected function bottombutton8_clickHandler(event:MouseEvent):void
+			{
+				curSelected = event.currentTarget as BottomButton;
+				showColorPickr(curSelected.id);
+				setPreSelected(curSelected);
+			}
+
+			protected function bottombutton9_clickHandler(event:MouseEvent):void
+			{
+				var tt:Array = arr;
+			}
+			private function setPreSelected(target:BottomButton):void{
+				
+				if(preSelected){
+					
+					if(preSelected.id != target.id){
+						
+						return;
+						
+					}
+					
+				}
+				if(curColor){
+					
+					target.changeColor(curColor);
+					
+				}
+				preSelected = target;
+				/* if(preSelected){
+					
+					preSelected.clearColor();
+					
+				}
+				if(curColor){
+					
+					target.changeColor(curColor);
+					
+				}
+				preSelected = target; */
+				
+			}
+			private function setCurSelected(str:String):void
+			{
+				if(this[str]){
+					
+					this.curSelected = this[str];
+					setPreSelected(curSelected);
+					
+				}
+			}
+			public function changeButtonColor(value:Number):void
+			{
+				curColor = value;
+				if(!curSelected){
+					
+					return;
+					
+				}
+				curSelected.changeColor(value);
+				
+			}
+
+			protected function bottombutton10_clickHandler(event:MouseEvent):void
+			{
+				if(colorPickr){
+					
+					colorPickr.chooseRandomColor();
+					
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Button skinClass="skins.LogoButton" id="logoBtn" width="70" height="28" x="100" buttonMode="true" />
+	<s:HGroup verticalAlign="middle" horizontalAlign="center" x="250" gap="30">
+		<s:Button skinClass="skins.HomeButton" id="homeBtn" width="82" height="25" buttonMode="true" />
+		<s:Button skinClass="skins.ShopButton" id="shopBtn" width="77" height="25" buttonMode="true" />
+		<s:Button skinClass="skins.DesignButton" id="designBtn" width="89" height="25" buttonMode="true" />
+		<s:Button skinClass="skins.ShareButton" id="shareBtn" width="86" height="25" buttonMode="true" />
+	</s:HGroup>
+	<s:HGroup width="100%" horizontalAlign="center" verticalAlign="middle" bottom="70" gap="30" id="btnGroup">
+		<local:BottomButton buttonSkin="{skins.RandomButton}" label="随机秀" labelColor="#e2322b" topGap="10" buttonMode="true" click="bottombutton10_clickHandler(event)" />
+		<mx:VRule height="50" strokeColor="#000000" shadowColor="#000000" width="1" />
+		<local:BottomButton buttonSkin="{skins.BodyButton}" label="车 架" labelColor="#000000" id="body" topGap="10" buttonMode="true" click="bottombutton1_clickHandler(event)" />
+		<local:BottomButton buttonSkin="{skins.HandButton}" label="把 套" labelColor="#000000" id="hand" topGap="20" buttonMode="true" click="bottombutton2_clickHandler(event)" />
+		<local:BottomButton buttonSkin="{skins.RoundButton}" label="外 胎" labelColor="#000000" id="round" topGap="5" buttonMode="true" click="bottombutton3_clickHandler(event)" />
+		<local:BottomButton buttonSkin="{skins.InnerRoundButton}" label="车 圈" labelColor="#000000" id="innerRound" topGap="5" buttonMode="true" click="bottombutton4_clickHandler(event)" />
+		<local:BottomButton buttonSkin="{skins.SeatButton}" label="坐 椅" labelColor="#000000" id="seat" topGap="10" buttonMode="true" click="bottombutton5_clickHandler(event)" />
+		<local:BottomButton buttonSkin="{skins.OverFenderButton}" label="挡泥板" labelColor="#000000" topGap="10" buttonMode="true" click="bottombutton6_clickHandler(event)" />
+		<local:BottomButton buttonSkin="{skins.BikeBrake}" label="刹车线" labelColor="#000000" id="brake" topGap="10" buttonMode="true" click="bottombutton7_clickHandler(event)" />
+		<local:BottomButton buttonSkin="{skins.BikeGroupButton}" label="编 组" labelColor="#000000" id="group" topGap="10" buttonMode="true" click="bottombutton8_clickHandler(event)" />
+		<local:BottomButton buttonSkin="{skins.PreorderButton}" label="填写订单" labelColor="#000000" topGap="10" buttonMode="true" click="bottombutton9_clickHandler(event)" />
+	</s:HGroup>
+	<mx:HRule width="900" horizontalCenter="0" bottom="50" strokeColor="#a8a8a8" shadowColor="#a8a8a8"/>
+	<s:HGroup horizontalAlign="right" verticalAlign="middle" width="100%" paddingRight="60" bottom="20">
+		<s:BitmapImage source="{WebResource.Price}" />
+		<s:Label text="798" fontSize="16" />
+	</s:HGroup>
+	<s:SpriteVisualElement id="istage" width="100%" height="100%" mouseEnabled="false" mouseChildren="true" />
+</s:Application>

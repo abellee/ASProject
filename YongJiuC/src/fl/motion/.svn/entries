@@ -1,0 +1,238 @@
+10
+
+dir
+0
+https://abellee87@abellee87.googlecode.com/svn/trunk/ActionScript%20Project/YongJiuC/src/fl/motion
+https://abellee87@abellee87.googlecode.com/svn
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+43a9f31b-05ed-d3b2-51b3-f8445193c218
+
+Color.as
+file
+
+
+
+add
+
+BezierEase.as
+file
+
+
+
+add
+
+MatrixTransformer3D.as
+file
+
+
+
+add
+
+FunctionEase.as
+file
+
+
+
+add
+
+MatrixTransformer.as
+file
+
+
+
+add
+
+SimpleEase.as
+file
+
+
+
+add
+
+AnimatorFactory3D.as
+file
+
+
+
+add
+
+AdjustColor.as
+file
+
+
+
+add
+
+Tweenables.as
+file
+
+
+
+add
+
+AnimatorFactoryUniversal.as
+file
+
+
+
+add
+
+ITween.as
+file
+
+
+
+add
+
+AnimatorFactoryBase.as
+file
+
+
+
+add
+
+KeyframeBase.as
+file
+
+
+
+add
+
+RotateDirection.as
+file
+
+
+
+add
+
+MotionBase.as
+file
+
+
+
+add
+
+Source.as
+file
+
+
+
+add
+
+Animator3D.as
+file
+
+
+
+add
+
+motion_internal.as
+file
+
+
+
+add
+
+AnimatorFactory.as
+file
+
+
+
+add
+
+ColorMatrix.as
+file
+
+
+
+add
+
+BezierSegment.as
+file
+
+
+
+add
+
+AnimatorUniversal.as
+file
+
+
+
+add
+
+Keyframe.as
+file
+
+
+
+add
+
+easing
+dir
+
+
+
+add
+
+AnimatorBase.as
+file
+
+
+
+add
+
+Motion.as
+file
+
+
+
+add
+
+MotionEvent.as
+file
+
+
+
+add
+
+CustomEase.as
+file
+
+
+
+add
+
+DynamicMatrix.as
+file
+
+
+
+add
+
+Animator.as
+file
+
+
+
+add
+

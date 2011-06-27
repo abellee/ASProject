@@ -1,0 +1,11 @@
+<colorConfig width="14" height="14">
+<body colorNum="14" colorValue="0xff0000, 0x00ff00, 0xddffee, 0xeeffdd, 0xaabbcc, 0xff0000, 0x00ff00, 0xddffee, 0xeeffdd, 0xaabbcc, 0x00ff00, 0xddffee, 0xeeffdd, 0xaabbcc" />
+<brake colorNum="1" colorValue="0xff0000" />
+<chain colorNum="7" colorValue="0xff0000, 0x00ff00, 0xddffee, 0xff0000, 0x00ff00, 0xddffee, 0xff0000" />
+<crankset colorNum="1" colorValue="0xff0000" />
+<group colorNum="2" colorValue="0xff0000, 0x000000" />
+<hand colorNum="4" colorValue="0xff0000, 0xffaa00, 0xffdd00, 0xffbb00" />
+<innerRound colorNum="1" colorValue="0xff0000" />
+<round colorNum="3" colorValue="0xff0000, 0x00ff00, 0xddffee" />
+<seat colorNum="4" colorValue="0xff0000, 0x00ff00, 0xddffee, 0xff0000" />
+</colorConfig>
