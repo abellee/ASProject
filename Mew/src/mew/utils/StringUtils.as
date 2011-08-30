@@ -34,7 +34,7 @@ package mew.utils
 		}
 		public static function displayTopicAndAt(str:String):String
 		{
-			var topicPattern:RegExp = /#.+#/g;
+			var topicPattern:RegExp = /#.+?#/g;
 			var atPattern:RegExp = /@[\u4e00-\u9fa5\da-zA-Z_-]+/g;
 			var topicArr:Array = str.match(topicPattern);
 			var atArr:Array = str.match(atPattern);
@@ -57,8 +57,21 @@ package mew.utils
 		}
 		public static function getURLs(str:String):Array
 		{
-			var urlPattern:RegExp = /(http|https):\/\/[a-zA-Z.-\d\/]+/g;
+			var urlPattern:RegExp = /(http|https):\/\/[a-zA-Z.-\d\/\#\?\&\=]+/g;
 			return str.match(urlPattern);
+		}
+		
+		public static function getStringLength(str:String):Number
+		{
+			var chinesePattern:RegExp = /[\u4e00-\u9fa5]+/g;
+			var arr:Array = str.match(chinesePattern);
+			var len:Number = 0;
+			for each(var s:String in arr){
+				len += s.length;
+			}
+			len += (str.length - len) * .5;
+			
+			return len;
 		}
 	}
 }

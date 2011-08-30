@@ -1,4 +1,4 @@
-package com.iabel.utils
+package com.iabel.util
 {
 	import flash.display.BitmapData;
 	

@@ -4,6 +4,7 @@ package mew.modules
 	import com.sina.microblog.data.MicroBlogUser;
 	
 	import flash.display.Shape;
+	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	
@@ -77,6 +78,16 @@ package mew.modules
 			background.graphics.beginFill(0x000000, 0);
 			background.graphics.drawRect(0, 0, this.width-1, this.height-1);
 			background.graphics.endFill();
+		}
+		override protected function dealloc(event:Event):void
+		{
+			super.dealloc(event);
+			userData = null;
+			nameBox = null;
+			userAvatar = null;
+			fansNumText = null;
+			sexAndLocation = null;
+			background = null;
 		}
 	}
 }

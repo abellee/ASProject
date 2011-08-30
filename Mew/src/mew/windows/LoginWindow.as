@@ -1,39 +1,28 @@
 package mew.windows
 {
 	import com.greensock.TweenLite;
-	import com.iabel.core.ALSprite;
-	import com.iabel.system.CoreSystem;
 	import com.sina.microblog.data.MicroBlogUser;
 	import com.sina.microblog.events.MicroBlogErrorEvent;
 	import com.sina.microblog.events.MicroBlogEvent;
-	
-	import config.Config;
 	
 	import fl.controls.Button;
 	import fl.controls.CheckBox;
 	import fl.controls.ComboBox;
 	import fl.controls.Label;
-	import fl.controls.TextInput;
 	
 	import flash.desktop.NativeApplication;
 	import flash.display.NativeWindowInitOptions;
-	import flash.display.NativeWindowType;
 	import flash.display.Screen;
 	import flash.display.Sprite;
-	import flash.display.StageAlign;
-	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
-	import flash.text.TextFieldAutoSize;
 	
 	import mew.communication.LocalManager;
 	import mew.data.SystemSettingData;
 	
 	import system.MewSystem;
-	
-	import widget.Widget;
 	
 	public class LoginWindow extends ALNativeWindow
 	{
@@ -55,12 +44,9 @@ package mew.windows
 		
 		override protected function init():void
 		{
-			this.stage.align = StageAlign.TOP_LEFT;
-			this.stage.scaleMode = StageScaleMode.NO_SCALE;
-			
 			instance = this;
 			
-			drawBackground();
+			drawBackground(350, 400);
 			
 			this.stage.nativeWindow.width = background.width + 20;
 			this.stage.nativeWindow.height = background.height + 20;
@@ -126,7 +112,7 @@ package mew.windows
 			mewLoginLabel.x = loginBtn.width + loginBtn.x - mewLoginLabel.width;
 			mewLoginLabel.y = registLabel.y;
 			if(SystemSettingData.autoLogin){
-				if(Config._verified){
+				if(SystemSettingData._verified){
 					verifyCredential();
 				}
 			}
@@ -159,7 +145,7 @@ package mew.windows
 		
 		private function oauthLogin(event:MouseEvent):void
 		{
-			if(!Config._verified){
+			if(!SystemSettingData._verified){
 				var nativeWindowInitOption:NativeWindowInitOptions = new NativeWindowInitOptions();
 				
 				if(!oauthWindow) oauthWindow = new OAuthWindow(nativeWindowInitOption);
@@ -184,9 +170,9 @@ package mew.windows
 		{
 			oauthWindow.removeEventListener(Event.CLOSE, oauthWindow_closeHandler);
 			oauthWindow = null;
-			if(!Config._verified){
-				Config._accessTokenKey = "";
-				Config._accessTokenSecret = "";
+			if(!SystemSettingData._verified){
+				SystemSettingData._accessTokenKey = "";
+				SystemSettingData._accessTokenSecret = "";
 				var centerX:uint = (Screen.mainScreen.visibleBounds.width - this.stage.nativeWindow.width) / 2;
 				TweenLite.to(this.stage.nativeWindow, .3, {x:centerX});
 			}else{
@@ -198,8 +184,8 @@ package mew.windows
 		{
 			MewSystem.microBlog.addEventListener(MicroBlogEvent.VERIFY_CREDENTIALS_RESULT, onVerifyCredentialResult);
 			MewSystem.microBlog.addEventListener(MicroBlogErrorEvent.VERIFY_CREDENTIALS_ERROR, onVerifyCredentialError);
-			MewSystem.microBlog.accessTokenKey = Config._accessTokenKey;
-			MewSystem.microBlog.accessTokenSecrect = Config._accessTokenSecret;
+			MewSystem.microBlog.accessTokenKey = SystemSettingData._accessTokenKey;
+			MewSystem.microBlog.accessTokenSecrect = SystemSettingData._accessTokenSecret;
 			MewSystem.microBlog.verifyCredentials();
 		}
 		
@@ -211,9 +197,9 @@ package mew.windows
 		{
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.VERIFY_CREDENTIALS_RESULT, onVerifyCredentialResult);
 			MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.VERIFY_CREDENTIALS_ERROR, onVerifyCredentialError);
-			Config._accessTokenKey = "";
-			Config._accessTokenSecret = "";
-			Config._verified = false;
+			SystemSettingData._accessTokenKey = "";
+			SystemSettingData._accessTokenSecret = "";
+			SystemSettingData._verified = false;
 			loginBtn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
 		}
 		
@@ -222,10 +208,10 @@ package mew.windows
 			// 尽可能晚的创建周边的功能块 所以在验证成功后再创建
 			MewSystem.app.initWidgets();
 			
-			Config._verified = true;
+			SystemSettingData._verified = true;
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.VERIFY_CREDENTIALS_RESULT, onVerifyCredentialResult);
-			LocalManager.setSettingsInSharedObject("accessTokenKey", Config._accessTokenKey);
-			LocalManager.setSettingsInSharedObject("accessTokenSecret", Config._accessTokenSecret);
+			LocalManager.setSettingsInSharedObject("accessTokenKey", SystemSettingData._accessTokenKey);
+			LocalManager.setSettingsInSharedObject("accessTokenSecret", SystemSettingData._accessTokenSecret);
 			MewSystem.app.userData = MewSystem.app.dataCache.getUserDataCache(event.result as MicroBlogUser);
 			if(oauthWindow){
 				oauthWindow.close();
@@ -234,19 +220,9 @@ package mew.windows
 			MewSystem.app.loginSuccess();
 		}
 		
-		override protected function drawBackground():void
+		override protected function drawBackground(w:int, h:int):void
 		{
-			if(!background) background = new Sprite();
-			background.mouseChildren = false;
-			background.graphics.beginFill(0xdddddd, 1.0);
-			background.graphics.drawRoundRect(0, 0, 350, 400, 10, 10);
-			background.graphics.endFill();
-			Widget.widgetGlowFilter(background);
-			addChild(background);
-			background.x = 10;
-			background.y = 10;
-			background.width = 350;
-			background.height = 400;
+			super.drawBackground(w, h);
 			background.addEventListener(MouseEvent.MOUSE_DOWN, dragLoginPanel);
 		}
 		
@@ -258,19 +234,23 @@ package mew.windows
 		override protected function dealloc(event:Event):void
 		{
 			super.dealloc(event);
-			if(background){
-				background.removeEventListener(MouseEvent.MOUSE_DOWN, dragLoginPanel);
-				background.filters = null;
-			}
-			if(loginBtn){
-				loginBtn.removeEventListener(MouseEvent.CLICK, oauthLogin);
-			}
-			if(closeBtn){
-				closeBtn.removeEventListener(MouseEvent.CLICK, exitApplication);
-			}
-			if(autoLogin){
-				autoLogin.removeEventListener(Event.CHANGE, setAutoLogin);
-			}
+			if(loginBtn) loginBtn.removeEventListener(MouseEvent.CLICK, oauthLogin);
+			if(closeBtn) closeBtn.removeEventListener(MouseEvent.CLICK, exitApplication);
+			if(autoLogin) autoLogin.removeEventListener(Event.CHANGE, setAutoLogin);
+			if(registLabel) registLabel.removeEventListener(MouseEvent.CLICK, registSinaUser);
+			if(forgetLabel) forgetLabel.removeEventListener(MouseEvent.CLICK, forgetPassword);
+			if(mewLoginLabel) mewLoginLabel.removeEventListener(MouseEvent.CLICK, mewUserLogin);
+			if(autoLogin) autoLogin.removeEventListener(Event.CHANGE, setAutoLogin);
+			if(oauthWindow) oauthWindow.removeEventListener(Event.CLOSE, oauthWindow_closeHandler);
+			loginBtn = null;
+			closeBtn = null;
+			autoLogin = null;
+			instance = null;
+			weiboChooser = null;
+			registLabel = null;
+			forgetLabel = null;
+			mewLoginLabel = null;
+			oauthWindow = null;
 		}
 	}
 }

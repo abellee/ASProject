@@ -1,6 +1,8 @@
 package mew.data
 {
-	public class MediaData
+	import flash.events.EventDispatcher;
+
+	public class MediaData extends EventDispatcher
 	{
 		protected var _originURL:String = null;
 		public var thumbURL:String = null;
@@ -17,7 +19,12 @@ package mew.data
 		{
 			_originURL = value;
 		}
-
-
+		
+		public function dealloc():void
+		{
+			_originURL = null;
+			thumbURL = null;
+			title = null;
+		}
 	}
 }

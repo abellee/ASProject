@@ -1,13 +1,12 @@
 package mew.windows
 {
 	import com.greensock.TweenLite;
-	import com.iabel.core.ALSprite;
 	import com.iabel.core.UISprite;
+	import com.iabel.system.CoreSystem;
 	import com.iabel.util.ScaleBitmap;
 	
 	import config.SQLConfig;
 	
-	import flash.data.SQLResult;
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.display.NativeWindow;
@@ -18,8 +17,9 @@ package mew.windows
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	
-	import mew.communication.SQLiteManager;
 	import mew.data.SystemSettingData;
+	
+	import org.bytearray.gif.player.GIFPlayer;
 	
 	import system.MewSystem;
 	
@@ -28,23 +28,23 @@ package mew.windows
 	public class ALNativeWindow extends NativeWindow
 	{
 		protected var _listenerList:Object = null;
-		protected var background:Sprite = null;
+		protected var background:UISprite = null;
+		protected var cover:Sprite = null;
 		public function ALNativeWindow(initOptions:NativeWindowInitOptions)
 		{
 			super(initOptions);
 			
 			addEventListener(Event.CLOSE, dealloc);
 			
+			this.stage.align = StageAlign.TOP_LEFT;
+			this.stage.scaleMode = StageScaleMode.NO_SCALE;
+			this.stage.nativeWindow.alwaysInFront = SystemSettingData.alwaysInfront;
+			
 			init();
 		}
 		
 		protected function init():void
 		{
-			this.stage.align = StageAlign.TOP_LEFT;
-			this.stage.scaleMode = StageScaleMode.NO_SCALE;
-			this.stage.nativeWindow.alwaysInFront = SystemSettingData.alwaysInfront;
-			
-			drawBackground();
 			this.stage.nativeWindow.width = background.width + 20;
 			this.stage.nativeWindow.height = background.height + 20;
 			
@@ -61,13 +61,13 @@ package mew.windows
 //			TweenLite.to(this.stage.nativeWindow, .3, {y: ypos});
 		}
 		
-		protected function drawBackground():void
+		protected function drawBackground(w:int, h:int):void
 		{
-			var h:int = Screen.mainScreen.visibleBounds.height - MewSystem.app.height - 100;
-			if(!background) background = new Sprite();
+			if(!background) background = new UISprite();
 			background.mouseChildren = false;
+			background.graphics.clear();
 			background.graphics.beginFill(0xdddddd, 1.0);
-			background.graphics.drawRoundRect(10, 10, 465, h, 10, 10);
+			background.graphics.drawRoundRect(10, 10, w, h, 10, 10);
 			background.graphics.endFill();
 			Widget.widgetGlowFilter(background);
 			addChild(background);
@@ -112,27 +112,62 @@ package mew.windows
 			return 0;
 		}
 		
+		public function showResult(value:int, mode:Boolean = false):void
+		{
+			
+		}
+		
+		protected function drawCover():void
+		{
+			if(!cover) cover = new Sprite();
+			cover.graphics.clear();
+			cover.graphics.beginFill(0x000000, .2);
+			cover.graphics.drawRect(10, 10, background.width, background.height);
+			cover.graphics.endFill();
+			cover.mouseChildren = false;
+			addChild(cover);
+		}
+		
 		public function addChild(displayObject:DisplayObject):DisplayObject
 		{
 			this.stage.addChild(displayObject);
+			CoreSystem.objectDestroied();
 			return displayObject;
 		}
 		
 		public function addChildAt(displayObject:DisplayObject, index:uint):DisplayObject
 		{
 			this.stage.addChildAt(displayObject, index);
+			CoreSystem.objectDestroied();
 			return displayObject;
 		}
 		
 		public function removeChild(displayObject:DisplayObject):DisplayObject
 		{
 			this.stage.removeChild(displayObject);
+			CoreSystem.objectDestroied();
 			return displayObject;
 		}
 		
 		public function removeChildAt(index:uint):void
 		{
 			this.stage.removeChildAt(index);
+			CoreSystem.objectDestroied();
+		}
+		
+		override public function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void
+		{
+			if(!_listenerList) _listenerList = {};
+			if(_listenerList[type] && _listenerList[type] == listener) return;
+			_listenerList[type] = listener;
+			
+			super.addEventListener(type, listener, useCapture, priority, useWeakReference);
+		}
+		override public function removeEventListener(type:String, listener:Function, useCapture:Boolean=false):void
+		{
+			if(_listenerList && _listenerList[type] && _listenerList[type] == listener) delete _listenerList[type];
+			
+			super.removeEventListener(type, listener, useCapture);
 		}
 		
 		public function removeAllChildren():void
@@ -146,6 +181,9 @@ package mew.windows
 						(child as ScaleBitmap).dealloc();
 					}else if(child is Bitmap){
 						(child as Bitmap).bitmapData.dispose();
+						(child as Bitmap).bitmapData = null;
+					}else if(child is GIFPlayer){
+						(child as GIFPlayer).dispose();
 					}
 					child = null;
 				}
@@ -160,16 +198,14 @@ package mew.windows
 		
 		protected function dealloc(event:Event):void
 		{
-			trace("dealloc");
 			removeAllChildren();
-			for (var key:String in _listenerList){
-				this.removeEventListener(key, _listenerList[key]);
-			}
+			for (var key:String in _listenerList) this.removeEventListener(key, _listenerList[key]);
 			if(_listenerList ) _listenerList = null;
 			if(background){
 				background.filters = null;
 				background = null;
 			}
+			cover = null;
 		}
 	}
 }

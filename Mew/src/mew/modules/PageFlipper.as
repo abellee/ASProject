@@ -1,14 +1,15 @@
 package mew.modules
 {
-	import com.iabel.core.ALSprite;
+	import com.iabel.core.UISprite;
 	
 	import fl.controls.Button;
 	
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import mew.windows.ALNativeWindow;
 	
-	public class PageFlipper extends ALSprite
+	public class PageFlipper extends UISprite
 	{
 		public var curPageNum:int = 0;
 		public var view:ALNativeWindow = null;
@@ -43,6 +44,18 @@ package mew.modules
 		private function indexPageBtn_mouseClickHandler(event:MouseEvent):void
 		{
 			
+		}
+		
+		override protected function dealloc(event:Event):void
+		{
+			super.dealloc(event);
+			view = null;
+			prePageBtn.removeEventListener(MouseEvent.CLICK, prePageBtn_mouseClickHandler);
+			nextPageBtn.removeEventListener(MouseEvent.CLICK, nextPageBtn_mouseClickHandler);
+			indexPageBtn.removeEventListener(MouseEvent.CLICK, indexPageBtn_mouseClickHandler);
+			prePageBtn = null;
+			nextPageBtn = null;
+			indexPageBtn = null;
 		}
 	}
 }

@@ -4,8 +4,7 @@ package com.iabel.system
 	public class CoreSystem
 	{
 		private static var curTime:int = 0;
-		private static var totalTimes:int = 1000;
-		
+		private static var totalTimes:int = 2000;
 //		public static var application:Object;
 		
 		public function CoreSystem()

@@ -2,6 +2,7 @@ package mew.modules
 {
 	import com.greensock.TweenLite;
 	import com.iabel.core.UISprite;
+	import com.iabel.util.ScaleBitmap;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -21,19 +22,40 @@ package mew.modules
 		private var loader:Loader;
 		private var bk:DisplayObject;
 		public var userData:UserData;
-		public function Avatar()
+		public function Avatar(size:int = 50)
 		{
 			super();
 			
-			init();
+			init(size);
 		}
-		private function init():void
+		private function init(s:int):void
 		{
-			bk = StaticAssets.getDefaultAvatar();
+			bk = StaticAssets.getDefaultAvatar(s);
 			addChildAt(bk, 0);
 			setSize(bk.width, bk.height);
 			
 			drawBorder();
+		}
+		
+		override public function removeAllChildren():void
+		{
+			while(this.numChildren)
+			{
+				var child:DisplayObject = this.getChildAt(0);
+				if(child){
+					
+					if(child is ScaleBitmap){
+						(child as ScaleBitmap).dealloc();
+					}else if(child is Bitmap){
+						if(MewSystem.app.currentState == MewSystem.app.FANS || MewSystem.app.currentState == MewSystem.app.FOLLOW){
+							var cache:BitmapData = MewSystem.app.assetsCache.getAvatarCache(userData.id);
+							if(!cache) (child as Bitmap).bitmapData.dispose();
+						}
+					}
+					child = null;
+				}
+				this.removeChildAt(0);
+			}
 		}
 		
 		public function loadAvatar(size:int = 50):void
@@ -41,7 +63,7 @@ package mew.modules
 			var src:String = userData.src;
 			if(size == 180) src = src.replace(/\/50\//, "/180/");
 			var cache:BitmapData = MewSystem.app.assetsCache.getAvatarCache(userData.id);
-			if(cache){
+			if(cache && size == 50){
 				var bitmap:Bitmap = new Bitmap(cache);
 				addAvatar(bitmap);
 				return;
@@ -67,11 +89,16 @@ package mew.modules
 			loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadAvatar_completeHandler);
 			var bitmap:Bitmap
 			var cache:BitmapData = MewSystem.app.assetsCache.getAvatarCache(userData.id);
-			if(cache){
+			if(cache && (event.target.content as Bitmap).width == 50){
 				bitmap = new Bitmap(cache);
 			}else{
 				bitmap = event.target.content as Bitmap;
-				MewSystem.app.assetsCache.setAvatarCache(userData.id, bitmap.bitmapData);
+				if(bitmap.width >= 180){
+					bitmap.width = 100;
+					bitmap.height = 100;
+				}else{
+					if(MewSystem.app.currentState != MewSystem.app.FANS && MewSystem.app.currentState != MewSystem.app.FOLLOW) MewSystem.app.assetsCache.setAvatarCache(userData.id, bitmap.bitmapData);
+				}
 			}
 			loader.unloadAndStop();
 			loader = null;
@@ -85,6 +112,15 @@ package mew.modules
 			this.graphics.beginFill(0x000000, 0);
 			this.graphics.drawRect(0, 0, this.width-1, this.height-1);
 			this.graphics.endFill();
+		}
+		
+		override protected function dealloc(event:Event):void
+		{
+			super.dealloc(event);
+			if(loader) loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadAvatar_completeHandler);
+			loader = null;
+			bk = null;
+			userData = null;
 		}
 	}
 }

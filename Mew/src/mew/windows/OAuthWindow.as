@@ -76,19 +76,19 @@ package mew.windows
 		
 		private function oauthLoader_loadCompleteHandler(event:Event):void
 		{
-			var needRequestAuthorize:Boolean = Config._accessTokenKey.length == 0;
+			var needRequestAuthorize:Boolean = SystemSettingData._accessTokenKey.length == 0;
 			var result:String = oauthLoader.data as String;
 			
 			if (result.length > 0)
 			{
 				var urlVar:URLVariables = new URLVariables(oauthLoader.data);
-				Config._accessTokenKey = urlVar.oauth_token;
-				Config._accessTokenSecret = urlVar.oauth_token_secret;
+				SystemSettingData._accessTokenKey = urlVar.oauth_token;
+				SystemSettingData._accessTokenSecret = urlVar.oauth_token_secret;
 				
 				if (needRequestAuthorize)
 				{
 					var url:String = "http://api.t.sina.com.cn/oauth/authorize";
-					url+="?oauth_token=" + StringEncoders.urlEncodeUtf8String(Config._accessTokenKey);
+					url+="?oauth_token=" + StringEncoders.urlEncodeUtf8String(SystemSettingData._accessTokenKey);
 					url += "&oauth_callback=http://api.t.sina.com.cn/flash/callback.htm";
 					if(!_html) _html = new HTMLLoader();
 					var urlReq:URLRequest = new URLRequest(url);
@@ -146,7 +146,7 @@ package mew.windows
 				var params:URLVariables = new URLVariables;
 				var now:Date=new Date();
 				params["oauth_consumer_key"]=Config.appKey;
-				if (Config._accessTokenKey.length > 0)	params["oauth_token"] = Config._accessTokenKey;
+				if (SystemSettingData._accessTokenKey.length > 0)	params["oauth_token"] = SystemSettingData._accessTokenKey;
 				if (_pin && _pin.length > 0) params["oauth_verifier"] = _pin;
 				params["oauth_signature_method"]="HMAC-SHA1";
 				params["oauth_timestamp"]=now.time.toString().substr(0, 10);
@@ -167,7 +167,7 @@ package mew.windows
 				msgStr+="&";
 				msgStr += StringEncoders.urlEncodeUtf8String(paramsStr);		
 				var secrectStr:String = Config.appSecret + "&";		
-				secrectStr += Config._accessTokenSecret;		
+				secrectStr += SystemSettingData._accessTokenSecret;		
 				var sig:String = Base64.encode(HMAC.hash(secrectStr, msgStr, SHA1));
 				params["oauth_signature"] = sig;			
 				req.data = params;

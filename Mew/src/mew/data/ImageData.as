@@ -3,7 +3,10 @@ package mew.data
 	import flash.display.Loader;
 	import flash.display.LoaderInfo;
 	import flash.events.Event;
+	import flash.events.IEventDispatcher;
 	import flash.net.URLRequest;
+	
+	import system.MewSystem;
 
 	public class ImageData extends MediaData
 	{
@@ -30,6 +33,14 @@ package mew.data
 			loader.contentLoaderInfo.removeEventListener(Event.INIT, imageInitHandler);
 			originWidth = (event.target as LoaderInfo).width;
 			originHeight = (event.target as LoaderInfo).height;
+			loader = null;
+			dispatchEvent(new Event("size_init_complete"));
+		}
+		
+		override public function dealloc():void
+		{
+			midURL = null;
+			if(loader) loader.contentLoaderInfo.removeEventListener(Event.INIT, imageInitHandler);
 			loader = null;
 		}
 	}

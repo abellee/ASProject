@@ -18,7 +18,7 @@ package mew.modules
 		{
 			super();
 		}
-		override public function initStatus(obj:Object):void
+		override public function initStatus(obj:Object, xml:XML):void
 		{
 			var comment:MicroBlogComment = obj as MicroBlogComment;
 			
@@ -26,6 +26,7 @@ package mew.modules
 			userData = MewSystem.app.dataCache.getUserDataCache(comment.user);
 			
 			var commentUserData:UserData = MewSystem.app.dataCache.getUserDataCache(comment.status.user);
+			data = MewSystem.app.dataCache.getWeiboDataCache(comment.status);
 			
 			userAvatar.userData = userData;
 			userAvatar.loadAvatar();
@@ -37,23 +38,20 @@ package mew.modules
 			nameBox.x = userAvatar.x + userAvatar.width + 10;
 			nameBox.y = 0;
 			
-			weiboText.htmlText = "<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt(comment.text) + "</span>";
+			addChild(weiboText);
+			weiboText.x = nameBox.x;
+			weiboText.y = nameBox.y + nameBox.height + 10;
+			comment.text = comment.text.replace(/\</g, "&lt;");
+			weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt(comment.text) + "</span>", this.width - weiboText.x, xml);
 			urls = StringUtils.getURLs(comment.text);
 			if(urls && urls.length){
 				for each(var s:String in urls){
-					var str:String = weiboText.htmlText;
-					weiboText.htmlText = str.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
+					weiboText.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
 				}
 				videoChecker = new VideoChecker();
 				videoChecker.addEventListener(Event.COMPLETE, checkVideoUrlComplete);
 				videoChecker.isVideoURL(urls);
 			}
-			
-			addChild(weiboText);
-			weiboText.x = nameBox.x;
-			weiboText.y = nameBox.y + nameBox.height + 10;
-			weiboText.width = this.width - weiboText.x;
-			weiboText.height = weiboText.textHeight;
 			
 			timeAndFrom.time = comment.createdAt;
 			timeAndFrom.from = "";
@@ -63,7 +61,7 @@ package mew.modules
 			repostBox.setSize(this.width - weiboText.x, 10);
 			repostBox.x = weiboText.x;
 			repostBox.y = weiboText.y + weiboText.height + 10;
-			repostBox.initStatus(comment.status);
+			repostBox.initStatus(comment.status, xml);
 			addChild(repostBox);
 			repostBox.addEventListener(Event.RESIZE, onResize);
 			
@@ -73,6 +71,11 @@ package mew.modules
 			addChild(timeAndFrom);
 			var h:int = timeAndFrom.y + timeAndFrom.height;
 			if(h != this.height) setSize(this.width, Math.max(this.height, h));
+		}
+		override protected function dealloc(event:Event):void
+		{
+			super.dealloc(event);
+			id = null;
 		}
 	}
 }

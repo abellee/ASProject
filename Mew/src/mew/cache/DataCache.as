@@ -5,6 +5,8 @@ package mew.cache
 	
 	import mew.data.UserData;
 	import mew.data.WeiboData;
+	
+	import system.MewSystem;
 
 	public class DataCache
 	{
@@ -43,6 +45,23 @@ package mew.cache
 			weiboDataCache[status.id] = weiboData;
 			
 			return weiboData;
+		}
+		
+		public function destroy():void
+		{
+			for(var key:String in userDataCache){
+				var udc:UserData = userDataCache[key] as UserData;
+				if(udc.id == MewSystem.app.userData.id) continue;
+				if(udc) udc.dealloc();
+				userDataCache[key] = null;
+				delete userDataCache[key];
+			}
+			for(var k:String in weiboDataCache){
+				var wdc:WeiboData = weiboDataCache[k] as WeiboData;
+				if(wdc) wdc.dealloc();
+				weiboDataCache[k] = null;
+				delete weiboDataCache[k];
+			}
 		}
 	}
 }

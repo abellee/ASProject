@@ -1,10 +1,13 @@
 package mew.modules
 {
+	import com.iabel.component.EmotionTextField;
 	import com.iabel.core.UISprite;
 	import com.sina.microblog.data.MicroBlogDirectMessage;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.geom.Rectangle;
+	import flash.net.URLRequest;
 	import flash.text.StyleSheet;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
@@ -12,6 +15,8 @@ package mew.modules
 	import mew.data.UserData;
 	import mew.data.WeiboData;
 	import mew.utils.StringUtils;
+	
+	import org.bytearray.gif.player.GIFPlayer;
 	
 	import system.MewSystem;
 	
@@ -22,11 +27,11 @@ package mew.modules
 		public var data:WeiboData = null;
 		public var userData:UserData = null;
 		
-		private var targetUserData:UserData = null;
-		private var userAvatar:Avatar = null;
+		protected var targetUserData:UserData = null;
+		protected var userAvatar:Avatar = null;
 		
 		protected var nameBox:NameBox = null;
-		protected var weiboText:TextField = null;
+		protected var weiboText:EmotionTextField = null;
 		protected var urls:Array = null;
 		
 		public function DirectMessageBox()
@@ -44,34 +49,10 @@ package mew.modules
 		protected function init():void
 		{
 			nameBox = new NameBox();
-			weiboText = new TextField();
-			
-			if(!Widget.linkStyle){
-				Widget.linkStyle = new StyleSheet();
-				Widget.linkStyle.setStyle(".mainStyle",{color: "0x4C4C4C", fontFamily: "华文黑体", fontSize: "12", leading: "5"});
-				Widget.linkStyle.setStyle("a:link", {color: Widget.linkColor});
-				Widget.linkStyle.setStyle("a:hover", {color: Widget.linkColor});
-				Widget.linkStyle.setStyle("a:visited", {color: Widget.linkColor});
-				Widget.linkStyle.setStyle("a:active", {color: Widget.linkColor});
-			}
-			weiboText.styleSheet = Widget.linkStyle;
-			weiboText.autoSize = TextFieldAutoSize.LEFT;
-//			weiboText.defaultTextFormat = Widget.wbTextFormat;
-			weiboText.mouseWheelEnabled = false;
-			weiboText.wordWrap = true;
-			weiboText.addEventListener(MouseEvent.MOUSE_WHEEL, stopMouseWheel);
-			weiboText.addEventListener(Event.SCROLL, stopScroll);
-		}
-		protected function stopMouseWheel(event:MouseEvent):void
-		{
-			weiboText.scrollV = 1;
-		}
-		protected function stopScroll(event:Event):void
-		{
-			weiboText.scrollV = 1;
+			weiboText = new EmotionTextField();
 		}
 		
-		public function initStatus(obj:Object):void
+		public function initStatus(obj:Object, xml:XML):void
 		{
 			var dm:MicroBlogDirectMessage = obj as MicroBlogDirectMessage;
 			if(!dm) return;
@@ -89,8 +70,6 @@ package mew.modules
 			nameBox.userData = userData;
 			nameBox.create();
 			
-			weiboText.htmlText = StringUtils.displayTopicAndAt(data.content + " (" + StringUtils.transformTime(dm.createdAt) + ")");
-			urls = StringUtils.getURLs(data.content);
 			addChild(userAvatar);
 			addChild(nameBox);
 			addChild(weiboText);
@@ -99,12 +78,30 @@ package mew.modules
 			else userAvatar.x = 0;
 			
 			nameBox.x = userAvatar.width + 5;
-			weiboText.width = this.width - userAvatar.width * 2 - 10;
-			weiboText.height = weiboText.textHeight;
+			data.content = data.content.replace(/\</g, "&lt;");
+			weiboText.setText(StringUtils.displayTopicAndAt(data.content + " (" + StringUtils.transformTime(dm.createdAt) + ")"), this.width - userAvatar.width * 2 - 10, xml);
 			weiboText.x = nameBox.x;
 			weiboText.y = nameBox.y + nameBox.height + 5;
+			urls = StringUtils.getURLs(data.content);
+			if(urls && urls.length){
+				for each(var s:String in urls){
+					weiboText.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
+				}
+			}
 			
 			setSize(this.width, this.height);
+		}
+		
+		override protected function dealloc(event:Event):void
+		{
+			super.dealloc(event);
+			data = null;
+			userData = null;
+			targetUserData = null;
+			userAvatar = null;
+			nameBox = null;
+			weiboText = null;
+			urls = null;
 		}
 	}
 }

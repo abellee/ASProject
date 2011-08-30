@@ -8,6 +8,8 @@ package mew.modules
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	
+	import system.MewSystem;
+	
 	public class WeiboFormList extends UISprite
 	{
 		protected var changed:Boolean = false;
@@ -17,7 +19,7 @@ package mew.modules
 			super();
 		}
 		
-		override public function listData(arr:Array, w:Number):void
+		override public function listData(arr:Array, w:Number, xml:XML):void
 		{
 			fromIndex = this.numChildren;
 			for each(var obj:Object in arr){
@@ -27,7 +29,7 @@ package mew.modules
 				else if(obj is MicroBlogDirectMessage) entry = new DirectMessageBox();
 				entry.x = 10;
 				entry.setSize(w - entry.x, 10);
-				entry.initStatus(obj);
+				entry.initStatus(obj, xml);
 				entry.addEventListener(Event.RESIZE, onResize);
 				if(this.numChildren){
 					var pre:DisplayObject = this.getChildAt(this.numChildren - 1);
@@ -49,7 +51,7 @@ package mew.modules
 		{
 			changed = true;
 			var num:int = this.numChildren;
-			for(var i:int = fromIndex; i<num; i++){
+			for(var i:int = 0; i<num; i++){
 				var entry:DirectMessageBox = this.getChildAt(i) as DirectMessageBox;
 				entry.x = 10;
 				if(i){
@@ -66,6 +68,11 @@ package mew.modules
 		{
 			changed = false;
 			if(stage) stage.invalidate();
+		}
+		
+		override protected function dealloc(event:Event):void
+		{
+			super.dealloc(event);
 		}
 	}
 }

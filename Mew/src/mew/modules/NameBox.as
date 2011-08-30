@@ -47,5 +47,13 @@ package mew.modules
 			}
 			setSize(w, h);
 		}
+		
+		override protected function dealloc(event:Event):void
+		{
+			super.dealloc(event);
+			userData = null;
+			nameTextField = null;
+			vicon = null;
+		}
 	}
 }

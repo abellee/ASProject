@@ -1,12 +1,12 @@
 package mew.modules
 {
-	import com.iabel.core.ALSprite;
+	import com.iabel.core.UISprite;
 	
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	
-	public class UserFloatFrame extends ALSprite
+	public class UserFloatFrame extends UISprite
 	{
 		public var userAvatar:Avatar = null;
 		public var nameBox:NameBox = null;
@@ -16,10 +16,9 @@ package mew.modules
 		{
 			super();
 		}
-		override protected function onAddedToStage(event:Event):void
+		override protected function onAdded(event:Event):void
 		{
-			super.onAddedToStage(event);
-			
+			super.onAdded(event);
 			addChild(areaText);
 			addChild(fansNumText);
 		}
@@ -34,6 +33,14 @@ package mew.modules
 			fansNumText.defaultTextFormat = null; // 待定
 			fansNumText.autoSize = TextFieldAutoSize.LEFT;
 			fansNumText.mouseWheelEnabled = false;
+		}
+		override protected function dealloc(event:Event):void
+		{
+			super.dealloc(event);
+			userAvatar = null;
+			nameBox = null;
+			areaText = null;
+			fansNumText = null;
 		}
 	}
 }

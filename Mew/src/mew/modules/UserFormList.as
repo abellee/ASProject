@@ -12,7 +12,7 @@ package mew.modules
 		{
 			super();
 		}
-		override public function listData(arr:Array, w:Number):void
+		override public function listData(arr:Array, w:Number, xml:XML):void
 		{
 			fromIndex = this.numChildren;
 			for each(var obj:MicroBlogUser in arr){

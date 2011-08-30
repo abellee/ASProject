@@ -164,7 +164,8 @@ package mew.utils
 					}
 					var imgArr:Array = str.match(/pic=(?P<img>.+?)\"/);
 					if(imgArr && imgArr["img"]) videoURLs[index]["image"] = imgArr["img"];
-					var tta:Array = str.match(/<title>(?P<title>.+?)(?:\s*)(?:-+?)(?:\s*)(?:视频*)(?:\s*)(?:-+?)(?:\s*)(?:优酷视频*)(?:\s*)(?:-+?)(?:\s*)(?:在线观看*)<\/title>/);
+					var tta:Array = str.match(/<title>(?P<title>.+?)<\/title>/);
+					//(?:\s*)(?:-+?)(?:\s*)(?:视频*)(?:\s*)(?:-+?)(?:\s*)(?:优酷视频*)(?:\s*)(?:-+?)(?:\s*)(?:在线观看*)
 					if(tta && tta["title"]) videoURLs[index]["title"] = tta["title"];
 					break;
 				case "tudou":
@@ -181,7 +182,8 @@ package mew.utils
 					else videoURLs[index]["src"] = "http://www.tudou.com/v/" + videoURLs[index]["code"] + "/v.swf";
 					var imgs:Array = str.match(/pic(?:\s*)[=:](?:\s*)[\'\"](?:\s*)(?P<img>.+?)(?:\s*)[\'\"]/);
 					if(imgs && imgs["img"]) videoURLs[index]["image"] = imgs["img"];
-					var ta:Array = str.match(/<title>(?P<title>.+?)(?:\s*)(?:_+?)(?:\s*)(?:在线观看*).+<\/title>/);
+					var ta:Array = str.match(/<title>(?P<title>.+?)<\/title>/);
+					//(?:\s*)(?:_+?)(?:\s*)(?:在线观看*).+
 					if(ta && ta["title"]) videoURLs[index]["title"] = ta["title"];
 					break;
 				case "ku6":
@@ -191,7 +193,8 @@ package mew.utils
 						if(resultArr["img"]) videoURLs[index]["image"] = resultArr["img"];
 						videoURLs[index]["src"] = "http://player.ku6.com/refer/" + videoURLs[index]["id"] + "/v.swf";
 					}
-					var tArr:Array = str.match(/<title>(?P<title>.+?)(?:\s*)(?:-+?)(?:\s*)(?:在线观看*).+<\/title>/);
+					var tArr:Array = str.match(/<title>(?P<title>.+?)<\/title>/);
+					//(?:\s*)(?:-+?)(?:\s*)(?:在线观看*).+
 					if(tArr && tArr["title"]) videoURLs[index]["title"] = tArr["title"];
 					break;
 				case "sina":
@@ -206,7 +209,8 @@ package mew.utils
 					if(videoURLs[index]["id"]) videoURLs[index]["src"] = "http://player.56.com/" + videoURLs[index]["id"] + ".swf";
 					var imga:Array = str.match(/img(?:\s*)\"(?:\s*):(?:\s*)\"(?:\s*)(?P<img>.+?)(?:\s*)\"(?:\s*)}(?:\s*);/);
 					if(imga && imga["img"]) videoURLs[index]["image"] = imga["img"];
-					var titleRes:Array = str.match(/<title>(?P<title>.+?)(?:\s*)-(?:\s*).+<\/title>/);
+					var titleRes:Array = str.match(/<title>(?P<title>.+?)<\/title>/);
+					//(?:\s*)-(?:\s*).+
 					if(titleRes && titleRes["title"]) videoURLs[index]["title"] = titleRes["title"];
 					break;
 				case "sohu":
@@ -217,7 +221,8 @@ package mew.utils
 					}
 					var arr1:Array = str.match(/var(?:\s*)cover(?:\s*)=(?:\s*)\"(?:\s*)(?P<img>.+?)(?:\s*)\"(?:\s*);/);
 					if(arr1 && arr1["img"]) videoURLs[index]["image"] = arr1["img"];
-					var arr2:Array = str.match(/<title>(?P<title>.+?)(?:\s*)-(?:\s*).+<\/title>/);
+					var arr2:Array = str.match(/<title>(?P<title>.+?)<\/title>/);
+					//(?:\s*)-(?:\s*).+
 					if(arr2 && arr2["title"]) videoURLs[index]["title"] = arr2["title"];
 					break;
 				case "yinyuetai":
@@ -225,7 +230,8 @@ package mew.utils
 					if(arr3 && arr3["src"]) videoURLs[index]["src"] = arr3["src"];
 					var arr4:Array = str.match(/<meta(?:\s*)property(?:\s*)=(?:\s*)\"og:image\"(?:\s*)content=\"(?P<img>.+?)\"(?:\s*)\/>/);
 					if(arr4 && arr4["img"]) videoURLs[index]["image"] = arr4["img"];
-					var arr5:Array = str.match(/<title>(?P<title>.+?)(?:[\r\n\t]*)-MV.+<\/title>/);
+					var arr5:Array = str.match(/<title>(?P<title>.+?)<\/title>/);
+					//(?:[\r\n\t]*)-MV.+
 					if(arr5 && arr5["title"]) videoURLs[index]["title"] = arr5["title"];
 					break;
 				case "v1":
@@ -256,7 +262,8 @@ package mew.utils
 					if(vidArr && vidArr["videoCenterId"]){
 						videoURLs[index]["src"] = "http://player.cntv.cn/standard/cntvOutSidePlayer.swf?videoId=" + videoId + "&filePath=" + filePath + "&isAutoPlay=false&url=" + urlStr + "&tai=bugu&configPath=http://bugu.cntv.cn/nettv/Library/ibugu/player/config.xml&widgetsConfig=http://bugu.cntv.cn/nettv/Library/ibugu/player/widgetsConfig.xml&languageConfig=http://bugu.cntv.cn/nettv/Library/ibugu/player/zh_cn.xml&hour24DataURL=&outsideChannelId=channelBugu&videoCenterId=" + vidArr["videoCenterId"];
 					}
-					var arr10:Array = str.match(/<title>(?P<title>.+?)_(?:.+?)_中国网络电视台<\/title>/);
+					var arr10:Array = str.match(/<title>(?P<title>.+?)<\/title>/);
+					// _(?:.+?)_中国网络电视台
 					if(arr10 && arr10["title"]) videoURLs[index]["title"] = arr10["title"];
 					break;
 				case "joy":

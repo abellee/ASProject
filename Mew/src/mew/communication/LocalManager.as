@@ -3,6 +3,8 @@ package mew.communication
 	import config.Config;
 	
 	import flash.net.SharedObject;
+	
+	import mew.data.SystemSettingData;
 
 	public class LocalManager
 	{
@@ -15,9 +17,9 @@ package mew.communication
 			var so:SharedObject = SharedObject.getLocal(Config.MEWCACHE);
 			if(so.data){
 				if(so.data.accessTokenKey && so.data.accessTokenSecret){
-					Config._accessTokenKey = so.data.accessTokenKey;
-					Config._accessTokenSecret = so.data.accessTokenSecret;
-					Config._verified = true;
+					SystemSettingData._accessTokenKey = so.data.accessTokenKey;
+					SystemSettingData._accessTokenSecret = so.data.accessTokenSecret;
+					SystemSettingData._verified = true;
 				}
 			}
 			so.close();

@@ -12,6 +12,7 @@ package mew.data
 		public var src:String = null;
 		public var location:String = null;
 		public var sex:String = null;
+		public var domain:String = null;
 		
 		public var isVerified:Boolean = false;
 		public var isFollowMe:Boolean = false;
@@ -48,12 +49,27 @@ package mew.data
 			screenName = user.screenName;
 			isFollowMe = user.isFollowingMe;
 			allowAllActMsg = user.allowAllActMsg;
+			domain = user.domain;
 			if(user.status) status = MewSystem.app.dataCache.getWeiboDataCache(user.status);
 		}
 		
 		public function refreshUserData():void
 		{
 			
+		}
+		
+		public function dealloc():void
+		{
+			username = null;
+			screenName = null;
+			id = null;
+			src = null;
+			location = null;
+			sex = null;
+			description = null;
+			blogURL = null;
+			if(status) status.dealloc();
+			status = null;
 		}
 	}
 }

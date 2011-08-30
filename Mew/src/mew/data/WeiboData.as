@@ -6,15 +6,18 @@ package mew.data
 
 	public class WeiboData
 	{
-		public var content:String = null;
 		public var id:String = null;
-		public var isCollected:Boolean = false;
+		public var content:String = null;
 		public var imageData:ImageData = null;
 		public var videoData:MediaData = null;
 		public var musicData:MediaData = null;
 		public var repostData:WeiboData = null;
-		public var height:int = 0;
-		public var y:int = 0;
+		public var isCollected:Boolean = false;
+		
+		public var cid:String = null;               // 供微博发布器使用
+		public var time:Number = 0;                 // 供定时微博发布器使用
+		public var success:Boolean = false;         // 供定时微博发布器使用
+		
 		public function WeiboData()
 		{
 		}
@@ -35,6 +38,21 @@ package mew.data
 			if(status.repost){
 				repostData = MewSystem.app.dataCache.getWeiboDataCache(status.repost);
 			}
+		}
+		
+		public function dealloc():void
+		{
+			content = null;
+			id = null;
+			if(imageData) imageData.dealloc();
+			imageData = null;
+			if(videoData) videoData.dealloc();
+			videoData = null;
+			if(musicData) musicData.dealloc();
+			musicData = null;
+			if(repostData) repostData.dealloc();
+			repostData = null;
+			cid = null;
 		}
 	}
 }

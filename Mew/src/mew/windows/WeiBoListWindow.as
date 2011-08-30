@@ -1,7 +1,6 @@
 package mew.windows
 {
 	import com.iabel.component.VGroup;
-	import com.iabel.core.ALSprite;
 	import com.iabel.core.UISprite;
 	import com.sina.microblog.data.MicroBlogStatus;
 	import com.sina.microblog.events.MicroBlogEvent;
@@ -18,9 +17,12 @@ package mew.windows
 	import flash.events.Event;
 	import flash.events.TimerEvent;
 	import flash.geom.Point;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
 	import flash.utils.Timer;
 	
 	import mew.modules.NameBox;
+	import mew.modules.UserDescription;
 	import mew.modules.WeiboEntry;
 	import mew.modules.WeiboFormList;
 	
@@ -34,37 +36,15 @@ package mew.windows
 		private var dataLoading:Boolean = false;
 		private var tempArr:Array = null;
 		private var timer:Timer = new Timer(1000);
+		protected var userDescription:UserDescription = null;
 		public function WeiBoListWindow(initOptions:NativeWindowInitOptions)
 		{
 			super(initOptions);
-//			this.stage.addEventListener(Event.RESIZE, onResize);
 		}
-		
-//		private function onResize(event:Event):void
-//		{
-//			/*var preHeight:Number = scrollList.content.height;
-//			var num:int = list.numChildren;
-//			for(var i:int = 0; i<num; i++){
-//				var child:WeiboEntry = list.getChildAt(i) as WeiboEntry;
-//				child.x = 10;
-//				if(i){
-//					var pre:WeiboEntry = list.getChildAt(i - 1) as WeiboEntry;
-//					child.y = pre.y + pre.height + 10;
-//				}else{
-//					child.y = 10;
-//				}
-//			}
-//			if(scrollList){
-//				if(scrollList.content.height != preHeight){
-//					list.setSize(scrollList.width - scrollList.verticalScrollBar.width, Math.max(scrollList.content.height, preHeight), 0xff0000);
-//					scrollList.source = list;
-//					scrollList.update();
-//				}
-//			}*/
-//		}
 		
 		override protected function init():void
 		{
+			drawBackground(465, Screen.mainScreen.visibleBounds.height - MewSystem.app.height - 100);
 			super.init();
 			if(!scrollList) scrollList = new ScrollPane();
 		}
@@ -75,12 +55,28 @@ package mew.windows
 		
 		override public function showWeibo(arr:Array, content:UISprite):void
 		{
+			var xpos:int = 10;
+			var ypos:int = 10;
+			var hvalue:int = this.background.height;
+			if(MewSystem.app.currentState == MewSystem.app.MY_WEIBO){
+				if(!userDescription){
+					userDescription = new UserDescription();
+					userDescription.setSize(this.background.width, 10);
+					userDescription.userData = MewSystem.app.userData;
+					userDescription.showData();
+					addChild(userDescription);
+					userDescription.x = 10;
+					userDescription.y = 20;
+					ypos = userDescription.y + userDescription.height;
+					hvalue = hvalue - userDescription.height - 10;
+				}
+			}
 			list = content;
 			list.addEventListener(Event.RESIZE, onResize);
 			scrollList.addEventListener(ScrollEvent.SCROLL, onScroll);
 			scrollList.source = list;
-			scrollList.move(10, 10);
-			scrollList.setSize(this.background.width, this.background.height);
+			scrollList.move(xpos, ypos);
+			scrollList.setSize(this.background.width, hvalue);
 			addChild(scrollList);
 		}
 		
@@ -126,7 +122,6 @@ package mew.windows
 					MewSystem.microBlog.loadDirectMessagesSent("0", "0", 20, curPage);
 					break;
 				case MewSystem.app.FANS:
-					trace(">>>>", curPage);
 					MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_FOLLOWERS_INFO_RESULT, dataByPageLoadComplete);
 					MewSystem.microBlog.loadFollowersInfo(null, "0", null, 20 * (curPage - 1), 20);
 					break;
@@ -152,7 +147,14 @@ package mew.windows
 			tempArr = tempArr.concat(receivedArray);
 			if(tempArr && tempArr.length){
 				tempArr.sortOn("id", Array.DESCENDING);
-				list.listData(tempArr, getContentWidth());
+				var urlLoader:URLLoader = new URLLoader();
+				var func:Function = function(e:Event):void{
+					urlLoader.removeEventListener(Event.COMPLETE, func);
+					list.listData(tempArr, getContentWidth(), XML(e.target.data));
+					urlLoader = null;
+				}
+				urlLoader.addEventListener(Event.COMPLETE, func);
+				urlLoader.load(new URLRequest("config/emotions.xml"));
 			}else{
 				if(curPage > 1) curPage--;
 			}
@@ -173,24 +175,36 @@ package mew.windows
 			timer.reset();
 			timer.start();
 			var arr:Array = event.result as Array;
-			trace(arr.length);
 			if(!arr || !arr.length){
 				if(curPage > 1) curPage--;
 				return;
 			}
-			list.listData(arr, getContentWidth());
+			var urlLoader:URLLoader = new URLLoader();
+			var func:Function = function(e:Event):void{
+				urlLoader.removeEventListener(Event.COMPLETE, func);
+				list.listData(arr, getContentWidth(), XML(e.target.data));
+				return;
+			}
+			urlLoader.addEventListener(Event.COMPLETE, func);
+			urlLoader.load(new URLRequest("config/emotions.xml"));
 		}
 		private function resetLoadingState(event:TimerEvent):void
 		{
+			timer.stop();
 			dataLoading = false;
 		}
 		
 		override protected function dealloc(event:Event):void
 		{
 			super.dealloc(event);
-			timer.stop();
-			timer.removeEventListener(TimerEvent.TIMER, resetLoadingState);
-			timer = null;
+			if(timer){
+				timer.stop();
+				timer.removeEventListener(TimerEvent.TIMER, resetLoadingState);
+				timer = null;
+			}
+			if(list) list = null;
+			if(scrollList) scrollList = null;
+			tempArr = null;
 		}
 	}
 }

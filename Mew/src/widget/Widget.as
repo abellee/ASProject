@@ -8,25 +8,34 @@ package widget
 
 	public class Widget
 	{
-		public static var usernameFormat:TextFormat = new TextFormat("华文黑体", 13, 0x4C4C4C, true);
-		public static var wbSentTimeFormat:TextFormat = new TextFormat("华文黑体", 12, 0x4C4C4C);
-		public static var wbFromFormat:TextFormat = new TextFormat("华文黑体", 12, 0x4C4C4C);
-		public static var wbTextFormat:TextFormat = new TextFormat("华文黑体", 12, 0x4C4C4C, null, null, null, null, null, null, null, null, null, 5);
+		public static var systemFont:String = "华文黑体";
+		public static var numberFont:String = "华文黑体";
 		public static var atColor:String = "#3FB9F8";
 		public static var topicColor:String = "#3FB9F8";
 		public static var linkColor:String = "#3FB9F8";
-		public static var fromColor:String = "#F6A835";
+		public static var fromColor:String = "#727272";
 		public static var linkStyle:StyleSheet = null;
+		public static var mainColor:Number = 0x383938;
+		
+		public static var normalFormat:TextFormat = new TextFormat(systemFont, 12, 0x4C4C4C);
+		public static var tipFormat:TextFormat = new TextFormat(systemFont, 12, 0xbdbdbd);
+		public static var usernameFormat:TextFormat = new TextFormat(systemFont, 13, 0x4C4C4C, true);
+		public static var wbSentTimeFormat:TextFormat = new TextFormat(systemFont, 12, 0x4C4C4C);
+		public static var wbFromFormat:TextFormat = new TextFormat(systemFont, 12, 0x4C4C4C);
+		public static var alertFormat:TextFormat = new TextFormat(systemFont, 14, 0x4C4C4C, true, null, null, null, null, "center", null, null, null, 5);
+		public static var wbTextFormat:TextFormat = new TextFormat(systemFont, 12, 0x4C4C4C, null, null, null, null, null, null, null, null, null, 10);
+		public static var videoTitleFormat:TextFormat = new TextFormat(systemFont, 12, 0xFFFFFF);
+		public static var descriptionFormat:TextFormat = new TextFormat(systemFont, 12, 0x4C4C4C, null, null, null, null, null, null, null, null, null, 5);
 		public function Widget()
 		{
 		}
 		
-		public static function widgetGlowFilter(target:DisplayObject):void
+		public static function widgetGlowFilter(target:DisplayObject, xBlur:Number = 10, yBlur:Number = 10):void
 		{
 			var color:Number = 0x000000;
 			var alpha:Number = 0.5;
-			var blurX:Number = 10;
-			var blurY:Number = 10;
+			var blurX:Number = xBlur;
+			var blurY:Number = yBlur;
 			var strength:Number = 1;
 			var inner:Boolean = false;
 			var knockout:Boolean = false;

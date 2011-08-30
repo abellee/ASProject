@@ -52,5 +52,13 @@ package mew.modules
 			var h:int = Math.max(timeTextField.height, fromTextField.height);
 			setSize(w, h);
 		}
+		override protected function dealloc(event:Event):void
+		{
+			super.dealloc(event);
+			time = null;
+			from = null;
+			timeTextField = null;
+			fromTextField = null;
+		}
 	}
 }

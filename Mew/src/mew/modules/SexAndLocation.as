@@ -3,6 +3,7 @@ package mew.modules
 	import com.iabel.core.UISprite;
 	
 	import flash.display.DisplayObject;
+	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	
@@ -39,10 +40,24 @@ package mew.modules
 			addChild(localText);
 			
 			localText.x = sexIcon.x + sexIcon.width + 2;
-			if(localText.height > sexIcon.height) sexIcon.y = (localText.height - sexIcon.height) / 2;
-			else localText.y = (sexIcon.height - localText.height) / 2;
+			var h:int = this.height;
+			if(localText.height > sexIcon.height){
+				h = localText.height;
+				sexIcon.y = (localText.height - sexIcon.height) / 2;
+			}else{
+				h = sexIcon.height;
+				localText.y = (sexIcon.height - localText.height) / 2;
+			}
 			
-			setSize(this.width, this.height);
+			setSize(this.width, h);
+		}
+		
+		override protected function dealloc(event:Event):void
+		{
+			super.dealloc(event);
+			location = null;
+			sexIcon = null;
+			localText = null;
 		}
 	}
 }
