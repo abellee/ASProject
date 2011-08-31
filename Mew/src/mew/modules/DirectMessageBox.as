@@ -1,26 +1,18 @@
-package mew.modules
-{
-	import com.iabel.component.EmotionTextField;
-	import com.iabel.core.UISprite;
-	import com.sina.microblog.data.MicroBlogDirectMessage;
-	
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.geom.Rectangle;
-	import flash.net.URLRequest;
-	import flash.text.StyleSheet;
-	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	
+package mew.modules {
+	import mew.windows.ALNativeWindow;
 	import mew.data.UserData;
 	import mew.data.WeiboData;
 	import mew.utils.StringUtils;
-	
-	import org.bytearray.gif.player.GIFPlayer;
-	
+
 	import system.MewSystem;
-	
-	import widget.Widget;
+
+	import com.iabel.component.EmotionTextField;
+	import com.iabel.core.UISprite;
+	import com.sina.microblog.data.MicroBlogDirectMessage;
+
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	
 	public class DirectMessageBox extends UISprite
 	{
@@ -66,6 +58,8 @@ package mew.modules
 			userAvatar = new Avatar();
 			userAvatar.userData = userData;
 			userAvatar.loadAvatar();
+			userAvatar.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
+			userAvatar.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
 			
 			nameBox.userData = userData;
 			nameBox.create();
@@ -73,6 +67,8 @@ package mew.modules
 			addChild(userAvatar);
 			addChild(nameBox);
 			addChild(weiboText);
+			nameBox.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
+			nameBox.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
 			
 			if(userData.id == MewSystem.app.userData.id) userAvatar.x = this.width - userAvatar.width - 2;
 			else userAvatar.x = 0;
@@ -90,6 +86,19 @@ package mew.modules
 			}
 			
 			setSize(this.width, this.height);
+		}
+
+		protected function removeFloatFrame(event : MouseEvent) : void
+		{
+			(this.stage.nativeWindow as ALNativeWindow).removeUserFloat();
+		}
+		
+		protected function showFloatFrame(event : MouseEvent) : void
+		{
+			if(!userAvatar) return;
+			var globalPoint:Point = this.localToGlobal(new Point(userAvatar.x, userAvatar.y));
+//			var realPoint:Point = this.stage.nativeWindow.globalToScreen(globalPoint);
+			(this.stage.nativeWindow as ALNativeWindow).showUserFloat(globalPoint, userData);
 		}
 		
 		override protected function dealloc(event:Event):void

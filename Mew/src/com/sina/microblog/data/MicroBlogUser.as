@@ -161,7 +161,7 @@ package com.sina.microblog.data
 		{
 			id = String(user.id);
 			screenName = user.screen_name;
-			name = user.name;
+			name = String(user.name);
 			province = user.province;
 			city = user.city;
 			location = user.location;

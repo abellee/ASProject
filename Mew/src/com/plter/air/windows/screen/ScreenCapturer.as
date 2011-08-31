@@ -115,7 +115,7 @@ package com.plter.air.windows.screen
 				var stream:FileStream=new FileStream;
 				stream.open(_screenCaptureExeFile,FileMode.WRITE);
 				if(__screenCapturerExeData==null){
-					__screenCapturerExeData=new ScreenCapturerExeDataClass;
+					__screenCapturerExeData=(new ScreenCapturerExeDataClass()) as ByteArray;
 				}
 				stream.writeBytes(__screenCapturerExeData);
 				stream.close();

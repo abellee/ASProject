@@ -1,5 +1,6 @@
-package mew.communication
-{
+package mew.communication {
+	import system.MewSystem;
+
 	import com.sina.microblog.data.MicroBlogComment;
 	import com.sina.microblog.data.MicroBlogCount;
 	import com.sina.microblog.data.MicroBlogDirectMessage;
@@ -7,21 +8,14 @@ package mew.communication
 	import com.sina.microblog.data.MicroBlogStatus;
 	import com.sina.microblog.data.MicroBlogUser;
 	import com.sina.microblog.data.MicroBlogUsersRelationship;
-	
+
 	import flash.data.SQLConnection;
-	import flash.data.SQLMode;
 	import flash.data.SQLResult;
 	import flash.data.SQLStatement;
 	import flash.events.SQLErrorEvent;
 	import flash.events.SQLEvent;
 	import flash.filesystem.File;
-	import flash.net.Responder;
 	import flash.net.registerClassAlias;
-	
-	import mew.data.TimingWeiboVariable;
-	
-	import system.MewSystem;
-	import system.TimingWeiboManager;
 
 	public class SQLiteManager
 	{

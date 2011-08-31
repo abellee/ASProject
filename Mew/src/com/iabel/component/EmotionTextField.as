@@ -1,21 +1,17 @@
-package com.iabel.component
-{
+package com.iabel.component {
+	import widget.Widget;
+
 	import com.iabel.core.UISprite;
-	
+
+	import org.bytearray.gif.player.GIFPlayer;
+
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	import flash.net.URLRequest;
-	import flash.text.StyleSheet;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
-	
-	import mew.utils.StringUtils;
-	
-	import org.bytearray.gif.player.GIFPlayer;
-	
-	import widget.Widget;
 	
 	public class EmotionTextField extends UISprite
 	{
@@ -34,7 +30,7 @@ package com.iabel.component
 			if(!indexArr || !indexArr.length) return;
 			var str:String = textField.text;
 			var tempTF:TextField = new TextField();
-			tempTF.defaultTextFormat = new TextFormat(Widget.systemFont, 12, null, null, null, null, null, null, null, null, null, null, 5);
+			tempTF.defaultTextFormat = new TextFormat(Widget.systemFont, 12, null, null, null, null, null, null, null, null, null, null, 10);
 			tempTF.autoSize = TextFieldAutoSize.LEFT;
 			tempTF.mouseWheelEnabled = false;
 			tempTF.wordWrap = true;

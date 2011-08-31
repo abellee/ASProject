@@ -78,7 +78,7 @@ package
 			fileRef.removeEventListener(DataEvent.UPLOAD_COMPLETE_DATA, uploadCompleteDataHandler);
 			if(event.data == "1"){
 				size = (event.target as FileReference).size;
-				this.dispatchEvent(new Event("remove_image"));
+				this.dispatchEvent(new Event(Event.COMPLETE));
 			}else{
 				upload();
 			}

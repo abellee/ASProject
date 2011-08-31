@@ -1,14 +1,11 @@
-package mew.modules
-{
+package mew.modules {
 	import com.iabel.core.UISprite;
 	import com.sina.microblog.data.MicroBlogComment;
 	import com.sina.microblog.data.MicroBlogDirectMessage;
 	import com.sina.microblog.data.MicroBlogStatus;
-	
+
 	import flash.display.DisplayObject;
 	import flash.events.Event;
-	
-	import system.MewSystem;
 	
 	public class WeiboFormList extends UISprite
 	{

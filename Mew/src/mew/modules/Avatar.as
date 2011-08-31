@@ -1,21 +1,19 @@
-package mew.modules
-{
+package mew.modules {
+	import mew.data.UserData;
+	import mew.factory.StaticAssets;
+
+	import system.MewSystem;
+
 	import com.greensock.TweenLite;
 	import com.iabel.core.UISprite;
 	import com.iabel.util.ScaleBitmap;
-	
+
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.net.URLRequest;
-	
-	import mew.data.UserData;
-	import mew.factory.StaticAssets;
-	
-	import system.MewSystem;
 	
 	public class Avatar extends UISprite
 	{
@@ -87,7 +85,7 @@ package mew.modules
 		private function loadAvatar_completeHandler(event:Event):void
 		{
 			loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadAvatar_completeHandler);
-			var bitmap:Bitmap
+			var bitmap:Bitmap;
 			var cache:BitmapData = MewSystem.app.assetsCache.getAvatarCache(userData.id);
 			if(cache && (event.target.content as Bitmap).width == 50){
 				bitmap = new Bitmap(cache);

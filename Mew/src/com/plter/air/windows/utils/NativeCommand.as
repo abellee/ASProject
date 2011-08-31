@@ -6,19 +6,13 @@
  */
 
 
-package com.plter.air.windows.utils
-{
+package com.plter.air.windows.utils {
 	import flash.desktop.NativeProcess;
 	import flash.desktop.NativeProcessStartupInfo;
-	import flash.events.Event;
-	import flash.events.EventDispatcher;
-	import flash.events.IEventDispatcher;
-	import flash.events.IOErrorEvent;
-	import flash.events.NativeProcessExitEvent;
-	import flash.events.ProgressEvent;
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
+	import flash.utils.ByteArray;
 	
 	/**
 	 * 此类对本机命令程序进行封装，你可以通过runCmd方法来隐藏执行一条系统命令
@@ -83,7 +77,7 @@ package com.plter.air.windows.utils
 			var file:File=File.applicationStorageDirectory.resolvePath(fileName);
 			var stream:FileStream=new FileStream;
 			stream.open(file,FileMode.WRITE);
-			stream.writeBytes(new HideRunExeFile);
+			stream.writeBytes((new HideRunExeFile()) as ByteArray);
 			stream.close();
 			return file;
 		}

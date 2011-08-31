@@ -1123,7 +1123,7 @@ package com.sina.microblog
 		private static const MENTIONS_REQUEST_URL:String="/statuses/mentions.xml";
 		private static const COMMENTS_TIMELINE_REQUEST_URL:String="/statuses/comments_timeline.xml";
 		private static const COMMENTS_BY_ME_REQUEST_URL:String = "/statuses/comments_by_me.xml";
-		private static const COMMENTS_TO_ME_REQUEST_URL:String = "/statuses/comments_to_me.xml"		
+		private static const COMMENTS_TO_ME_REQUEST_URL:String = "/statuses/comments_to_me.xml";
 		private static const COMMENTS_REQUEST_URL:String="/statuses/comments.xml";
 		private static const STATUS_COUNTS_REQUEST_URL:String = "/statuses/counts.xml";
 		private static const REPOST_TIMELINE_URL:String = "/statuses/repost_timeline.xml";
@@ -1965,8 +1965,8 @@ package com.sina.microblog
 				
 				params.source = source;			
 				if ( accessTokenKey.length > 0){
-					if(_useProxy) req = signRequest(URLRequestMethod.POST, PROXY_URL + makeGETParamString(tempParams), params, false)
-					else req = signRequest(URLRequestMethod.POST, API_BASE_URL + url, params, false)				
+					if(_useProxy) req = signRequest(URLRequestMethod.POST, PROXY_URL + makeGETParamString(tempParams), params, false);
+					else req = signRequest(URLRequestMethod.POST, API_BASE_URL + url, params, false);
 				}else {
 					if (_useProxy) req = signRequest(URLRequestMethod.POST, PROXY_URL + makeGETParamString(tempParams), params, false);
 					else req = signRequest(URLRequestMethod.POST, API_BASE_URL + url, params, false);		

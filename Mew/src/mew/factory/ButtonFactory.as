@@ -170,6 +170,24 @@ package mew.factory
 			return btn;
 		}
 		
+		public static function FollowButton():Button
+		{
+			var btn:Button = new Button();
+			btn.textField.autoSize = TextFieldAutoSize.LEFT;
+			btn.label = "关注";
+			btn.width = 60;
+			return btn;
+		}
+		
+		public static function AtButton():Button
+		{
+			var btn:Button = new Button();
+			btn.textField.autoSize = TextFieldAutoSize.LEFT;
+			btn.label = "@";
+			btn.width = 30;
+			return btn;
+		}
+		
 		public static function TopicButton():Button
 		{
 			var btn:Button = new Button();
@@ -220,6 +238,7 @@ package mew.factory
 			var btn:Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
 			btn.width = 20;
+			btn.rotation = rotate;
 			return btn;
 		}
 		

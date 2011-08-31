@@ -1,31 +1,41 @@
-package
-{
-	import com.greensock.TweenLite;
-	import com.iabel.core.ALSprite;
-	import com.iabel.core.UISprite;
-	import com.iabel.system.CoreSystem;
-	import com.iabel.util.StringDetector;
-	import com.iabel.util.URLDetector;
-	import com.sina.microblog.data.MicroBlogComment;
-	import com.sina.microblog.data.MicroBlogCount;
-	import com.sina.microblog.data.MicroBlogDirectMessage;
-	import com.sina.microblog.data.MicroBlogRelationshipDescriptor;
-	import com.sina.microblog.data.MicroBlogStatus;
-	import com.sina.microblog.data.MicroBlogUser;
-	import com.sina.microblog.data.MicroBlogUsersRelationship;
-	import com.sina.microblog.events.MicroBlogEvent;
-	
-	import config.Config;
-	
+package {
+	import flash.geom.Point;
 	import fl.controls.Button;
-	
-	import flash.data.SQLResult;
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
+
+	import mew.cache.AssetsCache;
+	import mew.cache.DataCache;
+	import mew.cache.WeiboDataCacher;
+	import mew.communication.DataPreloader;
+	import mew.communication.LocalManager;
+	import mew.data.SystemSettingData;
+	import mew.data.UserData;
+	import mew.modules.FloatUserInfo;
+	import mew.modules.UserFormList;
+	import mew.modules.WeiboAlternationCenter;
+	import mew.modules.WeiboFormList;
+	import mew.update.Update;
+	import mew.windows.ALNativeWindow;
+	import mew.windows.AboutWindow;
+	import mew.windows.DropListWindow;
+	import mew.windows.EmotionWindow;
+	import mew.windows.ImageViewer;
+	import mew.windows.LoginWindow;
+	import mew.windows.SystemSetting;
+	import mew.windows.ThemeWindow;
+	import mew.windows.TimingWeiboWindow;
+	import mew.windows.UpdateWindow;
+	import mew.windows.VideoViewer;
+	import mew.windows.WeiBoListWindow;
+	import mew.windows.WeiBoPublisher;
+
+	import system.MewSystem;
+	import system.TimingWeiboManager;
+
+	import widget.Widget;
+
+	import com.greensock.TweenLite;
+
 	import flash.display.DisplayObject;
-	import flash.display.Loader;
-	import flash.display.LoaderInfo;
-	import flash.display.NativeWindow;
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.NativeWindowType;
 	import flash.display.Screen;
@@ -34,65 +44,27 @@ package
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.geom.Matrix;
-	import flash.net.SharedObject;
+	import flash.net.URLLoader;
 	import flash.net.URLRequest;
-	import flash.net.navigateToURL;
-	import flash.net.registerClassAlias;
-	import flash.text.Font;
-	
-	import mew.cache.AssetsCache;
-	import mew.cache.DataCache;
-	import mew.cache.WeiboDataCacheWriter;
-	import mew.cache.WeiboDataCacher;
-	import mew.communication.DataPreloader;
-	import mew.communication.LocalManager;
-	import mew.communication.SQLiteManager;
-	import mew.data.SystemSettingData;
-	import mew.data.UserData;
-	import mew.modules.UserFormList;
-	import mew.modules.WeiboEntry;
-	import mew.modules.WeiboFormList;
-	import mew.update.Update;
-	import mew.utils.StringUtils;
-	import mew.utils.VideoChecker;
-	import mew.windows.ALNativeWindow;
-	import mew.windows.AboutWindow;
-	import mew.windows.AlertWindow;
-	import mew.windows.DropListWindow;
-	import mew.windows.EmotionWindow;
-	import mew.windows.ImageViewer;
-	import mew.windows.LoginWindow;
-	import mew.windows.OAuthWindow;
-	import mew.windows.SystemSetting;
-	import mew.windows.ThemeWindow;
-	import mew.windows.TimingWeiboWindow;
-	import mew.windows.UpdateWindow;
-	import mew.windows.VideoViewer;
-	import mew.windows.WeiBoListWindow;
-	import mew.windows.WeiBoPublisher;
-	
-	import system.MewSystem;
-	import system.TimingWeiboManager;
-	
-	import widget.Widget;
+	import flash.text.StyleSheet;
 	
 	[SWF(frameRate=30)]
 	public class Mew extends Sprite
 	{
 		private var loginPanel:LoginWindow;               // 登录界面
-		private var imagerView:ImageViewer;               // 查看大图界面 
-		private var videoView:VideoViewer;                // 视频界面
-		private var systemSetting:SystemSetting;          // 系统设置界面
-		private var alertWindow:AlertWindow;              // confirm界面
+		public var imageViewer:ImageViewer;                // 查看大图界面 
+		public var videoViewer:VideoViewer;                 // 视频界面
+		public var systemSetting:SystemSetting;           // 系统设置界面
 		private var dropListWindow:DropListWindow;        // 下拉列表界
-		private var emotionWindow:EmotionWindow;          // 表情界面
-		private var aboutWindow:AboutWindow;              // 关于界面
-		private var themeWindow:ThemeWindow;              // 主题选择界面
-		private var timingWindow:TimingWeiboWindow;       // 定时微博界面
-		private var updateWindow:UpdateWindow;            // 更新界面
+		public var emotionWindow:EmotionWindow;           // 表情界面
+		public var aboutWindow:AboutWindow;               // 关于界面
+		public var themeWindow:ThemeWindow;               // 主题选择界面
+		public var timingWindow:TimingWeiboWindow;        // 定时微博界面
+		public var updateWindow:UpdateWindow;             // 更新界面
 		private var weiboListWindow:WeiBoListWindow;      // 微博列表界面
-		private var weiboPublishWindow:WeiBoPublisher;    // 微博发布器
+		public var targetUserWindow:WeiBoListWindow;      // 目标用户界面
+		public var weiboPublishWindow:WeiBoPublisher;     // 微博发布器
+		public var userFloat:FloatUserInfo;
 		
 		private var background:Sprite;     // 主界面背景
 		
@@ -130,7 +102,6 @@ package
 		public var currentButton:DisplayObject = null;
 		
 		public var timingWeiboManager:TimingWeiboManager = null;        // 定时微博管理器
-		public var sqliteManager:SQLiteManager = null;                  // 本地数据库管理器
 		public var localWriter:WeiboDataCacher = null;
 		
 		public var update:Update = null;                                // 更新检测
@@ -140,6 +111,8 @@ package
 		
 		private var preloader:DataPreloader = null;
 		
+		public var alternationCenter:WeiboAlternationCenter = null;
+		
 		public function Mew()
 		{
 			super();
@@ -148,14 +121,6 @@ package
 		}
 		private function init():void
 		{
-			/*var videoChecker:VideoChecker = new VideoChecker();
-			videoChecker.isVideoURL(["http://v.youku.com/v_show/id_XMjkzNzU0MTAw.html",
-				"http://news.joy.cn/video/3064577.htm", "http://bugu.cntv.cn/ent/C20352/classpage/video/20110820/100389.shtml",
-				"http://tv.v1.cn/tpjs/2011-8-22/1313978608564v.shtml", "http://www.yinyuetai.com/video/241881",
-				"http://tv.sohu.com/20110803/n315253285.shtml", "http://www.56.com/u38/v_NjI0NzI1NDc.html",
-				"http://video.sina.com.cn/p/sports/c/v/2011-08-21/234961451709.html", "http://v.ku6.com/film/show_129913/yYpl6lVQsGZNJal6.html",
-				"http://www.tudou.com/playlist/p/a67218i93826498.html", "http://v.youku.com/v_show/id_XMjk3MjAzMjE2.html"]);*/
-			
 			this.stage.scaleMode = StageScaleMode.NO_SCALE;
 			this.stage.align = StageAlign.TOP_LEFT;
 			
@@ -172,7 +137,7 @@ package
 			// 打开登录界面
 			doLogin();
 			
-			if(SystemSettingData.checkUpdateAtStart) checkUpdate();
+			if(SystemSettingData.checkUpdateDelay == 0) checkUpdate();
 			
 			// 初始化主界面
 //			this.visible = false;
@@ -183,7 +148,6 @@ package
 			this.stage.nativeWindow.alwaysInFront = SystemSettingData.alwaysInfront;
 			drawBackground();
 			drawButtons();
-			
 		}
 		
 		private function doLogin():void
@@ -390,6 +354,7 @@ package
 					return;
 				}
 				weiboPublishWindow = new WeiBoPublisher(getNativeWindowInitOption());
+				weiboPublishWindow.displayByState(WeiBoPublisher.NORMAL);
 				weiboPublishWindow.activate();
 				return;
 			}
@@ -468,7 +433,10 @@ package
 					return;
 					break;
 				case mewBtn:
-					navigateToURL(new URLRequest("http://mew.iabel.com"));
+//					navigateToURL(new URLRequest("http://mew.iabel.com"));
+					var timing:TimingWeiboWindow = new TimingWeiboWindow(getNativeWindowInitOption());
+					timing.activate();
+					return;
 					break;
 				case listBtn:
 					if(currentState == ACCOUNT_LIST){
@@ -536,9 +504,17 @@ package
 		
 		public function initWidgets():void
 		{
-			// 初始化本地数据库管理器
 			if(!dataCache) dataCache = new DataCache();
 			if(!assetsCache) assetsCache = new AssetsCache();
+			if(!alternationCenter) alternationCenter = new WeiboAlternationCenter();
+			if(!Widget.linkStyle){
+				Widget.linkStyle = new StyleSheet();
+				Widget.linkStyle.setStyle(".mainStyle", {fontFamily: Widget.systemFont, color:Widget.mainTextColor, fontSize:12, leading:10});
+				Widget.linkStyle.setStyle("a:link", {fontFamily: Widget.systemFont, color:Widget.linkColor, fontSize:12, leading:11, textDecoration:"none"});
+				Widget.linkStyle.setStyle("a:hover", {fontFamily: Widget.systemFont, color:Widget.linkColor, fontSize:12, leading:11, textDecoration:"underline"});
+			}
+			if(!timingWeiboManager) timingWeiboManager = new TimingWeiboManager();
+			timingWeiboManager.check();
 		}
 		
 		public function checkUpdate():void
@@ -550,14 +526,14 @@ package
 		
 		public function destroyUpdate():void
 		{
-			if(update){
-				update = null;
-			}
+			if(update) update = null;
 		}
 		
 		public function callFromSQLiteManager(arr:Array):void
 		{
 			if(currentActiveWindow){
+				var xml:XML = null;
+				var urlLoader:URLLoader = new URLLoader();
 				switch(currentState){
 					case INDEX:
 					case AT:
@@ -566,17 +542,43 @@ package
 					case MY_WEIBO:
 					case DIRECT_MESSAGE:
 						var list:WeiboFormList = new WeiboFormList();
-						list.listData(arr, currentActiveWindow.getContentWidth());
-						currentActiveWindow.showWeibo(arr, list);
+						var func:Function = function(event:Event):void
+						{
+							urlLoader.removeEventListener(Event.COMPLETE, func);
+							xml = XML(urlLoader.data);
+							list.listData(arr, currentActiveWindow.getContentWidth(), xml);
+							currentActiveWindow.showWeibo(arr, list);
+						};
+						urlLoader.addEventListener(Event.COMPLETE, func);
+						urlLoader.load(new URLRequest("config/emotions.xml"));
 						break;
 					case FANS:
 					case FOLLOW:
 						var userList:UserFormList = new UserFormList();
-						userList.listData(arr, currentActiveWindow.getContentWidth());
+						userList.listData(arr, currentActiveWindow.getContentWidth(), null);
 						currentActiveWindow.showWeibo(arr, userList);
 						break;
 				}
 			}
+		}
+		
+		public function showTargetUserWindow(arr:Array, ud:UserData, p:Point):void
+		{
+			if(!targetUserWindow) targetUserWindow = new WeiBoListWindow(getNativeWindowInitOption());
+			var xml:XML = null;
+			var urlLoader:URLLoader = new URLLoader();
+			var list:WeiboFormList = new WeiboFormList();
+			var func:Function = function(event:Event):void
+			{
+				urlLoader.removeEventListener(Event.COMPLETE, func);
+				xml = XML(urlLoader.data);
+				list.listData(arr, targetUserWindow.getContentWidth(), xml);
+				targetUserWindow.showWeibo(arr, list, ud);
+				targetUserWindow.relocate(p);
+				targetUserWindow.activate();
+			};
+			urlLoader.addEventListener(Event.COMPLETE, func);
+			urlLoader.load(new URLRequest("config/emotions.xml"));
 		}
 		
 		public function loginSuccess():void
@@ -589,16 +591,6 @@ package
 			if(!localWriter) localWriter = new WeiboDataCacher();
 			if(!preloader) preloader =  new DataPreloader();
 			preloader.preload();
-		}
-		private function loadFriendTimeLine(event:MicroBlogEvent):void
-		{
-//			list = event.result as Array;
-//			var sh:SharedObject = SharedObject.getLocal("testData");
-//			sh.data.arr = list;
-//			sh.flush();
-			if(this.currentActiveWindow){
-//				this.currentActiveWindow.showWeibo(list);
-			}
 		}
 		
 		public function reloadTheme():void

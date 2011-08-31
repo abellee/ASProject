@@ -111,6 +111,9 @@ package mew.windows
 			
 			mewLoginLabel.x = loginBtn.width + loginBtn.x - mewLoginLabel.width;
 			mewLoginLabel.y = registLabel.y;
+			SystemSettingData._verified = false;
+			SystemSettingData._accessTokenKey = "";
+			SystemSettingData._accessTokenSecret = "";
 			if(SystemSettingData.autoLogin){
 				if(SystemSettingData._verified){
 					verifyCredential();

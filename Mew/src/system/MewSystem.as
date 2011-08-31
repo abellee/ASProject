@@ -1,5 +1,6 @@
 package system
 {
+	import flash.display.Sprite;
 	import com.sina.microblog.MicroBlog;
 	
 	import config.Config;
@@ -32,6 +33,8 @@ package system
 		public static var cycleMotion:MovieClip = new MovieClip();
 		
 		public static var toolTip:ToolTip = null;
+		
+		public static var database:Boolean = false;
 		
 		public static function initMicroBlog():void
 		{
@@ -88,6 +91,18 @@ package system
 			nativeWindowInitOption.type = NativeWindowType.LIGHTWEIGHT;
 			
 			return nativeWindowInitOption;
+		}
+		
+		public static function getRoundRect(widthSize:int, heightSize:int, lineColor:Number = 0x000000, backgroundColor:Number = 0xffffff,
+		 backgroundAlpha:int = 1.0, lineWeight:int = 1, lineAlpha:int = 1, leftTop:int = 5, rightTop:int = 5, leftBottom:int = 5, rightBottom:int = 5):Sprite
+		{
+			var sp:Sprite = new Sprite();
+			sp.graphics.lineStyle(lineWeight, lineColor, lineAlpha);
+			sp.graphics.beginFill(backgroundColor, backgroundAlpha);
+			sp.graphics.drawRoundRectComplex(0, 0, widthSize, heightSize, leftTop, rightTop, leftBottom, rightBottom);
+			sp.graphics.endFill();
+			
+			return sp;
 		}
 	}
 }

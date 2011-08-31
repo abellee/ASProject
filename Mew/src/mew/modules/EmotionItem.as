@@ -1,17 +1,13 @@
-package mew.modules
-{
+package mew.modules {
 	import com.iabel.core.UISprite;
-	
+
 	import flash.display.Bitmap;
 	import flash.display.Loader;
-	import flash.display.LoaderInfo;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.events.UncaughtErrorEvent;
 	import flash.net.URLRequest;
-	
-	import org.bytearray.gif.player.GIFPlayer;
 	
 	public class EmotionItem extends UISprite
 	{

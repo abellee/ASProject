@@ -1,32 +1,23 @@
-package mew.windows
-{
-	import com.iabel.component.VGroup;
-	import com.iabel.core.UISprite;
-	import com.sina.microblog.data.MicroBlogStatus;
-	import com.sina.microblog.events.MicroBlogEvent;
-	import com.yahoo.astra.fl.containers.BorderPane;
-	import com.yahoo.astra.fl.containers.VBoxPane;
-	
+package mew.windows {
 	import fl.containers.ScrollPane;
 	import fl.events.ScrollEvent;
-	
-	import flash.data.SQLResult;
+
+	import mew.data.UserData;
+	import mew.modules.UserDescription;
+
+	import system.MewSystem;
+
+	import com.iabel.core.UISprite;
+	import com.sina.microblog.events.MicroBlogEvent;
+
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.Screen;
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.TimerEvent;
 	import flash.geom.Point;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.utils.Timer;
-	
-	import mew.modules.NameBox;
-	import mew.modules.UserDescription;
-	import mew.modules.WeiboEntry;
-	import mew.modules.WeiboFormList;
-	
-	import system.MewSystem;
 	
 	public class WeiBoListWindow extends ALNativeWindow
 	{
@@ -53,7 +44,7 @@ package mew.windows
 			return (background.width - scrollList.verticalScrollBar.width);
 		}
 		
-		override public function showWeibo(arr:Array, content:UISprite):void
+		override public function showWeibo(arr:Array, content:UISprite, ud:UserData = null):void
 		{
 			var xpos:int = 10;
 			var ypos:int = 10;
@@ -78,6 +69,12 @@ package mew.windows
 			scrollList.move(xpos, ypos);
 			scrollList.setSize(this.background.width, hvalue);
 			addChild(scrollList);
+		}
+		
+		public function relocate(p:Point):void
+		{
+			this.stage.nativeWindow.x = p.x;
+			this.stage.nativeWindow.y = p.y;
 		}
 		
 		private function onScroll(event:ScrollEvent):void
@@ -123,11 +120,11 @@ package mew.windows
 					break;
 				case MewSystem.app.FANS:
 					MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_FOLLOWERS_INFO_RESULT, dataByPageLoadComplete);
-					MewSystem.microBlog.loadFollowersInfo(null, "0", null, 20 * (curPage - 1), 20);
+					MewSystem.microBlog.loadFollowersInfo(null, "0", null, 30 * (curPage - 1), 30);
 					break;
 				case MewSystem.app.FOLLOW:
 					MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_FRIENDS_INFO_RESULT, dataByPageLoadComplete);
-					MewSystem.microBlog.loadFriendsInfo(null, "0", null, 20 * (curPage - 1), 20);
+					MewSystem.microBlog.loadFriendsInfo(null, "0", null, 30 * (curPage - 1), 30);
 					break;
 			}
 		}
@@ -152,7 +149,7 @@ package mew.windows
 					urlLoader.removeEventListener(Event.COMPLETE, func);
 					list.listData(tempArr, getContentWidth(), XML(e.target.data));
 					urlLoader = null;
-				}
+				};
 				urlLoader.addEventListener(Event.COMPLETE, func);
 				urlLoader.load(new URLRequest("config/emotions.xml"));
 			}else{
@@ -184,7 +181,7 @@ package mew.windows
 				urlLoader.removeEventListener(Event.COMPLETE, func);
 				list.listData(arr, getContentWidth(), XML(e.target.data));
 				return;
-			}
+			};
 			urlLoader.addEventListener(Event.COMPLETE, func);
 			urlLoader.load(new URLRequest("config/emotions.xml"));
 		}

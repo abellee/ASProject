@@ -185,6 +185,7 @@ package mew.modules
 		
 		private function clearContentHandler(event:MewEvent):void
 		{
+			if(inputTextField.text == "") return;
 			resetContent(false);
 		}
 		

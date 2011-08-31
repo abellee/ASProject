@@ -1,12 +1,21 @@
-package mew.windows
-{
-	import com.greensock.TweenLite;
+package mew.windows {
+	import flash.events.TimerEvent;
+	import config.SQLConfig;
+
+	import mew.data.SystemSettingData;
+	import mew.data.UserData;
+	import mew.modules.FloatUserInfo;
+
+	import system.MewSystem;
+
+	import widget.Widget;
+
 	import com.iabel.core.UISprite;
 	import com.iabel.system.CoreSystem;
 	import com.iabel.util.ScaleBitmap;
-	
-	import config.SQLConfig;
-	
+
+	import org.bytearray.gif.player.GIFPlayer;
+
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.display.NativeWindow;
@@ -16,20 +25,17 @@ package mew.windows
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
-	
-	import mew.data.SystemSettingData;
-	
-	import org.bytearray.gif.player.GIFPlayer;
-	
-	import system.MewSystem;
-	
-	import widget.Widget;
+	import flash.geom.Point;
+	import flash.utils.Timer;
 	
 	public class ALNativeWindow extends NativeWindow
 	{
 		protected var _listenerList:Object = null;
 		protected var background:UISprite = null;
 		protected var cover:Sprite = null;
+		protected var showTimer:Timer = null;
+		protected var curPoint:Point = null;
+		protected var curUD:UserData = null;
 		public function ALNativeWindow(initOptions:NativeWindowInitOptions)
 		{
 			super(initOptions);
@@ -54,7 +60,7 @@ package mew.windows
 				xpos = MewSystem.app.currentButton.x + MewSystem.app.currentButton.width / 2 - this.stage.nativeWindow.width / 2;
 				
 			}
-			var startPos:int = Screen.mainScreen.visibleBounds.height + this.stage.nativeWindow.height;
+//			var startPos:int = Screen.mainScreen.visibleBounds.height + this.stage.nativeWindow.height;
 			var ypos:int = Screen.mainScreen.visibleBounds.y + MewSystem.app.height;
 			this.stage.nativeWindow.x = xpos;
 			this.stage.nativeWindow.y = ypos;
@@ -102,7 +108,7 @@ package mew.windows
 					break;
 			}
 		}
-		public function showWeibo(arr:Array, content:UISprite):void
+		public function showWeibo(arr:Array, content:UISprite, ud:UserData = null):void
 		{
 			return;
 		}
@@ -115,6 +121,48 @@ package mew.windows
 		public function showResult(value:int, mode:Boolean = false):void
 		{
 			
+		}
+		
+		public function showUserFloat(p:Point, ud:UserData):void
+		{
+			curPoint = p;
+			curUD = ud;
+			if(showTimer){
+				showTimer.stop();
+				showTimer.removeEventListener(TimerEvent.TIMER, showFloatFrame);
+				showTimer = null;
+			}
+			showTimer = new Timer(1000);
+			showTimer.addEventListener(TimerEvent.TIMER, showFloatFrame);
+			showTimer.start();
+		}
+		
+		protected function showFloatFrame(event:TimerEvent):void
+		{
+			if(showTimer){
+				showTimer.stop();
+				showTimer.removeEventListener(TimerEvent.TIMER, showFloatFrame);
+				showTimer = null;
+			}
+			if(MewSystem.app.userFloat){
+				if(this.stage.contains(MewSystem.app.userFloat)) this.stage.removeChild(MewSystem.app.userFloat);
+				MewSystem.app.userFloat = null;
+			}
+			MewSystem.app.userFloat = new FloatUserInfo();
+			MewSystem.app.userFloat.initData(curUD);
+			addChild(MewSystem.app.userFloat);
+			MewSystem.app.userFloat.x = curPoint.x + 54;
+			MewSystem.app.userFloat.y = curPoint.y;
+		}
+		
+		public function removeUserFloat():void
+		{
+			curPoint = null;
+			curUD = null;
+			if(MewSystem.app.userFloat && this.stage.contains(MewSystem.app.userFloat)){
+				this.stage.removeChild(MewSystem.app.userFloat);
+				MewSystem.app.userFloat = null;
+			}
 		}
 		
 		protected function drawCover():void
@@ -206,6 +254,13 @@ package mew.windows
 				background = null;
 			}
 			cover = null;
+			if(showTimer){
+				showTimer.stop();
+				showTimer.removeEventListener(TimerEvent.TIMER, showFloatFrame);
+				showTimer = null;
+			}
+			curPoint = null;
+			curUD = null;
 		}
 	}
 }

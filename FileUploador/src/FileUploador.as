@@ -1,9 +1,8 @@
-package
-{
+package {
 	import fl.containers.ScrollPane;
 	import fl.controls.Button;
 	import fl.controls.ScrollPolicy;
-	
+
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -11,11 +10,6 @@ package
 	import flash.net.FileFilter;
 	import flash.net.FileReference;
 	import flash.net.FileReferenceList;
-	import flash.net.URLLoader;
-	import flash.net.URLRequest;
-	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.utils.ByteArray;
 	
 	[SWF(width="400", height="300")]
 	public class FileUploador extends Sprite
@@ -26,7 +20,7 @@ package
 		private var uploadButton:Button = null;
 		private var deleteAll:Button = null;
 		private var fileRef:FileReferenceList = null;
-		private var uploadURL:String = "";
+//		private var uploadURL:String = "";
 		private var fileType:FileFilter = new FileFilter("Image(*.jpg, *.png, *.jpeg, *.gif)", "*.jpg;*.png;*.jpeg;*.gif");
 		
 		public static var serverURLParams:Object = {};

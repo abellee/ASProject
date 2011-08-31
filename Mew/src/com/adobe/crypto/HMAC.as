@@ -99,7 +99,7 @@ package com.adobe.crypto {
 				}
 			}
 
-			secret.length = 64
+			secret.length = 64;
 			secret.position = 0;
 			for ( var x:int = 0; x < 64; x++ ) {
 				var byte:int = secret.readByte();

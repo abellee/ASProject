@@ -1,15 +1,14 @@
-package mew.modules
-{
-	import com.sina.microblog.data.MicroBlogComment;
-	
-	import flash.display.DisplayObject;
-	import flash.events.Event;
-	
-	import mew.data.UserData;
+package mew.modules {
 	import mew.utils.StringUtils;
 	import mew.utils.VideoChecker;
-	
+
 	import system.MewSystem;
+
+	import com.sina.microblog.data.MicroBlogComment;
+
+	import flash.display.DisplayObject;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
 
 	public class CommentEntry extends WeiboEntry
 	{
@@ -25,18 +24,21 @@ package mew.modules
 			id = comment.id;
 			userData = MewSystem.app.dataCache.getUserDataCache(comment.user);
 			
-			var commentUserData:UserData = MewSystem.app.dataCache.getUserDataCache(comment.status.user);
 			data = MewSystem.app.dataCache.getWeiboDataCache(comment.status);
 			
 			userAvatar.userData = userData;
 			userAvatar.loadAvatar();
 			addChild(userAvatar);
+			userAvatar.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
+			userAvatar.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
 			
 			nameBox.userData = userData;
 			nameBox.create();
 			addChild(nameBox);
 			nameBox.x = userAvatar.x + userAvatar.width + 10;
 			nameBox.y = 0;
+			nameBox.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
+			nameBox.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
 			
 			addChild(weiboText);
 			weiboText.x = nameBox.x;

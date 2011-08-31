@@ -14,7 +14,7 @@ package org.bytearray.gif.encoder
 	{
 		private static var EOF:int = -1;
 		private var imgW:int;
-		private var imgH:int
+		private var imgH:int;
 		private var pixAry:ByteArray;
 		private var initCodeSize:int;
 		private var remaining:int;
@@ -37,9 +37,9 @@ package org.bytearray.gif.encoder
 		// James A. Woods (decvax!ihnp4!ames!jaw)
 		// Joe Orost (decvax!vax135!petsd!joe)
 		
-		private var n_bits:int // number of bits/code
+		private var n_bits:int; // number of bits/code
 		private var maxbits:int = BITS; // user settable max # bits/code
-		private var maxcode:int // maximum code, given n_bits
+		private var maxcode:int; // maximum code, given n_bits
 		private var maxmaxcode:int = 1 << BITS; // should NEVER generate this code
 		private var htab:Array = new Array;
 		private var codetab:Array = new Array;

@@ -1,5 +1,8 @@
-package mew.cache
-{
+package mew.cache {
+	import config.SQLConfig;
+
+	import system.MewSystem;
+
 	import com.sina.microblog.data.MicroBlogComment;
 	import com.sina.microblog.data.MicroBlogCount;
 	import com.sina.microblog.data.MicroBlogDirectMessage;
@@ -7,22 +10,15 @@ package mew.cache
 	import com.sina.microblog.data.MicroBlogStatus;
 	import com.sina.microblog.data.MicroBlogUser;
 	import com.sina.microblog.data.MicroBlogUsersRelationship;
-	
-	import config.SQLConfig;
-	
-	import flash.events.Event;
+
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 	import flash.net.registerClassAlias;
-	
-	import mew.data.WeiboDataCacheVariable;
-	
-	import system.MewSystem;
 
 	public class WeiboDataCacher
 	{
-		private var lastWriteID:String = null;                          // 最后一次写操作的数据id
+//		private var lastWriteID:String = null;                          // 最后一次写操作的数据id
 		
 		public function WeiboDataCacher()
 		{

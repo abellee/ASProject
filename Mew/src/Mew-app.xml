@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<application xmlns="http://ns.adobe.com/air/application/2.6">
+<?xml version="1.0" encoding="utf-8" standalone="no"?><application xmlns="http://ns.adobe.com/air/application/2.6">
 
 <!-- Adobe AIR Application Descriptor File Template.
 
@@ -18,23 +17,23 @@
 	<id>Mew</id>
 
 	<!-- Used as the filename for the application. Required. -->
-	<filename>Mew</filename>
+	<filename>Mew微博</filename>
 
 	<!-- The name that is displayed in the AIR application installer. 
 	May have multiple values for each language. See samples or xsd schema file. Optional. -->
-	<name>Mew</name>
+	<name>Mew微博</name>
 	
 	<!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade. 
 	Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
 	An updated version of application must have a versionNumber value higher than the previous version. Required for namespace >= 2.5 . -->
-	<versionNumber>0.0.0</versionNumber>
+	<versionNumber>1.2</versionNumber>
 		         
 	<!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
 	<!-- <versionLabel></versionLabel> -->
 
 	<!-- Description, displayed in the AIR application installer.
 	May have multiple values for each language. See samples or xsd schema file. Optional. -->
-	<!-- <description></description> -->
+	<description><![CDATA[<p align="center"><b>版权归Abel Lee所有<br>Copyright © 2011 All Rights Reserved.</p><b>Developer: </b><font color="#3FB9F8"><a href="http://weibo.com/abellee"><b>Abel Lee</b></a></font><br><b>Designer: </b><font color="#3FB9F8"><a href="http://weibo.com/1833968851"><b>沈-叉叉</b></a></font>]]></description>
 
 	<!-- Copyright information. Optional -->
 	<!-- <copyright></copyright> -->
@@ -46,16 +45,16 @@
 	<initialWindow>
 		<!-- The main SWF or HTML file of the application. Required. -->
 		<!-- Note: In Flash Builder, the SWF reference is set automatically. -->
-		<content>[This value will be overwritten by Flash Builder in the output app.xml]</content>
+		<content>Mew.swf</content>
 		
 		<!-- The title of the main window. Optional. -->
 		<!-- <title></title> -->
 
 		<!-- The type of system chrome to use (either "standard" or "none"). Optional. Default standard. -->
-		<!-- <systemChrome></systemChrome> -->
+		<systemChrome>none</systemChrome>
 
 		<!-- Whether the window is transparent. Only applicable when systemChrome is none. Optional. Default false. -->
-		<!-- <transparent></transparent> -->
+		<transparent>true</transparent>
 
 		<!-- Whether the window is initially visible. Optional. Default false. -->
 		<!-- <visible></visible> -->

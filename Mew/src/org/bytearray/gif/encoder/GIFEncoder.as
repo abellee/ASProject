@@ -6,20 +6,14 @@
 * @version 0.1 AS3 implementation
 */
 
-package org.bytearray.gif.encoder
-{
-	import flash.utils.ByteArray;
-	import flash.display.BitmapData;
+package org.bytearray.gif.encoder {
 	import flash.display.Bitmap;
-	import org.bytearray.gif.encoder.NeuQuant
-	import flash.net.URLRequestHeader;
-	import flash.net.URLRequestMethod;
-	import flash.net.URLRequest;
-	import flash.net.navigateToURL;
+	import flash.display.BitmapData;
+	import flash.utils.ByteArray;
 	
 	public class GIFEncoder
 	{
-		private var width:int // image size
+		private var width:int; // image size
   		private var height:int;
 	    private var transparent:* = null; // transparent color if given
 	    private var transIndex:int; // transparent index in color table
@@ -29,7 +23,7 @@ package org.bytearray.gif.encoder
 	    private var out:ByteArray;
 	    private var image:Bitmap; // current frame
 	    private var pixels:ByteArray; // BGR byte array from frame
-	    private var indexedPixels:ByteArray // converted frame indexed to palette
+	    private var indexedPixels:ByteArray; // converted frame indexed to palette
 	    private var colorDepth:int; // number of bit planes
 	    private var colorTab:ByteArray; // RGB palette
 	    private var usedEntry:Array = new Array; // active palette entries
@@ -242,7 +236,7 @@ package org.bytearray.gif.encoder
 		    height = h;
 		    if (width < 1)width = 320;
 		    if (height < 1)height = 240;
-		    sizeSet = true
+		    sizeSet = true;
 			
 		}
 		
@@ -376,7 +370,7 @@ package org.bytearray.gif.encoder
 			out.writeByte(0x21); // extension introducer
 		    out.writeByte(0xf9); // GCE label
 		    out.writeByte(4); // data block size
-		    var transp:int
+		    var transp:int;
 		    var disp:int;
 		    if (transparent == null) {
 		      transp = 0;

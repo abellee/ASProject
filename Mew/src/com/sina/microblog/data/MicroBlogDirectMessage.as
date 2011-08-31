@@ -54,7 +54,7 @@ package com.sina.microblog.data
 		{
 			id = String(message.id);
 			createdAt = MicroBlogDataUtil.resolveDate(message.created_at);
-			text = message.text;
+			text = String(message.text);
 			senderID = String(message.sender_id);
 			recipientID = String(message.recipient_id);
 			senderScreenName = message.sender_screen_name;

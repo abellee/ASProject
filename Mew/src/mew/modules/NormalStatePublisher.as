@@ -1,30 +1,27 @@
-package mew.modules
-{
-	import com.iabel.core.UISprite;
-	
+package mew.modules {
 	import fl.controls.UIScrollBar;
-	
+
+	import mew.data.UserData;
+	import mew.data.WeiboData;
+	import mew.events.MewEvent;
+	import mew.utils.StringUtils;
+
+	import system.MewSystem;
+
+	import widget.Widget;
+
+	import com.iabel.core.UISprite;
+
+	import mx.utils.StringUtil;
+
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.TextEvent;
 	import flash.geom.Point;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
 	import flash.utils.ByteArray;
-	
-	import mew.data.UserData;
-	import mew.data.WeiboData;
-	import mew.events.MewEvent;
-	import mew.utils.StringUtils;
-	import mew.windows.EmotionWindow;
-	
-	import mx.utils.StringUtil;
-	
-	import system.MewSystem;
-	
-	import widget.Widget;
 	
 	public class NormalStatePublisher extends UISprite implements IWeiboPublisherContainer, IEmotionCorrelation
 	{
@@ -131,6 +128,7 @@ package mew.modules
 		
 		private function clearContentHandler(event:MewEvent):void
 		{
+			if(inputTextField.text == "") return;
 			resetContent(false);
 		}
 		

@@ -18,7 +18,7 @@ package com.iabel.util
 					return Bitmap;
 					break;
 				case MOVIECLIP:
-					return MovieClip
+					return MovieClip;
 					break;
 			}
 			return null;

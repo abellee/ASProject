@@ -1,18 +1,34 @@
-package mew.windows
-{
+package mew.windows {
+	import mew.communication.SuggestDataGetter;
+	import mew.modules.ITiming;
+	import fl.controls.Button;
+	import fl.controls.UIScrollBar;
+
+	import mew.data.TimingWeiboVariable;
+	import mew.events.MewEvent;
+	import mew.factory.ButtonFactory;
+	import mew.modules.IEmotionCorrelation;
+	import mew.modules.TimeSettor;
+	import mew.modules.URLShortor;
+	import mew.modules.UploadImageViewer;
+	import mew.modules.WeiboPublisherButtonGroup;
+	import mew.utils.StringUtils;
+
+	import system.MewSystem;
+
+	import widget.Widget;
+
 	import com.greensock.TweenLite;
 	import com.iabel.util.ScaleBitmap;
-	
-	import fl.controls.Button;
-	import fl.controls.ComboBox;
-	import fl.controls.UIScrollBar;
-	
-	import flash.display.Bitmap;
+
+	import mx.utils.StringUtil;
+
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.Screen;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.filesystem.File;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
@@ -20,19 +36,7 @@ package mew.windows
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
 	
-	import mew.events.MewEvent;
-	import mew.factory.ButtonFactory;
-	import mew.modules.IEmotionCorrelation;
-	import mew.modules.URLShortor;
-	import mew.modules.UploadImageViewer;
-	import mew.modules.WeiboPublisherButtonGroup;
-	import mew.utils.StringUtils;
-	
-	import system.MewSystem;
-	
-	import widget.Widget;
-	
-	public class TimingWeiboWindow extends ALNativeWindow implements IEmotionCorrelation
+	public class TimingWeiboWindow extends ALNativeWindow implements IEmotionCorrelation, ITiming
 	{
 		private var topBK:Sprite = null;
 		private var titleText:TextField = null;
@@ -54,12 +58,8 @@ package mew.windows
 		
 		private var timeline:ScaleBitmap = null;
 		
-		private var yearText:TextField = null;
-		private var yearTextBackground:Sprite = null;
-		private var monthSelector:ComboBox = null;
-		private var daySelector:ComboBox = null;
-		private var hourSelector:ComboBox = null;
-		private var minuteSelector:ComboBox = null;
+		private var timeSettor:TimeSettor = null;
+		private var suggestGetter:SuggestDataGetter = null;
 		
 		private var scrolling:Boolean = false;
 		
@@ -70,7 +70,7 @@ package mew.windows
 		
 		override protected function init():void
 		{
-			drawBackground(600, 450);
+			drawBackground(700, 450);
 			background.alpha = 0;
 			this.stage.nativeWindow.alwaysInFront = true;
 			super.init();
@@ -185,6 +185,75 @@ package mew.windows
 			buttonGroup.addEventListener(MewEvent.TOPIC, topicHandler);
 			buttonGroup.addEventListener(MewEvent.CLEAR_CONTENT, clearContentHandler);
 			buttonGroup.addEventListener(MewEvent.SHORT_URL, shortURLHandler);
+			
+			timeSettor = new TimeSettor();
+			addChild(timeSettor);
+			timeSettor.x = bk.x + bk.width + 10;
+			timeSettor.y = bk.y;
+			
+			sendButton = ButtonFactory.SendButton();
+			addChild(sendButton);
+			sendButton.x = (timeSettor.width - sendButton.width) / 2 + timeSettor.x;
+			sendButton.y = (background.height + 110 + timeSettor.y) / 2 - sendButton.height / 2;
+			sendButton.addEventListener(MouseEvent.CLICK, sendButton_mouseClickHandler);
+		}
+
+		private function sendButton_mouseClickHandler(event : MouseEvent) : void
+		{
+			if(Number(textNumText.text) <= 0){
+				MewSystem.showLightAlert("定时微博的内容不能为空!", this.stage);
+				return;
+			}else if(Number(textNumText.text) > 140){
+				MewSystem.showLightAlert("定时微博的字数不得大于140字!", this.stage);
+				return;
+			}
+			var str:String = inputTextField.text;
+			str = str.replace(/\s/g, " ");
+			if(str == ""){
+				MewSystem.showLightAlert("定时微博的内容不能为空!", this.stage);
+				return;
+			}
+			str = inputTextField.text;
+			str = StringUtil.trim(str);
+			str = str.replace(/\n\r\t/g, " ");
+			
+			if(timeSettor){
+				var year:int = timeSettor.year;
+				var month:int = timeSettor.month;
+				var date:int = timeSettor.date;
+				var hour:int = timeSettor.hour;
+				var minute:int = timeSettor.minute;
+				var targetTime:Number = new Date(year, month - 1, date, hour, minute).time;
+				
+				var now:Date = new Date();
+				var time:Number = now.time;
+				trace(year, month, date, hour, minute, targetTime, time);
+				if(targetTime - time > 60000){
+					var data:TimingWeiboVariable = new TimingWeiboVariable();
+					data.content = str;
+					data.createTime = time;
+					if(imageViewer.imageExtension){
+						data.img = time + "." + imageViewer.imageExtension;
+						copyImage(data.img);
+					}
+					data.state = 0;
+					data.time = targetTime;
+					MewSystem.app.timingWeiboManager.target = this;
+					MewSystem.app.timingWeiboManager.writeData(data);
+					resetContent(true);
+				}else{
+					MewSystem.showLightAlert("定时微博的时间必需大于当前时间!", this.stage);
+				}
+			}
+		}
+
+		private function copyImage(newName:String) : void
+		{
+			if(imageViewer.imageFile){
+				var file:File = File.applicationStorageDirectory.resolvePath("timing/" + newName);
+				trace(imageViewer.imageFile.nativePath, file.exists, file.nativePath);
+				imageViewer.imageFile.copyTo(file);
+			}
 		}
 		
 		private function drawLine():void
@@ -200,7 +269,7 @@ package mew.windows
 		{
 			if(buttonContainer.x >= 0 || scrolling) return;
 			scrolling = true;
-			var targetX:int = buttonContainer.x + masker.scrollRect.width;
+			var targetX:int = buttonContainer.x + masker.scrollRect.width >= 0 ? 0 : buttonContainer.x + masker.scrollRect.width;
 			TweenLite.to(buttonContainer, .3, {x: targetX, onComplete: scrollComplete});
 		}
 		
@@ -208,7 +277,8 @@ package mew.windows
 		{
 			if(buttonContainer.x <= -(buttonContainer.width - masker.scrollRect.width) || scrolling) return;
 			scrolling = true;
-			var targetX:int = buttonContainer.x - masker.scrollRect.width;
+			var targetX:int = buttonContainer.x - masker.scrollRect.width <= -(buttonContainer.width - masker.scrollRect.width) ?
+			 -(buttonContainer.width - masker.scrollRect.width) : buttonContainer.x - masker.scrollRect.width;
 			TweenLite.to(buttonContainer, .3, {x: targetX, onComplete: scrollComplete});
 		}
 		
@@ -252,6 +322,7 @@ package mew.windows
 		
 		private function clearContentHandler(event:MewEvent):void
 		{
+			if(inputTextField.text == "") return;
 			resetContent(false);
 		}
 		
@@ -293,7 +364,20 @@ package mew.windows
 		
 		private function inputTextField_onChangeHandler(event:Event):void
 		{
-			var len:Number = StringUtils.getStringLength(inputTextField.text);
+			var str:String = inputTextField.text;
+			var start:int = inputTextField.selectionBeginIndex;
+			var lastAt:int = str.lastIndexOf("@", start);
+			if(lastAt != -1){
+				var validStr:String = str.substring(lastAt, start);
+				var blank:int = validStr.search(/\s/g);
+				if(blank == -1 && validStr != "@"){
+					var q:String = validStr.substr(1);
+					trace(q);
+					if(!suggestGetter) suggestGetter = new SuggestDataGetter();
+					suggestGetter.getData(q);
+				}
+			}
+			var len:Number = StringUtils.getStringLength(str);
 			textNumText.text = 140 - len + "";
 			textNumText.x = bk.x + bk.width - textNumText.width - 15;
 			textNumText.y = bk.y + bk.height - textNumText.height - 10;
@@ -341,6 +425,15 @@ package mew.windows
 			textNumText.y = bk.y + bk.height - textNumText.height - 10;
 			this.stage.focus = inputTextField;
 			removeScrollBar();
+		}
+		
+		public function timingWeiboData(data:Vector.<TimingWeiboVariable>):void
+		{
+			
+		}
+		public function showLightAlert(str:String):void
+		{
+			MewSystem.showLightAlert(str, this.stage);
 		}
 		
 		private function drawTextBackground():void

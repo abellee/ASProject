@@ -14,10 +14,12 @@ package widget
 		public static var topicColor:String = "#3FB9F8";
 		public static var linkColor:String = "#3FB9F8";
 		public static var fromColor:String = "#727272";
+		public static var mainTextColor:String = "0x4c4c4c";
 		public static var linkStyle:StyleSheet = null;
 		public static var mainColor:Number = 0x383938;
 		
 		public static var normalFormat:TextFormat = new TextFormat(systemFont, 12, 0x4C4C4C);
+		public static var normalWhiteFormat:TextFormat = new TextFormat(systemFont, 12, 0xFFFFFF);
 		public static var tipFormat:TextFormat = new TextFormat(systemFont, 12, 0xbdbdbd);
 		public static var usernameFormat:TextFormat = new TextFormat(systemFont, 13, 0x4C4C4C, true);
 		public static var wbSentTimeFormat:TextFormat = new TextFormat(systemFont, 12, 0x4C4C4C);

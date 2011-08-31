@@ -1,13 +1,10 @@
-package mew.modules
-{
+package mew.modules {
+	import system.MewSystem;
+
 	import com.sina.microblog.events.MicroBlogErrorEvent;
 	import com.sina.microblog.events.MicroBlogEvent;
-	
+
 	import flash.utils.ByteArray;
-	
-	import mew.windows.ALNativeWindow;
-	
-	import system.MewSystem;
 
 	public class WeiboAlternationCenter
 	{
@@ -35,6 +32,11 @@ package mew.modules
 			MewSystem.microBlog.addEventListener(MicroBlogEvent.UPDATE_STATUS_RESULT, updateStatus_resultHandler);
 			MewSystem.microBlog.addEventListener(MicroBlogErrorEvent.UPDATE_STATUS_ERROR, updateStatus_errorHandler);
 			MewSystem.microBlog.updateStatus(status, null, imageData, replyId);
+		}
+		
+		public function loadUserTimeline(id:String = null, userId:String = "0", screenName:String = null, sinceId:String = "0", maxId:String = "0", count:int = 20, page:int = 1):void
+		{
+			
 		}
 		
 		private function updateStatus_resultHandler(event:MicroBlogEvent):void

@@ -203,7 +203,7 @@ package com.adobe.serialization.json
 				// no comma is necessary
 				if ( s.length > 0 ) {
 					// we've already added an element, so add the comma separator
-					s += ","
+					s += ",";
 				}
 				
 				// convert the value to a string
@@ -268,7 +268,7 @@ package com.adobe.serialization.json
 					// no comma is necessary
 					if ( s.length > 0 ) {
 						// we've already added an item, so add the comma separator
-						s += ","
+						s += ",";
 					}
 					
 					s += escapeString( key ) + ":" + convertToString( value );
@@ -284,7 +284,7 @@ package com.adobe.serialization.json
 					// no comma is necessary
 					if ( s.length > 0 ) {
 						// We've already added an item, so add the comma separator
-						s += ","
+						s += ",";
 					}
 					
 					s += escapeString( v.@name.toString() ) + ":" 

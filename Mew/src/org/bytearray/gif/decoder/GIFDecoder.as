@@ -64,7 +64,7 @@ package org.bytearray.gif.decoder
 		// pixel aspect ratio
 		private var pixelAspect:int;
 
-		private var lctFlag:Boolean // local color table flag
+		private var lctFlag:Boolean; // local color table flag
 		// interlace flag
 		private var interlace:Boolean;
 		// local color table size
@@ -102,14 +102,14 @@ package org.bytearray.gif.decoder
 		private static var MaxStackSize:int = 4096;
 
 		// LZW decoder working arrays
-		private var prefix:Array
+		private var prefix:Array;
 		private var suffix:Array;
 		private var pixelStack:Array;
 		private var pixels:Array;
 
 		// frames read from current file
-		private var frames:Array
-		private var frameCount:int
+		private var frames:Array;
+		private var frameCount:int;
 		
 		public function GIFDecoder ( )
 		{

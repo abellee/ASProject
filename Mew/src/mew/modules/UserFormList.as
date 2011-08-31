@@ -1,9 +1,6 @@
-package mew.modules
-{
-	import com.iabel.core.UISprite;
+package mew.modules {
 	import com.sina.microblog.data.MicroBlogUser;
-	
-	import flash.display.DisplayObject;
+
 	import flash.events.Event;
 	
 	public class UserFormList extends WeiboFormList

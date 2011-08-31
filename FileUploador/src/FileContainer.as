@@ -20,6 +20,7 @@ package
 			var num:int = this.numChildren;
 			addChild(image);
 			image.addEventListener("remove_image", removeImage);
+			image.addEventListener(Event.COMPLETE, removeImage);
 			image.x = (num % 5) * (image.w + 10) + 10;
 			image.y = int(num / 5) * (image.h + 10);
 		}
@@ -44,17 +45,19 @@ package
 		private function removeImage(event:Event):void
 		{
 			var image:ImageItem = event.currentTarget as ImageItem;
-			totalSize += image.size;
-			totalNum ++;
-			TweenLite.to(image, .3, {alpha: 0, onComplete: removeSuccess, onCompleteParams:[image]});
+			TweenLite.to(image, .3, {alpha: 0, onComplete: removeSuccess, onCompleteParams:[image, event.type]});
 		}
-		private function removeSuccess(image:ImageItem):void
+		private function removeSuccess(image:ImageItem, type:String):void
 		{
 			if(this.contains(image)) this.removeChild(image);
 			image.removeEventListener("remove_image", removeImage);
 			layout();
 			this.dispatchEvent(new Event("remove_image"));
-			upload();
+			if(type == Event.COMPLETE){
+				totalSize += image.size;
+				totalNum ++;
+				upload();
+			}
 		}
 		private function layout():void
 		{

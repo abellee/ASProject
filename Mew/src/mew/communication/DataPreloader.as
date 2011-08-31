@@ -1,5 +1,6 @@
-package mew.communication
-{
+package mew.communication {
+	import system.MewSystem;
+
 	import com.sina.microblog.data.MicroBlogComment;
 	import com.sina.microblog.data.MicroBlogCount;
 	import com.sina.microblog.data.MicroBlogDirectMessage;
@@ -7,13 +8,9 @@ package mew.communication
 	import com.sina.microblog.data.MicroBlogStatus;
 	import com.sina.microblog.data.MicroBlogUser;
 	import com.sina.microblog.data.MicroBlogUsersRelationship;
-	import com.sina.microblog.events.MicroBlogErrorEvent;
 	import com.sina.microblog.events.MicroBlogEvent;
-	
+
 	import flash.net.registerClassAlias;
-	import flash.utils.ByteArray;
-	
-	import system.MewSystem;
 
 	public class DataPreloader
 	{
@@ -54,10 +51,10 @@ package mew.communication
 			MewSystem.microBlog.loadUserTimeline();
 			
 			MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_FOLLOWERS_INFO_RESULT, loadFollowersInfoResult);
-			MewSystem.microBlog.loadFollowersInfo(null, "0", null, -1, 20);
+			MewSystem.microBlog.loadFollowersInfo(null, "0", null, -1, 30);
 			
 			MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_FRIENDS_INFO_RESULT, loadFriendsInfoResult);
-			MewSystem.microBlog.loadFriendsInfo(null, "0", null, -1, 20);
+			MewSystem.microBlog.loadFriendsInfo(null, "0", null, -1, 30);
 		}
 		
 		private function loadFriendTimeLine(event:MicroBlogEvent):void
@@ -120,6 +117,7 @@ package mew.communication
 		{
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_FOLLOWERS_INFO_RESULT, loadFollowersInfoResult);
 			var result:Array = event.result as Array;
+			trace(result.length);
 			insertToDB("mew_fans", result);
 		}
 		
@@ -136,7 +134,7 @@ package mew.communication
 				var mainObj:Object = {};
 				mainObj["fileName"] = table;
 				var obj:Object = {};
-				var len:int = result.length
+				var len:int = result.length;
 				for(var i:int = 0; i<len; i++){
 					obj[result[i].id] = result[i];
 				}

@@ -88,7 +88,7 @@ package org.bytearray.gif.encoder
 		/* defs for decreasing alpha factor */
 		private static var alphabiasshift:int = 10; /* alpha starts at 1.0 */
 		private static var initalpha:int = (1 << alphabiasshift);
-		private var alphadec:int /* biased by 10 bits */
+		private var alphadec:int; /* biased by 10 bits */
 		
 		/* radbias and alpharadbias used for radpower calculation */
 		private static var radbiasshift:int = 8;
@@ -101,7 +101,7 @@ package org.bytearray.gif.encoder
 		* Types and Global Variables --------------------------
 		*/
 		
-		private var thepicture:ByteArray/* the input image itself */
+		private var thepicture:ByteArray;/* the input image itself */
 		private var lengthcount:int; /* lengthcount = H*W*3 */
 		private var samplefac:int; /* sampling factor 1..30 */
 		
@@ -173,8 +173,8 @@ package org.bytearray.gif.encoder
 		  var smallval:int;
 		  var p:Array;
 		  var q:Array;
-		  var previouscol:int
-		  var startpos:int
+		  var previouscol:int;
+		  var startpos:int;
 		  
 		  previouscol = 0;
 		  startpos = 0;
@@ -250,7 +250,7 @@ package org.bytearray.gif.encoder
 		   var i:int;
 		   var j:int;
 		   var b:int;
-		   var g:int
+		   var g:int;
 		   var r:int;
 		   var radius:int;
 		   var rad:int;
@@ -354,7 +354,7 @@ package org.bytearray.gif.encoder
 		   
 		   var i:int;
 		   var j:int;
-		   var dist:int
+		   var dist:int;
 		   var a:int;
 		   var bestd:int;
 		   var p:Array;

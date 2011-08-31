@@ -1,25 +1,23 @@
-package mew.windows
-{
+package mew.windows {
+	import fl.controls.Button;
+
+	import mew.data.UserData;
+	import mew.data.WeiboData;
+	import mew.factory.ButtonFactory;
+	import mew.modules.IWeiboPublisherContainer;
+	import mew.modules.NormalStatePublisher;
+	import mew.modules.ReplyOrRepostStatePublisher;
+
+	import system.MewSystem;
+
 	import com.greensock.TweenLite;
 	import com.iabel.core.UISprite;
-	
-	import fl.controls.Button;
-	
+
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.Screen;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.utils.ByteArray;
-	
-	import mew.data.UserData;
-	import mew.data.WeiboData;
-	import mew.factory.ButtonFactory;
-	import mew.modules.IWeiboPublisherContainer;
-	import mew.modules.LightAlert;
-	import mew.modules.NormalStatePublisher;
-	import mew.modules.ReplyOrRepostStatePublisher;
-	
-	import system.MewSystem;
 	
 	public class WeiBoPublisher extends ALNativeWindow
 	{

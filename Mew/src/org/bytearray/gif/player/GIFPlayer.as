@@ -4,23 +4,7 @@
 * @version 0.6
 */
 
-package org.bytearray.gif.player
-{	
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.display.IBitmapDrawable;
-	import flash.errors.ScriptTimeoutError;
-	import flash.events.Event;
-	import flash.events.IOErrorEvent;
-	import flash.events.TimerEvent;
-	import flash.net.URLLoader;
-	import flash.net.URLLoaderDataFormat;
-	import flash.net.URLRequest;
-	import flash.system.LoaderContext;
-	import flash.utils.ByteArray;
-	import flash.utils.Timer;
-	import flash.utils.getTimer;
-	
+package org.bytearray.gif.player {
 	import org.bytearray.gif.decoder.GIFDecoder;
 	import org.bytearray.gif.errors.FileTypeError;
 	import org.bytearray.gif.events.FileTypeEvent;
@@ -28,11 +12,23 @@ package org.bytearray.gif.player
 	import org.bytearray.gif.events.GIFPlayerEvent;
 	import org.bytearray.gif.events.TimeoutEvent;
 	import org.bytearray.gif.frames.GIFFrame;
+
+	import flash.display.Bitmap;
+	import flash.errors.ScriptTimeoutError;
+	import flash.events.Event;
+	import flash.events.IOErrorEvent;
+	import flash.events.TimerEvent;
+	import flash.net.URLLoader;
+	import flash.net.URLLoaderDataFormat;
+	import flash.net.URLRequest;
+	import flash.utils.ByteArray;
+	import flash.utils.Timer;
+	
 	
 	public class GIFPlayer extends Bitmap
 	{
 		private var urlLoader:URLLoader;
-		private var gifDecoder:GIFDecoder
+		private var gifDecoder:GIFDecoder;
 		private var aFrames:Array;
 		private var myTimer:Timer;
 		private var iInc:int;
@@ -60,7 +56,7 @@ package org.bytearray.gif.player
 		
 		private function onIOError ( pEvt:IOErrorEvent ):void
 		{
-			dispatchEvent ( pEvt );	
+//			dispatchEvent ( pEvt );	
 		}
 		
 		private function onComplete ( pEvt:Event ):void 
@@ -255,7 +251,7 @@ package org.bytearray.gif.player
 					case 1:
 						bitmapData = aFrames[ 0 ].bitmapData.clone();
 						bitmapData.draw ( aFrames[ concat ( iInc ) ].bitmapData );
-						break
+						break;
 					case 2:
 						bitmapData = aFrames[ iInc ].bitmapData;
 						break;
@@ -284,7 +280,7 @@ package org.bytearray.gif.player
 					case 1:
 						bitmapData = aFrames[ 0 ].bitmapData.clone();
 						bitmapData.draw ( aFrames[ concat ( iInc ) ].bitmapData );
-						break
+						break;
 					case 2:
 						bitmapData = aFrames[ iInc ].bitmapData;
 						break;		

@@ -73,7 +73,7 @@ package com.sina.microblog.data
 		{
 			id = String(status.id);
 			createdAt = MicroBlogDataUtil.resolveDate(status.created_at);
-			text = status.text;
+			text = String(status.text);
 			source = status.source[0].a.toXMLString();
 			isFavorited = status.favorited == "true";
 			isTruncated = status.truncated == "true";

@@ -1,17 +1,13 @@
-package mew.modules
-{
+package mew.modules {
+	import mew.utils.StringUtils;
+
+	import widget.Widget;
+
 	import com.iabel.core.UISprite;
-	import com.yahoo.astra.fl.containers.HBoxPane;
-	import com.yahoo.astra.layout.modes.VerticalAlignment;
-	
-	import flash.display.Sprite;
+
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
-	
-	import mew.utils.StringUtils;
-	
-	import widget.Widget;
 	
 	public class TimeAndFrom extends UISprite
 	{

@@ -67,7 +67,7 @@ package mew.windows
 			leftButton = ButtonFactory.ArrowButton();
 			leftButton.label = "<";
 			rightButton = ButtonFactory.ArrowButton();
-			rightButton.label = ">"
+			rightButton.label = ">";
 			addChild(leftButton);
 			leftButton.x = 20;
 			leftButton.y = 20;
@@ -264,7 +264,7 @@ package mew.windows
 			masker = null;
 			if(urlLoader){
 				try{
-					urlLoader.close()
+					urlLoader.close();
 				}catch(e:Error){}
 				urlLoader.removeEventListener(Event.COMPLETE, emotionsXML_loadCompleteHandler);
 				urlLoader = null;

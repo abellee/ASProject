@@ -1,25 +1,23 @@
-package mew.modules
-{
-	import com.greensock.TweenLite;
-	import com.iabel.core.UISprite;
-	
-	import flash.display.Bitmap;
-	import flash.display.DisplayObject;
-	import flash.display.Loader;
-	import flash.display.NativeWindow;
-	import flash.display.NativeWindowInitOptions;
-	import flash.display.NativeWindowType;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.net.URLRequest;
-	
+package mew.modules {
 	import mew.data.ImageData;
 	import mew.data.MediaData;
 	import mew.factory.StaticAssets;
 	import mew.windows.ImageViewer;
-	
+
 	import system.MewSystem;
+
+	import com.greensock.TweenLite;
+	import com.iabel.core.UISprite;
+
+	import flash.display.Bitmap;
+	import flash.display.DisplayObject;
+	import flash.display.Loader;
+	import flash.display.LoaderInfo;
+	import flash.display.NativeWindowInitOptions;
+	import flash.display.NativeWindowType;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.net.URLRequest;
 	
 	public class ImageBox extends UISprite
 	{
@@ -48,7 +46,7 @@ package mew.modules
 		protected function thumbImage_loadCompleteHandler(event:Event):void
 		{
 			loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, thumbImage_loadCompleteHandler);
-			bitmap = event.target.content as Bitmap;
+			bitmap = (event.target as LoaderInfo).content as Bitmap;
 			addChild(bitmap);
 			if(bitmap.width < 20) bitmap.width = 20;
 			bitmap.alpha = 0;

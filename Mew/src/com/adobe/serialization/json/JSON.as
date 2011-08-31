@@ -76,7 +76,7 @@ package com.adobe.serialization.json {
 		 */
 		public static function decode( s:String ):* {
 			
-			var decoder:JSONDecoder = new JSONDecoder( s )
+			var decoder:JSONDecoder = new JSONDecoder( s );
 			return decoder.getValue();
 			
 		}

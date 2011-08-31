@@ -22,6 +22,9 @@ package mew.events
 		
 		public static const SHORTEN_URL_SUCCESS:String = "shorten_url_success";
 		
+		public static const SUGGESTION_SUCCESS:String = "suggestion_success";
+		public static const SUGGESTION_FAILED:String = "suggestion_failed";
+		
 		public function MewEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);

@@ -1,24 +1,15 @@
-package mew.modules
-{
-	import com.sina.microblog.data.MicroBlogStatus;
-	import com.yahoo.astra.fl.containers.BorderPane;
-	import com.yahoo.astra.fl.containers.VBoxPane;
-	import com.yahoo.astra.layout.modes.BorderConstraints;
-	
-	import flash.display.DisplayObject;
-	import flash.events.Event;
-	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.utils.getTimer;
-	
-	import mew.data.UserData;
-	import mew.data.WeiboData;
+package mew.modules {
+	import flash.geom.Point;
+	import flash.events.MouseEvent;
 	import mew.utils.StringUtils;
 	import mew.utils.VideoChecker;
-	
+
 	import system.MewSystem;
-	
-	import widget.Widget;
+
+	import com.sina.microblog.data.MicroBlogStatus;
+
+	import flash.display.DisplayObject;
+	import flash.events.Event;
 	
 	public class WeiboEntry extends RepostBox
 	{
@@ -42,10 +33,14 @@ package mew.modules
 			userAvatar.userData = userData;
 			userAvatar.loadAvatar();
 			addChild(userAvatar);
+			userAvatar.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
+			userAvatar.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
 			
 			nameBox.userData = userData;
 			nameBox.create();
 			addChild(nameBox);
+			nameBox.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
+			nameBox.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
 			nameBox.x = userAvatar.x + userAvatar.width + 10;
 			nameBox.y = 0;
 			
@@ -95,6 +90,7 @@ package mew.modules
 			addChild(timeAndFrom);
 			setSize(this.width, this.height);
 		}
+
 		override protected function onResize(event:Event):void
 		{
 			var h:int = this.height;

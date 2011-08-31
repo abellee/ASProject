@@ -20,7 +20,7 @@ package mew.modules
 			var now:Date = new Date();
 			var time:Number = now.time;
 			var dataTime:Number = data.time;
-			if(!data.success) pointSkin = new Bitmap()
+			if(!data.success) pointSkin = new Bitmap();
 		}
 	}
 }

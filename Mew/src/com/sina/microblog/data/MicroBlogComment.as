@@ -43,7 +43,7 @@ package com.sina.microblog.data
 		{
 			id = String(comment.id);
 			createdAt = MicroBlogDataUtil.resolveDate(comment.created_at);
-			text = comment.text;
+			text = String(comment.text);
 			if(comment.user[0] !=null){
 				user = new MicroBlogUser();
 				user.init(comment.user[0]);

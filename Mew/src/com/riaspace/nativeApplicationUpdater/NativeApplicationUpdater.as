@@ -518,7 +518,7 @@ package com.riaspace.nativeApplicationUpdater
 			if (_isNewerVersionFunction != null)
 				return _isNewerVersionFunction;
 			else
-				return function(currentVersion:String, updateVersion:String):Boolean { return currentVersion != updateVersion};
+				return function(currentVersion:String, updateVersion:String):Boolean { return currentVersion != updateVersion;};
 		}
 
 		public function set isNewerVersionFunction(value:Function):void

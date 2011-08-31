@@ -125,7 +125,7 @@ package mew.modules
 				bitmap.y = (bk.height - bitmap.height) / 2;
 				TweenLite.to(bitmap, .5, {alpha: 1});
 				return;
-			}
+			};
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, func);
 			loader.loadBytes(ba);
 		}
@@ -163,6 +163,17 @@ package mew.modules
 		{
 			if(!file) return null;
 			return file.data;
+		}
+		
+		public function get imageExtension():String
+		{
+			if(!file) return null;
+			return file.extension;
+		}
+		
+		public function get imageFile():File
+		{
+			return file;
 		}
 		
 		private function onCancelHandler(event:Event):void

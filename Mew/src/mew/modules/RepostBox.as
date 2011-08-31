@@ -1,28 +1,15 @@
-package mew.modules
-{
-	import com.iabel.core.UISprite;
-	import com.sina.microblog.data.MicroBlogStatus;
-	import com.yahoo.astra.fl.containers.BorderPane;
-	import com.yahoo.astra.layout.modes.BorderConstraints;
-	
-	import fl.core.InvalidationType;
-	
-	import flash.display.DisplayObject;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.geom.Point;
-	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	
+package mew.modules {
 	import mew.data.MediaData;
-	import mew.data.UserData;
-	import mew.data.WeiboData;
 	import mew.utils.StringUtils;
 	import mew.utils.VideoChecker;
-	
+
 	import system.MewSystem;
-	
-	import widget.Widget;
+
+	import com.sina.microblog.data.MicroBlogStatus;
+
+	import flash.display.DisplayObject;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
 	
 	public class RepostBox extends DirectMessageBox
 	{
@@ -70,6 +57,8 @@ package mew.modules
 				nameBox.userData = userData;
 				nameBox.create();
 				addChild(nameBox);
+				nameBox.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
+				nameBox.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
 				
 				addChild(weiboText);
 				weiboText.x = nameBox.x;

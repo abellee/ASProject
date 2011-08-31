@@ -1,12 +1,8 @@
-package mew.data
-{
+package mew.data {
 	import flash.display.Loader;
 	import flash.display.LoaderInfo;
 	import flash.events.Event;
-	import flash.events.IEventDispatcher;
 	import flash.net.URLRequest;
-	
-	import system.MewSystem;
 
 	public class ImageData extends MediaData
 	{
