@@ -1,5 +1,6 @@
 package mew.windows
 {
+	import fl.data.DataProvider;
 	import com.greensock.TweenLite;
 	import com.sina.microblog.data.MicroBlogUser;
 	import com.sina.microblog.events.MicroBlogErrorEvent;
@@ -29,7 +30,7 @@ package mew.windows
 		public static var instance:LoginWindow = null;
 		private var loginBtn:Button;
 		private var closeBtn:Button;
-		private var weiboChooser:ComboBox;
+		private var accChooser:ComboBox;
 		private var registLabel:Label;
 		private var forgetLabel:Label;
 		private var mewLoginLabel:Label;
@@ -60,17 +61,17 @@ package mew.windows
 			closeBtn.y = 15;
 			closeBtn.addEventListener(MouseEvent.CLICK, exitApplication);
 			
-			weiboChooser = new ComboBox();
-			addChild(weiboChooser);
-			weiboChooser.width = background.width - 40;
-			weiboChooser.x = (background.width - weiboChooser.width) / 2 + background.x;
-			weiboChooser.y = (background.height - weiboChooser.height) / 2 + background.y;
+			accChooser = new ComboBox();
+			addChild(accChooser);
+			accChooser.width = background.width - 40;
+			accChooser.x = (background.width - accChooser.width) / 2 + background.x;
+			accChooser.y = (background.height - accChooser.height) / 2 + background.y;
 			
 			loginBtn = new Button();
 			loginBtn.label = "登录";
 			addChild(loginBtn);
-			loginBtn.x = weiboChooser.x + weiboChooser.width - loginBtn.width;
-			loginBtn.y = weiboChooser.y + weiboChooser.height + 20;
+			loginBtn.x = accChooser.x + accChooser.width - loginBtn.width;
+			loginBtn.y = accChooser.y + accChooser.height + 20;
 			loginBtn.addEventListener(MouseEvent.CLICK, oauthLogin);
 			
 			autoLogin = new CheckBox();
@@ -78,7 +79,7 @@ package mew.windows
 			autoLogin.label = "自动登录";
 			autoLogin.selected = SystemSettingData.autoLogin;
 			addChild(autoLogin);
-			autoLogin.x = weiboChooser.x;
+			autoLogin.x = accChooser.x;
 			autoLogin.y = loginBtn.y + (loginBtn.height - autoLogin.height) / 2;
 			autoLogin.addEventListener(Event.CHANGE, setAutoLogin);
 			
@@ -101,9 +102,9 @@ package mew.windows
 			addChild(forgetLabel);
 			addChild(mewLoginLabel);
 			
-			var gap:uint = (weiboChooser.width - registLabel.width - forgetLabel.width - mewLoginLabel.width) / 2;
+			var gap:uint = (accChooser.width - registLabel.width - forgetLabel.width - mewLoginLabel.width) / 2;
 			
-			registLabel.x = weiboChooser.x;
+			registLabel.x = accChooser.x;
 			registLabel.y = background.y + background.height - registLabel.height - 10;
 			
 			forgetLabel.x = gap + registLabel.x + registLabel.width;
@@ -111,9 +112,14 @@ package mew.windows
 			
 			mewLoginLabel.x = loginBtn.width + loginBtn.x - mewLoginLabel.width;
 			mewLoginLabel.y = registLabel.y;
-			SystemSettingData._verified = false;
-			SystemSettingData._accessTokenKey = "";
-			SystemSettingData._accessTokenSecret = "";
+			var userAccounts:Object = LocalManager.getUserAccount();
+			var dp:DataProvider = new DataProvider();
+			for(var key:String in userAccounts){
+				if(userAccounts[key]["default"]) dp.addItemAt({label:userAccounts[key]["username"], account:key, password:userAccounts[key]["password"]}, 0);
+				else dp.addItem({label:userAccounts[key]["username"], account:key, password:userAccounts[key]["password"]});
+			}
+			dp.addItem({label: "其它帐号登录..."});
+			accChooser.dataProvider = dp;
 			if(SystemSettingData.autoLogin){
 				if(SystemSettingData._verified){
 					verifyCredential();
@@ -213,9 +219,8 @@ package mew.windows
 			
 			SystemSettingData._verified = true;
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.VERIFY_CREDENTIALS_RESULT, onVerifyCredentialResult);
-			LocalManager.setSettingsInSharedObject("accessTokenKey", SystemSettingData._accessTokenKey);
-			LocalManager.setSettingsInSharedObject("accessTokenSecret", SystemSettingData._accessTokenSecret);
 			MewSystem.app.userData = MewSystem.app.dataCache.getUserDataCache(event.result as MicroBlogUser);
+			LocalManager.setUserSharedObject(SystemSettingData._accessTokenKey, SystemSettingData._accessTokenSecret, MewSystem.app.userData.username);
 			if(oauthWindow){
 				oauthWindow.close();
 				return;
@@ -249,7 +254,7 @@ package mew.windows
 			closeBtn = null;
 			autoLogin = null;
 			instance = null;
-			weiboChooser = null;
+			accChooser = null;
 			registLabel = null;
 			forgetLabel = null;
 			mewLoginLabel = null;

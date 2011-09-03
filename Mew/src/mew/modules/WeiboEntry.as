@@ -23,6 +23,29 @@ package mew.modules {
 			super.init();
 			userAvatar = new Avatar();
 		}
+		override protected function removeOperationButton(event : MouseEvent) : void
+		{
+			if(MewSystem.operationButton && this.contains(MewSystem.operationButton)){
+				this.removeChild(MewSystem.operationButton);
+				MewSystem.operationButton = null;
+			}
+		}
+		
+		override protected function showOperationButton(event : MouseEvent) : void
+		{
+			MewSystem.operationButton = new OperationGroup();
+			if(userData.id == MewSystem.app.userData.id){
+				MewSystem.operationButton.showAllButtons();
+			}else{
+				MewSystem.operationButton.showCollectionButton();
+				MewSystem.operationButton.showRepostButton();
+				MewSystem.operationButton.showCommentButton();
+				MewSystem.operationButton.calculateSize();
+			}
+			MewSystem.operationButton.sid = data.id;
+			addChild(MewSystem.operationButton);
+			MewSystem.operationButton.x = this.width - MewSystem.operationButton.width - 5;
+		}
 		override public function initStatus(obj:Object, xml:XML):void
 		{
 			var status:MicroBlogStatus = obj as MicroBlogStatus;
@@ -33,31 +56,27 @@ package mew.modules {
 			userAvatar.userData = userData;
 			userAvatar.loadAvatar();
 			addChild(userAvatar);
-			userAvatar.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
-			userAvatar.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
 			
 			nameBox.userData = userData;
 			nameBox.create();
 			addChild(nameBox);
-			nameBox.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
-			nameBox.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
 			nameBox.x = userAvatar.x + userAvatar.width + 10;
 			nameBox.y = 0;
 			
 			addChild(weiboText);
 			weiboText.x = nameBox.x;
 			weiboText.y = nameBox.y + nameBox.height + 10;
-			data.content = data.content.replace(/\</g, "&lt;");
-			weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt(data.content) + "</span>", this.width - weiboText.x, xml);
-			urls = StringUtils.getURLs(data.content);
+			var contentStr:String = data.content.replace(/\</g, "&lt;");
+			urls = StringUtils.getURLs(contentStr);
 			if(urls && urls.length){
 				for each(var s:String in urls){
-					weiboText.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
+					contentStr = contentStr.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
 				}
 				videoChecker = new VideoChecker();
 				videoChecker.addEventListener(Event.COMPLETE, checkVideoUrlComplete);
 				videoChecker.isVideoURL(urls);
 			}
+			weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt(contentStr) + "</span>", this.width - weiboText.x, xml);
 			
 			timeAndFrom.time = status.createdAt;
 			timeAndFrom.from = status.source;
@@ -89,6 +108,7 @@ package mew.modules {
 			timeAndFrom.y = preChild.y + preChild.height + 10;
 			addChild(timeAndFrom);
 			setSize(this.width, this.height);
+			addListener();
 		}
 
 		override protected function onResize(event:Event):void

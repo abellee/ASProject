@@ -131,7 +131,7 @@ package mew.windows
 		
 		private function showContainer():void
 		{
-			if(curContainer && this.stage.contains(curContainer as UISprite)){
+			if(curContainer && container.contains(curContainer as UISprite)){
 				removeChild(curContainer as UISprite);
 				curContainer = null;
 			}

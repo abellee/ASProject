@@ -1,8 +1,9 @@
 package mew.modules {
-	import mew.windows.ALNativeWindow;
 	import mew.data.UserData;
 	import mew.data.WeiboData;
+	import mew.events.MewEvent;
 	import mew.utils.StringUtils;
+	import mew.windows.ALNativeWindow;
 
 	import system.MewSystem;
 
@@ -30,7 +31,29 @@ package mew.modules {
 		{
 			super();
 			addEventListener(Event.ADDED_TO_STAGE, onAdd);
+			addEventListener(MouseEvent.ROLL_OVER, showOperationButton);
+			addEventListener(MouseEvent.ROLL_OUT, removeOperationButton);
 			init();
+		}
+
+		protected function removeOperationButton(event : MouseEvent) : void
+		{
+			if(MewSystem.operationButton && this.contains(MewSystem.operationButton)){
+				this.removeChild(MewSystem.operationButton);
+				MewSystem.operationButton = null;
+			}
+		}
+
+		protected function showOperationButton(event : MouseEvent) : void
+		{
+			if(!MewSystem.operationButton) MewSystem.operationButton = new OperationGroup();
+			MewSystem.operationButton.showDeleteButton();
+			MewSystem.operationButton.showMessageButton();
+			MewSystem.operationButton.calculateSize();
+			addChild(MewSystem.operationButton);
+			MewSystem.operationButton.sid = data.id;
+			if(userData.id == MewSystem.app.userData.id) MewSystem.operationButton.x = 5;
+			else MewSystem.operationButton.x = this.width - MewSystem.operationButton.width - 5;
 		}
 		protected function onAdd(event:Event):void
 		{
@@ -58,8 +81,6 @@ package mew.modules {
 			userAvatar = new Avatar();
 			userAvatar.userData = userData;
 			userAvatar.loadAvatar();
-			userAvatar.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
-			userAvatar.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
 			
 			nameBox.userData = userData;
 			nameBox.create();
@@ -67,25 +88,51 @@ package mew.modules {
 			addChild(userAvatar);
 			addChild(nameBox);
 			addChild(weiboText);
-			nameBox.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
-			nameBox.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
 			
 			if(userData.id == MewSystem.app.userData.id) userAvatar.x = this.width - userAvatar.width - 2;
 			else userAvatar.x = 0;
 			
 			nameBox.x = userAvatar.width + 5;
-			data.content = data.content.replace(/\</g, "&lt;");
-			weiboText.setText(StringUtils.displayTopicAndAt(data.content + " (" + StringUtils.transformTime(dm.createdAt) + ")"), this.width - userAvatar.width * 2 - 10, xml);
-			weiboText.x = nameBox.x;
-			weiboText.y = nameBox.y + nameBox.height + 5;
-			urls = StringUtils.getURLs(data.content);
+			var contentStr:String = data.content.replace(/\</g, "&lt;");
+			urls = StringUtils.getURLs(contentStr);
 			if(urls && urls.length){
 				for each(var s:String in urls){
-					weiboText.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
+					contentStr = contentStr.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
 				}
 			}
+			weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt(contentStr + " (" + StringUtils.transformTime(dm.createdAt) + ")") + "</span>",
+			 this.width - userAvatar.width * 2 - 10, xml);
+			weiboText.x = nameBox.x;
+			weiboText.y = nameBox.y + nameBox.height + 5;
 			
 			setSize(this.width, this.height);
+			addListener();
+		}
+		
+		protected function addListener():void
+		{
+			if(userAvatar){
+				userAvatar.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
+				userAvatar.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
+				userAvatar.addEventListener(MouseEvent.CLICK, showTargetUser);
+			}
+			if(nameBox){
+				nameBox.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
+				nameBox.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
+				nameBox.addEventListener(MouseEvent.CLICK, showTargetUser);
+			}
+			weiboText.addEventListener(MewEvent.PLAY_VIDEO, playVideoHandler);
+		}
+		
+		protected function playVideoHandler(event:MewEvent):void
+		{
+			
+		}
+
+		protected function showTargetUser(event : MouseEvent) : void
+		{
+			if(MewSystem.app.currentState == MewSystem.app.MY_WEIBO && userData == MewSystem.app.userData) return;
+			MewSystem.app.alternationCenter.loadUserTimeline(userData.id);
 		}
 
 		protected function removeFloatFrame(event : MouseEvent) : void

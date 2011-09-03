@@ -20,6 +20,8 @@ package widget
 		
 		public static var normalFormat:TextFormat = new TextFormat(systemFont, 12, 0x4C4C4C);
 		public static var normalWhiteFormat:TextFormat = new TextFormat(systemFont, 12, 0xFFFFFF);
+		public static var searchGrayFormat:TextFormat = new TextFormat(systemFont, 12, 0xb9b9b9);
+		public static var searchFormat:TextFormat = new TextFormat(systemFont, 12, 0x4C4C4C);
 		public static var tipFormat:TextFormat = new TextFormat(systemFont, 12, 0xbdbdbd);
 		public static var usernameFormat:TextFormat = new TextFormat(systemFont, 13, 0x4C4C4C, true);
 		public static var wbSentTimeFormat:TextFormat = new TextFormat(systemFont, 12, 0x4C4C4C);

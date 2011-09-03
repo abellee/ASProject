@@ -1,32 +1,22 @@
-package mew.windows
-{
-	import com.iabel.system.GC;
-	
+package mew.windows {
+	import widget.Widget;
 	import fl.controls.Button;
-	
+
+	import mew.data.SystemSettingData;
+
+	import system.MewSystem;
+
+	import com.iabel.system.GC;
+
 	import flash.desktop.NativeApplication;
 	import flash.display.NativeWindow;
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.Screen;
-	import flash.display.StageDisplayState;
 	import flash.events.Event;
-	import flash.events.FullScreenEvent;
-	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
-	import flash.events.NativeWindowBoundsEvent;
-	import flash.events.NativeWindowDisplayStateEvent;
 	import flash.html.HTMLLoader;
-	import flash.net.URLRequest;
-	import flash.system.Security;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
-	import flash.ui.Keyboard;
-	
-	import mew.data.SystemSettingData;
-	
-	import system.MewSystem;
-	
-	import widget.Widget;
 	
 	public class VideoViewer extends ALNativeWindow
 	{
@@ -48,10 +38,8 @@ package mew.windows
 			html = new HTMLLoader();
 			html.paintsDefaultBackground = false;
 			titleTextField = new TextField();
-			titleTextField.selectable = false;
+			titleTextField.styleSheet = Widget.linkStyle;
 			titleTextField.autoSize = TextFieldAutoSize.LEFT;
-			titleTextField.defaultTextFormat = Widget.videoTitleFormat;
-			titleTextField.mouseEnabled = false;
 			
 			closeBtn = new Button();
 			closeBtn.label = "close";
@@ -97,7 +85,7 @@ package mew.windows
 		{
 			if(title){
 				if(title.length > 20) title = title.substr(0, 20) + "...";
-				titleTextField.text = title;
+				titleTextField.htmlText = "<span class=\"mainStyle\"><a href='" + str + "'>" + title + "</a></span>";
 				titleTextField.width = titleTextField.textWidth;
 				titleTextField.height = titleTextField.textHeight;
 				addChild(titleTextField);
@@ -106,7 +94,8 @@ package mew.windows
 			}
 			addChild(html);
 			html.addEventListener(Event.COMPLETE, htmlLoadComplete);
-			html.loadString("<object type=\"application/x-shockwave-flash\" width=\"480\" height=\"400\"> <param name=\"movie\" value=\"" + str + "\" /> <param name=\"wmode\" value=\"transparent\" /><param name=\"allowScriptAccess\" value=\"sameDomain\" /> <param name=\"allowFullScreen\" value=\"true\" /> </object>");
+			html.loadString("<object type=\"application/x-shockwave-flash\" width=\"480\" height=\"400\"> <param name=\"movie\" value=\"" + str +
+			 "\" /> <param name=\"wmode\" value=\"transparent\" /><param name=\"allowScriptAccess\" value=\"sameDomain\" /> <param name=\"allowFullScreen\" value=\"true\" /></object>");
 		}
 		
 		protected function htmlLoadComplete(event:Event):void

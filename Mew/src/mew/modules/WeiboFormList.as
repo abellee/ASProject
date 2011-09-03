@@ -16,13 +16,16 @@ package mew.modules {
 			super();
 		}
 		
-		override public function listData(arr:Array, w:Number, xml:XML):void
+		override public function listData(arr:Array, w:Number, xml:XML, showRepost:Boolean = true):void
 		{
 			fromIndex = this.numChildren;
 			for each(var obj:Object in arr){
 				var entry:DirectMessageBox;
 				if(obj is MicroBlogStatus) entry = new WeiboEntry();
-				else if(obj is MicroBlogComment) entry = new CommentEntry();
+				else if(obj is MicroBlogComment){
+					entry = new CommentEntry();
+					(entry as CommentEntry).showRepost = showRepost;
+				}
 				else if(obj is MicroBlogDirectMessage) entry = new DirectMessageBox();
 				entry.x = 10;
 				entry.setSize(w - entry.x, 10);

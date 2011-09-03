@@ -1,0 +1,91 @@
+<root width="64" height="32">
+<item>
+<x>1</x>
+<y>0</y>
+<tid>2</tid>
+<text>鞋帽店</text>
+<image>images/1.jpg</image>
+<rotation>0</rotation>
+<keyword>鞋子, 帽子</keyword>
+</item>
+
+<item>
+<x>6</x>
+<y>8</y>
+<tid>2</tid>
+<text>鞋帽店</text>
+<image>images/1.jpg</image>
+<rotation>-20</rotation>
+<keyword>鞋子, 帽子</keyword>
+</item>
+
+<item>
+<x>3</x>
+<y>0</y>
+<tid>2</tid>
+<text>鞋帽店</text>
+<image>images/1.jpg</image>
+<rotation>0</rotation>
+<keyword>鞋子, 帽子</keyword>
+</item>
+
+<item>
+<x>4</x>
+<y>0</y>
+<tid>2</tid>
+<text>鞋帽店</text>
+<image>images/1.jpg</image>
+<rotation>0</rotation>
+<keyword>鞋子, 帽子</keyword>
+</item>
+
+<item>
+<x>4</x>
+<y>0</y>
+<tid>2</tid>
+<text>鞋帽店</text>
+<image>images/1.jpg</image>
+<rotation>0</rotation>
+<keyword>鞋子, 帽子</keyword>
+</item>
+
+<item>
+<x>5</x>
+<y>0</y>
+<tid>2</tid>
+<text>鞋帽店</text>
+<image>images/1.jpg</image>
+<rotation>0</rotation>
+<keyword>鞋子, 帽子</keyword>
+</item>
+
+<item>
+<x>6</x>
+<y>0</y>
+<tid>2</tid>
+<text>鞋帽店</text>
+<image>images/1.jpg</image>
+<rotation>0</rotation>
+<keyword>鞋子, 帽子</keyword>
+</item>
+
+<item>
+<x>7</x>
+<y>0</y>
+<tid>2</tid>
+<text>鞋帽店</text>
+<image>images/1.jpg</image>
+<rotation>0</rotation>
+<keyword>鞋子, 帽子</keyword>
+</item>
+
+<item>
+<x>8</x>
+<y>0</y>
+<tid>2</tid>
+<text>鞋帽店</text>
+<image>images/1.jpg</image>
+<rotation>0</rotation>
+<keyword>鞋子, 帽子</keyword>
+</item>
+</root>

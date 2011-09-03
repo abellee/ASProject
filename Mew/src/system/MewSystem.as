@@ -1,23 +1,31 @@
-package system
-{
-	import flash.display.Sprite;
-	import com.sina.microblog.MicroBlog;
-	
+package system {
 	import config.Config;
-	
+	import config.SQLConfig;
+
+	import mew.data.SuggestData;
+	import mew.data.SystemSettingData;
+	import mew.modules.Alert;
+	import mew.modules.IEmotionCorrelation;
+	import mew.modules.LightAlert;
+	import mew.modules.OperationGroup;
+	import mew.modules.Suggesttor;
+	import mew.modules.ToolTip;
+	import mew.windows.EmotionWindow;
+
+	import widget.Widget;
+
+	import com.sina.microblog.MicroBlog;
+	import com.sina.microblog.data.MicroBlogComment;
+	import com.sina.microblog.data.MicroBlogDirectMessage;
+	import com.sina.microblog.data.MicroBlogStatus;
+	import com.sina.microblog.data.MicroBlogUser;
+
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.NativeWindowType;
+	import flash.display.Sprite;
 	import flash.geom.Point;
-	
-	import mew.modules.Alert;
-	import mew.modules.IEmotionCorrelation;
-	import mew.modules.LightAlert;
-	import mew.modules.ToolTip;
-	import mew.windows.EmotionWindow;
-	
-	import widget.Widget;
 
 	public class MewSystem
 	{
@@ -33,8 +41,33 @@ package system
 		public static var cycleMotion:MovieClip = new MovieClip();
 		
 		public static var toolTip:ToolTip = null;
+		public static var operationButton:OperationGroup = null;
+		public static var repostOperationButton:OperationGroup = null;
 		
 		public static var database:Boolean = false;
+		
+		public static var lastStatusId:String = null;
+		public static var lastDMId:String = null;
+		public static var lastCommentId:String = null;
+		public static var lastFanId:String = null;
+		public static var lastAtId:String = null;
+		
+		public static var finalStatusId:String = null;
+		public static var finalDMId:String = null;
+		public static var finalCommentId:String = null;
+		public static var finalFollowId:String = null;
+		public static var finalCollectId:String = null;
+		public static var finalUserStatusId:String = null;
+		
+		public static var statusNum:int = 20;
+		public static var atNum:int = 20;
+		public static var commentNum:int = 20;
+		public static var userStatusNum:int = 20;
+		public static var fansNum:int = 30;
+		public static var followNum:int = 30;
+		public static var directMessageNum:int = 20;        // totally is 40
+		public static var collectNum:int = 20;
+		public static var wbCommentNum:int = 10;
 		
 		public static function initMicroBlog():void
 		{
@@ -43,6 +76,76 @@ package system
 			microBlog.consumerKey = Config.appKey;
 			microBlog.consumerSecret = Config.appSecret;
 			microBlog.isTrustDomain = true;
+		}
+		
+		public static function setLastId(fileName:String, arr:Array):void
+		{
+			switch(fileName){
+				case SQLConfig.MEW_FANS:
+					MewSystem.lastFanId = (arr[0] as MicroBlogUser).id;
+					break;
+				case SQLConfig.MEW_AT:
+					MewSystem.lastAtId = (arr[0] as MicroBlogStatus).id;
+					break;
+				case SQLConfig.MEW_DIRECT:
+					MewSystem.lastDMId = (arr[0] as MicroBlogDirectMessage).id;
+					break;
+				case SQLConfig.MEW_INDEX:
+					MewSystem.lastStatusId = (arr[0] as MicroBlogStatus).id;
+					break;
+				case SQLConfig.MEW_COMMENT:
+					MewSystem.lastCommentId = (arr[0] as MicroBlogComment).id;
+					break;
+			}
+		}
+		
+		public static function setFinalId(fileName:String, arr:Array):void
+		{
+			switch(fileName){
+				case SQLConfig.MEW_FOLLOW:
+					MewSystem.finalFollowId = (arr[arr.length - 1] as MicroBlogUser).id;
+					break;
+				case SQLConfig.MEW_COLLECT:
+					MewSystem.finalCollectId = (arr[arr.length - 1] as MicroBlogStatus).id;
+					break;
+				case SQLConfig.MEW_DIRECT:
+					MewSystem.finalDMId = (arr[arr.length - 1] as MicroBlogDirectMessage).id;
+					break;
+				case SQLConfig.MEW_INDEX:
+					MewSystem.finalStatusId = (arr[arr.length - 1] as MicroBlogStatus).id;
+					break;
+				case SQLConfig.MEW_MY_WEIBO:
+					MewSystem.finalUserStatusId = (arr[arr.length - 1] as MicroBlogStatus).id;
+					break;
+				case SQLConfig.MEW_COMMENT:
+					MewSystem.finalCommentId = (arr[arr.length - 1] as MicroBlogComment).id;
+					break;
+			}
+		}
+		
+		public static function dmNotice(num:int):void
+		{
+			if(SystemSettingData.dmNotice && num > 0) app.showUnread(app.DIRECT_MESSAGE, num);
+		}
+		
+		public static function atNotice(num:int):void
+		{
+			if(SystemSettingData.atNotice && num > 0) app.showUnread(app.AT, num);
+		}
+		
+		public static function fansNotice(num:int):void
+		{
+			if(SystemSettingData.fansNotice && num > 0) app.showUnread(app.FANS, num);
+		}
+		
+		public static function statusNotice(num:int):void
+		{
+			if(SystemSettingData.weiboNotice && num > 0) app.showUnread(app.INDEX, num);
+		}
+		
+		public static function commentNotice(num:int):void
+		{
+			if(SystemSettingData.commentNotice && num > 0) app.showUnread(app.COMMENT, num);
 		}
 		
 		public static function show(text:String, parent:DisplayObjectContainer):void
@@ -67,12 +170,31 @@ package system
 			MewSystem.cycleMotion.y = (parent.height - MewSystem.cycleMotion.height) / 2;
 		}
 		
+		public static function removeCycleLoading(parent:DisplayObjectContainer):void
+		{
+			if(!parent){
+				if(MewSystem.cycleMotion.parent){
+					MewSystem.cycleMotion.parent.removeChild(MewSystem.cycleMotion);
+					return;
+				}
+				return;
+			}
+			if(parent.contains(MewSystem.cycleMotion)) parent.removeChild(MewSystem.cycleMotion);
+		}
+		
 		public static function openEmotionWindow(pos:Point, parent:IEmotionCorrelation):void
 		{
 			if(!app.emotionWindow) app.emotionWindow = new EmotionWindow(getNativeWindowInitOption());
 			app.emotionWindow.orientationWindow(pos);
 			app.emotionWindow.targetWindow = parent;
 			app.emotionWindow.activate();
+		}
+		
+		public static function openSuggestWindow(pos:Point, data:Vector.<SuggestData>):void
+		{
+			if(!app.suggestor) app.suggestor = new Suggesttor();
+			app.suggestor.locate(pos, data.length * 30);
+			app.suggestor.showSuggest(data);
 		}
 		
 		public static function closeEmotionWindow():void

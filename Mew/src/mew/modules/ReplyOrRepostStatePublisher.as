@@ -1,30 +1,34 @@
-package mew.modules
-{
-	import com.iabel.core.UISprite;
-	
+package mew.modules {
 	import fl.controls.UIScrollBar;
-	
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.text.TextFieldType;
-	import flash.text.TextFormat;
-	import flash.utils.ByteArray;
-	
+
+	import mew.communication.SuggestDataGetter;
+	import mew.data.SuggestData;
 	import mew.data.UserData;
 	import mew.data.WeiboData;
 	import mew.events.MewEvent;
 	import mew.utils.StringUtils;
 	import mew.windows.WeiBoPublisher;
-	
-	import mx.utils.StringUtil;
-	
+
 	import system.MewSystem;
-	
+
 	import widget.Widget;
+
+	import com.iabel.core.UISprite;
+
+	import mx.utils.StringUtil;
+
+	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.events.KeyboardEvent;
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFieldType;
+	import flash.text.TextFormat;
+	import flash.ui.Keyboard;
+	import flash.utils.ByteArray;
 	
 	public class ReplyOrRepostStatePublisher extends UISprite implements IWeiboPublisherContainer, IEmotionCorrelation
 	{
@@ -40,11 +44,20 @@ package mew.modules
 		private var wd:WeiboData = null;
 		private var scroller:UIScrollBar = null;
 		private var urlShortor:URLShortor = null;
+		private var suggestGetter:SuggestDataGetter = null;
+		private var explicitHeight:int;
 		public function ReplyOrRepostStatePublisher()
 		{
 			super();
 			
 			init();
+			addEventListener(Event.ADDED_TO_STAGE, onAddedStage);
+		}
+		
+		private function onAddedStage(event:Event):void
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, onAddedStage);
+			explicitHeight = this.stage.nativeWindow.height;
 		}
 		
 		private function init():void
@@ -71,7 +84,7 @@ package mew.modules
 			weiboText.mouseWheelEnabled = false;
 		}
 		
-		public function showWeiboContent(state:String, userData:UserData, weiboData:WeiboData):void
+		public function showWeiboContent(state:String, userData:UserData, weiboData:WeiboData, additionalStr:String):void
 		{
 			ud = userData;
 			wd = weiboData;
@@ -93,11 +106,7 @@ package mew.modules
 			var str:String = weiboData.content.replace(/\</g, "&lt;");
 			str = StringUtils.displayTopicAndAt(str);
 			var urls:Array = StringUtils.getURLs(str);
-			if(urls && urls.length){
-				for each(var s:String in urls){
-					str.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
-				}
-			}
+			if(urls && urls.length) for each(var s:String in urls) str.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
 			addChild(weiboText);
 			weiboText.x = nameBox.x;
 			weiboText.y = nameBox.y + nameBox.height + 10;
@@ -122,6 +131,9 @@ package mew.modules
 			inputTextField.height = bk.height - 20;
 			inputTextField.addEventListener(Event.CHANGE, inputTextField_onChangeHandler);
 			inputTextField.addEventListener(Event.ADDED_TO_STAGE, inputTextField_addToStageHandler);
+			inputTextField.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+			inputTextField.text = additionalStr;
+			if(state == WeiBoPublisher.REPOST) inputTextField.setSelection(0, 0);
 			
 			textNumText = new TextField();
 			textNumText.defaultTextFormat = new TextFormat(Widget.systemFont, 40, 0x000000);
@@ -198,7 +210,7 @@ package mew.modules
 				return;
 			}
 			urlShortor = new URLShortor();
-			urlShortor.parentStage = MewSystem.app.weiboPublishWindow.stage;
+			urlShortor.parentStage = MewSystem.app.weiboPublishWindow.container;
 			addChild(urlShortor);
 			urlShortor.addEventListener(MewEvent.SHORTEN_URL_SUCCESS, shortenURL_successHandler);
 			var selectedText:String = inputTextField.selectedText;
@@ -227,7 +239,26 @@ package mew.modules
 		
 		private function inputTextField_onChangeHandler(event:Event):void
 		{
-			var len:Number = StringUtils.getStringLength(inputTextField.text);
+			var str:String = inputTextField.text;
+			var start:int = inputTextField.selectionBeginIndex;
+			var lastAt:int = str.lastIndexOf("@", start);
+			if(lastAt != -1){
+				var validStr:String = str.substring(lastAt, start);
+				var blank:int = validStr.search(/\s/g);
+				if(blank == -1 && validStr != "@"){
+					var q:String = validStr.substr(1);
+					if(!suggestGetter) suggestGetter = new SuggestDataGetter();
+					if(!suggestGetter.hasEventListener(MewEvent.SUGGESTION_SUCCESS)){
+						suggestGetter.addEventListener(MewEvent.SUGGESTION_SUCCESS, suggestGetSuccess);
+						suggestGetter.addEventListener(MewEvent.SUGGESTION_FAILED, suggestGetFailed);
+						suggestGetter.addEventListener(MewEvent.NO_SUGGESTION, noSuggestion);
+					}
+					suggestGetter.getData(q);
+				}else{
+					if(suggestGetter) suggestGetter.dispatchEvent(new MewEvent(MewEvent.NO_SUGGESTION));
+				}
+			}
+			var len:Number = StringUtils.getStringLength(str);
 			textNumText.text = 140 - len + "";
 			textNumText.x = bk.x + bk.width - textNumText.width - 15;
 			textNumText.y = bk.y + bk.height - textNumText.height - 10;
@@ -256,6 +287,84 @@ package mew.modules
 			str = str.replace(/\n\r\t/g, " ");
 			if(Number(textNumText.text) < 0) return null;
 			return str;
+		}
+		
+		private function noSuggestion(event : MewEvent) : void
+		{
+			trace("no suggestion!");
+			if(MewSystem.app.suggestor){
+				if(this.contains(MewSystem.app.suggestor)) this.removeChild(MewSystem.app.suggestor);
+				MewSystem.app.suggestor = null;
+			}
+			suggestGetter.removeEventListener(MewEvent.SUGGESTION_SUCCESS, suggestGetSuccess);
+			suggestGetter.removeEventListener(MewEvent.SUGGESTION_FAILED, suggestGetFailed);
+			suggestGetter.removeEventListener(MewEvent.NO_SUGGESTION, noSuggestion);
+		}
+
+		private function suggestGetFailed(event : MewEvent) : void
+		{
+			if(MewSystem.app.suggestor){
+				if(this.contains(MewSystem.app.suggestor)) this.removeChild(MewSystem.app.suggestor);
+				MewSystem.app.suggestor = null;
+			}
+			suggestGetter.removeEventListener(MewEvent.SUGGESTION_SUCCESS, suggestGetSuccess);
+			suggestGetter.removeEventListener(MewEvent.SUGGESTION_FAILED, suggestGetFailed);
+			suggestGetter.removeEventListener(MewEvent.NO_SUGGESTION, noSuggestion);
+		}
+
+		private function suggestGetSuccess(event : MewEvent) : void
+		{
+			trace("success!");
+			var data:Vector.<SuggestData> = suggestGetter.data;
+			var index:int = inputTextField.caretIndex;
+			if(index != -1){
+				var rect:Rectangle = inputTextField.getCharBoundaries(index-1);
+				var pos:Point = new Point(inputTextField.x + rect.x, inputTextField.y + rect.y);
+				MewSystem.openSuggestWindow(pos, data);
+				addChild(MewSystem.app.suggestor);
+				this.stage.nativeWindow.height = MewSystem.app.suggestor.y + MewSystem.app.suggestor.height > explicitHeight ?
+				 MewSystem.app.suggestor.y + MewSystem.app.suggestor.height : explicitHeight;
+			}
+		}
+
+		private function keyDownHandler(event : KeyboardEvent) : void
+		{
+			switch(event.keyCode){
+				case Keyboard.UP:
+					if(MewSystem.app.suggestor){
+						event.preventDefault();
+						MewSystem.app.suggestor.previous();
+					}
+					break;
+				case Keyboard.DOWN:
+					if(MewSystem.app.suggestor){
+						event.preventDefault();
+						MewSystem.app.suggestor.next();
+					}
+					break;
+				case Keyboard.ENTER:
+					if(MewSystem.app.suggestor){
+						event.preventDefault();
+						var str:String = inputTextField.text;
+						var start:int = inputTextField.selectionBeginIndex;
+						var lastAt:int = str.lastIndexOf("@", start);
+						if(lastAt != -1){
+							var validStr:String = str.substring(lastAt, start);
+							var blank:int = validStr.search(/\s/g);
+							if(blank == -1 && validStr != "@"){
+								var selectedName:String = MewSystem.app.suggestor.selectedName + " ";
+								inputTextField.replaceText(lastAt + 1, start, selectedName);
+								var realIndex:int = lastAt + selectedName.length + 1;
+								inputTextField.setSelection(realIndex, realIndex);
+								suggestGetter.dispatchEvent(new MewEvent(MewEvent.NO_SUGGESTION));
+							}
+						}
+					}
+					break;
+				case Keyboard.ESCAPE:
+					if(suggestGetter) suggestGetter.dispatchEvent(new MewEvent(MewEvent.NO_SUGGESTION));
+					break;
+			}
 		}
 		
 		private function removeScrollBar():void
@@ -335,20 +444,34 @@ package mew.modules
 			buttonGroup.removeEventListener(MewEvent.CLEAR_CONTENT, clearContentHandler);
 			buttonGroup.removeEventListener(MewEvent.SHORT_URL, shortURLHandler);
 			
-			inputTextField.removeEventListener(Event.CHANGE, inputTextField_onChangeHandler);
-			inputTextField.removeEventListener(Event.ADDED_TO_STAGE, inputTextField_addToStageHandler);
+			if(inputTextField){
+				inputTextField.removeEventListener(Event.CHANGE, inputTextField_onChangeHandler);
+				inputTextField.removeEventListener(Event.ADDED_TO_STAGE, inputTextField_addToStageHandler);
+				inputTextField.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+				inputTextField = null;
+			}
 			
 			if(urlShortor){
 				urlShortor.removeEventListener(MewEvent.SHORTEN_URL_SUCCESS, shortenURL_successHandler);
 				urlShortor = null;
 			}
 			if(topBK){
-				topBK.addEventListener(MouseEvent.MOUSE_DOWN, dragNativeWindow);
+				topBK.removeEventListener(MouseEvent.MOUSE_DOWN, dragNativeWindow);
 				topBK = null;
+			}
+			if(suggestGetter){
+				suggestGetter.dealloc();
+				suggestGetter.removeEventListener(MewEvent.SUGGESTION_SUCCESS, suggestGetSuccess);
+				suggestGetter.removeEventListener(MewEvent.SUGGESTION_FAILED, suggestGetFailed);
+				suggestGetter.removeEventListener(MewEvent.NO_SUGGESTION, noSuggestion);
+				suggestGetter = null;
+			}
+			if(MewSystem.app.suggestor){
+				if(this.contains(MewSystem.app.suggestor)) this.removeChild(MewSystem.app.suggestor);
+				MewSystem.app.suggestor = null;
 			}
 			bk = null;
 			title = null;
-			inputTextField = null;
 			textNumText = null;
 			buttonGroup = null;
 			nameBox = null;

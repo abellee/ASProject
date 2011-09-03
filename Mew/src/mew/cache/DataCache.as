@@ -21,8 +21,14 @@ package mew.cache
 			userDataCache = {};
 			weiboDataCache = {};
 		}
-		public function getUserDataCache(user:MicroBlogUser):UserData
+		public function getUserDataCache(user:MicroBlogUser, cache:Boolean = true):UserData
 		{
+			if(!cache){
+				if(userDataCache[user.id]) return userDataCache[user.id];
+				var userData:UserData = new UserData();
+				userData.init(user);
+				return userData;
+			}
 			return userDataCache[user.id] ? userDataCache[user.id] : cacheUserData(user);
 		}
 		private function cacheUserData(user:MicroBlogUser):UserData
@@ -34,8 +40,14 @@ package mew.cache
 			return userData;
 		}
 		
-		public function getWeiboDataCache(status:MicroBlogStatus):WeiboData
+		public function getWeiboDataCache(status:MicroBlogStatus, cache:Boolean = true):WeiboData
 		{
+			if(!cache){
+				if(weiboDataCache[status.id]) return weiboDataCache[status.id];
+				var weiboData:WeiboData = new WeiboData();
+				weiboData.init(status);
+				return weiboData;
+			}
 			return weiboDataCache[status.id] ? weiboDataCache[status.id] : cacheWeiboData(status);
 		}
 		private function cacheWeiboData(status:MicroBlogStatus):WeiboData

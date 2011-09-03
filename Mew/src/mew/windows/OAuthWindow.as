@@ -101,7 +101,7 @@ package mew.windows
 					this.stage.stageHeight = _html.height;
 					needRequestAuthorize=false;
 				}else {
-					if(this.stage.contains(_html)) removeChild(_html);
+					if(container.contains(_html)) removeChild(_html);
 					if(_html){
 						_html.removeEventListener(Event.COMPLETE, htmlLoad_completeHandler);
 						_html.removeEventListener(Event.LOCATION_CHANGE, onLocationChange);

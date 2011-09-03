@@ -31,12 +31,23 @@ package system {
 		{
 			var file:File = File.applicationDirectory.resolvePath(filePath);
 			if(!file.exists){
+				trace("create table");
 				createTable(file);
 				return;
 			}
+			trace("table exists!");
 			MewSystem.database = true;
 			var now:Number = new Date().time;
 			readData(now);
+		}
+		public function checkData(num:Number):Boolean
+		{
+			if(timingWeiboList && timingWeiboList.length){
+				for each(var tmv:TimingWeiboVariable in timingWeiboList){
+					if(tmv.time == num) return false;
+				}
+			}
+			return true;
 		}
 		private function startTiming():void
 		{
@@ -47,13 +58,16 @@ package system {
 			}
 			if(!timingWeiboList.length) return;
 			var firstItem:TimingWeiboVariable = timingWeiboList[0];
+			trace("______________________________");
+			firstItem.toString()
+			trace("______________________________");
 			var now:Date = new Date();
 			var nowTime:Number = now.time;
 			if(nowTime <= firstItem.time) start(firstItem.time - nowTime);
 		}
-		private function sortByTime(a:Number, b:Number):Number
+		private function sortByTime(a:TimingWeiboVariable, b:TimingWeiboVariable):Number
 		{
-			return a - b;
+			return a.time - b.time;
 		}
 		public function start(time:int):void
 		{
@@ -67,7 +81,7 @@ package system {
 			timer.removeEventListener(TimerEvent.TIMER, timingWeibo_sendHandler);
 			timer = null;
 			var firstItem:TimingWeiboVariable = timingWeiboList[0];
-			if(!firstItem.img){
+			if(firstItem.img == "null"){
 				sendTextContent();
 				return;
 			}
@@ -81,6 +95,8 @@ package system {
 		{
 			file.removeEventListener(IOErrorEvent.IO_ERROR, noImageFile);
 			file.removeEventListener(Event.COMPLETE, fileLoadComplete);
+			file = null;
+			trace("can't load image");
 			sendTextContent();
 		}
 		
@@ -100,8 +116,9 @@ package system {
 			file.removeEventListener(IOErrorEvent.IO_ERROR, noImageFile);
 			file.removeEventListener(Event.COMPLETE, fileLoadComplete);
 			var firstItem:TimingWeiboVariable = timingWeiboList[0];
-			trace("send");
+			trace("send with image");
 			MewSystem.app.alternationCenter.updateStatus(firstItem.content, file.data);
+			file = null;
 			firstItem.state = 1;
 			updateData(firstItem.id, firstItem);
 			timingWeiboList.shift();
@@ -173,6 +190,7 @@ package system {
 			openConnection();
 			dbStatement.text = "insert into mew_timing(content, img, time, state, createTime) values('" + data.content + "', '" + data.img + "', '"
 			 + data.time + "', '" + data.state + "', '" + data.createTime + "')";
+			 trace("write: " + dbStatement.text);
 			dbStatement.addEventListener(SQLEvent.RESULT, writeDataComplete);
 			dbStatement.execute();
 		}
@@ -181,7 +199,7 @@ package system {
 		{
 			isSelfReading = isSelf;
 			openConnection();
-			dbStatement.text = "select * from mew_timing where time > " + num + " order by id desc";
+			dbStatement.text = "select * from mew_timing where time >= " + num + " order by id desc";
 			dbStatement.addEventListener(SQLEvent.RESULT, dataReadComplete);
 			dbStatement.execute();
 		}
@@ -248,6 +266,10 @@ package system {
 					timingWeiboList = dataVector;
 					timingWeiboList.sort(sortByTime);
 					startTiming();
+					for each(var tm:TimingWeiboVariable in timingWeiboList){
+						tm.toString();
+					}
+					trace("************************************************************************");
 					trace(timingWeiboList.length + ">>>>>>");
 				}
 			}

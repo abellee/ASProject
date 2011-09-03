@@ -2939,7 +2939,7 @@ package com.sina.microblog
 				ioError.message = "The network error";
 				dispatchEvent(ioError);
 				return;
-			}		
+			}
 			var result:XML=new XML(loader.data);		
 			currentResult = result; ///////////////////////////////////////////////////////////////////////////////测试用途		
 			if (result.child("error").length() > 0)

@@ -38,6 +38,15 @@ package mew.factory
 			return btn;
 		}
 		
+		public static function MessageButton():Button
+		{
+			var btn:Button = new Button();
+			btn.textField.autoSize = TextFieldAutoSize.LEFT;
+			btn.label = "私";
+			btn.width = 10;
+			return btn;
+		}
+		
 		public static function CommentButton():Button
 		{
 			var btn:Button = new Button();
@@ -80,6 +89,33 @@ package mew.factory
 			return btn;
 		}
 		
+		public static function SearchWeiboButton():Button
+		{
+			var btn:Button = new Button();
+			btn.textField.autoSize = TextFieldAutoSize.LEFT;
+			btn.label = "搜微博";
+			btn.width = 60;
+			return btn;
+		}
+		
+		public static function SearchUserButton():Button
+		{
+			var btn:Button = new Button();
+			btn.textField.autoSize = TextFieldAutoSize.LEFT;
+			btn.label = "找人";
+			btn.width = 60;
+			return btn;
+		}
+		
+		public static function SearchButton():Button
+		{
+			var btn:Button = new Button();
+			btn.textField.autoSize = TextFieldAutoSize.LEFT;
+			btn.label = "搜索";
+			btn.width = 60;
+			return btn;
+		}
+		
 		public static function DefaultButton():Button
 		{
 			var btn:Button = new Button();
@@ -95,6 +131,14 @@ package mew.factory
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
 			btn.label = "系统设置";
 			btn.width = 100;
+			return btn;
+		}
+		
+		public static function UnreadButton():Button
+		{
+			var btn:Button = new Button();
+			btn.textField.autoSize = TextFieldAutoSize.LEFT;
+			btn.width = 10;
 			return btn;
 		}
 		
@@ -267,14 +311,6 @@ package mew.factory
 		}
 		
 		public static function UserHomeButton():Button
-		{
-			var btn:Button = new Button();
-			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.width = 60;
-			return btn;
-		}
-		
-		public static function UserProfileButton():Button
 		{
 			var btn:Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;

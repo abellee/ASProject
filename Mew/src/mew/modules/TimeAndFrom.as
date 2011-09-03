@@ -35,7 +35,8 @@ package mew.modules {
 			timeTextField.text = StringUtils.transformTime(time);
 			timeTextField.width = timeTextField.textWidth;
 			timeTextField.height = timeTextField.textHeight;
-			fromTextField.htmlText = "来自 <font color=\"" + Widget.fromColor + "\">" + from + "</font>";
+			if(from && from != "") fromTextField.htmlText = "来自 <font color=\"" + Widget.fromColor + "\">" + from + "</font>";
+			else fromTextField.text = " ";
 			fromTextField.width = fromTextField.textWidth;
 			fromTextField.height = fromTextField.textHeight;
 			

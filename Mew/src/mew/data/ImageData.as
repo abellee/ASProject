@@ -22,7 +22,7 @@ package mew.data {
 		{
 			loader = new Loader();
 			loader.contentLoaderInfo.addEventListener(Event.INIT, imageInitHandler);
-			loader.load(new URLRequest(originURL));
+			loader.load(new URLRequest(midURL));
 		}
 		private function imageInitHandler(event:Event):void
 		{
@@ -36,7 +36,12 @@ package mew.data {
 		override public function dealloc():void
 		{
 			midURL = null;
-			if(loader) loader.contentLoaderInfo.removeEventListener(Event.INIT, imageInitHandler);
+			if(loader){
+				try{
+					loader.close();
+				}catch(e:Error){}
+				loader.contentLoaderInfo.removeEventListener(Event.INIT, imageInitHandler);
+			}
 			loader = null;
 		}
 	}

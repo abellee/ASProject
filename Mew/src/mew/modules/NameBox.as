@@ -1,4 +1,5 @@
 package mew.modules {
+	import mew.utils.StringUtils;
 	import mew.data.UserData;
 	import mew.factory.StaticAssets;
 
@@ -20,14 +21,17 @@ package mew.modules {
 		{
 			super();
 		}
-		public function create():void
+		public function create(trunck:int = 0):void
 		{
 			if(!nameTextField) nameTextField = new TextField();
 			nameTextField.defaultTextFormat = Widget.usernameFormat;
 			nameTextField.autoSize = TextFieldAutoSize.LEFT;
 			nameTextField.mouseWheelEnabled = false;
 			
-			nameTextField.text = userData.username;
+			if(!userData) return;
+			var nameStr:String = userData.username;
+			if(trunck > 0 && nameStr.length > trunck) nameStr = nameStr.substr(0, trunck) + "...";
+			nameTextField.text = nameStr;
 			nameTextField.width = nameTextField.textWidth;
 			nameTextField.height = nameTextField.textHeight;
 			addChild(nameTextField);

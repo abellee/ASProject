@@ -1,20 +1,20 @@
-package mew.modules
-{
+package mew.modules {
 	import fl.controls.Button;
-	
+
+	import mew.factory.ButtonFactory;
+	import mew.factory.StaticAssets;
+	import mew.windows.VideoViewer;
+
+	import system.MewSystem;
+
 	import flash.display.Bitmap;
 	import flash.display.Loader;
+	import flash.display.LoaderInfo;
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.NativeWindowType;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.net.URLRequest;
-	
-	import mew.factory.ButtonFactory;
-	import mew.factory.StaticAssets;
-	import mew.windows.VideoViewer;
-	
-	import system.MewSystem;
 
 	public class VideoBox extends ImageBox
 	{
@@ -50,6 +50,9 @@ package mew.modules
 		
 		override protected function thumbImage_loadCompleteHandler(event:Event):void
 		{
+			bitmap = (event.target as LoaderInfo).content as Bitmap;
+			bitmap.width = 120;
+			bitmap.height = 90;
 			super.thumbImage_loadCompleteHandler(event);
 			addChild(playBtn);
 			playBtn.x = (this.width - playBtn.width) / 2;
@@ -63,6 +66,11 @@ package mew.modules
 			if(!MewSystem.app.videoViewer) MewSystem.app.videoViewer = new VideoViewer(getNativeWindowInitOption());
 			MewSystem.app.videoViewer.showVideo(data.originURL, data.title);
 			MewSystem.app.videoViewer.activate();
+		}
+		
+		public function play():void
+		{
+			playBtn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
 		}
 		
 		private function getNativeWindowInitOption():NativeWindowInitOptions

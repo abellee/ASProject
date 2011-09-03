@@ -13,6 +13,7 @@ package mew.modules {
 	public class CommentEntry extends WeiboEntry
 	{
 		protected var id:String = null;
+		public var showRepost:Boolean = true;
 		public function CommentEntry()
 		{
 			super();
@@ -29,16 +30,12 @@ package mew.modules {
 			userAvatar.userData = userData;
 			userAvatar.loadAvatar();
 			addChild(userAvatar);
-			userAvatar.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
-			userAvatar.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
 			
 			nameBox.userData = userData;
 			nameBox.create();
 			addChild(nameBox);
 			nameBox.x = userAvatar.x + userAvatar.width + 10;
 			nameBox.y = 0;
-			nameBox.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
-			nameBox.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
 			
 			addChild(weiboText);
 			weiboText.x = nameBox.x;
@@ -59,13 +56,15 @@ package mew.modules {
 			timeAndFrom.from = "";
 			timeAndFrom.create();
 			
-			repostBox = new RepostBox();
-			repostBox.setSize(this.width - weiboText.x, 10);
-			repostBox.x = weiboText.x;
-			repostBox.y = weiboText.y + weiboText.height + 10;
-			repostBox.initStatus(comment.status, xml);
-			addChild(repostBox);
-			repostBox.addEventListener(Event.RESIZE, onResize);
+			if(showRepost){
+				repostBox = new RepostBox();
+				repostBox.setSize(this.width - weiboText.x, 10);
+				repostBox.x = weiboText.x;
+				repostBox.y = weiboText.y + weiboText.height + 10;
+				repostBox.initStatus(comment.status, xml);
+				addChild(repostBox);
+				repostBox.addEventListener(Event.RESIZE, onResize);
+			}
 			
 			var preChild:DisplayObject = this.getChildAt(this.numChildren - 1);
 			timeAndFrom.x = preChild.x;
@@ -73,6 +72,7 @@ package mew.modules {
 			addChild(timeAndFrom);
 			var h:int = timeAndFrom.y + timeAndFrom.height;
 			if(h != this.height) setSize(this.width, Math.max(this.height, h));
+			addListener();
 		}
 		override protected function dealloc(event:Event):void
 		{

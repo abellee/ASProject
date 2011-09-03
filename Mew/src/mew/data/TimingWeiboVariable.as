@@ -11,5 +11,9 @@ package mew.data
 		public function TimingWeiboVariable()
 		{
 		}
+		public function toString():void
+		{
+			trace("id: " + id + " -------- content: " + content + " -------- img: " + img + " ------ time: " + time + " -------- state: " + state + " --------- createTime: " + createTime);
+		}
 	}
 }

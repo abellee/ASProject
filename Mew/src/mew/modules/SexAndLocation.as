@@ -27,6 +27,7 @@ package mew.modules
 		}
 		public function create():void
 		{
+			location = location.length > 6 ? location.substr(0, 6) + "..." : location;
 			localText = new TextField();
 			localText.defaultTextFormat = Widget.wbSentTimeFormat;
 			localText.autoSize = TextFieldAutoSize.LEFT;

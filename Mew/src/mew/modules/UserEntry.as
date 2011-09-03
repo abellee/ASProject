@@ -1,18 +1,18 @@
-package mew.modules
-{
+package mew.modules {
+	import mew.data.UserData;
+
+	import system.MewSystem;
+
+	import widget.Widget;
+
 	import com.iabel.core.UISprite;
 	import com.sina.microblog.data.MicroBlogUser;
-	
+
 	import flash.display.Shape;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
-	
-	import mew.data.UserData;
-	
-	import system.MewSystem;
-	
-	import widget.Widget;
 	
 	public class UserEntry extends UISprite
 	{
@@ -29,17 +29,19 @@ package mew.modules
 		
 		public function initStatus(user:MicroBlogUser):void
 		{
-			userData = MewSystem.app.dataCache.getUserDataCache(user);
+			userData = MewSystem.app.dataCache.getUserDataCache(user, false);
 			
 			userAvatar = new Avatar();
 			userAvatar.userData = userData;
 			userAvatar.loadAvatar();
 			addChild(userAvatar);
+			userAvatar.addEventListener(MouseEvent.CLICK, showTargetUser);
 			
 			nameBox = new NameBox();
 			nameBox.userData = userData;
-			nameBox.create();
+			nameBox.create(9);
 			addChild(nameBox);
+			nameBox.addEventListener(MouseEvent.CLICK, showTargetUser);
 			
 			sexAndLocation = new SexAndLocation();
 			sexAndLocation.location = userData.location;
@@ -50,7 +52,7 @@ package mew.modules
 			fansNumText = new TextField();
 			fansNumText.defaultTextFormat = Widget.wbSentTimeFormat;
 			fansNumText.autoSize = TextFieldAutoSize.LEFT;
-			fansNumText.text = "粉丝 " + userData.fansNum;
+			fansNumText.text = "粉丝 " + (userData.fansNum >= 100000 ? int(userData.fansNum / 10000) + "万" : userData.fansNum);
 			fansNumText.selectable = false;
 			fansNumText.mouseEnabled = false;
 			fansNumText.width = fansNumText.textWidth;
@@ -70,6 +72,11 @@ package mew.modules
 			drawBorder();
 		}
 		
+		protected function showTargetUser(event : MouseEvent) : void
+		{
+			MewSystem.app.alternationCenter.loadUserTimeline(userData.id);
+		}
+		
 		private function drawBorder():void
 		{
 			if(!background) background = new Shape();
@@ -82,6 +89,8 @@ package mew.modules
 		override protected function dealloc(event:Event):void
 		{
 			super.dealloc(event);
+			if(userAvatar) userAvatar.removeEventListener(MouseEvent.CLICK, showTargetUser);
+			if(nameBox) nameBox.removeEventListener(MouseEvent.CLICK, showTargetUser);
 			userData = null;
 			nameBox = null;
 			userAvatar = null;

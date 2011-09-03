@@ -155,6 +155,7 @@ package mew.windows
 		{
 			var emoItem:EmotionItem = event.target as EmotionItem;
 			if(emoItem) targetWindow.appendText(emoItem.emotionText);
+			MewSystem.closeEmotionWindow();
 		}
 		
 		private function showPageButton():void

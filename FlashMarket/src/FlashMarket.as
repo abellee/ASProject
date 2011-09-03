@@ -41,7 +41,7 @@ package
 				var house:Item = new Item();
 				house.keywords = item.keyword.split(",");
 				house.pos = new Point(item.x, item.y);
-				house.content = item.text;
+				house.content = String(item.text);
 				house.tid = item.tid;
 				house.rotate = item.rotation;
 				if(Cache.bitmapDataList["http://localhost/" + item.image]){

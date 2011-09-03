@@ -1,5 +1,6 @@
 package mew.modules
 {
+	import mew.events.MewEvent;
 	import com.iabel.core.UISprite;
 	
 	import flash.display.DisplayObject;
@@ -71,7 +72,7 @@ package mew.modules
 			localAndSex.y = domainText.y + domainText.height + 5;
 			
 			var preChild:DisplayObject = null;
-			preChild = localAndSex;
+			preChild = avatar;
 			if(userData.blogURL){
 				if(!blogLinkText) blogLinkText = new TextField();
 				blogLinkText.defaultTextFormat = Widget.normalFormat;
@@ -95,8 +96,6 @@ package mew.modules
 				blogText.y = blogLinkText.y;
 				blogText.width = this.width - blogText.x;
 				blogText.height = blogText.textHeight;
-				
-				preChild = blogLinkText;
 			}
 			if(userData.description){
 				if(!descriptionText) descriptionText = new TextField();
@@ -117,6 +116,15 @@ package mew.modules
 			userCorrelationBtns.y = preChild.y + preChild.height + 20;
 			
 			setSize(this.width, userCorrelationBtns.y + userCorrelationBtns.height);
+			
+			userCorrelationBtns.addEventListener(MewEvent.USER_FANS, bubbleEvent);
+			userCorrelationBtns.addEventListener(MewEvent.USER_FOLLOW, bubbleEvent);
+			userCorrelationBtns.addEventListener(MewEvent.USER_HOME, bubbleEvent);
+		}
+
+		private function bubbleEvent(event : MewEvent) : void
+		{
+			this.dispatchEvent(event.clone() as MewEvent);
 		}
 		
 		public function showOperationButtons(operationGroup:OperationGroup):void
@@ -139,6 +147,11 @@ package mew.modules
 			descriptionText = null;
 			localAndSex = null;
 			operationButtonGroup = null;
+			if(userCorrelationBtns){
+				userCorrelationBtns.removeEventListener(MewEvent.USER_FANS, bubbleEvent);
+				userCorrelationBtns.removeEventListener(MewEvent.USER_FOLLOW, bubbleEvent);
+				userCorrelationBtns.removeEventListener(MewEvent.USER_HOME, bubbleEvent);
+			}
 			userCorrelationBtns = null;
 		}
 	}

@@ -33,7 +33,7 @@ package mew.modules
 		private var shortURL:String = "http://api.t.sina.com.cn/short_url/shorten.xml";
 		private var urlLoader:URLLoader = null;
 		public var originStr:String = null;
-		public var parentStage:Stage = null;
+		public var parentStage:UISprite = null;
 		public function URLShortor()
 		{
 			super();

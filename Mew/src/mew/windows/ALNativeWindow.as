@@ -1,4 +1,5 @@
 package mew.windows {
+	import com.greensock.TweenLite;
 	import flash.events.TimerEvent;
 	import config.SQLConfig;
 
@@ -36,10 +37,15 @@ package mew.windows {
 		protected var showTimer:Timer = null;
 		protected var curPoint:Point = null;
 		protected var curUD:UserData = null;
+		protected var ownWindow:Vector.<ALNativeWindow> = null;
+		public var container:UISprite = null;
+		protected var newLocation:Point = null;
 		public function ALNativeWindow(initOptions:NativeWindowInitOptions)
 		{
 			super(initOptions);
 			
+			container = new UISprite();
+			this.stage.addChild(container);
 			addEventListener(Event.CLOSE, dealloc);
 			
 			this.stage.align = StageAlign.TOP_LEFT;
@@ -54,6 +60,11 @@ package mew.windows {
 			this.stage.nativeWindow.width = background.width + 20;
 			this.stage.nativeWindow.height = background.height + 20;
 			
+			if(newLocation){
+				this.stage.nativeWindow.x = newLocation.x;
+				this.stage.nativeWindow.y = newLocation.y;
+				return;
+			}
 			var xpos:int = 0;
 			if(MewSystem.app.currentState != MewSystem.app.NONE){
 			
@@ -62,6 +73,8 @@ package mew.windows {
 			}
 //			var startPos:int = Screen.mainScreen.visibleBounds.height + this.stage.nativeWindow.height;
 			var ypos:int = Screen.mainScreen.visibleBounds.y + MewSystem.app.height;
+			if(xpos < Screen.mainScreen.visibleBounds.x) xpos = Screen.mainScreen.visibleBounds.x;
+			else if(xpos + this.stage.nativeWindow.width > Screen.mainScreen.visibleBounds.width) xpos = Screen.mainScreen.visibleBounds.width - this.stage.nativeWindow.width;
 			this.stage.nativeWindow.x = xpos;
 			this.stage.nativeWindow.y = ypos;
 //			TweenLite.to(this.stage.nativeWindow, .3, {y: ypos});
@@ -76,7 +89,7 @@ package mew.windows {
 			background.graphics.drawRoundRect(10, 10, w, h, 10, 10);
 			background.graphics.endFill();
 			Widget.widgetGlowFilter(background);
-			addChild(background);
+			addChildAt(background, 0);
 		}
 		
 		public function readData():void
@@ -88,8 +101,8 @@ package mew.windows {
 				case MewSystem.app.AT:
 					MewSystem.app.localWriter.readData(SQLConfig.MEW_AT);
 					break;
-				case MewSystem.app.COMMENT_ME:
-					MewSystem.app.localWriter.readData(SQLConfig.MEW_COMMENT_ME);
+				case MewSystem.app.COMMENT:
+					MewSystem.app.localWriter.readData(SQLConfig.MEW_COMMENT);
 					break;
 				case MewSystem.app.COLLECT:
 					MewSystem.app.localWriter.readData(SQLConfig.MEW_COLLECT);
@@ -106,6 +119,20 @@ package mew.windows {
 				case MewSystem.app.FOLLOW:
 					MewSystem.app.localWriter.readData(SQLConfig.MEW_FOLLOW);
 					break;
+			}
+		}
+		public function iseeu(win:ALNativeWindow):void
+		{
+			if(!ownWindow) ownWindow = new Vector.<ALNativeWindow>();
+			ownWindow.push(win);
+		}
+		public function goodbye(win:ALNativeWindow):void
+		{
+			if(ownWindow){
+				var index:int = ownWindow.indexOf(win);
+				if(index != -1){
+					ownWindow.splice(index, 1);	
+				}
 			}
 		}
 		public function showWeibo(arr:Array, content:UISprite, ud:UserData = null):void
@@ -125,6 +152,7 @@ package mew.windows {
 		
 		public function showUserFloat(p:Point, ud:UserData):void
 		{
+			return;
 			curPoint = p;
 			curUD = ud;
 			if(showTimer){
@@ -145,7 +173,7 @@ package mew.windows {
 				showTimer = null;
 			}
 			if(MewSystem.app.userFloat){
-				if(this.stage.contains(MewSystem.app.userFloat)) this.stage.removeChild(MewSystem.app.userFloat);
+				if(container.contains(MewSystem.app.userFloat)) container.removeChild(MewSystem.app.userFloat);
 				MewSystem.app.userFloat = null;
 			}
 			MewSystem.app.userFloat = new FloatUserInfo();
@@ -157,10 +185,11 @@ package mew.windows {
 		
 		public function removeUserFloat():void
 		{
+			return;
 			curPoint = null;
 			curUD = null;
-			if(MewSystem.app.userFloat && this.stage.contains(MewSystem.app.userFloat)){
-				this.stage.removeChild(MewSystem.app.userFloat);
+			if(MewSystem.app.userFloat && container.contains(MewSystem.app.userFloat)){
+				container.removeChild(MewSystem.app.userFloat);
 				MewSystem.app.userFloat = null;
 			}
 		}
@@ -178,28 +207,28 @@ package mew.windows {
 		
 		public function addChild(displayObject:DisplayObject):DisplayObject
 		{
-			this.stage.addChild(displayObject);
+			container.addChild(displayObject);
 			CoreSystem.objectDestroied();
 			return displayObject;
 		}
 		
 		public function addChildAt(displayObject:DisplayObject, index:uint):DisplayObject
 		{
-			this.stage.addChildAt(displayObject, index);
+			container.addChildAt(displayObject, index);
 			CoreSystem.objectDestroied();
 			return displayObject;
 		}
 		
 		public function removeChild(displayObject:DisplayObject):DisplayObject
 		{
-			this.stage.removeChild(displayObject);
+			container.removeChild(displayObject);
 			CoreSystem.objectDestroied();
 			return displayObject;
 		}
 		
 		public function removeChildAt(index:uint):void
 		{
-			this.stage.removeChildAt(index);
+			container.removeChildAt(index);
 			CoreSystem.objectDestroied();
 		}
 		
@@ -218,11 +247,18 @@ package mew.windows {
 			super.removeEventListener(type, listener, useCapture);
 		}
 		
+		public function relocate(p:Point):void
+		{
+			newLocation = p;
+			this.stage.nativeWindow.x = p.x;
+			this.stage.nativeWindow.y = p.y;
+		}
+		
 		public function removeAllChildren():void
 		{
-			while(this.stage.numChildren)
+			while(container.numChildren)
 			{
-				var child:DisplayObject = this.stage.getChildAt(0);
+				var child:DisplayObject = container.getChildAt(0);
 				if(child){
 					
 					if(child is ScaleBitmap){
@@ -235,7 +271,7 @@ package mew.windows {
 					}
 					child = null;
 				}
-				this.stage.removeChildAt(0);
+				container.removeChildAt(0);
 			}
 		}
 		
@@ -247,6 +283,7 @@ package mew.windows {
 		protected function dealloc(event:Event):void
 		{
 			removeAllChildren();
+			container.removeAllChildren();
 			for (var key:String in _listenerList) this.removeEventListener(key, _listenerList[key]);
 			if(_listenerList ) _listenerList = null;
 			if(background){
@@ -261,6 +298,16 @@ package mew.windows {
 			}
 			curPoint = null;
 			curUD = null;
+			if(ownWindow){
+				while(ownWindow.length){
+					var win:ALNativeWindow = ownWindow.pop();
+					win.close();
+				}
+				ownWindow = null;
+				MewSystem.app.widgetWindow = null;
+			}
+			container = null;
+			newLocation = null;
 		}
 	}
 }

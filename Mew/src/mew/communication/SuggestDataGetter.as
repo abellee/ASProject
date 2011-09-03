@@ -1,20 +1,18 @@
 package mew.communication {
-	import flash.events.EventDispatcher;
-	import com.sina.microblog.events.MicroBlogErrorEvent;
-	import mew.events.MewEvent;
-	import com.sina.microblog.events.MicroBlogEvent;
-	import system.MewSystem;
-	import config.Config;
-	import flash.net.URLRequest;
-	import flash.events.Event;
 	import mew.data.SuggestData;
-	import mew.modules.IEmotionCorrelation;
-	import flash.net.URLLoader;
+	import mew.events.MewEvent;
+
+	import system.MewSystem;
+
+	import com.sina.microblog.events.MicroBlogErrorEvent;
+	import com.sina.microblog.events.MicroBlogEvent;
+
+	import flash.events.EventDispatcher;
 	/**
 	 * @author abellee
 	 */
 	public class SuggestDataGetter extends EventDispatcher {
-		private var path:String = "search/suggestions/at_users.xml";
+		private var path:String = "/search/suggestions/at_users.xml";
 		public var data:Vector.<SuggestData> = null;
 		public function SuggestDataGetter(){
 			
@@ -34,15 +32,19 @@ package mew.communication {
 			MewSystem.microBlog.removeEventListener(MewEvent.SUGGESTION_SUCCESS, getSuggestionDataSuccess);
 			MewSystem.microBlog.removeEventListener(MewEvent.SUGGESTION_FAILED, getSuggestionDataFailed);
 			
-			var xmlList:XML = XML(event.result).children();
+			if(!data) data = new Vector.<SuggestData>();
+			data.length = 0;
+			var xmlList:XMLList = XML(event.result).children();
 			if(xmlList && xmlList.children().length()){
 				for each (var xml : XML in xmlList) {
 					var suggestData:SuggestData = new SuggestData();
-					
+					suggestData.id = xml.uid.text();
+					suggestData.nickname = xml.nickname.text();
+					data.push(suggestData);
 				}
 			}
-			
-			this.dispatchEvent(new MewEvent(MewEvent.SUGGESTION_SUCCESS));
+			if(data.length) this.dispatchEvent(new MewEvent(MewEvent.SUGGESTION_SUCCESS));
+			else this.dispatchEvent(new MewEvent(MewEvent.NO_SUGGESTION));
 		}
 		
 		private function getSuggestionDataFailed(event:MicroBlogErrorEvent):void
@@ -50,6 +52,14 @@ package mew.communication {
 			MewSystem.microBlog.removeEventListener(MewEvent.SUGGESTION_SUCCESS, getSuggestionDataSuccess);
 			MewSystem.microBlog.removeEventListener(MewEvent.SUGGESTION_FAILED, getSuggestionDataFailed);
 			this.dispatchEvent(new MewEvent(MewEvent.SUGGESTION_FAILED));
+		}
+		
+		public function dealloc():void
+		{
+			path = null;
+			data = null;
+			MewSystem.microBlog.removeEventListener(MewEvent.SUGGESTION_SUCCESS, getSuggestionDataSuccess);
+			MewSystem.microBlog.removeEventListener(MewEvent.SUGGESTION_FAILED, getSuggestionDataFailed);
 		}
 	}
 }

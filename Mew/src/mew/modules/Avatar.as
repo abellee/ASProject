@@ -58,6 +58,7 @@ package mew.modules {
 		
 		public function loadAvatar(size:int = 50):void
 		{
+			if(!userData) return;
 			var src:String = userData.src;
 			if(size == 180) src = src.replace(/\/50\//, "/180/");
 			var cache:BitmapData = MewSystem.app.assetsCache.getAvatarCache(userData.id);
@@ -115,7 +116,12 @@ package mew.modules {
 		override protected function dealloc(event:Event):void
 		{
 			super.dealloc(event);
-			if(loader) loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadAvatar_completeHandler);
+			if(loader){
+				try{
+					loader.close();
+				}catch(e:Error){}
+				loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadAvatar_completeHandler);
+			}
 			loader = null;
 			bk = null;
 			userData = null;

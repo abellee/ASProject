@@ -338,6 +338,14 @@ package org.bytearray.gif.player {
 				aFrames[int(i)].bitmapData.dispose();
 				aFrames[int(i)].bitmapData = null;
 			}
+			if(gifDecoder) gifDecoder.dealloc();
+			urlLoader.removeEventListener ( Event.COMPLETE, onComplete );
+			urlLoader.removeEventListener ( IOErrorEvent.IO_ERROR, onIOError );
+			urlLoader = null;
+			myTimer.removeEventListener ( TimerEvent.TIMER, update );
+			myTimer = null;
+			gifDecoder = null;
+			aFrames = null;
 		}
 	}
 }

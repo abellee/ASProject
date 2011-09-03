@@ -9,7 +9,7 @@ package mew.modules {
 		{
 			super();
 		}
-		override public function listData(arr:Array, w:Number, xml:XML):void
+		override public function listData(arr:Array, w:Number, xml:XML, showRepost:Boolean = true):void
 		{
 			fromIndex = this.numChildren;
 			for each(var obj:MicroBlogUser in arr){
@@ -22,10 +22,15 @@ package mew.modules {
 			}
 			if(fromIndex) this.dispatchEvent(new Event(Event.RESIZE));
 		}
-		
+
 		override protected function redraw():void
 		{
 			return;
+		}
+		
+		override protected function dealloc(event:Event):void
+		{
+			super.dealloc(event);
 		}
 	}
 }

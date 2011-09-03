@@ -3,7 +3,10 @@ package mew.windows {
 	import fl.events.ScrollEvent;
 
 	import mew.data.UserData;
+	import mew.events.MewEvent;
 	import mew.modules.UserDescription;
+	import mew.modules.UserFormList;
+	import mew.modules.WeiboFormList;
 
 	import system.MewSystem;
 
@@ -28,6 +31,9 @@ package mew.windows {
 		private var tempArr:Array = null;
 		private var timer:Timer = new Timer(1000);
 		protected var userDescription:UserDescription = null;
+		private var curUserData:UserData = null;
+		private var curState:String = MewSystem.app.INDEX;
+		private var desH:int;
 		public function WeiBoListWindow(initOptions:NativeWindowInitOptions)
 		{
 			super(initOptions);
@@ -48,18 +54,34 @@ package mew.windows {
 		{
 			var xpos:int = 10;
 			var ypos:int = 10;
-			var hvalue:int = this.background.height;
-			if(MewSystem.app.currentState == MewSystem.app.MY_WEIBO){
+			desH = this.background.height;
+			if(ud){                                                                 // 其它用户
 				if(!userDescription){
 					userDescription = new UserDescription();
 					userDescription.setSize(this.background.width, 10);
+					curUserData = ud;
+					userDescription.userData = ud;
+					userDescription.showData();
+					addChild(userDescription);
+					userDescription.x = 10;
+					userDescription.y = 20;
+					ypos = userDescription.y + userDescription.height;
+					desH = desH - userDescription.height - 10;
+					addListener();
+				}
+			}else if(MewSystem.app.currentState == MewSystem.app.MY_WEIBO){         // 当前用户
+				if(!userDescription){
+					userDescription = new UserDescription();
+					userDescription.setSize(this.background.width, 10);
+					curUserData = MewSystem.app.userData;
 					userDescription.userData = MewSystem.app.userData;
 					userDescription.showData();
 					addChild(userDescription);
 					userDescription.x = 10;
 					userDescription.y = 20;
 					ypos = userDescription.y + userDescription.height;
-					hvalue = hvalue - userDescription.height - 10;
+					desH = desH - userDescription.height - 10;
+					addListener();
 				}
 			}
 			list = content;
@@ -67,14 +89,50 @@ package mew.windows {
 			scrollList.addEventListener(ScrollEvent.SCROLL, onScroll);
 			scrollList.source = list;
 			scrollList.move(xpos, ypos);
-			scrollList.setSize(this.background.width, hvalue);
+			scrollList.setSize(this.background.width, desH);
 			addChild(scrollList);
 		}
 		
-		public function relocate(p:Point):void
+		private function addListener():void
 		{
-			this.stage.nativeWindow.x = p.x;
-			this.stage.nativeWindow.y = p.y;
+			userDescription.addEventListener(MewEvent.USER_FANS, showUserFans);
+			userDescription.addEventListener(MewEvent.USER_FOLLOW, showUserFollow);
+			userDescription.addEventListener(MewEvent.USER_HOME, showUserHome);
+		}
+
+		private function showUserHome(event : MewEvent) : void
+		{
+			if(curState == MewSystem.app.INDEX) return;
+			curState = MewSystem.app.INDEX;
+			list.removeAllChildren();
+			list = new WeiboFormList();
+			resetAndLoad();
+		}
+
+		private function showUserFollow(event : MewEvent) : void
+		{
+			if(curState == MewSystem.app.FOLLOW) return;
+			curState = MewSystem.app.FOLLOW;
+			list.removeAllChildren();
+			list = new UserFormList();
+			resetAndLoad();
+		}
+
+		private function showUserFans(event : MewEvent) : void
+		{
+			if(curState == MewSystem.app.FANS) return;
+			curState = MewSystem.app.FANS;
+			list.removeAllChildren();
+			list = new UserFormList();
+			resetAndLoad();
+		}
+		
+		private function resetAndLoad():void
+		{
+			scrollList.source = list;
+			scrollList.setSize(this.background.width, desH);
+			curPage = 0;
+			loadDataByPage();
 		}
 		
 		private function onScroll(event:ScrollEvent):void
@@ -93,18 +151,37 @@ package mew.windows {
 			if(dataLoading) return;
 			dataLoading = true;
 			curPage++;
+			if(curUserData){
+				trace(curState, curPage);
+				switch(curState){
+					case MewSystem.app.INDEX:
+						MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_USER_TIMELINE_RESULT, dataByPageLoadComplete);
+						MewSystem.microBlog.loadUserTimeline(curUserData.id, "0", null, "0", "0", MewSystem.statusNum, curPage);
+						break;
+					case MewSystem.app.FANS:
+						MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_FOLLOWERS_INFO_RESULT, dataByPageLoadComplete);
+						MewSystem.microBlog.loadFollowersInfo(curUserData.id, "0", null, MewSystem.fansNum * (curPage - 1), MewSystem.fansNum);
+						break;
+					case MewSystem.app.FOLLOW:
+						MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_FRIENDS_INFO_RESULT, dataByPageLoadComplete);
+						MewSystem.microBlog.loadFriendsInfo(curUserData.id, "0", null, MewSystem.followNum * (curPage - 1), MewSystem.followNum);
+						break;
+				}
+				MewSystem.showCycleLoading(container);
+				return;
+			}
 			switch(MewSystem.app.currentState){
 				case MewSystem.app.INDEX:
 					MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_FRIENDS_TIMELINE_RESULT, dataByPageLoadComplete);
-					MewSystem.microBlog.loadFriendsTimeline("0", "0", 20, curPage);
+					MewSystem.microBlog.loadFriendsTimeline("0", "0", MewSystem.statusNum, curPage);
 					break;
 				case MewSystem.app.AT:
 					MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_MENSIONS_RESULT, dataByPageLoadComplete);
-					MewSystem.microBlog.loadMentions("0", "0", 20, curPage);
+					MewSystem.microBlog.loadMentions("0", "0", MewSystem.atNum, curPage);
 					break;
-				case MewSystem.app.COMMENT_ME:
-					MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_COMMENTS_TO_ME_RESULT, dataByPageLoadComplete);
-					MewSystem.microBlog.loadCommentsToMe("0", "0", 20, curPage);
+				case MewSystem.app.COMMENT:
+					MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_COMMENTS_TIMELINE_RESULT, dataByPageLoadComplete);
+					MewSystem.microBlog.loadCommentsTimeline("0", "0", MewSystem.commentNum, curPage);
 					break;
 				case MewSystem.app.COLLECT:
 					MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_FAVORITE_LIST_RESULT, dataByPageLoadComplete);
@@ -112,21 +189,22 @@ package mew.windows {
 					break;
 				case MewSystem.app.MY_WEIBO:
 					MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_USER_TIMELINE_RESULT, dataByPageLoadComplete);
-					MewSystem.microBlog.loadUserTimeline(null, "0", null, "0", "0", 20, curPage);
+					MewSystem.microBlog.loadUserTimeline(null, "0", null, "0", "0", MewSystem.userStatusNum, curPage);
 					break;
 				case MewSystem.app.DIRECT_MESSAGE:
 					MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_DIRECT_MESSAGES_SENT_RESULT, loadDirectMessageSentResult);
-					MewSystem.microBlog.loadDirectMessagesSent("0", "0", 20, curPage);
+					MewSystem.microBlog.loadDirectMessagesSent("0", "0", MewSystem.directMessageNum, curPage);
 					break;
 				case MewSystem.app.FANS:
 					MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_FOLLOWERS_INFO_RESULT, dataByPageLoadComplete);
-					MewSystem.microBlog.loadFollowersInfo(null, "0", null, 30 * (curPage - 1), 30);
+					MewSystem.microBlog.loadFollowersInfo(null, "0", null, MewSystem.fansNum * (curPage - 1), MewSystem.fansNum);
 					break;
 				case MewSystem.app.FOLLOW:
 					MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_FRIENDS_INFO_RESULT, dataByPageLoadComplete);
-					MewSystem.microBlog.loadFriendsInfo(null, "0", null, 30 * (curPage - 1), 30);
+					MewSystem.microBlog.loadFriendsInfo(null, "0", null, MewSystem.followNum * (curPage - 1), MewSystem.followNum);
 					break;
 			}
+			MewSystem.showCycleLoading(container);
 		}
 		
 		private function loadDirectMessageSentResult(event:MicroBlogEvent):void
@@ -134,13 +212,17 @@ package mew.windows {
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_DIRECT_MESSAGES_SENT_RESULT, loadDirectMessageSentResult);
 			tempArr = event.result as Array;
 			MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_DIRECT_MESSAGES_RECEIVED_RESULT, loadDirectMessageReceivedResult);
-			MewSystem.microBlog.loadDirectMessagesReceived("0", "0", 20, curPage);
+			MewSystem.microBlog.loadDirectMessagesReceived("0", "0", MewSystem.directMessageNum, curPage);
 		}
 		
 		private function loadDirectMessageReceivedResult(event:MicroBlogEvent):void
 		{
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_DIRECT_MESSAGES_RECEIVED_RESULT, loadDirectMessageReceivedResult);
 			var receivedArray:Array = event.result as Array;
+			if(!timer.hasEventListener(TimerEvent.TIMER)) timer.addEventListener(TimerEvent.TIMER, resetLoadingState);
+			timer.reset();
+			timer.start();
+			MewSystem.removeCycleLoading(container);
 			tempArr = tempArr.concat(receivedArray);
 			if(tempArr && tempArr.length){
 				tempArr.sortOn("id", Array.DESCENDING);
@@ -148,22 +230,23 @@ package mew.windows {
 				var func:Function = function(e:Event):void{
 					urlLoader.removeEventListener(Event.COMPLETE, func);
 					list.listData(tempArr, getContentWidth(), XML(e.target.data));
+					scrollList.update();
+					scrollList.drawNow();
 					urlLoader = null;
+					tempArr = null;
 				};
 				urlLoader.addEventListener(Event.COMPLETE, func);
 				urlLoader.load(new URLRequest("config/emotions.xml"));
 			}else{
 				if(curPage > 1) curPage--;
 			}
-			tempArr = null;
-			dataLoading = false;
 		}
 		
 		private function dataByPageLoadComplete(event:MicroBlogEvent):void
 		{
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_FRIENDS_TIMELINE_RESULT, dataByPageLoadComplete);
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_MENSIONS_RESULT, dataByPageLoadComplete);
-			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_COMMENTS_TO_ME_RESULT, dataByPageLoadComplete);
+			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_COMMENTS_TIMELINE_RESULT, dataByPageLoadComplete);
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_FAVORITE_LIST_RESULT, dataByPageLoadComplete);
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_USER_TIMELINE_RESULT, dataByPageLoadComplete);
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_FOLLOWERS_INFO_RESULT, dataByPageLoadComplete);
@@ -171,6 +254,7 @@ package mew.windows {
 			if(!timer.hasEventListener(TimerEvent.TIMER)) timer.addEventListener(TimerEvent.TIMER, resetLoadingState);
 			timer.reset();
 			timer.start();
+			MewSystem.removeCycleLoading(container);
 			var arr:Array = event.result as Array;
 			if(!arr || !arr.length){
 				if(curPage > 1) curPage--;
@@ -180,6 +264,8 @@ package mew.windows {
 			var func:Function = function(e:Event):void{
 				urlLoader.removeEventListener(Event.COMPLETE, func);
 				list.listData(arr, getContentWidth(), XML(e.target.data));
+				scrollList.update();
+				scrollList.drawNow();
 				return;
 			};
 			urlLoader.addEventListener(Event.COMPLETE, func);
@@ -200,8 +286,18 @@ package mew.windows {
 				timer = null;
 			}
 			if(list) list = null;
-			if(scrollList) scrollList = null;
+			if(scrollList){
+				scrollList.removeEventListener(ScrollEvent.SCROLL, onScroll);
+				scrollList = null;
+			}
 			tempArr = null;
+			curUserData = null;
+			if(userDescription){
+				userDescription.removeEventListener(MewEvent.USER_FANS, showUserFans);
+				userDescription.removeEventListener(MewEvent.USER_FOLLOW, showUserFollow);
+				userDescription.removeEventListener(MewEvent.USER_HOME, showUserHome);
+			}
+			userDescription = null;
 		}
 	}
 }

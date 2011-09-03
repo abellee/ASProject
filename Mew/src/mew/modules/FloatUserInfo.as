@@ -1,16 +1,19 @@
 package mew.modules {
-	import flash.events.MouseEvent;
-	import flash.text.TextFieldAutoSize;
-	import widget.Widget;
-	import mew.data.UserData;
-	import system.MewSystem;
-	import mew.factory.ButtonFactory;
 	import fl.controls.Button;
+
+	import mew.data.UserData;
+	import mew.factory.ButtonFactory;
+
+	import system.MewSystem;
+
+	import widget.Widget;
 
 	import com.iabel.core.UISprite;
 
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
 
 	/**
 	 * @author abellee
@@ -58,6 +61,7 @@ package mew.modules {
 			nameBox.userData = ud;
 			nameBox.create();
 			
+			if(!ud) return;
 			sexAndLocation.location = ud.location;
 			sexAndLocation.sex = ud.sex;
 			sexAndLocation.create();
@@ -96,6 +100,21 @@ package mew.modules {
 				desTextField.width = 280;
 				desTextField.height = desTextField.textHeight;
 			}
+		}
+		
+		override protected function dealloc(event:Event):void
+		{
+			super.dealloc(event);
+			
+			avatar = null;
+			nameBox = null;
+			desTextField = null;
+			sexAndLocation = null;
+			followButton = null;
+			atButton = null;
+			bk = null;
+			userData = null;
+			weiboCorrelation = null;
 		}
 	}
 }

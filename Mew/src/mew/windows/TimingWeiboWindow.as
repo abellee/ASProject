@@ -1,13 +1,16 @@
 package mew.windows {
-	import mew.communication.SuggestDataGetter;
-	import mew.modules.ITiming;
+	import flash.ui.Keyboard;
+	import flash.events.KeyboardEvent;
 	import fl.controls.Button;
 	import fl.controls.UIScrollBar;
 
+	import mew.communication.SuggestDataGetter;
+	import mew.data.SuggestData;
 	import mew.data.TimingWeiboVariable;
 	import mew.events.MewEvent;
 	import mew.factory.ButtonFactory;
 	import mew.modules.IEmotionCorrelation;
+	import mew.modules.ITiming;
 	import mew.modules.TimeSettor;
 	import mew.modules.URLShortor;
 	import mew.modules.UploadImageViewer;
@@ -62,7 +65,7 @@ package mew.windows {
 		private var suggestGetter:SuggestDataGetter = null;
 		
 		private var scrolling:Boolean = false;
-		
+		private var explicitHeight:int;
 		public function TimingWeiboWindow(initOptions:NativeWindowInitOptions)
 		{
 			super(initOptions);
@@ -76,6 +79,7 @@ package mew.windows {
 			super.init();
 			this.stage.nativeWindow.x = (Screen.mainScreen.visibleBounds.width - this.stage.nativeWindow.width) / 2;
 			this.stage.nativeWindow.y = (Screen.mainScreen.visibleBounds.height - this.stage.nativeWindow.height) / 2;
+			explicitHeight = this.stage.nativeWindow.height;
 			
 			drawTitleBackground();
 			addChild(topBK);
@@ -173,6 +177,7 @@ package mew.windows {
 			inputTextField.height = bk.height - 20;
 			inputTextField.addEventListener(Event.CHANGE, inputTextField_onChangeHandler);
 			inputTextField.addEventListener(Event.ADDED_TO_STAGE, inputTextField_addToStageHandler);
+			inputTextField.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 			
 			addChild(buttonGroup);
 			buttonGroup.gap = 20;
@@ -200,18 +205,26 @@ package mew.windows {
 
 		private function sendButton_mouseClickHandler(event : MouseEvent) : void
 		{
-			if(Number(textNumText.text) <= 0){
-				MewSystem.showLightAlert("定时微博的内容不能为空!", this.stage);
+			if(Number(textNumText.text) < 0){
+				MewSystem.showLightAlert("定时微博的字数不得大于140字!", container);
 				return;
-			}else if(Number(textNumText.text) > 140){
-				MewSystem.showLightAlert("定时微博的字数不得大于140字!", this.stage);
-				return;
+			}else if(Number(textNumText.text) >= 140){
+				if(imageViewer.imageExtension){
+					inputTextField.text = "分享图片";
+				}else{
+					MewSystem.showLightAlert("定时微博的内容不能为空!", container);
+					return;
+				}
 			}
 			var str:String = inputTextField.text;
 			str = str.replace(/\s/g, " ");
 			if(str == ""){
-				MewSystem.showLightAlert("定时微博的内容不能为空!", this.stage);
-				return;
+				if(imageViewer.imageExtension){
+					inputTextField.text = "分享图片";
+				}else{
+					MewSystem.showLightAlert("定时微博的内容不能为空!", container);
+					return;
+				}
 			}
 			str = inputTextField.text;
 			str = StringUtil.trim(str);
@@ -227,8 +240,11 @@ package mew.windows {
 				
 				var now:Date = new Date();
 				var time:Number = now.time;
-				trace(year, month, date, hour, minute, targetTime, time);
 				if(targetTime - time > 60000){
+					if(!MewSystem.app.timingWeiboManager.checkData(targetTime)){
+						MewSystem.showLightAlert("该时间点已经存在定时任务!", container);
+						return;
+					}
 					var data:TimingWeiboVariable = new TimingWeiboVariable();
 					data.content = str;
 					data.createTime = time;
@@ -242,7 +258,7 @@ package mew.windows {
 					MewSystem.app.timingWeiboManager.writeData(data);
 					resetContent(true);
 				}else{
-					MewSystem.showLightAlert("定时微博的时间必需大于当前时间!", this.stage);
+					MewSystem.showLightAlert("定时微博的时间必需大于当前时间!", container);
 				}
 			}
 		}
@@ -335,7 +351,7 @@ package mew.windows {
 				return;
 			}
 			urlShortor = new URLShortor();
-			urlShortor.parentStage = this.stage;
+			urlShortor.parentStage = container;
 			addChild(urlShortor);
 			urlShortor.addEventListener(MewEvent.SHORTEN_URL_SUCCESS, shortenURL_successHandler);
 			var selectedText:String = inputTextField.selectedText;
@@ -372,9 +388,15 @@ package mew.windows {
 				var blank:int = validStr.search(/\s/g);
 				if(blank == -1 && validStr != "@"){
 					var q:String = validStr.substr(1);
-					trace(q);
 					if(!suggestGetter) suggestGetter = new SuggestDataGetter();
+					if(!suggestGetter.hasEventListener(MewEvent.SUGGESTION_SUCCESS)){
+						suggestGetter.addEventListener(MewEvent.SUGGESTION_SUCCESS, suggestGetSuccess);
+						suggestGetter.addEventListener(MewEvent.SUGGESTION_FAILED, suggestGetFailed);
+						suggestGetter.addEventListener(MewEvent.NO_SUGGESTION, noSuggestion);
+					}
 					suggestGetter.getData(q);
+				}else{
+					if(suggestGetter) suggestGetter.dispatchEvent(new MewEvent(MewEvent.NO_SUGGESTION));
 				}
 			}
 			var len:Number = StringUtils.getStringLength(str);
@@ -396,6 +418,84 @@ package mew.windows {
 				scroller.scrollPosition = scroller.maxScrollPosition;
 			}else{
 				removeScrollBar();
+			}
+		}
+
+		private function noSuggestion(event : MewEvent) : void
+		{
+			trace("no suggestion!");
+			if(MewSystem.app.suggestor){
+				if(container.contains(MewSystem.app.suggestor)) this.removeChild(MewSystem.app.suggestor);
+				MewSystem.app.suggestor = null;
+			}
+			suggestGetter.removeEventListener(MewEvent.SUGGESTION_SUCCESS, suggestGetSuccess);
+			suggestGetter.removeEventListener(MewEvent.SUGGESTION_FAILED, suggestGetFailed);
+			suggestGetter.removeEventListener(MewEvent.NO_SUGGESTION, noSuggestion);
+		}
+
+		private function suggestGetFailed(event : MewEvent) : void
+		{
+			if(MewSystem.app.suggestor){
+				if(container.contains(MewSystem.app.suggestor)) this.removeChild(MewSystem.app.suggestor);
+				MewSystem.app.suggestor = null;
+			}
+			suggestGetter.removeEventListener(MewEvent.SUGGESTION_SUCCESS, suggestGetSuccess);
+			suggestGetter.removeEventListener(MewEvent.SUGGESTION_FAILED, suggestGetFailed);
+			suggestGetter.removeEventListener(MewEvent.NO_SUGGESTION, noSuggestion);
+		}
+
+		private function suggestGetSuccess(event : MewEvent) : void
+		{
+			trace("success!");
+			var data:Vector.<SuggestData> = suggestGetter.data;
+			var index:int = inputTextField.caretIndex;
+			if(index != -1){
+				var rect:Rectangle = inputTextField.getCharBoundaries(index-1);
+				var pos:Point = new Point(inputTextField.x + rect.x, inputTextField.y + rect.y);
+				MewSystem.openSuggestWindow(pos, data);
+				addChild(MewSystem.app.suggestor);
+				this.stage.nativeWindow.height = MewSystem.app.suggestor.y + MewSystem.app.suggestor.height > explicitHeight ?
+				 MewSystem.app.suggestor.y + MewSystem.app.suggestor.height : explicitHeight;
+			}
+		}
+
+		private function keyDownHandler(event : KeyboardEvent) : void
+		{
+			switch(event.keyCode){
+				case Keyboard.UP:
+					if(MewSystem.app.suggestor){
+						event.preventDefault();
+						MewSystem.app.suggestor.previous();
+					}
+					break;
+				case Keyboard.DOWN:
+					if(MewSystem.app.suggestor){
+						event.preventDefault();
+						MewSystem.app.suggestor.next();
+					}
+					break;
+				case Keyboard.ENTER:
+					if(MewSystem.app.suggestor){
+						event.preventDefault();
+						var str:String = inputTextField.text;
+						var start:int = inputTextField.selectionBeginIndex;
+						var lastAt:int = str.lastIndexOf("@", start);
+						if(lastAt != -1){
+							var validStr:String = str.substring(lastAt, start);
+							var blank:int = validStr.search(/\s/g);
+							if(blank == -1 && validStr != "@"){
+								var selectedName:String = MewSystem.app.suggestor.selectedName + " ";
+								inputTextField.replaceText(lastAt + 1, start, selectedName);
+								var realIndex:int = lastAt + selectedName.length + 1;
+								inputTextField.setSelection(realIndex, realIndex);
+								suggestGetter.dispatchEvent(new MewEvent(MewEvent.NO_SUGGESTION));
+							}
+						}
+					}
+					break;
+				case Keyboard.ESCAPE:
+					if(suggestGetter) suggestGetter.dispatchEvent(new MewEvent(MewEvent.NO_SUGGESTION));
+					break;
 			}
 		}
 		
@@ -433,7 +533,7 @@ package mew.windows {
 		}
 		public function showLightAlert(str:String):void
 		{
-			MewSystem.showLightAlert(str, this.stage);
+			MewSystem.showLightAlert(str, container);
 		}
 		
 		private function drawTextBackground():void
@@ -457,11 +557,6 @@ package mew.windows {
 			this.stage.nativeWindow.startMove();
 		}
 		
-		override protected function dealloc(event:Event):void
-		{
-			super.dealloc(event);
-		}
-		
 		private function drawTitleBackground():void
 		{
 			if(!topBK) topBK = new Sprite();
@@ -470,6 +565,65 @@ package mew.windows {
 			topBK.graphics.drawRoundRectComplex(10, 10, background.width, 30, 12, 12, 0, 0);
 			topBK.graphics.endFill();
 			topBK.mouseChildren = false;
+		}
+		
+		override protected function dealloc(event:Event):void
+		{
+			super.dealloc(event);
+			
+			if(topBK){
+				topBK.removeEventListener(MouseEvent.MOUSE_DOWN, dragNativeWindow);
+				topBK = null;
+			}
+			titleText = null;
+			if(leftArrow){
+				leftArrow.removeEventListener(MouseEvent.CLICK, leftButton_mouseClickHandler);
+				leftArrow = null;
+			}
+			if(rightArrow){
+				rightArrow.removeEventListener(MouseEvent.CLICK, rightButton_mouseClickHandler);
+				rightArrow = null;
+			}
+			masker = null;
+			if(buttonContainer){
+				buttonGroup.removeEventListener(MewEvent.SCREEN_SHOT, screenShotHandler);
+				buttonGroup.removeEventListener(MewEvent.EMOTION, emotionHandler);
+				buttonGroup.removeEventListener(MewEvent.TOPIC, topicHandler);
+				buttonGroup.removeEventListener(MewEvent.CLEAR_CONTENT, clearContentHandler);
+				buttonGroup.removeEventListener(MewEvent.SHORT_URL, shortURLHandler);
+				buttonContainer = null;
+			}
+			timeButtons = null;
+			hline = null;
+			buttonGroup = null;
+			imageViewer = null;
+			bk = null;
+			if(inputTextField){
+				inputTextField.removeEventListener(Event.CHANGE, inputTextField_onChangeHandler);
+				inputTextField.removeEventListener(Event.ADDED_TO_STAGE, inputTextField_addToStageHandler);
+				inputTextField.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+				inputTextField = null;
+			}
+			textNumText = null;
+			scroller = null;
+			urlShortor = null;
+			if(sendButton){
+				sendButton.removeEventListener(MouseEvent.CLICK, sendButton_mouseClickHandler);
+				sendButton = null;
+			}
+			timeline = null;
+			timeSettor = null;
+			if(suggestGetter){
+				suggestGetter.dealloc();
+				suggestGetter.removeEventListener(MewEvent.SUGGESTION_SUCCESS, suggestGetSuccess);
+				suggestGetter.removeEventListener(MewEvent.SUGGESTION_FAILED, suggestGetFailed);
+				suggestGetter.removeEventListener(MewEvent.NO_SUGGESTION, noSuggestion);
+				suggestGetter = null;
+			}
+			if(MewSystem.app.suggestor){
+				if(container && container.contains(MewSystem.app.suggestor)) this.removeChild(MewSystem.app.suggestor);
+				MewSystem.app.suggestor = null;
+			}
 		}
 	}
 }

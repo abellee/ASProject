@@ -24,7 +24,7 @@ package mew.modules {
 		public var data:MediaData = null;
 		protected var defaultBK:DisplayObject = null;
 		protected var loader:Loader = null;
-		private var bitmap:Bitmap = null;
+		protected var bitmap:Bitmap = null;
 		public function ImageBox()
 		{
 			super();
@@ -81,7 +81,7 @@ package mew.modules {
 				MewSystem.app.imageViewer = null;
 			}
 			MewSystem.app.imageViewer = new ImageViewer(getNativeWindowInitOption());
-			MewSystem.app.imageViewer.showImage((data as ImageData).originWidth, (data as ImageData).originHeight, (data as ImageData).originURL);
+			MewSystem.app.imageViewer.showImage((data as ImageData).originWidth, (data as ImageData).originHeight, (data as ImageData).midURL);
 			MewSystem.app.imageViewer.activate();
 		}
 		
@@ -120,7 +120,12 @@ package mew.modules {
 			if(data && (data is ImageData)) (data as ImageData).removeEventListener("size_init_complete", showImageViewer);
 			data = null;
 			defaultBK = null;
-			if(loader) loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, thumbImage_loadCompleteHandler);
+			if(loader){
+				try{
+					loader.close();
+				}catch(e:Error){}
+				loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, thumbImage_loadCompleteHandler);
+			}
 			loader = null;
 			bitmap = null;
 		}

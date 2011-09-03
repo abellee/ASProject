@@ -45,7 +45,7 @@ package mew.windows {
 			addChild(sendButton);
 		}
 		
-		public function displayByState(state:String, userData:UserData = null, weiboData:WeiboData = null):void
+		public function displayByState(state:String, userData:UserData = null, weiboData:WeiboData = null, additionalStr:String = null):void
 		{
 			if(curContainer){
 				removeChild(curContainer as UISprite);
@@ -64,7 +64,7 @@ package mew.windows {
 					break;
 			}
 			currentState = state;
-			if(userData && weiboData) curContainer.showWeiboContent(state, userData, weiboData);
+			if(userData && weiboData) curContainer.showWeiboContent(state, userData, weiboData, additionalStr);
 			addChild(curContainer as UISprite);
 			curContainer.x = 10;
 			curContainer.y = 10;
@@ -84,14 +84,14 @@ package mew.windows {
 					if(curContainer){
 						content = curContainer.getContent();
 						if(content == null){
-							MewSystem.showLightAlert("微博内容不能超过140个字!", this.stage);
+							MewSystem.showLightAlert("微博内容不能超过140个字!", container);
 							return;
 						}
 						img = curContainer.getImageData();
 						if(img && content == ""){
 							content = "分享图片";
 						}else if(!img && content == ""){
-							MewSystem.showLightAlert("微博内容不能为空!", this.stage);
+							MewSystem.showLightAlert("微博内容不能为空!", container);
 							return;
 						}
 						MewSystem.app.alternationCenter.updateStatus(content, img);
@@ -103,7 +103,7 @@ package mew.windows {
 						var rid:String = curContainer.getReplyId();
 						var isComment:int = curContainer.isComment();
 						if(content == null){
-							MewSystem.showLightAlert("微博内容不能超过140个字!", this.stage);
+							MewSystem.showLightAlert("微博内容不能超过140个字!", container);
 							return;
 						}else if(content == ""){
 							content = "转发微博";
@@ -117,10 +117,10 @@ package mew.windows {
 						var sid:String = curContainer.getReplyId();
 						var cid:String = curContainer.getCommentId();
 						if(content == null){
-							MewSystem.showLightAlert("微博内容不能超过140个字!", this.stage);
+							MewSystem.showLightAlert("微博内容不能超过140个字!", container);
 							return;
 						}else if(content == ""){
-							MewSystem.showLightAlert("微博内容不能为空!", this.stage);
+							MewSystem.showLightAlert("微博内容不能为空!", container);
 							return;
 						}
 						MewSystem.app.alternationCenter.commentStatus(sid, content, cid);
@@ -131,13 +131,13 @@ package mew.windows {
 					break;
 			}
 			drawCover();
-			MewSystem.showCycleLoading(this.stage);
+			MewSystem.showCycleLoading(container);
 		}
 		
 		override public function showResult(value:int, mode:Boolean=false):void
 		{
-			if(this.stage.contains(MewSystem.cycleMotion)) removeChild(MewSystem.cycleMotion);
-			if(cover && this.stage.contains(cover)){
+			if(container.contains(MewSystem.cycleMotion)) removeChild(MewSystem.cycleMotion);
+			if(cover && container.contains(cover)){
 				removeChild(cover);
 				cover = null;
 			}
@@ -145,7 +145,7 @@ package mew.windows {
 			if(value == 0) str = "微博发布失败!";
 			else curContainer.resetContent();
 			
-			MewSystem.showLightAlert(str, this.stage);
+			MewSystem.showLightAlert(str, container);
 			
 			if(this.currentState != NORMAL){
 				displayByState(NORMAL);

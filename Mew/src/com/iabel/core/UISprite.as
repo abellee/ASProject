@@ -1,5 +1,6 @@
 package com.iabel.core
 {
+	import flash.display.Loader;
 	import com.iabel.system.CoreSystem;
 	import com.iabel.util.ScaleBitmap;
 	
@@ -113,8 +114,8 @@ package com.iabel.core
 							bt.bitmapData.dispose();
 							bt.bitmapData = null;
 						}
-					}else if(child is GIFPlayer){
-						(child as GIFPlayer).dispose();
+					}else if(child is Loader){
+						(child as Loader).unloadAndStop();
 					}
 					child = null;
 				}
@@ -159,7 +160,7 @@ package com.iabel.core
 			return _tooltip;
 		}
 		
-		public function listData(arr:Array, w:Number, xml:XML):void
+		public function listData(arr:Array, w:Number, xml:XML, showRepost:Boolean = true):void
 		{
 			return;
 		}

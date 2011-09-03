@@ -56,7 +56,7 @@ package mew.windows
 			realH = hei > limitH ? limitH : hei;
 			
 			drawBackground(wid + 40, realH + 60);
-			background.alpha = 0;
+			container.alpha = 0;
 			this.stage.nativeWindow.width = wid + 60;
 			this.stage.nativeWindow.height = realH + 80;
 			this.stage.nativeWindow.x = (Screen.mainScreen.visibleBounds.width - this.stage.nativeWindow.width) / 2;
@@ -77,7 +77,7 @@ package mew.windows
 			loadingText.mouseEnabled = false;
 			loadingText.visible = false;
 			
-			TweenLite.to(background, .3, {alpha: 1, onComplete: showAllComponents}); 
+			TweenLite.to(container, .3, {alpha: 1, onComplete: showAllComponents}); 
 		}
 		
 		private function showAllComponents():void
@@ -85,6 +85,7 @@ package mew.windows
 			background.addEventListener(MouseEvent.RIGHT_CLICK, closeVideoWindow);
 			closeBtn.visible = true;
 			loadingText.visible = true;
+			MewSystem.showCycleLoading(container);
 			html = new HTMLLoader();
 			addChild(html);
 			html.paintsDefaultBackground = false;
@@ -100,6 +101,7 @@ package mew.windows
 		
 		override protected function htmlLoadComplete(event:Event):void
 		{
+			MewSystem.removeCycleLoading(container);
 			html.removeEventListener(Event.COMPLETE, htmlLoadComplete);
 			html.width = wid;
 			html.height = realH;

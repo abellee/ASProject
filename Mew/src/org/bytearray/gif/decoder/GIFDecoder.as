@@ -863,6 +863,29 @@ package org.bytearray.gif.decoder
 				
 			} while ((blockSize > 0) && !hasError());
 		}
+		public function dealloc():void
+		{
+			frameRect = null;
+			if(inStream) inStream.clear();
+			inStream = null;
+			gct = null;
+			lct = null;
+			act = null;
+			lastRect = null;
+			if(image) image.dispose();
+			if(bitmap) bitmap.dispose();
+			if(lastImage) lastImage.dispose();
+			if(block) block.clear();
+			image = null;
+			bitmap = null;
+			lastImage = null;
+			block = null;
+			prefix = null;
+			suffix = null;
+			pixelStack = null;
+			pixels = null;
+			frames = null;
+		}
 	}
 	
 }

@@ -1,5 +1,6 @@
 package mew.modules {
 	import mew.data.MediaData;
+	import mew.events.MewEvent;
 	import mew.utils.StringUtils;
 	import mew.utils.VideoChecker;
 
@@ -30,6 +31,30 @@ package mew.modules {
 			timeAndFrom = new TimeAndFrom();
 		}
 		
+		override protected function removeOperationButton(event : MouseEvent) : void
+		{
+			if(MewSystem.repostOperationButton && this.contains(MewSystem.repostOperationButton)){
+				this.removeChild(MewSystem.repostOperationButton);
+				MewSystem.repostOperationButton = null;
+			}
+		}
+		
+		override protected function showOperationButton(event : MouseEvent) : void
+		{
+			MewSystem.repostOperationButton = new OperationGroup();
+			if(userData.id == MewSystem.app.userData.id){
+				MewSystem.repostOperationButton.showAllButtons();
+			}else{
+				MewSystem.repostOperationButton.showCollectionButton();
+				MewSystem.repostOperationButton.showRepostButton();
+				MewSystem.repostOperationButton.showCommentButton();
+				MewSystem.repostOperationButton.calculateSize();
+			}
+			MewSystem.repostOperationButton.sid = data.id;
+			addChild(MewSystem.repostOperationButton);
+			MewSystem.repostOperationButton.x = this.width - MewSystem.repostOperationButton.width - 5;
+		}
+		
 		override public function initStatus(obj:Object, xml:XML):void
 		{
 			var status:MicroBlogStatus = obj as MicroBlogStatus;
@@ -37,17 +62,17 @@ package mew.modules {
 			userData = MewSystem.app.dataCache.getUserDataCache(status.user);
 			data = MewSystem.app.dataCache.getWeiboDataCache(status);
 			
-			data.content = data.content.replace(/\</g, "&lt;");
-			weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt(data.content) + "</span>", this.width, xml);
-			urls = StringUtils.getURLs(data.content);
+			var contentStr:String = data.content.replace(/\</g, "&lt;");
+			urls = StringUtils.getURLs(contentStr);
 			if(urls && urls.length){
 				for each(var s:String in urls){
-					weiboText.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
+					contentStr = contentStr.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
 				}
 				videoChecker = new VideoChecker();
 				videoChecker.addEventListener(Event.COMPLETE, checkVideoUrlComplete);
 				videoChecker.isVideoURL(urls);
 			}
+			weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt(contentStr) + "</span>", this.width, xml);
 			
 			if(data.content == "此微博已被原作者删除。"){
 				nameBox = null;
@@ -57,8 +82,6 @@ package mew.modules {
 				nameBox.userData = userData;
 				nameBox.create();
 				addChild(nameBox);
-				nameBox.addEventListener(MouseEvent.ROLL_OVER, showFloatFrame);
-				nameBox.addEventListener(MouseEvent.ROLL_OUT, removeFloatFrame);
 				
 				addChild(weiboText);
 				weiboText.x = nameBox.x;
@@ -84,8 +107,9 @@ package mew.modules {
 				addChild(timeAndFrom);
 			}
 			setSize(this.width, this.height);
-			
+			addListener();
 		}
+		
 		protected function onResize(event:Event):void
 		{
 			var h:int = this.height;
@@ -144,6 +168,11 @@ package mew.modules {
 				}
 			}
 			videoChecker = null;
+		}
+		
+		override protected function playVideoHandler(event:MewEvent):void
+		{
+			if(videoBox) videoBox.play();
 		}
 		override protected function dealloc(event:Event):void
 		{

@@ -1,4 +1,5 @@
 package mew.cache {
+	import mew.utils.MewUtils;
 	import config.SQLConfig;
 
 	import system.MewSystem;
@@ -30,29 +31,37 @@ package mew.cache {
 			registerClassAlias("microblogrelationship", MicroBlogUsersRelationship);
 			registerClassAlias("microblogcount", MicroBlogCount);
 		}
-		public function writeData(obj:Object):void
+		
+		public function writeData(arr:Array, fileName:String):void
 		{
-			var file:File = File.applicationStorageDirectory.resolvePath("cache/" + MewSystem.app.userData.id + "/" + obj["fileName"] + ".cache");
+			var file:File = File.applicationStorageDirectory.resolvePath("cache/" + MewSystem.app.userData.id + "/" + fileName + ".cache");
 			var fileStream:FileStream = new FileStream();
 			fileStream.open(file, FileMode.WRITE);
-			fileStream.writeObject(obj["data"]);
+			fileStream.writeObject(arr);
 			fileStream.close();
 		}
-		public function appendData():void
+		
+		public function appendData(arr:Array, fileName:String):void
 		{
-			
+			var result:Array = readLocalData(fileName);
+			result = result.concat(arr);
+			MewSystem.setFinalId(fileName, result);
+			writeData(result, fileName);
 		}
+		
+		public function prefixData(arr:Array, fileName:String, limitNum:int):void
+		{
+			var result:Array = readLocalData(fileName);
+			var num:int = result.length + arr.length - limitNum;
+			for (var i : int = 0; i < num; i++) result.pop();
+			arr = arr.concat(result);
+			MewSystem.setLastId(fileName, arr);
+			writeData(arr, fileName);
+		}
+		
 		public function readData(fileName:String):void
 		{
 			var arr:Array;
-			if(fileName == SQLConfig.MEW_DIRECT){
-				var receivedArray:Array = readLocalData("mew_dmreceived");
-				var sentArray:Array = readLocalData("mew_dmsent");
-				arr = receivedArray.concat(sentArray);
-				arr.sortOn("id", Array.DESCENDING);
-				MewSystem.app.callFromSQLiteManager(arr);
-				return;
-			}
 			arr = readLocalData(fileName);
 			MewSystem.app.callFromSQLiteManager(arr);
 		}
@@ -61,23 +70,27 @@ package mew.cache {
 			var file:File = File.applicationStorageDirectory.resolvePath("cache/" + MewSystem.app.userData.id + "/" + fileName + ".cache");
 			var fileStream:FileStream = new FileStream();
 			fileStream.open(file, FileMode.READ);
-			var obj:Object = fileStream.readObject();
+			var arr:Array = fileStream.readObject();
 			fileStream.close();
-			var arr:Array = [];
-			for(var key:String in obj){
-				arr.push(obj[key]);
-				delete obj[key];
-			}
-			arr.sortOn("id", Array.DESCENDING);
+//			for(var key:String in obj){
+//				arr.push(obj[key]);
+//				delete obj[key];
+//			}
+//			arr.sortOn("id", Array.DESCENDING);
 			return arr;
 		}
 		public function updateData():void
 		{
 			
 		}
-		public function deleteData():void
+		public function deleteData(fileName:String, index:int):void
 		{
-			
+			var arr:Array = readLocalData(fileName);
+			if(index <= arr.length){
+				arr.splice(index, 1);
+				writeData(arr, fileName);
+				if(!index) MewSystem.setLastId(fileName, arr);
+			}
 		}
 	}
 }
