@@ -27,7 +27,7 @@ package mew.modules {
 					(entry as CommentEntry).showRepost = showRepost;
 				}
 				else if(obj is MicroBlogDirectMessage) entry = new DirectMessageBox();
-				entry.x = 10;
+				entry.x = 0;
 				entry.setSize(w - entry.x, 10);
 				entry.initStatus(obj, xml);
 				entry.addEventListener(Event.RESIZE, onResize);
@@ -53,7 +53,7 @@ package mew.modules {
 			var num:int = this.numChildren;
 			for(var i:int = 0; i<num; i++){
 				var entry:DirectMessageBox = this.getChildAt(i) as DirectMessageBox;
-				entry.x = 10;
+				entry.x = 0;
 				if(i){
 					var pre:DisplayObject = this.getChildAt(i - 1);
 					entry.y = pre.y + int(pre.height) + 10;

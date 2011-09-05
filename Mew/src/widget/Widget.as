@@ -16,13 +16,18 @@ package widget
 		public static var fromColor:String = "#727272";
 		public static var mainTextColor:String = "0x4c4c4c";
 		public static var linkStyle:StyleSheet = null;
-		public static var mainColor:Number = 0x383938;
+		public static var mainColor:Number = 0x2d2d2d;
+		public static var orangeButtonFontColor:Number = 0x432318;
 		
 		public static var normalFormat:TextFormat = new TextFormat(systemFont, 12, 0x4C4C4C);
 		public static var normalWhiteFormat:TextFormat = new TextFormat(systemFont, 12, 0xFFFFFF);
+		public static var normalGrayFormat:TextFormat = new TextFormat(systemFont, 13, 0xc1c1c1);
+		public static var mainPanelButtonFormat:TextFormat = new TextFormat(systemFont, 13, 0xc1c1c1, true);
 		public static var searchGrayFormat:TextFormat = new TextFormat(systemFont, 12, 0xb9b9b9);
 		public static var searchFormat:TextFormat = new TextFormat(systemFont, 12, 0x4C4C4C);
 		public static var tipFormat:TextFormat = new TextFormat(systemFont, 12, 0xbdbdbd);
+		public static var unreadFormat:TextFormat = new TextFormat(systemFont, 12, 0x7f3c00, true);
+		public static var noticeFormat:TextFormat = new TextFormat(systemFont, 12, 0xf4f4f4, null, null, null, null, null, null, null, null, null, 5);
 		public static var usernameFormat:TextFormat = new TextFormat(systemFont, 13, 0x4C4C4C, true);
 		public static var wbSentTimeFormat:TextFormat = new TextFormat(systemFont, 12, 0x4C4C4C);
 		public static var wbFromFormat:TextFormat = new TextFormat(systemFont, 12, 0x4C4C4C);

@@ -1,4 +1,4 @@
-package com.riaspace.nativeApplicationUpdater.utils
+package com.iabel.nativeApplicationUpdater.utils
 {
 	import flash.desktop.NativeProcess;
 	import flash.desktop.NativeProcessStartupInfo;

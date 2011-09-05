@@ -1,6 +1,4 @@
 package mew.windows {
-	import flash.ui.Keyboard;
-	import flash.events.KeyboardEvent;
 	import fl.controls.Button;
 	import fl.controls.UIScrollBar;
 
@@ -12,24 +10,34 @@ package mew.windows {
 	import mew.modules.IEmotionCorrelation;
 	import mew.modules.ITiming;
 	import mew.modules.TimeSettor;
+	import mew.modules.TimingPoint;
 	import mew.modules.URLShortor;
 	import mew.modules.UploadImageViewer;
 	import mew.modules.WeiboPublisherButtonGroup;
 	import mew.utils.StringUtils;
+
+	import resource.Resource;
 
 	import system.MewSystem;
 
 	import widget.Widget;
 
 	import com.greensock.TweenLite;
+	import com.greensock.easing.Cubic;
+	import com.greensock.plugins.ShortRotationPlugin;
+	import com.greensock.plugins.TransformAroundCenterPlugin;
+	import com.greensock.plugins.TransformAroundPointPlugin;
+	import com.greensock.plugins.TweenPlugin;
 	import com.iabel.util.ScaleBitmap;
 
 	import mx.utils.StringUtil;
 
+	import flash.display.Bitmap;
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.Screen;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.filesystem.File;
 	import flash.geom.Point;
@@ -38,6 +46,7 @@ package mew.windows {
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
+	import flash.ui.Keyboard;
 	
 	public class TimingWeiboWindow extends ALNativeWindow implements IEmotionCorrelation, ITiming
 	{
@@ -66,6 +75,13 @@ package mew.windows {
 		
 		private var scrolling:Boolean = false;
 		private var explicitHeight:int;
+		
+		private var closeButton:Button = null;
+		private var pointList:Vector.<TimingPoint> = null;
+		private var minTime:Number = 0;
+		private var maxTime:Number = 0;
+		private var perSize:Number = 0;
+		private var curDay:Number = 0;
 		public function TimingWeiboWindow(initOptions:NativeWindowInitOptions)
 		{
 			super(initOptions);
@@ -74,9 +90,9 @@ package mew.windows {
 		override protected function init():void
 		{
 			drawBackground(700, 450);
-			background.alpha = 0;
 			this.stage.nativeWindow.alwaysInFront = true;
-			super.init();
+			this.stage.nativeWindow.width = background.width + 20;
+			this.stage.nativeWindow.height = background.height + 20;
 			this.stage.nativeWindow.x = (Screen.mainScreen.visibleBounds.width - this.stage.nativeWindow.width) / 2;
 			this.stage.nativeWindow.y = (Screen.mainScreen.visibleBounds.height - this.stage.nativeWindow.height) / 2;
 			explicitHeight = this.stage.nativeWindow.height;
@@ -85,7 +101,11 @@ package mew.windows {
 			addChild(topBK);
 			topBK.addEventListener(MouseEvent.MOUSE_DOWN, dragNativeWindow);
 			
-			TweenLite.to(background, .3, {alpha: 1});
+			closeButton = ButtonFactory.CloseButton();
+			addChild(closeButton);
+			closeButton.x = topBK.width + topBK.x - closeButton.width;
+			closeButton.y = 20;
+			closeButton.addEventListener(MouseEvent.CLICK, closeWindow);
 			
 			if(!titleText) titleText = new TextField();
 			titleText.defaultTextFormat = new TextFormat(Widget.systemFont, 16, 0xFFFFFF);
@@ -103,17 +123,15 @@ package mew.windows {
 			if(!buttonContainer) buttonContainer = new Sprite();
 			if(!masker) masker = new Sprite();
 			masker.mouseEnabled = false;
-			masker.scrollRect = new Rectangle(0, 0, topBK.width - 80, 40);
-			leftArrow = ButtonFactory.TimingArrow();
-			leftArrow.label = "<";
+			masker.scrollRect = new Rectangle(0, 0, topBK.width - 90, 40);
+			leftArrow = ButtonFactory.TimingArrow(1);
 			addChild(leftArrow);
-			leftArrow.x = 20;
-			leftArrow.y = topBK.height + 20;
+			leftArrow.x = 30;
+			leftArrow.y = topBK.height + 30;
 			
-			rightArrow = ButtonFactory.TimingArrow();
-			rightArrow.label = ">";
+			rightArrow = ButtonFactory.TimingArrow(-1);
 			addChild(rightArrow);
-			rightArrow.x = background.width - rightArrow.width;
+			rightArrow.x = background.width - rightArrow.width + 5;
 			rightArrow.y = leftArrow.y;
 			timeButtons = new Vector.<String>();
 			for(var i:int = 0; i<24; i++){
@@ -121,9 +139,11 @@ package mew.windows {
 				var str:String = "AM";
 				if(i >= 12) str = "PM";
 				btn.label = i + str;
+				btn.name = i + "";
 				timeButtons.push(btn);
-				btn.x = buttonContainer.numChildren * (btn.width + 10);
+				btn.x = buttonContainer.numChildren * (btn.width + 11);
 				buttonContainer.addChild(btn);
+				btn.addEventListener(MouseEvent.CLICK, showCurrentTimingWeibo);
 			}
 			masker.addChild(buttonContainer);
 			addChild(masker);
@@ -136,14 +156,21 @@ package mew.windows {
 			leftArrow.addEventListener(MouseEvent.CLICK, leftButton_mouseClickHandler);
 			rightArrow.addEventListener(MouseEvent.CLICK, rightButton_mouseClickHandler);
 			
+			timeline = new ScaleBitmap((new Resource.Timeline() as Bitmap).bitmapData, "auto", true);
+			timeline.scale9Grid = new Rectangle(7, 0, 16, 10);
+			timeline.width = 620;
+			addChild(timeline);
+			timeline.x = 53;
+			timeline.y = 220;
+			
 			if(!buttonGroup) buttonGroup = new WeiboPublisherButtonGroup();
 			if(!imageViewer) imageViewer = new UploadImageViewer(100);
 			if(!inputTextField) inputTextField = new TextField();
 			if(!textNumText) textNumText = new TextField();
 			
 			addChild(imageViewer);
-			imageViewer.x = 20;
-			imageViewer.y = background.height - imageViewer.height - 10 + background.y;
+			imageViewer.x = 30;
+			imageViewer.y = background.height - imageViewer.height - 20 + background.y;
 			
 			drawTextBackground();
 			addChild(bk);
@@ -162,14 +189,13 @@ package mew.windows {
 			textNumText.alpha = .2;
 			addChild(textNumText);
 			textNumText.x = bk.x + bk.width - textNumText.width - 15;
-			textNumText.y = bk.y + bk.height - textNumText.height - 10;
+			textNumText.y = bk.y + bk.height - textNumText.height - 5;
 			
 			inputTextField = new TextField();
 			inputTextField.defaultTextFormat = new TextFormat(Widget.systemFont, 14, 0x4c4c4c, null, null, null, null, null, null, null, null, null, 5);
 			inputTextField.type = TextFieldType.INPUT;
 			inputTextField.wordWrap = true;
 			inputTextField.multiline = true;
-			inputTextField.border = true;
 			addChild(inputTextField);
 			inputTextField.x = bk.x + 10;
 			inputTextField.y = bk.y + 10;
@@ -180,11 +206,11 @@ package mew.windows {
 			inputTextField.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 			
 			addChild(buttonGroup);
-			buttonGroup.gap = 20;
+			buttonGroup.gap = 36;
 			buttonGroup.setSize(10, 70);
 			buttonGroup.init();
 			buttonGroup.x = bk.x;
-			buttonGroup.y = bk.height + bk.y + 20;
+			buttonGroup.y = bk.height + bk.y - 20;
 			buttonGroup.addEventListener(MewEvent.SCREEN_SHOT, screenShotHandler);
 			buttonGroup.addEventListener(MewEvent.EMOTION, emotionHandler);
 			buttonGroup.addEventListener(MewEvent.TOPIC, topicHandler);
@@ -196,11 +222,48 @@ package mew.windows {
 			timeSettor.x = bk.x + bk.width + 10;
 			timeSettor.y = bk.y;
 			
-			sendButton = ButtonFactory.SendButton();
+			sendButton = ButtonFactory.WhiteButton();
+			sendButton.setStyle("textFormat", new TextFormat(Widget.systemFont, 16, 0x4c4c4c, true));
+			sendButton.label = "发 送";
+			sendButton.width = 100;
+			sendButton.height = 40;
 			addChild(sendButton);
-			sendButton.x = (timeSettor.width - sendButton.width) / 2 + timeSettor.x;
-			sendButton.y = (background.height + 110 + timeSettor.y) / 2 - sendButton.height / 2;
+			sendButton.x = (timeSettor.width - sendButton.width) / 2 + timeSettor.x - 10;
+			sendButton.y = (background.height + 110 + timeSettor.y) / 2 - sendButton.height / 2 - 5;
 			sendButton.addEventListener(MouseEvent.CLICK, sendButton_mouseClickHandler);
+			
+			this.stage.focus = inputTextField;
+			
+			var now:Date = new Date();
+			var year:Number = now.getFullYear();
+			var month:Number = now.getMonth() + 1;
+			var day:Number = now.getDate();
+			
+			TweenPlugin.activate([ShortRotationPlugin, TransformAroundCenterPlugin, TransformAroundPointPlugin]);
+			
+			curDay = new Date(year, month - 1, day, 0, 0, 0, 0).time;
+			curDay -= 3 * 24 * 60 * 60 * 1000;
+			getCurrentData(0);
+		}
+
+		private function showCurrentTimingWeibo(event : MouseEvent) : void
+		{
+			removeAllPoint();
+			getCurrentData(int(event.currentTarget.name));
+		}
+
+		private function getCurrentData(startHour:int) : void
+		{
+			minTime = curDay + startHour * 60 * 60 * 1000;
+			maxTime = minTime + 60 * 60 * 1000;
+			perSize = timeline.width / (maxTime - minTime);
+			MewSystem.app.timingWeiboManager.target = this;
+			MewSystem.app.timingWeiboManager.readData(minTime, maxTime, false);
+		}
+
+		private function closeWindow(event : MouseEvent) : void
+		{
+			MewSystem.app.closeTimingWindow();
 		}
 
 		private function sendButton_mouseClickHandler(event : MouseEvent) : void
@@ -276,9 +339,9 @@ package mew.windows {
 		{
 			if(!hline) hline = new Sprite();
 			hline.graphics.clear();
-			hline.graphics.lineStyle(2, 0x000000, 1.0);
-			hline.graphics.moveTo(leftArrow.x, leftArrow.y + leftArrow.height + 10);
-			hline.graphics.lineTo(rightArrow.x + rightArrow.width, rightArrow.y + rightArrow.height + 10);
+			hline.graphics.lineStyle(2, 0x000000, .3);
+			hline.graphics.moveTo(leftArrow.x, leftArrow.y + leftArrow.height + 12);
+			hline.graphics.lineTo(rightArrow.x + rightArrow.width - 20, rightArrow.y + rightArrow.height + 10);
 		}
 		
 		private function leftButton_mouseClickHandler(event:MouseEvent):void
@@ -317,7 +380,7 @@ package mew.windows {
 		{
 			var emotionBtnPos:Point = buttonGroup.getEmotionButtonPos();
 			emotionBtnPos.x = emotionBtnPos.x + buttonGroup.x;
-			emotionBtnPos.y = emotionBtnPos.y + buttonGroup.y;
+			emotionBtnPos.y = emotionBtnPos.y + buttonGroup.y - 5;
 			var realPoint:Point = this.stage.nativeWindow.globalToScreen(emotionBtnPos);
 			MewSystem.openEmotionWindow(realPoint, this);
 		}
@@ -455,7 +518,7 @@ package mew.windows {
 				MewSystem.openSuggestWindow(pos, data);
 				addChild(MewSystem.app.suggestor);
 				this.stage.nativeWindow.height = MewSystem.app.suggestor.y + MewSystem.app.suggestor.height > explicitHeight ?
-				 MewSystem.app.suggestor.y + MewSystem.app.suggestor.height : explicitHeight;
+				MewSystem.app.suggestor.y + MewSystem.app.suggestor.height : explicitHeight;
 			}
 		}
 
@@ -527,9 +590,55 @@ package mew.windows {
 			removeScrollBar();
 		}
 		
+		private function removeAllPoint():void
+		{
+			if(!pointList || !pointList.length) return;
+			for each(var p:TimingPoint in pointList){
+				p.removeEventListener(MouseEvent.MOUSE_OVER, swapOver);
+				p.removeEventListener(MouseEvent.MOUSE_OUT, swapBack);
+				p.removeEventListener(MouseEvent.CLICK, showDetail);
+				removeChild(p);
+			}
+			pointList.length = 0;
+		}
+		
 		public function timingWeiboData(data:Vector.<TimingWeiboVariable>):void
 		{
-			
+			if(data && data.length){
+				if(!pointList) pointList = new Vector.<TimingPoint>();
+				for each(var item:TimingWeiboVariable in data){
+					var point:TimingPoint = new TimingPoint();
+					point.data = item;
+					point.initPoint();
+					addChild(point);
+					point.scaleX = 0;
+					point.scaleY = 0;
+					point.index = container.numChildren - 1;
+					TweenLite.to(point, .3, {transformAroundCenter:{scaleX:1, scaleY:1}, ease:Cubic.easeOut});
+					point.x = int((item.time - minTime) * perSize) - point.width / 2 + timeline.x;
+					point.y = timeline.y - point.height / 2 + timeline.height / 2;
+					point.addEventListener(MouseEvent.MOUSE_OVER, swapOver);
+					point.addEventListener(MouseEvent.MOUSE_OUT, swapBack);
+					point.addEventListener(MouseEvent.CLICK, showDetail);
+					pointList.push(point);
+				}
+			}
+		}
+
+		private function showDetail(event : MouseEvent) : void
+		{
+		}
+
+		private function swapBack(event : MouseEvent) : void
+		{
+			var curTarget:TimingPoint = event.currentTarget as TimingPoint;
+			container.setChildIndex(curTarget, curTarget.index);
+		}
+
+		private function swapOver(event : MouseEvent) : void
+		{
+			var curTarget:TimingPoint = event.currentTarget as TimingPoint;
+			container.setChildIndex(curTarget, container.numChildren - 1);
 		}
 		public function showLightAlert(str:String):void
 		{
@@ -542,14 +651,15 @@ package mew.windows {
 			bk.graphics.clear();
 			bk.graphics.lineStyle(1, 0x000000, .3);
 			bk.graphics.beginFill(0xFFFFFF, 1.0);
-			bk.graphics.drawRoundRect(0, 0, 300, 80, 12, 12);
+			bk.graphics.drawRoundRect(0, 0, 300, 100, 12, 12);
 			bk.graphics.endFill();
 		}
 		
-		override protected function drawBackground(w:int, h:int):void
+		override protected function drawBackground(w:int, h:int, position:String = null):void
 		{
 			super.drawBackground(w, h);
-			background.addEventListener(MouseEvent.MOUSE_DOWN, dragNativeWindow);
+			addChildAt(whiteBackground, 1);
+			whiteBackground.addEventListener(MouseEvent.MOUSE_DOWN, dragNativeWindow);
 		}
 		
 		private function dragNativeWindow(event:MouseEvent):void
@@ -623,6 +733,10 @@ package mew.windows {
 			if(MewSystem.app.suggestor){
 				if(container && container.contains(MewSystem.app.suggestor)) this.removeChild(MewSystem.app.suggestor);
 				MewSystem.app.suggestor = null;
+			}
+			if(closeButton){
+				closeButton.removeEventListener(MouseEvent.CLICK, closeWindow);
+				closeButton = null;
 			}
 		}
 	}

@@ -9,11 +9,14 @@ package mew.windows {
 	import mew.modules.UserFormList;
 	import mew.modules.WeiboFormList;
 
+	import resource.Resource;
+
 	import system.MewSystem;
 
 	import widget.Widget;
 
 	import com.iabel.core.UISprite;
+	import com.iabel.utils.ScaleBitmap;
 	import com.sina.microblog.data.MicroBlogStatus;
 	import com.sina.microblog.data.MicroBlogUser;
 	import com.sina.microblog.events.MicroBlogErrorEvent;
@@ -21,6 +24,7 @@ package mew.windows {
 
 	import mx.utils.StringUtil;
 
+	import flash.display.Bitmap;
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.Screen;
 	import flash.display.Sprite;
@@ -29,6 +33,7 @@ package mew.windows {
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
+	import flash.geom.Rectangle;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.text.TextField;
@@ -63,7 +68,8 @@ package mew.windows {
 		private var dataLoading:Boolean = false;
 		private var timer:Timer = new Timer(1000);
 		
-		private var desH:int;
+		private var desH : int;
+		private var scrollBarSkin : ScaleBitmap;
 		
 		public function SearchWindow(initOptions : NativeWindowInitOptions) {
 			super(initOptions);
@@ -71,9 +77,10 @@ package mew.windows {
 		
 		override protected function init():void
 		{
-			drawBackground(465, 50);
+			drawBackground(465, 50, "top");
 			super.init();
 			if(!scrollList) scrollList = new ScrollPane();
+//			scrollList.ho
 			drawSearchBackground();
 			
 			if(!searchWeiboButton) searchWeiboButton = ButtonFactory.SearchWeiboButton();
@@ -127,23 +134,48 @@ package mew.windows {
 		
 		override public function getContentWidth():Number
 		{
-			return (background.width - scrollList.verticalScrollBar.width);
+			return (background.width - 60);
+		}
+		
+		protected function getSprite(w:int, h:int):Sprite
+		{
+			var sp:Sprite = new Sprite();
+			sp.graphics.beginFill(0x000000, 0);
+			sp.graphics.drawRect(0, 0, w, h);
+			sp.graphics.endFill();
+			return sp;
 		}
 		
 		override public function showWeibo(arr:Array, content:UISprite, ud:UserData = null):void
 		{
-			var xpos:int = 10;
+			var xpos:int = 30;
 			var ypos:int = searchBackground.y + searchBackground.height;
 			desH = Screen.mainScreen.visibleBounds.height - MewSystem.app.height - 100;
 			scrollList.source = list;
 			list.addEventListener(Event.RESIZE, onResize);
 			scrollList.addEventListener(ScrollEvent.SCROLL, onScroll);
 			if(background.height < desH){
-				drawBackground(465, desH);
+				drawBackground(465, desH, "top");
 				super.init();
 				scrollList.move(xpos, ypos);
 				addChild(scrollList);
-				scrollList.setSize(this.background.width, desH - searchBackground.height - searchBackground.y + 10);
+				scrollList.setSize(this.background.width - 40, desH - searchBackground.height - searchBackground.y - 10);
+				scrollList.setStyle("upSkin", getSprite(scrollList.width, scrollList.height));
+				scrollBarSkin = new ScaleBitmap((new Resource.ScrollBarSkin() as Bitmap).bitmapData, "auto", true);
+				scrollBarSkin.scale9Grid = new Rectangle(0, 10, 16, 10);
+				scrollList.setStyle("thumbUpSkin", scrollBarSkin);
+				scrollList.setStyle("thumbOverSkin", scrollBarSkin);
+				scrollList.setStyle("thumbDownSkin", scrollBarSkin);
+				scrollList.setStyle("thumbIcon", new Sprite());
+				scrollList.setStyle("trackUpSkin", new Sprite());
+				scrollList.setStyle("trackOverSkin", new Sprite());
+				scrollList.setStyle("trackDownSkin", new Sprite());
+				scrollList.setStyle("upArrowUpSkin", new Sprite());
+				scrollList.setStyle("upArrowOverSkin", new Sprite());
+				scrollList.setStyle("upArrowDownSkin", new Sprite());
+				scrollList.setStyle("downArrowUpSkin", new Sprite());
+				scrollList.setStyle("downArrowOverSkin", new Sprite());
+				scrollList.setStyle("downArrowDownSkin", new Sprite());
 			}
 		}
 		
@@ -365,7 +397,7 @@ package mew.windows {
 			searchBackground.graphics.beginFill(Widget.mainColor, 1.0);
 			searchBackground.graphics.drawRoundRectComplex(0, 0, background.width, 50, 12, 12, 12, 12);
 			searchBackground.graphics.endFill();
-			addChildAt(searchBackground, 1);
+			addChildAt(searchBackground, 2);
 			searchBackground.x = 10;
 			searchBackground.y = 10;
 		}
@@ -408,6 +440,8 @@ package mew.windows {
 			searchWeiboButton = null;
 			searchUserButton = null;
 			searchButton = null;
+			if(scrollBarSkin && scrollBarSkin.bitmapData) scrollBarSkin.bitmapData.dispose();
+			scrollBarSkin = null;
 		}
 	}
 }

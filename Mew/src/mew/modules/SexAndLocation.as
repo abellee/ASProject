@@ -1,15 +1,14 @@
-package mew.modules
-{
+package mew.modules {
+	import resource.Resource;
+
+	import widget.Widget;
+
 	import com.iabel.core.UISprite;
-	
+
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
-	
-	import mew.factory.StaticAssets;
-	
-	import widget.Widget;
 	
 	public class SexAndLocation extends UISprite
 	{
@@ -22,8 +21,8 @@ package mew.modules
 		}
 		public function set sex(str:String):void
 		{
-			if(str == "f") sexIcon = StaticAssets.getSexIcon();
-			else if(str == "m") sexIcon = StaticAssets.getSexIcon();
+			if(str == "f") sexIcon = new (Resource.FemaleSkin)();
+			else if(str == "m") sexIcon = new (Resource.MaleSkin)();
 		}
 		public function create():void
 		{

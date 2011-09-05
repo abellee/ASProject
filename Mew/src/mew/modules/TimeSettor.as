@@ -1,4 +1,5 @@
 package mew.modules {
+	import mew.factory.ButtonFactory;
 	import flash.events.Event;
 	import fl.data.DataProvider;
 	import fl.controls.ComboBox;
@@ -35,7 +36,7 @@ package mew.modules {
 		}
 		private function init():void
 		{
-			timeSetBackground = MewSystem.getRoundRect(240, 100, 0x000000, 0xffffff, 1.0, 1, .3);
+			timeSetBackground = MewSystem.getRoundRect(220, 100, 0x000000, 0xd1cfcc, 1.0, 1, .3);
 			addChild(timeSetBackground);
 			timeSetBackground.mouseChildren = false;
 			timeSetBackground.mouseEnabled = false;
@@ -78,12 +79,10 @@ package mew.modules {
 					dateList["date" + newMonth].push(newDay);
 				}
 			}
-			yearText = new ComboBox();
+			yearText = ButtonFactory.TimingComboBox();
 			yearText.setStyle("textFormat", Widget.normalFormat);
 			yearData = new DataProvider();
-			for each (var ya : int in dateList["year"]) {
-				yearData.addItem({label:ya, data:ya});
-			}
+			for each (var ya : int in dateList["year"]) yearData.addItem({label:ya, data:ya});
 			yearText.dataProvider = yearData;
 			yearText.setSize(60, yearText.height);
 			addChild(yearText);
@@ -96,8 +95,8 @@ package mew.modules {
 			lineText0.x = yearText.x + yearText.width + 10;
 			lineText0.y = yearText.y + (yearText.height - lineText0.height) / 2;
 			
-			monthSelector = new ComboBox();
-			monthSelector.setSize(60, monthSelector.height);
+			monthSelector = ButtonFactory.TimingComboBox();
+			monthSelector.setSize(50, monthSelector.height);
 			addChild(monthSelector);
 			monthSelector.x = lineText0.x + lineText0.width + 5;
 			monthSelector.y = yearText.y;
@@ -107,8 +106,8 @@ package mew.modules {
 			lineText1.x = monthSelector.x + monthSelector.width + 5;
 			lineText1.y = monthSelector.y + (monthSelector.height - lineText1.height) / 2;
 			
-			dateSelector = new ComboBox();
-			dateSelector.setSize(60, dateSelector.height);
+			dateSelector = ButtonFactory.TimingComboBox();
+			dateSelector.setSize(50, dateSelector.height);
 			addChild(dateSelector);
 			dateSelector.x = lineText1.x + lineText1.width + 5;
 			dateSelector.y = yearText.y;
@@ -117,7 +116,7 @@ package mew.modules {
 			monthSelector.selectedIndex = getSelectIndex(month, monthData);
 			dateSelector.selectedIndex = getSelectIndex(date, dateData);
 			
-			hourSelector = new ComboBox();
+			hourSelector = ButtonFactory.TimingComboBox();
 			var str:String = "";
 			var hourData : DataProvider = new DataProvider();
 			for (var h : int = 0; h < 24; h++) {
@@ -128,17 +127,16 @@ package mew.modules {
 			hourSelector.selectedIndex = hour;
 			addChild(hourSelector);
 			hourSelector.x = yearText.x;
-			hourSelector.y = yearText.y + yearText.height + 5;
+			hourSelector.y = yearText.y + yearText.height + 10;
 			
 			var colonText:TextField = getColonText();
-			addChild(colonText);
 			addChild(colonText);
 			
 			hourSelector.setSize((timeSetBackground.width - 20) / 2 - colonText.width / 2 - 5, hourSelector.height);
 			colonText.x = hourSelector.x + hourSelector.width + 5;
 			colonText.y = hourSelector.y + (hourSelector.height - colonText.height) / 2;
 			
-			minuteSelector = new ComboBox();
+			minuteSelector = ButtonFactory.TimingComboBox();
 			var minuteData : DataProvider = new DataProvider();
 			for (var r : int = 0; r < 60; r++) {
 				str = r < 10 ? "0" + r : r + "";
@@ -147,7 +145,7 @@ package mew.modules {
 			minuteSelector.dataProvider = minuteData;
 			minuteSelector.selectedIndex = minute;
 			addChild(minuteSelector);
-			minuteSelector.x = colonText.x + colonText.width + 5;
+			minuteSelector.x = colonText.x + colonText.width + 10;
 			minuteSelector.y = hourSelector.y;
 			
 			minuteSelector.setSize(timeSetBackground.width - 10 - minuteSelector.x, minuteSelector.height);

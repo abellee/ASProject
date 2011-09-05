@@ -25,7 +25,7 @@ package mew.modules {
 		}
 		override protected function init():void
 		{
-			defaultBK = new Bitmap(StaticAssets.DefaultVideo);
+			defaultBK = new Bitmap(StaticAssets.DefaultVideo());
 			playBtn = ButtonFactory.PlayButton();
 		}
 		

@@ -47,7 +47,7 @@ package com.iabel.core
 		protected function drawBackground(w:Number, h:Number, color:Number = 0):void
 		{
 			this.graphics.clear();
-			this.graphics.beginFill(color, .1);
+			this.graphics.beginFill(color, 0);
 			this.graphics.drawRect(0, 0, w, h);
 			this.graphics.endFill();
 		}
@@ -112,7 +112,6 @@ package com.iabel.core
 						var bt:Bitmap = child as Bitmap;
 						if(bt && bt.bitmapData){
 							bt.bitmapData.dispose();
-							bt.bitmapData = null;
 						}
 					}else if(child is Loader){
 						(child as Loader).unloadAndStop();

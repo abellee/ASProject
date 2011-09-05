@@ -1,4 +1,5 @@
 package mew.windows {
+	import mew.data.SystemSettingData;
 	import fl.controls.Button;
 
 	import mew.data.UserData;
@@ -10,6 +11,8 @@ package mew.windows {
 
 	import system.MewSystem;
 
+	import widget.Widget;
+
 	import com.greensock.TweenLite;
 	import com.iabel.core.UISprite;
 
@@ -17,6 +20,7 @@ package mew.windows {
 	import flash.display.Screen;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.text.TextFormat;
 	import flash.utils.ByteArray;
 	
 	public class WeiBoPublisher extends ALNativeWindow
@@ -35,14 +39,29 @@ package mew.windows {
 		}
 		override protected function init():void
 		{
-			drawBackground(640, 400);
-			this.stage.nativeWindow.alwaysInFront = true;
+			drawBackground(640, 380);
+			this.stage.nativeWindow.alwaysInFront = SystemSettingData.alwaysInfront;
 			super.init();
 			this.stage.nativeWindow.x = (Screen.mainScreen.visibleBounds.width - this.stage.nativeWindow.width) / 2;
 			this.stage.nativeWindow.y = Screen.mainScreen.visibleBounds.height + 10;
 			
-			if(!sendButton) sendButton = ButtonFactory.SendButton();
+			if(!sendButton) sendButton = ButtonFactory.WhiteButton();
+			sendButton.setStyle("textFormat", new TextFormat(Widget.systemFont, 16, 0x4c4c4c, true));
+			sendButton.label = "发 送";
+			sendButton.width = 100;
+			sendButton.height = 40;
 			addChild(sendButton);
+			
+			if(!closeButton) closeButton = ButtonFactory.CloseButton();
+			addChild(closeButton);
+			closeButton.x = whiteBackground.width;
+			closeButton.y = 20;
+			closeButton.addEventListener(MouseEvent.CLICK, closeWindow);
+		}
+
+		private function closeWindow(event : MouseEvent) : void
+		{
+			MewSystem.app.closePublishWindow();
 		}
 		
 		public function displayByState(state:String, userData:UserData = null, weiboData:WeiboData = null, additionalStr:String = null):void
@@ -67,9 +86,9 @@ package mew.windows {
 			if(userData && weiboData) curContainer.showWeiboContent(state, userData, weiboData, additionalStr);
 			addChild(curContainer as UISprite);
 			curContainer.x = 10;
-			curContainer.y = 10;
+			curContainer.y = 15;
 			sendButton.x = background.x + background.width - sendButton.width - 20;
-			sendButton.y = background.y + background.height - 40;
+			sendButton.y = background.y + background.height - 65;
 			sendButton.addEventListener(MouseEvent.CLICK, sendStatus);
 			
 			TweenLite.to(this.stage.nativeWindow, .3, {y: Screen.mainScreen.visibleBounds.height - this.stage.nativeWindow.height - 100});
@@ -152,10 +171,11 @@ package mew.windows {
 			}
 		}
 		
-		override protected function drawBackground(w:int, h:int):void
+		override protected function drawBackground(w:int, h:int, position:String = null):void
 		{
 			super.drawBackground(w, h);
-			background.addEventListener(MouseEvent.MOUSE_DOWN, dragLoginPanel);
+			addChildAt(whiteBackground, 1);
+			whiteBackground.addEventListener(MouseEvent.MOUSE_DOWN, dragLoginPanel);
 		}
 		
 		private function dragLoginPanel(event:MouseEvent):void
@@ -167,6 +187,7 @@ package mew.windows {
 		{
 			super.dealloc(event);
 			
+			if(closeButton) closeButton.removeEventListener(MouseEvent.CLICK, closeWindow);
 			currentState = null;
 			curContainer = null;
 			closeButton = null;

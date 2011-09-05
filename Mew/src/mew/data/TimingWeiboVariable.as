@@ -6,7 +6,7 @@ package mew.data
 		public var content:String = null;
 		public var img:String = null;
 		public var time:Number = 0;
-		public var state:int = 0;
+		public var state:int = 0;                // 0 未发送 1 发送成功 2 发送失败 3 图片丢失 但已发送文字
 		public var createTime:Number = NaN;
 		public function TimingWeiboVariable()
 		{

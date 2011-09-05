@@ -1,6 +1,7 @@
 package mew.modules {
 	import mew.data.UserData;
-	import mew.factory.StaticAssets;
+
+	import resource.Resource;
 
 	import system.MewSystem;
 
@@ -28,11 +29,19 @@ package mew.modules {
 		}
 		private function init(s:int):void
 		{
-			bk = StaticAssets.getDefaultAvatar(s);
+			if(s == 50) bk = new (Resource.MewDefault50)();
+			else{
+				bk = new (Resource.MewDefault180)();
+				bk.width = 100;
+				bk.height = 100;
+			}
 			addChildAt(bk, 0);
 			setSize(bk.width, bk.height);
 			
 			drawBorder();
+			
+			bk.x = (this.width - bk.width) / 2;
+			bk.y = (this.height - bk.height) / 2;
 		}
 		
 		override public function removeAllChildren():void
@@ -109,7 +118,7 @@ package mew.modules {
 			this.graphics.clear();
 			this.graphics.lineStyle(1, 0x000000);
 			this.graphics.beginFill(0x000000, 0);
-			this.graphics.drawRect(0, 0, this.width-1, this.height-1);
+			this.graphics.drawRect(0, 0, this.width + 4, this.height + 4);
 			this.graphics.endFill();
 		}
 		

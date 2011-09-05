@@ -11,6 +11,7 @@ package system {
 	import mew.modules.Suggesttor;
 	import mew.modules.ToolTip;
 	import mew.windows.EmotionWindow;
+	import mew.windows.LightNoticeWindow;
 
 	import widget.Widget;
 
@@ -18,6 +19,7 @@ package system {
 	import com.sina.microblog.data.MicroBlogComment;
 	import com.sina.microblog.data.MicroBlogDirectMessage;
 	import com.sina.microblog.data.MicroBlogStatus;
+	import com.sina.microblog.data.MicroBlogUnread;
 	import com.sina.microblog.data.MicroBlogUser;
 
 	import flash.display.DisplayObjectContainer;
@@ -43,6 +45,7 @@ package system {
 		public static var toolTip:ToolTip = null;
 		public static var operationButton:OperationGroup = null;
 		public static var repostOperationButton:OperationGroup = null;
+		public static var noticeWindow:LightNoticeWindow = null;
 		
 		public static var database:Boolean = false;
 		
@@ -71,11 +74,49 @@ package system {
 		
 		public static function initMicroBlog():void
 		{
-			if(!microBlog) microBlog = new MicroBlog();
+			microBlog = new MicroBlog();
 			microBlog.source = Config.appKey;
 			microBlog.consumerKey = Config.appKey;
 			microBlog.consumerSecret = Config.appSecret;
 			microBlog.isTrustDomain = true;
+		}
+		
+		public static function showNoticeWindow(data:MicroBlogUnread):void
+		{
+			if(!data.comments && !data.dm && !data.followers && !data.mentions && !data.new_status) return;
+			if(!noticeWindow) noticeWindow = new LightNoticeWindow(getNativeWindowInitOption());
+			noticeWindow.showNotice(data);
+			noticeWindow.activate();
+		}
+		
+		public static function closeNoticeWindow():void
+		{
+			if(noticeWindow){
+				noticeWindow.close();
+				noticeWindow = null;
+			}
+		}
+		
+		public static function getTriangle(dir:String = "up"):Sprite
+		{
+			var sp:Sprite = new Sprite();
+			sp.graphics.beginFill(Widget.mainColor, 1.0);
+			switch(dir){
+				case "up":
+					sp.graphics.moveTo(50, 0);
+					sp.graphics.lineTo(0, 50);
+					sp.graphics.lineTo(100, 50);
+					sp.graphics.lineTo(50, 0);
+					break;
+				case "down":
+					sp.graphics.moveTo(0, 0);
+					sp.graphics.lineTo(100, 0);
+					sp.graphics.lineTo(50, 50);
+					sp.graphics.lineTo(0, 0);
+					break;
+			}
+			sp.graphics.endFill();
+			return sp;
 		}
 		
 		public static function setLastId(fileName:String, arr:Array):void
@@ -213,6 +254,15 @@ package system {
 			nativeWindowInitOption.type = NativeWindowType.LIGHTWEIGHT;
 			
 			return nativeWindowInitOption;
+		}
+		
+		public static function getVerticalLine(value:int):Sprite
+		{
+			var sp:Sprite = new Sprite();
+			sp.graphics.lineStyle(1, 0x000000, .2);
+			sp.graphics.moveTo(0, 0);
+			sp.graphics.lineTo(0, value);
+			return sp;
 		}
 		
 		public static function getRoundRect(widthSize:int, heightSize:int, lineColor:Number = 0x000000, backgroundColor:Number = 0xffffff,

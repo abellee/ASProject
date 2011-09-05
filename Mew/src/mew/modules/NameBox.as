@@ -1,7 +1,7 @@
 package mew.modules {
-	import mew.utils.StringUtils;
 	import mew.data.UserData;
-	import mew.factory.StaticAssets;
+
+	import resource.Resource;
 
 	import widget.Widget;
 
@@ -39,9 +39,9 @@ package mew.modules {
 			var w:int = nameTextField.textWidth;
 			var h:int = nameTextField.textHeight;
 			if(userData.isVerified){
-				vicon = new Bitmap(StaticAssets.YellowVIcon);
+				vicon = new (Resource.VSkin)();
 				addChild(vicon);
-				vicon.x = nameTextField.textWidth + nameTextField.x + 10;
+				vicon.x = nameTextField.textWidth + nameTextField.x + 5;
 				w += vicon.width;
 				h = Math.max(vicon.height, h);
 			}

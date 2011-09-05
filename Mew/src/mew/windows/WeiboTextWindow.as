@@ -5,15 +5,21 @@ package mew.windows {
 	import mew.modules.WeiboEntry;
 	import mew.modules.WeiboFormList;
 
+	import resource.Resource;
+
 	import system.MewSystem;
 
 	import com.iabel.core.UISprite;
+	import com.iabel.util.ScaleBitmap;
 	import com.sina.microblog.data.MicroBlogStatus;
 
+	import flash.display.Bitmap;
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.Screen;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.TimerEvent;
+	import flash.geom.Rectangle;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.utils.Timer;
@@ -29,24 +35,28 @@ package mew.windows {
 		private var dataLoading:Boolean = false;
 		private var timer:Timer = null;
 		private var realHeight:int = 0;
-		public function WeiboTextWindow(initOptions : NativeWindowInitOptions) {
+		private var position:String = null;
+		private var sp:Sprite = new Sprite();
+		private var scrollBarSkin:ScaleBitmap;
+		public function WeiboTextWindow(initOptions : NativeWindowInitOptions, pos:String = "top") {
 			super(initOptions);
+			position = pos;
 		}
 		
 		override protected function init():void
 		{
 			realHeight = Screen.mainScreen.visibleBounds.height - MewSystem.app.height - 100;
-			drawBackground(465, 10);
+			drawBackground(465, 10, position);
 			super.init();
 			weiboEntry = new WeiboEntry();
-			weiboEntry.x = 15;
-			weiboEntry.y = 15;
+			weiboEntry.x = 30;
+			weiboEntry.y = 30;
 			if(!scrollList) scrollList = new ScrollPane();
 		}
 		
 		override public function getContentWidth():Number
 		{
-			return (465 - scrollList.verticalScrollBar.width);
+			return 405;
 		}
 		
 		public function loadData(data:MicroBlogStatus):void
@@ -56,7 +66,7 @@ package mew.windows {
 			{
 				urlLoader.removeEventListener(Event.COMPLETE, func);
 				var xml:XML = XML(urlLoader.data);
-				weiboEntry.setSize(background.width - 10, 10);
+				weiboEntry.setSize(background.width - 40, 10);
 				weiboEntry.initStatus(data, xml);
 				weiboEntry.addEventListener(Event.RESIZE, onResize);
 				addChild(weiboEntry);
@@ -65,6 +75,12 @@ package mew.windows {
 			};
 			urlLoader.addEventListener(Event.COMPLETE, func);
 			urlLoader.load(new URLRequest("config/emotions.xml"));
+		}
+		
+		override protected function drawBackground(w:int, h:int, pos:String = null):void
+		{
+			super.drawBackground(w, h, position);
+			addChildAt(whiteBackground, 1);
 		}
 		
 		private function loadCommentListByPage():void
@@ -129,10 +145,19 @@ package mew.windows {
 		{
 			MewSystem.showLightAlert("加载评论信息失败!", container);
 		}
+		
+		protected function getSprite(w:int, h:int):Sprite
+		{
+			sp.graphics.clear();
+			sp.graphics.beginFill(0x000000, 0);
+			sp.graphics.drawRect(0, 0, w, h);
+			sp.graphics.endFill();
+			return sp;
+		}
 
 		private function onResize(event : Event = null) : void
 		{
-			var leftH:int = realHeight - weiboEntry.height - weiboEntry.y;
+			var leftH:int = realHeight - weiboEntry.height - weiboEntry.y - 20;
 			var scrollListHeight:int;
 			if(list){
 				if(list.height < leftH){
@@ -141,11 +166,45 @@ package mew.windows {
 					scrollListHeight = leftH < 30 ? 30 : leftH;
 				}
 			}
-			scrollList.setSize(465, scrollListHeight);
-			scrollList.move(10, weiboEntry.y + weiboEntry.height + 5);
+			scrollList.setSize(425, scrollListHeight);
+			scrollList.setStyle("upSkin", getSprite(scrollList.width, scrollList.height));
+			scrollBarSkin = new ScaleBitmap((new Resource.ScrollBarSkin() as Bitmap).bitmapData, "auto", true);
+			scrollBarSkin.scale9Grid = new Rectangle(0, 10, 16, 10);
+			scrollList.setStyle("thumbUpSkin", scrollBarSkin);
+			scrollList.setStyle("thumbOverSkin", scrollBarSkin);
+			scrollList.setStyle("thumbDownSkin", scrollBarSkin);
+			scrollList.setStyle("thumbIcon", new Sprite());
+			scrollList.setStyle("trackUpSkin", new Sprite());
+			scrollList.setStyle("trackOverSkin", new Sprite());
+			scrollList.setStyle("trackDownSkin", new Sprite());
+			scrollList.setStyle("upArrowUpSkin", new Sprite());
+			scrollList.setStyle("upArrowOverSkin", new Sprite());
+			scrollList.setStyle("upArrowDownSkin", new Sprite());
+			scrollList.setStyle("downArrowUpSkin", new Sprite());
+			scrollList.setStyle("downArrowOverSkin", new Sprite());
+			scrollList.setStyle("downArrowDownSkin", new Sprite());
+			scrollList.move(30, weiboEntry.y + weiboEntry.height + 5);
 			
-			drawBackground(465, weiboEntry.height + (scrollList.height + 15));
+			drawBackground(465, weiboEntry.y + weiboEntry.height + scrollList.height + 15);
 			super.init();
+		}
+		
+		override protected function dealloc(event:Event):void
+		{
+			super.dealloc(event);
+			if(timer){
+				timer.removeEventListener(TimerEvent.TIMER, resetLoadingState);
+				timer = null;
+			}
+			if(list) list.removeEventListener(Event.RESIZE, listResize);
+			if(scrollList) scrollList.removeEventListener(ScrollEvent.SCROLL, onScroll);
+			if(weiboEntry) weiboEntry.removeEventListener(Event.RESIZE, onResize);
+			weiboEntry = null;
+			list = null;
+			scrollList = null;
+			timer = null;
+			position = null;
+			sp = null;
 		}
 	}
 }

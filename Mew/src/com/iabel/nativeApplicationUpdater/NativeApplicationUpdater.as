@@ -1,11 +1,11 @@
-package com.riaspace.nativeApplicationUpdater
+package com.iabel.nativeApplicationUpdater
 {
 	import air.update.events.DownloadErrorEvent;
 	import air.update.events.StatusUpdateErrorEvent;
 	import air.update.events.StatusUpdateEvent;
 	import air.update.events.UpdateEvent;
 	
-	import com.riaspace.nativeApplicationUpdater.utils.HdiutilHelper;
+	import com.iabel.nativeApplicationUpdater.utils.HdiutilHelper;
 	
 	import flash.desktop.NativeApplication;
 	import flash.desktop.NativeProcess;
@@ -38,9 +38,9 @@ package com.riaspace.nativeApplicationUpdater
 	public class NativeApplicationUpdater extends EventDispatcher
 	{
 		
-		namespace UPDATE_XMLNS_1_0 = "http://ns.riaspace.com/air/framework/update/description/1.0";
+		namespace UPDATE_XMLNS_1_0 = "http://ns.iabel.com/air/framework/update/description/1.0";
 		
-		namespace UPDATE_XMLNS_1_1 = "http://ns.riaspace.com/air/framework/update/description/1.1";
+		namespace UPDATE_XMLNS_1_1 = "http://ns.iabel.com/air/framework/update/description/1.1";
 		
 		/**
 		 * The updater has not been initialized.

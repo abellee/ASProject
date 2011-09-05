@@ -1,4 +1,5 @@
 package mew.windows {
+	import mew.factory.ButtonFactory;
 	import widget.Widget;
 	import fl.controls.Button;
 
@@ -41,11 +42,10 @@ package mew.windows {
 			titleTextField.styleSheet = Widget.linkStyle;
 			titleTextField.autoSize = TextFieldAutoSize.LEFT;
 			
-			closeBtn = new Button();
-			closeBtn.label = "close";
+			closeBtn = ButtonFactory.CloseButton();
 			addChild(closeBtn);
-			closeBtn.x = this.stage.nativeWindow.width - closeBtn.width - 15;
-			closeBtn.y = 15;
+			closeBtn.x = this.stage.nativeWindow.width - closeBtn.width - 20;
+			closeBtn.y = 20;
 			closeBtn.addEventListener(MouseEvent.CLICK, closeVideoWindow);
 		}
 		
@@ -89,8 +89,8 @@ package mew.windows {
 				titleTextField.width = titleTextField.textWidth;
 				titleTextField.height = titleTextField.textHeight;
 				addChild(titleTextField);
-				titleTextField.x = 15;
-				titleTextField.y = 15;
+				titleTextField.x = 20;
+				titleTextField.y = 20;
 			}
 			addChild(html);
 			html.addEventListener(Event.COMPLETE, htmlLoadComplete);
@@ -108,7 +108,7 @@ package mew.windows {
 			this.stage.addEventListener(Event.ENTER_FRAME, detectApplication);
 		}
 		
-		override protected function drawBackground(w:int, h:int):void
+		override protected function drawBackground(w:int, h:int, position:String = null):void
 		{
 			super.drawBackground(w, h);
 			background.addEventListener(MouseEvent.MOUSE_DOWN, dragLoginPanel);

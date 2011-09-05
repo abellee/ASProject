@@ -1,7 +1,6 @@
 package mew.cache {
-	import mew.utils.MewUtils;
-	import config.SQLConfig;
-
+	import com.adobe.images.JPGEncoder;
+	import flash.utils.ByteArray;
 	import system.MewSystem;
 
 	import com.sina.microblog.data.MicroBlogComment;
@@ -12,6 +11,7 @@ package mew.cache {
 	import com.sina.microblog.data.MicroBlogUser;
 	import com.sina.microblog.data.MicroBlogUsersRelationship;
 
+	import flash.display.BitmapData;
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
@@ -90,6 +90,19 @@ package mew.cache {
 				arr.splice(index, 1);
 				writeData(arr, fileName);
 				if(!index) MewSystem.setLastId(fileName, arr);
+			}
+		}
+		
+		public function writeUserBitmap(id:String, bitmapData:BitmapData):void
+		{
+			var file:File = File.applicationStorageDirectory.resolvePath("cache/" + id + ".jpg");
+			if(!file.exists){
+				var encoder:JPGEncoder = new JPGEncoder(50);
+				var bytes:ByteArray = encoder.encode(bitmapData);
+				var fileStream:FileStream = new FileStream();
+				fileStream.open(file, FileMode.WRITE);
+				fileStream.writeBytes(bytes);
+				fileStream.close();
 			}
 		}
 	}

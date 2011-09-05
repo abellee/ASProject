@@ -47,7 +47,8 @@ package mew.windows
 			drawBackground(400, 350);
 			background.alpha = 0;
 			this.stage.nativeWindow.alwaysInFront = true;
-			super.init();
+			this.stage.nativeWindow.width = background.width + 20;
+			this.stage.nativeWindow.height = background.height + 20;
 			this.stage.nativeWindow.x = (Screen.mainScreen.visibleBounds.width - this.stage.nativeWindow.width) / 2;
 			this.stage.nativeWindow.y = (Screen.mainScreen.visibleBounds.height - this.stage.nativeWindow.height) / 2;
 			
@@ -108,7 +109,7 @@ package mew.windows
 			showContainer();
 		}
 		
-		override protected function drawBackground(w:int, h:int):void
+		override protected function drawBackground(w:int, h:int, position:String = null):void
 		{
 			super.drawBackground(w, h);
 			background.addEventListener(MouseEvent.MOUSE_DOWN, dragLoginPanel);

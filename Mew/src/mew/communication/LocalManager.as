@@ -43,20 +43,19 @@ package mew.communication
 			so.flush();
 			so.close();
 		}
-		public static function setUserSharedObject(key:String, value:String, name:String):void
+		public static function setUserSharedObject(key:String, value:String, name:String, id:String):void
 		{
 			var so:SharedObject = SharedObject.getLocal(Config.MEWCACHE);
+			so.data.accessTokenKey = key;
+			so.data.accessTokenSecret = value;
 			if(!so.data.user) so.data.user = {};
 			if(!so.data.userTimes) so.data.userTimes = {};
 			if(!so.data.user[key]) so.data.user[key] = {};
-			else{
-				for(var k:String in so.data.user){
-					so.data.user[k]["default"] = false;
-				}
-			}
+			for(var k:String in so.data.user) so.data.user[k]["default"] = false;
 			so.data.user[key]["password"] = value;
 			so.data.user[key]["username"] = name;
 			so.data.user[key]["default"] = true;
+			so.data.user[key]["id"] = id;
 			if(!so.data.userTimes[key]) so.data.userTimes[key] = 0;
 			else{
 				if(so.data.userTimes[key] < 3) so.data.userTimes[key] = so.data.userTimes[key] + 1;
@@ -70,6 +69,15 @@ package mew.communication
 			}
 			so.flush();
 			so.close();
+		}
+		public static function removeUserSharedObject(key:String, bool:Boolean):void
+		{
+			var so:SharedObject = SharedObject.getLocal(Config.MEWCACHE);
+			if(bool){
+				delete so.data.accessTokenKey;
+				delete so.data.accessTokenSecret;
+			}
+			delete so.data.user[key];
 		}
 		public static function getUserAccount():Object
 		{

@@ -1,6 +1,4 @@
 package mew.windows {
-	import com.greensock.TweenLite;
-	import flash.events.TimerEvent;
 	import config.SQLConfig;
 
 	import mew.data.SystemSettingData;
@@ -26,6 +24,7 @@ package mew.windows {
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
+	import flash.events.TimerEvent;
 	import flash.geom.Point;
 	import flash.utils.Timer;
 	
@@ -33,6 +32,7 @@ package mew.windows {
 	{
 		protected var _listenerList:Object = null;
 		protected var background:UISprite = null;
+		protected var whiteBackground:Sprite = null;
 		protected var cover:Sprite = null;
 		protected var showTimer:Timer = null;
 		protected var curPoint:Point = null;
@@ -40,6 +40,7 @@ package mew.windows {
 		protected var ownWindow:Vector.<ALNativeWindow> = null;
 		public var container:UISprite = null;
 		protected var newLocation:Point = null;
+		protected var triangle:Sprite = null;
 		public function ALNativeWindow(initOptions:NativeWindowInitOptions)
 		{
 			super(initOptions);
@@ -80,16 +81,38 @@ package mew.windows {
 //			TweenLite.to(this.stage.nativeWindow, .3, {y: ypos});
 		}
 		
-		protected function drawBackground(w:int, h:int):void
+		protected function drawBackground(w:int, h:int, position:String = null):void
 		{
 			if(!background) background = new UISprite();
 			background.mouseChildren = false;
 			background.graphics.clear();
-			background.graphics.beginFill(0xdddddd, 1.0);
-			background.graphics.drawRoundRect(10, 10, w, h, 10, 10);
+			background.graphics.beginFill(Widget.mainColor, 1.0);
+			background.graphics.drawRoundRect(10, 10, w, h, 20, 20);
 			background.graphics.endFill();
 			Widget.widgetGlowFilter(background);
+			
+			if(!triangle && position){
+				switch(position){
+					case "top":
+						triangle = MewSystem.getTriangle("up");
+						triangle.x = (w - triangle.width) / 2 + 10;
+						break;
+					case "bottom":
+						triangle = MewSystem.getTriangle("down");
+						triangle.x = (w - triangle.width) / 2 + 10;
+						triangle.y = h - 30;
+						break;
+				}
+				addChild(triangle);
+			}
+			if(!whiteBackground) whiteBackground = new Sprite();
+			whiteBackground.mouseChildren = false;
+			whiteBackground.graphics.clear();
+			whiteBackground.graphics.beginFill(0xFFFFFF, 1.0);
+			whiteBackground.graphics.drawRoundRect(15, 15, w - 10, h - 10, 10, 10);
+			whiteBackground.graphics.endFill();
 			addChildAt(background, 0);
+			if(container.numChildren >= 2) addChildAt(whiteBackground, 2);
 		}
 		
 		public function readData():void
@@ -260,12 +283,10 @@ package mew.windows {
 			{
 				var child:DisplayObject = container.getChildAt(0);
 				if(child){
-					
 					if(child is ScaleBitmap){
 						(child as ScaleBitmap).dealloc();
 					}else if(child is Bitmap){
 						(child as Bitmap).bitmapData.dispose();
-						(child as Bitmap).bitmapData = null;
 					}else if(child is GIFPlayer){
 						(child as GIFPlayer).dispose();
 					}

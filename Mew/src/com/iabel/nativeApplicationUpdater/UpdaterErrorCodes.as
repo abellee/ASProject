@@ -1,4 +1,4 @@
-package com.riaspace.nativeApplicationUpdater
+package com.iabel.nativeApplicationUpdater
 {
 	public class UpdaterErrorCodes
 	{

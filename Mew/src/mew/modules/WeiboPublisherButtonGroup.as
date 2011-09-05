@@ -1,15 +1,17 @@
-package mew.modules
-{
-	import com.iabel.core.UISprite;
-	
+package mew.modules {
 	import fl.controls.Button;
-	
+
+	import mew.events.MewEvent;
+	import mew.factory.ButtonFactory;
+
+	import system.MewSystem;
+
+	import com.iabel.core.UISprite;
+
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
-	
-	import mew.events.MewEvent;
-	import mew.factory.ButtonFactory;
 	
 	public class WeiboPublisherButtonGroup extends UISprite
 	{
@@ -18,7 +20,7 @@ package mew.modules
 		private var emotionButton:Button = null;
 		private var topicButton:Button = null;
 		private var clearButton:Button = null;
-		public var gap:int = 40;
+		public var gap:int = 60;
 		public function WeiboPublisherButtonGroup()
 		{
 			super();
@@ -31,6 +33,10 @@ package mew.modules
 				xpos = screenShotButton.x + screenShotButton.width + gap;
 				screenShotButton.y = this.height - screenShotButton.height;
 				screenShotButton.addEventListener(MouseEvent.CLICK, screenShotButton_mouseClickHandler);
+				var hline0:Sprite = MewSystem.getVerticalLine(20);
+				addChild(hline0);
+				hline0.x = screenShotButton.x + screenShotButton.width + gap / 2;
+				hline0.y = this.height - hline0.height - 7;
 			}
 			if(!emotionButton) emotionButton = ButtonFactory.EmotionButton();
 			if(!topicButton) topicButton = ButtonFactory.TopicButton();
@@ -41,14 +47,26 @@ package mew.modules
 			emotionButton.x = xpos;
 			emotionButton.y = this.height - emotionButton.height;
 			xpos = emotionButton.x + emotionButton.width + gap;
+			var hline:Sprite = MewSystem.getVerticalLine(20);
+			addChild(hline);
+			hline.x = emotionButton.x + emotionButton.width + gap / 2;
+			hline.y = this.height - hline.height - 7;
 			addChild(topicButton);
 			topicButton.x = xpos;
 			topicButton.y = this.height - topicButton.height;
 			xpos = topicButton.x + topicButton.width + gap;
+			var hline1:Sprite = MewSystem.getVerticalLine(20);
+			addChild(hline1);
+			hline1.x = topicButton.x + topicButton.width + gap / 2;
+			hline1.y = this.height - hline1.height - 7;
 			addChild(clearButton);
 			clearButton.x = xpos;
 			clearButton.y = this.height - clearButton.height;
 			xpos = clearButton.x + clearButton.width + gap;
+			var hline2:Sprite = MewSystem.getVerticalLine(20);
+			addChild(hline2);
+			hline2.x = clearButton.x + clearButton.width + gap / 2;
+			hline2.y = this.height - hline2.height - 7;
 			addChild(shortURLButton);
 			shortURLButton.x = xpos;
 			shortURLButton.y = this.height - shortURLButton.height;

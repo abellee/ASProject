@@ -8,16 +8,21 @@ package mew.windows {
 	import mew.modules.UserFormList;
 	import mew.modules.WeiboFormList;
 
+	import resource.Resource;
+
 	import system.MewSystem;
 
 	import com.iabel.core.UISprite;
+	import com.iabel.utils.ScaleBitmap;
 	import com.sina.microblog.events.MicroBlogEvent;
 
+	import flash.display.Bitmap;
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.Screen;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.TimerEvent;
-	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.utils.Timer;
@@ -34,53 +39,79 @@ package mew.windows {
 		private var curUserData:UserData = null;
 		private var curState:String = MewSystem.app.INDEX;
 		private var desH:int;
-		public function WeiBoListWindow(initOptions:NativeWindowInitOptions)
+		private var position:String = null;
+		private var scrollBarSkin:ScaleBitmap = null;
+		public function WeiBoListWindow(initOptions:NativeWindowInitOptions, pos:String = "top")
 		{
+			position = pos;
 			super(initOptions);
 		}
 		
 		override protected function init():void
 		{
-			drawBackground(465, Screen.mainScreen.visibleBounds.height - MewSystem.app.height - 100);
+			drawBackground(465, Screen.mainScreen.visibleBounds.height - MewSystem.app.height - 100, position);
 			super.init();
 			if(!scrollList) scrollList = new ScrollPane();
+			scrollBarSkin = new ScaleBitmap((new Resource.ScrollBarSkin() as Bitmap).bitmapData, "auto", true);
+			scrollBarSkin.scale9Grid = new Rectangle(0, 10, 16, 10);
+			scrollList.setStyle("thumbUpSkin", scrollBarSkin);
+			scrollList.setStyle("thumbOverSkin", scrollBarSkin);
+			scrollList.setStyle("thumbDownSkin", scrollBarSkin);
+			scrollList.setStyle("thumbIcon", new Sprite());
+			scrollList.setStyle("trackUpSkin", new Sprite());
+			scrollList.setStyle("trackOverSkin", new Sprite());
+			scrollList.setStyle("trackDownSkin", new Sprite());
+			scrollList.setStyle("upArrowUpSkin", new Sprite());
+			scrollList.setStyle("upArrowOverSkin", new Sprite());
+			scrollList.setStyle("upArrowDownSkin", new Sprite());
+			scrollList.setStyle("downArrowUpSkin", new Sprite());
+			scrollList.setStyle("downArrowOverSkin", new Sprite());
+			scrollList.setStyle("downArrowDownSkin", new Sprite());
+		}
+		protected function getSprite(w:int, h:int):Sprite
+		{
+			var sp:Sprite = new Sprite();
+			sp.graphics.beginFill(0x000000, 0);
+			sp.graphics.drawRect(0, 0, w, h);
+			sp.graphics.endFill();
+			return sp;
 		}
 		override public function getContentWidth():Number
 		{
-			return (background.width - scrollList.verticalScrollBar.width);
+			return (background.width - 60);
 		}
 		
 		override public function showWeibo(arr:Array, content:UISprite, ud:UserData = null):void
 		{
-			var xpos:int = 10;
-			var ypos:int = 10;
+			var xpos:int = 30;
+			var ypos:int = 30;
 			desH = this.background.height;
 			if(ud){                                                                 // 其它用户
 				if(!userDescription){
 					userDescription = new UserDescription();
-					userDescription.setSize(this.background.width, 10);
+					userDescription.setSize(this.background.width - 40, 10);
 					curUserData = ud;
 					userDescription.userData = ud;
 					userDescription.showData();
 					addChild(userDescription);
-					userDescription.x = 10;
-					userDescription.y = 20;
+					userDescription.x = 30;
+					userDescription.y = 30;
 					ypos = userDescription.y + userDescription.height;
-					desH = desH - userDescription.height - 10;
+					desH = desH - userDescription.height;
 					addListener();
 				}
 			}else if(MewSystem.app.currentState == MewSystem.app.MY_WEIBO){         // 当前用户
 				if(!userDescription){
 					userDescription = new UserDescription();
-					userDescription.setSize(this.background.width, 10);
+					userDescription.setSize(this.background.width - 40, 10);
 					curUserData = MewSystem.app.userData;
 					userDescription.userData = MewSystem.app.userData;
 					userDescription.showData();
 					addChild(userDescription);
-					userDescription.x = 10;
-					userDescription.y = 20;
+					userDescription.x = 30;
+					userDescription.y = 30;
 					ypos = userDescription.y + userDescription.height;
-					desH = desH - userDescription.height - 10;
+					desH = desH - userDescription.height;
 					addListener();
 				}
 			}
@@ -89,8 +120,15 @@ package mew.windows {
 			scrollList.addEventListener(ScrollEvent.SCROLL, onScroll);
 			scrollList.source = list;
 			scrollList.move(xpos, ypos);
-			scrollList.setSize(this.background.width, desH);
+			scrollList.setSize(this.background.width - 40, desH - 40);
+			scrollList.setStyle("upSkin", getSprite(scrollList.width, scrollList.height));
 			addChild(scrollList);
+		}
+		
+		override protected function drawBackground(w:int, h:int, position:String = null):void
+		{
+			super.drawBackground(w, h, position);
+			if(!triangle) addChildAt(whiteBackground, 1);
 		}
 		
 		private function addListener():void
@@ -130,7 +168,7 @@ package mew.windows {
 		private function resetAndLoad():void
 		{
 			scrollList.source = list;
-			scrollList.setSize(this.background.width, desH);
+			scrollList.setSize(this.background.width - 40, desH - 40);
 			curPage = 0;
 			loadDataByPage();
 		}
@@ -298,6 +336,8 @@ package mew.windows {
 				userDescription.removeEventListener(MewEvent.USER_HOME, showUserHome);
 			}
 			userDescription = null;
+			if(scrollBarSkin && scrollBarSkin.bitmapData) scrollBarSkin.bitmapData.dispose();
+			scrollBarSkin = null;
 		}
 	}
 }

@@ -192,14 +192,8 @@ package com.iabel.util {
 		}
 		public function dealloc():void
 		{
-			if(_originalBitmap){
-				_originalBitmap.dispose();
-				_originalBitmap = null;
-			}
-			if(this.bitmapData){
-				this.bitmapData.dispose();
-				this.bitmapData = null;
-			}
+			if(_originalBitmap) _originalBitmap.dispose();
+			if(this.bitmapData) this.bitmapData.dispose();
 			_scale9Grid = null;
 		}
 	}

@@ -39,7 +39,7 @@ package mew.modules {
 			
 			nameBox = new NameBox();
 			nameBox.userData = userData;
-			nameBox.create(9);
+			nameBox.create(7);
 			addChild(nameBox);
 			nameBox.addEventListener(MouseEvent.CLICK, showTargetUser);
 			

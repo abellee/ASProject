@@ -1,8 +1,16 @@
-package mew.modules
-{
+package mew.modules {
+	import mew.factory.ButtonFactory;
+	import fl.controls.Button;
+
+	import mew.factory.StaticAssets;
+
+	import resource.Resource;
+
+	import widget.Widget;
+
 	import com.greensock.TweenLite;
 	import com.iabel.core.UISprite;
-	
+
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
@@ -16,10 +24,6 @@ package mew.modules
 	import flash.text.TextFormat;
 	import flash.utils.ByteArray;
 	
-	import mew.factory.StaticAssets;
-	
-	import widget.Widget;
-	
 	public class UploadImageViewer extends UISprite
 	{
 		private var defaultBackground:DisplayObject = null;
@@ -27,21 +31,25 @@ package mew.modules
 		private var fileFilter:FileFilter = new FileFilter("Images(*.jpg, *.jpeg, *.png, *.gif, *.bmp)","*.jpg;*.jpeg;*.png;*.gif;*.bmp");
 		private var file:File = null;
 		private var bk:Sprite = null;
+		private var clearButton:Button = null;
 		public function UploadImageViewer(value:int = 180)
 		{
 			super();
 			
-			this.mouseChildren = false;
 			init(value);
 		}
 		private function init(value:int):void
 		{
-			var num:int = 70;
-			if(value == 100) num = 50;
+			var num:int = 50;
 			drawImageBackground(value + 20, value + num);
 			addChild(bk);
 			
-			defaultBackground = StaticAssets.getDefaultAvatar(value - 4);
+			if(value == 50) defaultBackground = new (Resource.MewDefault50)();
+			else{
+				defaultBackground = new (Resource.MewDefault180)();
+				defaultBackground.width = value;
+				defaultBackground.height = value;
+			}
 			addChild(defaultBackground);
 			defaultBackground.x = (this.width - defaultBackground.width) / 2;
 			defaultBackground.y = 10;
@@ -59,10 +67,23 @@ package mew.modules
 			tip.y = defaultBackground.y + defaultBackground.height + 10;
 			
 			addEventListener(MouseEvent.CLICK, browseImage);
+			
+			clearButton = ButtonFactory.CloseButton();
+			addChild(clearButton);
+			clearButton.visible = false;
+			clearButton.x = defaultBackground.x + defaultBackground.width - clearButton.width / 2;
+			clearButton.y = defaultBackground.y - clearButton.height / 2;
+			clearButton.addEventListener(MouseEvent.CLICK, clearBitmap);
+		}
+
+		private function clearBitmap(event : MouseEvent) : void
+		{
+			reset();
 		}
 		
 		private function browseImage(event:Event):void
 		{
+			if(event.target == clearButton) return;
 			if(!file) file = new File();
 			file.addEventListener(Event.SELECT, onSelectHandler);
 			file.addEventListener(Event.COMPLETE, onCompleteHandler);
@@ -98,6 +119,8 @@ package mew.modules
 					addChild(alertText);
 					alertText.x = (bk.width - alertText.textWidth) / 2;
 					alertText.y = (bk.height - alertText.textHeight) / 2;
+					addChild(clearButton);
+					clearButton.visible = true;
 					return;
 				}
 				var scale:Number = 1;
@@ -124,6 +147,8 @@ package mew.modules
 				bitmap.x = (bk.width - bitmap.width) / 2;
 				bitmap.y = (bk.height - bitmap.height) / 2;
 				TweenLite.to(bitmap, .5, {alpha: 1});
+				addChild(clearButton);
+				clearButton.visible = true;
 				return;
 			};
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, func);
@@ -132,24 +157,20 @@ package mew.modules
 		
 		private function clearChildren():void
 		{
-			while(this.numChildren > 1){
-				var child:DisplayObject = this.getChildAt(1);
-				removeChild(child);
-				if((child is Bitmap) && (child as Bitmap).bitmapData != StaticAssets.DefaultAvatar180) (child as Bitmap).bitmapData.dispose();
-			}
+			var child:DisplayObject = this.getChildAt(3);
+			removeChild(child);
+			defaultBackground.alpha = 0;
+			tip.alpha = 0;
 		}
 		
 		public function reset():void
 		{
 			clearChildren();
 			
-			addChild(defaultBackground);
-			defaultBackground.x = (this.width - defaultBackground.width) / 2;
-			defaultBackground.y = 10;
-			
-			addChild(tip);
-			tip.x = (this.width - tip.width) / 2;
-			tip.y = defaultBackground.y + defaultBackground.height + 10;
+			defaultBackground.alpha = 0;
+			tip.alpha = 0;
+			TweenLite.to(defaultBackground, .3, {alpha: 1});
+			TweenLite.to(tip, .3, {alpha: 1});
 			
 			if(file){
 				file.removeEventListener(Event.SELECT, onSelectHandler);
@@ -157,6 +178,7 @@ package mew.modules
 				file.removeEventListener(Event.CANCEL, onCancelHandler);
 				file = null;
 			}
+			clearButton.visible = false;
 		}
 		
 		public function get byteArray():ByteArray
@@ -208,6 +230,10 @@ package mew.modules
 			}
 			file = null;
 			bk = null;
+			if(clearButton){
+				clearButton.removeEventListener(MouseEvent.CLICK, clearBitmap);
+				clearButton = null;
+			}
 		}
 	}
 }

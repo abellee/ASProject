@@ -1,10 +1,17 @@
-package mew.windows
-{
-	import com.greensock.TweenLite;
-	
+package mew.windows {
 	import fl.controls.Button;
-	
+
+	import mew.factory.ButtonFactory;
+	import mew.factory.StaticAssets;
+
+	import system.MewSystem;
+
+	import widget.Widget;
+
+	import com.greensock.TweenLite;
+
 	import flash.desktop.NativeApplication;
+	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.Screen;
@@ -15,13 +22,6 @@ package mew.windows
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
-	
-	import mew.factory.ButtonFactory;
-	import mew.factory.StaticAssets;
-	
-	import system.MewSystem;
-	
-	import widget.Widget;
 	
 	public class AboutWindow extends ALNativeWindow
 	{
@@ -49,9 +49,9 @@ package mew.windows
 			
 			closeButton = ButtonFactory.CloseButton();
 			
-			mewFace = StaticAssets.getDefaultAvatar(100);
+			mewFace = new Bitmap(StaticAssets.MewFace());
 			
-			mewFont = StaticAssets.getDefaultAvatar(30);
+			mewFont = new Bitmap(StaticAssets.MewFont());
 			
 			var appDescription:XML = NativeApplication.nativeApplication.applicationDescriptor;
 			var ns:Namespace = appDescription.namespace();
@@ -107,7 +107,7 @@ package mew.windows
 			MewSystem.app.aboutWindow = null;
 		}
 		
-		override protected function drawBackground(w:int, h:int):void
+		override protected function drawBackground(w:int, h:int, position:String = null):void
 		{
 			super.drawBackground(w, h);
 			background.addEventListener(MouseEvent.MOUSE_DOWN, dragLoginPanel);

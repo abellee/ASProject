@@ -14,9 +14,9 @@ package mew.modules {
 			fromIndex = this.numChildren;
 			for each(var obj:MicroBlogUser in arr){
 				var entry:UserEntry = new UserEntry();
-				entry.setSize(140, 10);
+				entry.setSize(130, 10);
 				entry.initStatus(obj);
-				entry.x = (this.numChildren % 3) * (entry.width + 10) + 10;
+				entry.x = (this.numChildren % 3) * (entry.width + 10);
 				entry.y = int(this.numChildren / 3) * 140;
 				addChild(entry);
 			}

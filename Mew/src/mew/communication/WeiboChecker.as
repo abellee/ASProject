@@ -21,6 +21,11 @@ package mew.communication {
 			timer.addEventListener(TimerEvent.TIMER, onTimerEvent);
 			timer.start();
 		}
+		public function stopRunning():void
+		{
+			timer.stop();
+			timer.removeEventListener(TimerEvent.TIMER, onTimerEvent);
+		}
 		private function onTimerEvent(event:TimerEvent):void
 		{
 			MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_STATUS_UNREAD_RESULT, onLoadStatusUnreadResult);
@@ -49,6 +54,7 @@ package mew.communication {
 				loadNewComment(unreadData.comments);
 				loadNewDM(unreadData.dm);
 				loadNewAt(unreadData.mentions);
+				MewSystem.showNoticeWindow(unreadData);
 			}
 			timer.reset();
 			timer.start();

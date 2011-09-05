@@ -26,9 +26,9 @@ package mew.modules {
 		private function drawBorder():void
 		{
 			if(!bk) bk = new Sprite();
-			bk.graphics.lineStyle(0x000000, .2);
+			bk.graphics.lineStyle(1, 0x000000, .2);
 			bk.graphics.beginFill(0x000000, 0);
-			bk.graphics.drawRect(0, 0, 24, 24);
+			bk.graphics.drawRect(0, 0, 26, 26);
 			bk.graphics.endFill();
 			addChild(bk);
 			bk.mouseChildren = false;
@@ -91,8 +91,8 @@ package mew.modules {
 			bitmap.width = 22;
 			bitmap.height = 22;
 			addChild(bitmap);
-			bitmap.x = 2;
-			bitmap.y = 2;
+			bitmap.x = 3;
+			bitmap.y = 3;
 		}
 		
 		override protected function dealloc(event:Event):void

@@ -1,5 +1,6 @@
 package mew.windows
 {
+	import mew.factory.ButtonFactory;
 	import com.greensock.TweenLite;
 	
 	import fl.containers.ScrollPane;
@@ -54,20 +55,22 @@ package mew.windows
 			var limitH:int = 460;
 			if(Screen.mainScreen.visibleBounds.height > 768) limitH = 600;
 			realH = hei > limitH ? limitH : hei;
+			if(hei < 100) realH = 100;
 			
-			drawBackground(wid + 40, realH + 60);
+			var minWidth:int = wid;
+			if(wid < 100) minWidth = 100;
+			drawBackground(minWidth + 40, realH + 60);
 			container.alpha = 0;
 			this.stage.nativeWindow.width = wid + 60;
 			this.stage.nativeWindow.height = realH + 80;
 			this.stage.nativeWindow.x = (Screen.mainScreen.visibleBounds.width - this.stage.nativeWindow.width) / 2;
 			this.stage.nativeWindow.y = (Screen.mainScreen.visibleBounds.height - this.stage.nativeWindow.height) / 2;
 			
-			closeBtn = new Button();
-			closeBtn.label = "close";
+			closeBtn = ButtonFactory.CloseButton();
 			addChild(closeBtn);
 			closeBtn.visible = false;
-			closeBtn.x = this.stage.nativeWindow.width - closeBtn.width - 15;
-			closeBtn.y = 15;
+			closeBtn.x = this.stage.nativeWindow.width - closeBtn.width - 20;
+			closeBtn.y = 20;
 			closeBtn.addEventListener(MouseEvent.CLICK, closeVideoWindow);
 			
 			loadingText = new TextField();

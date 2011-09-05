@@ -41,7 +41,7 @@ package mew.modules {
 		}
 		protected function init():void
 		{
-			defaultBK = StaticAssets.getDefaultAvatar(50);
+			defaultBK = new Bitmap(StaticAssets.DefaultAvatar50());
 		}
 		protected function thumbImage_loadCompleteHandler(event:Event):void
 		{

@@ -182,7 +182,7 @@ package system {
 			}
 			closeDB();
 			var num:Number = new Date().time;
-			readData(num, true);
+			readData(num, num + 86400000, true);
 		}
 		
 		public function writeData(data:TimingWeiboVariable):void
@@ -195,11 +195,12 @@ package system {
 			dbStatement.execute();
 		}
 
-		public function readData(num:Number = 0, isSelf:Boolean = true):void
+		public function readData(num:Number = 0, maxNum:Number = 0, isSelf:Boolean = true):void
 		{
 			isSelfReading = isSelf;
 			openConnection();
-			dbStatement.text = "select * from mew_timing where time >= " + num + " order by id desc";
+			dbStatement.text = "select * from mew_timing where time >= " + num + " and time < " + maxNum + " order by id desc";
+			trace(dbStatement.text);
 			dbStatement.addEventListener(SQLEvent.RESULT, dataReadComplete);
 			dbStatement.execute();
 		}

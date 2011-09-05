@@ -1,11 +1,18 @@
-package mew.windows
-{
-	import com.greensock.TweenLite;
-	
+package mew.windows {
 	import fl.controls.Button;
 	import fl.controls.UIScrollBar;
-	
+
+	import mew.factory.ButtonFactory;
+	import mew.factory.StaticAssets;
+
+	import system.MewSystem;
+
+	import widget.Widget;
+
+	import com.greensock.TweenLite;
+
 	import flash.desktop.NativeApplication;
+	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.NativeWindowInitOptions;
@@ -17,13 +24,6 @@ package mew.windows
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
-	
-	import mew.factory.ButtonFactory;
-	import mew.factory.StaticAssets;
-	
-	import system.MewSystem;
-	
-	import widget.Widget;
 	
 	public class UpdateWindow extends ALNativeWindow
 	{
@@ -39,6 +39,8 @@ package mew.windows
 		private var uiScroll:UIScrollBar = null;
 		
 		private var loadingBar:MovieClip = null;
+		
+		private var newVersion:Number = NaN;
 		
 		public function UpdateWindow(initOptions:NativeWindowInitOptions)
 		{
@@ -57,10 +59,10 @@ package mew.windows
 			
 			closeButton = ButtonFactory.CloseButton();
 			addChild(closeButton);
-			closeButton.x = background.x + background.width - closeButton.width - 10;
-			closeButton.y = 15;
+			closeButton.x = background.x + background.width - closeButton.width;
+			closeButton.y = 20;
 			
-			mewFace = StaticAssets.getDefaultAvatar(100);
+			mewFace = new Bitmap(StaticAssets.MewFace());
 			addChild(mewFace);
 			mewFace.x = 30;
 			mewFace.y = 30;
@@ -96,7 +98,9 @@ package mew.windows
 		private function closeWindow(event:MouseEvent):void
 		{
 			if(event.target == skipButton){
-				// 缓存记录新的版本号 下次不再提示更新
+				if(!isNaN(newVersion)){
+					// 缓存记录新的版本号 下次不再提示更新
+				}
 			}
 			this.stage.nativeWindow.close();
 			MewSystem.app.updateWindow = null;
@@ -104,9 +108,11 @@ package mew.windows
 		
 		public function showData(version:Number, descriptionText:String):void
 		{
+			newVersion = version;
 			var appDescription:XML = NativeApplication.nativeApplication.applicationDescriptor;
 			var ns:Namespace = appDescription.namespace();
-			noticeText.htmlText = "<font color=\"#3FB9F8\" size=\"16\"><b>Mew微博有新版本啦！</b></font>\n<font color=\"#3FB9F8\" size=\"13\">您当前的版本号为" + appDescription.ns::versionNumber + "版本，是否更新到最新的" + version + "版本?</font>";
+			noticeText.htmlText = "<font color=\"#3FB9F8\" size=\"16\"><b>Mew微博有新版本啦！</b></font>\n<font color=\"#3FB9F8\" size=\"13\">您当前的版本号为"
+			 + appDescription.ns::versionNumber + "版本，是否更新到最新的" + version + "版本?</font>";
 			noticeText.height = noticeText.textHeight;
 			noticeText.y = mewFace.y + (mewFace.height - noticeText.height) / 2;
 			
@@ -139,7 +145,7 @@ package mew.windows
 			updateButton.y = cancelButton.y;
 		}
 		
-		override protected function drawBackground(w:int, h:int):void
+		override protected function drawBackground(w:int, h:int, position:String = null):void
 		{
 			super.drawBackground(w, h);
 			background.addEventListener(MouseEvent.MOUSE_DOWN, dragLoginPanel);

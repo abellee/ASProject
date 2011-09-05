@@ -98,8 +98,8 @@ package mew.modules {
 			addChild(buttonGroup);
 			buttonGroup.setSize(10, 70);
 			buttonGroup.init();
-			buttonGroup.x = bk.x;
-			buttonGroup.y = bk.height + bk.y + 20;
+			buttonGroup.x = bk.x + 20;
+			buttonGroup.y = bk.height + bk.y;
 			buttonGroup.addEventListener(MewEvent.SCREEN_SHOT, screenShotHandler);
 			buttonGroup.addEventListener(MewEvent.EMOTION, emotionHandler);
 			buttonGroup.addEventListener(MewEvent.TOPIC, topicHandler);
@@ -120,7 +120,7 @@ package mew.modules {
 		private function emotionHandler(event:MewEvent):void
 		{
 			var emotionBtnPos:Point = buttonGroup.getEmotionButtonPos();
-			emotionBtnPos.x = emotionBtnPos.x + buttonGroup.x;
+			emotionBtnPos.x = emotionBtnPos.x + buttonGroup.x + 6;
 			emotionBtnPos.y = emotionBtnPos.y + buttonGroup.y;
 			var realPoint:Point = MewSystem.app.weiboPublishWindow.globalToScreen(emotionBtnPos);
 			MewSystem.openEmotionWindow(realPoint, this);
@@ -371,7 +371,7 @@ package mew.modules {
 			bk.graphics.clear();
 			bk.graphics.lineStyle(1, 0x000000, .3);
 			bk.graphics.beginFill(0xFFFFFF, 1.0);
-			bk.graphics.drawRoundRect(0, 0, 600, 270, 12, 12);
+			bk.graphics.drawRoundRect(0, 0, 600, 250, 12, 12);
 			bk.graphics.endFill();
 		}
 		
