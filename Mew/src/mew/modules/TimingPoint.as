@@ -17,7 +17,6 @@ package mew.modules {
 		public function TimingPoint()
 		{
 			super();
-			this.mouseChildren = false;
 		}
 		
 		public function initPoint():void

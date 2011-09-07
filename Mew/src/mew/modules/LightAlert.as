@@ -72,7 +72,7 @@ package mew.modules
 		protected function removeAlert():void
 		{
 			TweenLite.to(this, .3, {alpha: 0, delay:.5, onComplete: function():void{
-				if(this.parent) this.parent.removeChild(this);
+				if(MewSystem.lightAlert.parent) MewSystem.lightAlert.parent.removeChild(MewSystem.lightAlert);
 				MewSystem.lightAlert = null;
 			}});
 		}

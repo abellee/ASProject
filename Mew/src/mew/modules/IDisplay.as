@@ -1,5 +1,4 @@
-package mew.modules
-{
+package mew.modules {
 	public interface IDisplay
 	{
 		function get x():Number;

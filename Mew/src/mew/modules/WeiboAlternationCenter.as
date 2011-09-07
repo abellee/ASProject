@@ -69,10 +69,24 @@ package mew.modules {
 			MewSystem.microBlog.loadStatusInfo(id);
 		}
 		
-		public function updateStatus(status:String, imageData:ByteArray = null, replyId:String = ""):void
+		public function updateStatus(status:String, imageData:ByteArray = null, replyId:String = "", target:IWeiboPublish = null):void
 		{
-			MewSystem.microBlog.addEventListener(MicroBlogEvent.UPDATE_STATUS_RESULT, updateStatus_resultHandler);
-			MewSystem.microBlog.addEventListener(MicroBlogErrorEvent.UPDATE_STATUS_ERROR, updateStatus_errorHandler);
+			var successFunc:Function = function(event:MicroBlogEvent):void
+			{
+				MewSystem.microBlog.removeEventListener(MicroBlogEvent.UPDATE_STATUS_RESULT, successFunc);
+				MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.UPDATE_STATUS_ERROR, errorFunc);
+				if(MewSystem.app.weiboPublishWindow) MewSystem.app.weiboPublishWindow.showResult(1);
+				else if(target) target.updateSuccess();
+			};
+			var errorFunc:Function = function(event:MicroBlogErrorEvent):void
+			{
+				MewSystem.microBlog.removeEventListener(MicroBlogEvent.UPDATE_STATUS_RESULT, successFunc);
+				MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.UPDATE_STATUS_ERROR, errorFunc);
+				if(MewSystem.app.weiboPublishWindow) MewSystem.app.weiboPublishWindow.showResult(0);
+				else if(target) target.updateFailed();
+			};
+			MewSystem.microBlog.addEventListener(MicroBlogEvent.UPDATE_STATUS_RESULT, successFunc);
+			MewSystem.microBlog.addEventListener(MicroBlogErrorEvent.UPDATE_STATUS_ERROR, errorFunc);
 			MewSystem.microBlog.updateStatus(status, null, imageData, replyId);
 		}
 		
@@ -103,20 +117,6 @@ package mew.modules {
 				var ud:UserData = MewSystem.app.dataCache.getUserDataCache(ms.user, false);
 				MewSystem.app.showTargetUserWindow(arr, ud);
 			}
-		}
-		
-		private function updateStatus_resultHandler(event:MicroBlogEvent):void
-		{
-			MewSystem.microBlog.removeEventListener(MicroBlogEvent.UPDATE_STATUS_RESULT, updateStatus_resultHandler);
-			MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.UPDATE_STATUS_ERROR, updateStatus_errorHandler);
-			if(MewSystem.app.weiboPublishWindow) MewSystem.app.weiboPublishWindow.showResult(1);
-		}
-		
-		private function updateStatus_errorHandler(event:MicroBlogErrorEvent):void
-		{
-			MewSystem.microBlog.removeEventListener(MicroBlogEvent.UPDATE_STATUS_RESULT, updateStatus_resultHandler);
-			MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.UPDATE_STATUS_ERROR, updateStatus_errorHandler);
-			if(MewSystem.app.weiboPublishWindow) MewSystem.app.weiboPublishWindow.showResult(0);
 		}
 	}
 }

@@ -37,6 +37,8 @@ package mew.events
 		public static const DELETE_STATUS:String = "delete_status";
 		public static const DIRECT_MESSAGE:String = "direct_message";
 		
+		public static const DELETE:String = "delete";
+		
 		public function MewEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);

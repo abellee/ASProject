@@ -9,6 +9,7 @@ package com.iabel.util
 		{
 			var pattern:RegExp = new RegExp(param + "=" + prefix + "(?P<" + param + ">.+?)" + suffix);
 			var arr:Array = str.match(pattern);
+			if(!arr) return null;
 			return arr[param];
 		}
 	}

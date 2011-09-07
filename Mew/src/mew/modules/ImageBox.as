@@ -81,7 +81,7 @@ package mew.modules {
 				MewSystem.app.imageViewer = null;
 			}
 			MewSystem.app.imageViewer = new ImageViewer(getNativeWindowInitOption());
-			MewSystem.app.imageViewer.showImage((data as ImageData).originWidth, (data as ImageData).originHeight, (data as ImageData).midURL);
+			MewSystem.app.imageViewer.showImage((data as ImageData).originWidth, (data as ImageData).originHeight, (data as ImageData).originURL,(data as ImageData).midURL);
 			MewSystem.app.imageViewer.activate();
 		}
 		

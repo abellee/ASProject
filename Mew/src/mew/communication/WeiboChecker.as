@@ -73,6 +73,7 @@ package mew.communication {
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_MENSIONS_RESULT, loadMentionsResult);
 			var arr:Array = event.result as Array;
 			if(arr && arr.length){
+				if(MewSystem.checkLastId(SQLConfig.MEW_AT, arr)) return;
 				MewSystem.app.localWriter.prefixData(arr, SQLConfig.MEW_AT, MewSystem.atNum);
 				MewSystem.atNotice(arr.length);
 			}
@@ -91,6 +92,7 @@ package mew.communication {
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_DIRECT_MESSAGES_RECEIVED_RESULT, loadDirectMessagesReceivedResult);
 			var arr:Array = event.result as Array;
 			if(arr && arr.length){
+				if(MewSystem.checkLastId(SQLConfig.MEW_DIRECT, arr)) return;
 				MewSystem.app.localWriter.prefixData(arr, SQLConfig.MEW_DIRECT, MewSystem.directMessageNum);
 				MewSystem.dmNotice(arr.length);
 			}
@@ -109,6 +111,7 @@ package mew.communication {
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_COMMENTS_TIMELINE_RESULT, loadCommentsTimeLineResult);
 			var arr:Array = event.result as Array;
 			if(arr && arr.length){
+				if(MewSystem.checkLastId(SQLConfig.MEW_COMMENT, arr)) return;
 				MewSystem.app.localWriter.prefixData(arr, SQLConfig.MEW_COMMENT, MewSystem.commentNum);
 				MewSystem.commentNotice(arr.length);
 			}
@@ -127,6 +130,7 @@ package mew.communication {
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_FRIENDS_TIMELINE_RESULT, loadFriendTimeLine);
 			var arr:Array = event.result as Array;
 			if(arr && arr.length){
+				if(MewSystem.checkLastId(SQLConfig.MEW_INDEX, arr)) return;
 				MewSystem.app.localWriter.prefixData(arr, SQLConfig.MEW_INDEX, MewSystem.statusNum);
 				MewSystem.statusNotice(arr.length);
 				var userStatus:Array = [];
@@ -153,6 +157,7 @@ package mew.communication {
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_FOLLOWERS_INFO_RESULT, loadFollowersInfoResult);
 			var arr:Array = event.result as Array;
 			if(arr && arr.length){
+				if(MewSystem.checkLastId(SQLConfig.MEW_FANS, arr)) return;
 				MewSystem.app.localWriter.prefixData(arr, SQLConfig.MEW_FANS, MewSystem.fansNum);
 				MewSystem.fansNotice(arr.length);
 			}

@@ -1,21 +1,19 @@
 package mew.windows {
+	import flash.events.MouseEvent;
 	import fl.containers.ScrollPane;
+	import fl.controls.Button;
 	import fl.events.ScrollEvent;
-
 	import mew.data.UserData;
 	import mew.events.MewEvent;
+	import mew.factory.ButtonFactory;
 	import mew.modules.UserDescription;
 	import mew.modules.UserFormList;
 	import mew.modules.WeiboFormList;
-
 	import resource.Resource;
-
 	import system.MewSystem;
-
 	import com.iabel.core.UISprite;
 	import com.iabel.utils.ScaleBitmap;
 	import com.sina.microblog.events.MicroBlogEvent;
-
 	import flash.display.Bitmap;
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.Screen;
@@ -41,9 +39,12 @@ package mew.windows {
 		private var desH:int;
 		private var position:String = null;
 		private var scrollBarSkin:ScaleBitmap = null;
-		public function WeiBoListWindow(initOptions:NativeWindowInitOptions, pos:String = "top")
+		private var closeButton:Button = null;
+		private var showClose:Boolean = false;
+		public function WeiBoListWindow(initOptions:NativeWindowInitOptions, pos:String = "top", showCloseButton:Boolean = false)
 		{
 			position = pos;
+			showClose = showCloseButton;
 			super(initOptions);
 		}
 		
@@ -67,6 +68,18 @@ package mew.windows {
 			scrollList.setStyle("downArrowUpSkin", new Sprite());
 			scrollList.setStyle("downArrowOverSkin", new Sprite());
 			scrollList.setStyle("downArrowDownSkin", new Sprite());
+			
+			if(showClose){
+				closeButton = ButtonFactory.CloseButton();
+				addChild(closeButton);
+				closeButton.x = 465 - closeButton.width;
+				closeButton.y = 20;
+				closeButton.addEventListener(MouseEvent.CLICK, closeCurrentWindow);
+			}
+		}
+		private function closeCurrentWindow(event:MouseEvent):void
+		{
+			MewSystem.app.closeWidgetWindow();
 		}
 		protected function getSprite(w:int, h:int):Sprite
 		{
@@ -338,6 +351,10 @@ package mew.windows {
 			userDescription = null;
 			if(scrollBarSkin && scrollBarSkin.bitmapData) scrollBarSkin.bitmapData.dispose();
 			scrollBarSkin = null;
+			if(closeButton){
+				closeButton.removeEventListener(MouseEvent.CLICK, closeCurrentWindow);
+				closeButton = null;
+			}
 		}
 	}
 }

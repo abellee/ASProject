@@ -1,4 +1,6 @@
 package system {
+	import flash.filesystem.FileMode;
+	import flash.filesystem.FileStream;
 	import flash.events.IOErrorEvent;
 	import flash.events.Event;
 	import mew.data.TimingWeiboVariable;
@@ -22,6 +24,8 @@ package system {
 		private var isSelfReading:Boolean = true;
 		private var file:File = null;
 		
+		private var dateFile:File = null;
+		
 		public var target:ITiming = null;
 		
 		public function TimingWeiboManager()
@@ -38,7 +42,7 @@ package system {
 			trace("table exists!");
 			MewSystem.database = true;
 			var now:Number = new Date().time;
-			readData(now);
+			readData(now, 0, true);
 		}
 		public function checkData(num:Number):Boolean
 		{
@@ -59,7 +63,7 @@ package system {
 			if(!timingWeiboList.length) return;
 			var firstItem:TimingWeiboVariable = timingWeiboList[0];
 			trace("______________________________");
-			firstItem.toString()
+			firstItem.toString();
 			trace("______________________________");
 			var now:Date = new Date();
 			var nowTime:Number = now.time;
@@ -169,7 +173,7 @@ package system {
 			if(!conn) conn = new SQLConnection();
 			if(!dbStatement) dbStatement = new SQLStatement();
 			dbStatement.sqlConnection = conn;
-			conn.open(file);
+			if(!conn.connected) conn.open(file);
 		}
 
 		private function writeDataComplete(event : SQLEvent) : void
@@ -177,16 +181,18 @@ package system {
 			dbStatement.removeEventListener(SQLEvent.RESULT, writeDataComplete);
 			var result:SQLResult = dbStatement.getResult();
 			if(target){
-				if(result) target.showLightAlert("添加成功!");
-				else target.showLightAlert("添加失败!");
+				if(result.complete){
+					target.showLightAlert("添加成功!");
+					readByID(result.lastInsertRowID);
+				}else target.showLightAlert("添加失败!");
 			}
-			closeDB();
 			var num:Number = new Date().time;
-			readData(num, num + 86400000, true);
+			readData(num, 0, true);
 		}
 		
 		public function writeData(data:TimingWeiboVariable):void
 		{
+			addNumOfDate(data.time);
 			openConnection();
 			dbStatement.text = "insert into mew_timing(content, img, time, state, createTime) values('" + data.content + "', '" + data.img + "', '"
 			 + data.time + "', '" + data.state + "', '" + data.createTime + "')";
@@ -194,12 +200,46 @@ package system {
 			dbStatement.addEventListener(SQLEvent.RESULT, writeDataComplete);
 			dbStatement.execute();
 		}
+		
+		public function readByID(id:Number):void
+		{
+			openConnection();
+			dbStatement.text = "select * from mew_timing where id=" + id;
+			dbStatement.addEventListener(SQLEvent.RESULT, readByIdSuccess);
+			dbStatement.execute();
+		}
+		
+		private function readByIdSuccess(event:SQLEvent):void
+		{
+			dbStatement.removeEventListener(SQLEvent.RESULT, readByIdSuccess);
+			var dataVector:Vector.<TimingWeiboVariable> = new Vector.<TimingWeiboVariable>();
+			var result:SQLResult = dbStatement.getResult();
+			if(result.data){
+				var len:int = result.data.length;
+				for (var i : int = 0; i < len; i++) {
+					var obj:Object = result.data[i];
+					var timingWeibo:TimingWeiboVariable = new TimingWeiboVariable();
+					timingWeibo.id = obj.id;
+					timingWeibo.content = obj.content;
+					timingWeibo.img = obj.img;
+					timingWeibo.time = obj.time;
+					timingWeibo.state = obj.state;
+					timingWeibo.createTime = obj.createTime;
+					dataVector.push(timingWeibo);
+				}
+			}
+			if(target){
+				target.timingWeiboData(dataVector);
+			}
+			closeDB();
+		}
 
-		public function readData(num:Number = 0, maxNum:Number = 0, isSelf:Boolean = true):void
+		public function readData(num:Number, maxNum:Number, isSelf:Boolean = true):void
 		{
 			isSelfReading = isSelf;
 			openConnection();
-			dbStatement.text = "select * from mew_timing where time >= " + num + " and time < " + maxNum + " order by id desc";
+			if(maxNum) dbStatement.text = "select * from mew_timing where time >= " + num + " and time < " + maxNum + " order by id desc";
+			else dbStatement.text = "select * from mew_timing where time >= " + num + " order by id desc";
 			trace(dbStatement.text);
 			dbStatement.addEventListener(SQLEvent.RESULT, dataReadComplete);
 			dbStatement.execute();
@@ -214,12 +254,35 @@ package system {
 			dbStatement.execute();
 		}
 
-		public function deleteData(id:Number):void
+		public function deleteData(id:Number, time:Number):void
 		{
+			deleteNumOfDate(time);
+			checkTimingWeiboList(id);
 			openConnection();
 			dbStatement.text = "delete from mew_timing where id=" + id;
 			dbStatement.addEventListener(SQLEvent.RESULT, deleteComplete);
 			dbStatement.execute();
+		}
+		
+		private function checkTimingWeiboList(id:Number):void
+		{
+			if(timingWeiboList && timingWeiboList.length){
+				var len:int = timingWeiboList.length;
+				for(var i:int = 0; i<len; i++){
+					var timingData:TimingWeiboVariable = timingWeiboList[i];
+					if(timingData.id == id){
+						timingWeiboList.splice(i, 1);
+						if(!i){
+							if(timer.running){
+								timer.stop();
+								timer.reset();
+								timer.start();
+							}
+						}
+						return;
+					}
+				}
+			}
 		}
 		
 		private function updateComplete(event : SQLEvent) : void
@@ -243,7 +306,7 @@ package system {
 			}
 			closeDB();
 		}
-
+		
 		private function dataReadComplete(event : SQLEvent) : void
 		{
 			dbStatement.removeEventListener(SQLEvent.RESULT, dataReadComplete);
@@ -262,7 +325,11 @@ package system {
 					timingWeibo.createTime = obj.createTime;
 					dataVector.push(timingWeibo);
 				}
-				if(!isSelfReading) target.timingWeiboData(dataVector);
+				if(!isSelfReading){
+					try{
+						target.timingWeiboData(dataVector);
+					}catch(e:Error){}
+				}
 				else{
 					timingWeiboList = dataVector;
 					timingWeiboList.sort(sortByTime);
@@ -275,6 +342,71 @@ package system {
 				}
 			}
 			closeDB();
+		}
+		private function addNumOfDate(time:Number):void
+		{
+			var obj:Object = readDate();
+			var date:Date = new Date(time);
+			var year:Number = date.getFullYear();
+			var month:Number = date.getMonth() + 1;
+			var day:Number = date.getDate();
+			var timeNum:Number = new Date(year, month - 1, day, 0, 0, 0, 0).time;
+			var monthStr:String = month < 10 ? "0" + month : month + "";
+			var dayStr:String = day < 10 ? "0" + day : day + "";
+			var str:String = year + "-" + monthStr + "-" + dayStr;
+			if(obj){
+				if(obj[str]) obj[str]["num"]++;
+				else{
+					obj[str] = {};
+					obj[str]["num"] = 1;
+					obj[str]["time"] = timeNum;
+				}
+			}else{
+				obj = {};
+				obj[str] = {};
+				obj[str]["num"] = 1;
+				obj[str]["time"] = timeNum;
+			}
+			writeDate(obj);
+		}
+		
+		private function deleteNumOfDate(time:Number):void
+		{
+			var obj:Object = readDate();
+			var date:Date = new Date(time);
+			var year:Number = date.getFullYear();
+			var month:Number = date.getMonth() + 1;
+			var day:Number = date.getDate();
+			var monthStr:String = month < 10 ? "0" + month : month + "";
+			var dayStr:String = day < 10 ? "0" + day : day + "";
+			var str:String = year + "-" + monthStr + "-" + dayStr;
+			if(obj){
+				if(obj[str]){
+					obj[str]["num"]--;
+					if(!obj[str]["num"]) delete obj[str];
+				}
+			}
+			writeDate(obj);
+		}
+		private function writeDate(obj:Object):void
+		{
+			if(!dateFile) dateFile = File.applicationStorageDirectory.resolvePath("timing/date.cache");
+			var fileStream:FileStream = new FileStream();
+			fileStream.open(dateFile, FileMode.WRITE);
+			fileStream.position = 0;
+			fileStream.writeObject(obj);
+			fileStream.close();
+		}
+		public function readDate():Object
+		{
+			if(!dateFile) dateFile = File.applicationStorageDirectory.resolvePath("timing/date.cache");
+			if(!dateFile.exists) return null;
+			var fileStream:FileStream = new FileStream();
+			fileStream.open(dateFile, FileMode.READ);
+			fileStream.position = 0;
+			var obj:Object = fileStream.readObject();
+			fileStream.close();
+			return obj;
 		}
 	}
 }

@@ -779,20 +779,25 @@ package {
 		public function showWeiboTextWindow(id:String):void
 		{
 			if(!id) return;
+			closeWidgetWindow();
+			MewSystem.showCycleLoading(currentActiveWindow.container);
+			alternationCenter.loadStatusInfo(id, currentActiveWindow.container);
+		}
+		
+		public function closeWidgetWindow():void
+		{
 			if(widgetWindow){
 				currentActiveWindow.goodbye(widgetWindow);
 				widgetWindow.close();
 				widgetWindow = null;
 			}
-			MewSystem.showCycleLoading(currentActiveWindow.container);
-			alternationCenter.loadStatusInfo(id, currentActiveWindow.container);
 		}
 
 		public function statusInfoLoaded(status:MicroBlogStatus, container:DisplayObjectContainer):void
 		{
 			if(!widgetWindow && currentActiveWindow.container == container){
 				MewSystem.removeCycleLoading(currentActiveWindow.container);
-				widgetWindow = new WeiboTextWindow(getNativeWindowInitOption(), null);
+				widgetWindow = new WeiboTextWindow(getNativeWindowInitOption(), null, true);
 				(widgetWindow as WeiboTextWindow).loadData(status);
 				openWidgetWindow();
 			}
@@ -801,11 +806,7 @@ package {
 		public function showSearchWindow(topic:String):void
 		{
 			if(!topic) return;
-			if(widgetWindow){
-				currentActiveWindow.goodbye(widgetWindow);
-				widgetWindow.close();
-				widgetWindow = null;
-			}
+			closeWidgetWindow();
 			widgetWindow = new SearchWindow(getNativeWindowInitOption());
 			
 			if(currentActiveWindow){
@@ -829,12 +830,8 @@ package {
 		public function showTargetUserWindow(arr:Array, ud:UserData):void
 		{
 			if(!arr || !ud) return;
-			if(widgetWindow){
-				currentActiveWindow.goodbye(widgetWindow);
-				widgetWindow.close();
-				widgetWindow = null;
-			}
-			widgetWindow = new WeiBoListWindow(getNativeWindowInitOption(), null);
+			closeWidgetWindow();
+			widgetWindow = new WeiBoListWindow(getNativeWindowInitOption(), null, true);
 			var xml:XML = null;
 			var urlLoader:URLLoader = new URLLoader();
 			var list:WeiboFormList = new WeiboFormList();

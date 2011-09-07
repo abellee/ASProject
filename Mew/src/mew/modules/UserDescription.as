@@ -57,7 +57,9 @@ package mew.modules
 			nameBox.x = avatar.width + avatar.x + 10;
 			nameBox.y = avatar.y;
 			
-			domainText.htmlText = "<a href='http://weibo.com/" + userData.domain + "'>http://weibo.com/" + userData.domain + "</a>";
+			var dir:String = userData.domain;
+			if(!dir || dir == "") dir = userData.id;
+			domainText.htmlText = "<a href='http://weibo.com/" + dir + "'>http://weibo.com/" + dir + "</a>";
 			domainText.x = nameBox.x;
 			domainText.y = nameBox.y + nameBox.height + 5;
 			domainText.width = this.width - domainText.x;

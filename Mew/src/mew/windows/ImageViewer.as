@@ -1,18 +1,16 @@
-package mew.windows
-{
-	import mew.factory.ButtonFactory;
-	import com.greensock.TweenLite;
-	
-	import fl.containers.ScrollPane;
+package mew.windows {
+	import flash.net.navigateToURL;
 	import fl.controls.Button;
-	
-	import flash.display.Loader;
-	import flash.display.LoaderInfo;
-	import flash.display.NativeMenu;
-	import flash.display.NativeMenuItem;
-	import flash.display.NativeWindow;
+
+	import mew.factory.ButtonFactory;
+
+	import system.MewSystem;
+
+	import widget.Widget;
+
+	import com.greensock.TweenLite;
+
 	import flash.display.NativeWindowInitOptions;
-	import flash.display.NativeWindowType;
 	import flash.display.Screen;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -20,20 +18,16 @@ package mew.windows
 	import flash.net.URLRequest;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
-	import flash.ui.ContextMenu;
-	import flash.ui.ContextMenuItem;
-	
-	import system.MewSystem;
-	
-	import widget.Widget;
 	
 	public class ImageViewer extends VideoViewer
 	{
 		private var originURL:String = null;
+		private var midURL:String = null;
 		private var wid:int = 0;
 		private var hei:int = 0;
 		private var loadingText:TextField = null;
 		private var realH:int;
+		private var downloadButton:Button = null;
 		public function ImageViewer(initOptions:NativeWindowInitOptions)
 		{
 			super(initOptions);
@@ -43,11 +37,12 @@ package mew.windows
 		{
 			return;
 		}
-		public function showImage(w:int, h:int, ourl:String):void
+		public function showImage(w:int, h:int, ourl:String, murl:String):void
 		{
 			wid = w;
 			hei = h;
 			originURL = ourl;
+			midURL = murl;
 			initData();
 		}
 		
@@ -73,6 +68,14 @@ package mew.windows
 			closeBtn.y = 20;
 			closeBtn.addEventListener(MouseEvent.CLICK, closeVideoWindow);
 			
+			downloadButton = ButtonFactory.ImageDownloadButton();
+			downloadButton.width = 20;
+			downloadButton.height = 21;
+			addChild(downloadButton);
+			downloadButton.x = 20;
+			downloadButton.y = 20;
+			downloadButton.addEventListener(MouseEvent.CLICK, downloadOriginalImage);
+			
 			loadingText = new TextField();
 			loadingText.autoSize = TextFieldAutoSize.LEFT;
 			loadingText.defaultTextFormat = Widget.wbFromFormat;
@@ -81,6 +84,11 @@ package mew.windows
 			loadingText.visible = false;
 			
 			TweenLite.to(container, .3, {alpha: 1, onComplete: showAllComponents}); 
+		}
+
+		private function downloadOriginalImage(event : MouseEvent) : void
+		{
+			navigateToURL(new URLRequest(originURL));
 		}
 		
 		private function showAllComponents():void
@@ -93,7 +101,7 @@ package mew.windows
 			addChild(html);
 			html.paintsDefaultBackground = false;
 			html.addEventListener(Event.COMPLETE, htmlLoadComplete);
-			html.load(new URLRequest(originURL));
+			html.load(new URLRequest(midURL));
 		}
 		
 		override protected function closeVideoWindow(event:MouseEvent):void
@@ -120,8 +128,10 @@ package mew.windows
 		override protected function dealloc(event:Event):void
 		{
 			super.dealloc(event);
+			background.removeEventListener(MouseEvent.RIGHT_CLICK, closeVideoWindow);
 			originURL = null;
 			loadingText = null;
+			midURL = null;
 		}
 	}
 }

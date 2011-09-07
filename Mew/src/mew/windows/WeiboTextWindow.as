@@ -1,7 +1,9 @@
 package mew.windows {
 	import fl.containers.ScrollPane;
+	import fl.controls.Button;
 	import fl.events.ScrollEvent;
 
+	import mew.factory.ButtonFactory;
 	import mew.modules.WeiboEntry;
 	import mew.modules.WeiboFormList;
 
@@ -18,6 +20,7 @@ package mew.windows {
 	import flash.display.Screen;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.geom.Rectangle;
 	import flash.net.URLLoader;
@@ -38,9 +41,13 @@ package mew.windows {
 		private var position:String = null;
 		private var sp:Sprite = new Sprite();
 		private var scrollBarSkin:ScaleBitmap;
-		public function WeiboTextWindow(initOptions : NativeWindowInitOptions, pos:String = "top") {
-			super(initOptions);
+		private var closeButton:Button = null;
+		private var showClose:Boolean = false;
+		public function WeiboTextWindow(initOptions : NativeWindowInitOptions, pos:String = "top", showCloseButton:Boolean = false)
+		{
 			position = pos;
+			showClose = showCloseButton;
+			super(initOptions);
 		}
 		
 		override protected function init():void
@@ -52,6 +59,18 @@ package mew.windows {
 			weiboEntry.x = 30;
 			weiboEntry.y = 30;
 			if(!scrollList) scrollList = new ScrollPane();
+			if(showClose){
+				closeButton = ButtonFactory.CloseButton();
+				addChild(closeButton);
+				closeButton.x = 465 - closeButton.width;
+				closeButton.y = 20;
+				closeButton.addEventListener(MouseEvent.CLICK, closeCurrentWindow);
+			}
+		}
+		
+		private function closeCurrentWindow(event:MouseEvent):void
+		{
+			MewSystem.app.closeWidgetWindow();
 		}
 		
 		override public function getContentWidth():Number

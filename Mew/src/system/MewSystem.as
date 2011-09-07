@@ -97,7 +97,7 @@ package system {
 			}
 		}
 		
-		public static function getTriangle(dir:String = "up"):Sprite
+		public static function getTriangle(dir:String = "up", size:int = 100):Sprite
 		{
 			var sp:Sprite = new Sprite();
 			sp.graphics.beginFill(Widget.mainColor, 1.0);
@@ -110,13 +110,37 @@ package system {
 					break;
 				case "down":
 					sp.graphics.moveTo(0, 0);
-					sp.graphics.lineTo(100, 0);
-					sp.graphics.lineTo(50, 50);
+					sp.graphics.lineTo(size, 0);
+					sp.graphics.lineTo(size / 2, size / 2);
 					sp.graphics.lineTo(0, 0);
 					break;
 			}
 			sp.graphics.endFill();
 			return sp;
+		}
+		
+		public static function checkLastId(fileName:String, arr:Array):Boolean
+		{
+			switch(fileName){
+				case SQLConfig.MEW_FANS:
+					return MewSystem.lastFanId == (arr[0] as MicroBlogUser).id;
+					break;
+				case SQLConfig.MEW_AT:
+					return MewSystem.lastAtId == (arr[0] as MicroBlogStatus).id;
+					break;
+				case SQLConfig.MEW_DIRECT:
+					return MewSystem.lastDMId == (arr[0] as MicroBlogDirectMessage).id;
+					break;
+				case SQLConfig.MEW_INDEX:
+					return MewSystem.lastStatusId == (arr[0] as MicroBlogStatus).id;
+					break;
+				case SQLConfig.MEW_COMMENT:
+					return MewSystem.lastCommentId == (arr[0] as MicroBlogComment).id;
+					break;
+				default:
+					return true;
+					break;
+			}
 		}
 		
 		public static function setLastId(fileName:String, arr:Array):void

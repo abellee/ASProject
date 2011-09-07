@@ -59,26 +59,26 @@ package mew.modules {
 		{
 			var status:MicroBlogStatus = obj as MicroBlogStatus;
 			if(!status) return;
-			userData = MewSystem.app.dataCache.getUserDataCache(status.user);
-			data = MewSystem.app.dataCache.getWeiboDataCache(status);
-			
-			var contentStr:String = data.content.replace(/\</g, "&lt;");
-			urls = StringUtils.getURLs(contentStr);
-			if(urls && urls.length){
-				for each(var s:String in urls){
-					contentStr = contentStr.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
-				}
-				videoChecker = new VideoChecker();
-				videoChecker.addEventListener(Event.COMPLETE, checkVideoUrlComplete);
-				videoChecker.isVideoURL(urls);
-			}
-			weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt(contentStr) + "</span>", this.width, xml);
-			
-			if(data.content == "此微博已被原作者删除。"){
+			if(!status.user){
+				weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt("该微博已被删除") + "</span>", this.width, xml);
 				nameBox = null;
 				timeAndFrom = null;
 				addChild(weiboText);
 			}else{
+				userData = MewSystem.app.dataCache.getUserDataCache(status.user);
+				data = MewSystem.app.dataCache.getWeiboDataCache(status);
+				
+				var contentStr:String = data.content.replace(/\</g, "&lt;");
+				urls = StringUtils.getURLs(contentStr);
+				if(urls && urls.length){
+					for each(var s:String in urls){
+						contentStr = contentStr.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
+					}
+					videoChecker = new VideoChecker();
+					videoChecker.addEventListener(Event.COMPLETE, checkVideoUrlComplete);
+					videoChecker.isVideoURL(urls);
+				}
+				weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt(contentStr) + "</span>", this.width, xml);
 				nameBox.userData = userData;
 				nameBox.create();
 				addChild(nameBox);
@@ -108,6 +108,55 @@ package mew.modules {
 			}
 			setSize(this.width, this.height);
 			addListener();
+//			userData = MewSystem.app.dataCache.getUserDataCache(status.user);
+//			data = MewSystem.app.dataCache.getWeiboDataCache(status);
+//			
+//			var contentStr:String = data.content.replace(/\</g, "&lt;");
+//			urls = StringUtils.getURLs(contentStr);
+//			if(urls && urls.length){
+//				for each(var s:String in urls){
+//					contentStr = contentStr.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
+//				}
+//				videoChecker = new VideoChecker();
+//				videoChecker.addEventListener(Event.COMPLETE, checkVideoUrlComplete);
+//				videoChecker.isVideoURL(urls);
+//			}
+//			weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt(contentStr) + "</span>", this.width, xml);
+//			
+//			if(data.content == "此微博已被原作者删除。"){
+//				nameBox = null;
+//				timeAndFrom = null;
+//				addChild(weiboText);
+//			}else{
+//				nameBox.userData = userData;
+//				nameBox.create();
+//				addChild(nameBox);
+//				
+//				addChild(weiboText);
+//				weiboText.x = nameBox.x;
+//				weiboText.y = nameBox.y + nameBox.height + 10;
+//				
+//				timeAndFrom.time = status.createdAt;
+//				timeAndFrom.from = status.source;
+//				timeAndFrom.create();
+//				
+//				if(data.imageData){
+//					imageBox = new ImageBox();
+//					imageBox.data = data.imageData;
+//					addChild(imageBox);
+//					imageBox.create();
+//					imageBox.x = weiboText.x;
+//					imageBox.y = weiboText.y + weiboText.height + 10;
+//					imageBox.addEventListener(Event.RESIZE, onResize);
+//				}
+//				
+//				var preChild:DisplayObject = this.getChildAt(this.numChildren - 1);
+//				timeAndFrom.x = preChild.x;
+//				timeAndFrom.y = preChild.y + preChild.height + 10;
+//				addChild(timeAndFrom);
+//			}
+//			setSize(this.width, this.height);
+//			addListener();
 		}
 		
 		protected function onResize(event:Event):void

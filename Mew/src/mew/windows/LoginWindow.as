@@ -49,6 +49,7 @@ package mew.windows {
 		private var imageFrame:Bitmap;
 		private var weiboButton:Button;
 		private var userAvatar:Bitmap;
+		private var defaultAvatar:Bitmap;
 		private var clearAccount:Label;
 		
 		private var labelMouseOutFormat:TextFormat = new TextFormat(Widget.systemFont, 12, 0x434343);
@@ -245,6 +246,10 @@ package mew.windows {
 							userAvatar = null;
 							loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, nfunc);
 							userAvatar = loader.content as Bitmap;
+							if(defaultAvatar){
+								if(container.contains(defaultAvatar)) removeChild(defaultAvatar);
+								defaultAvatar = null;
+							}
 							addChild(userAvatar);
 							userAvatar.alpha = 0;
 							userAvatar.x = imageFrame.x + (imageFrame.width - userAvatar.width) / 2;
@@ -258,8 +263,19 @@ package mew.windows {
 					file.load();
 				}else{
 					//TODO: 显示默认图片
+					addDefault();
 				}
+			}else{
+				addDefault();
 			}
+		}
+		
+		private function addDefault():void
+		{
+			if(!defaultAvatar) defaultAvatar = new Bitmap(StaticAssets.DefaultAvatar50());
+			addChild(defaultAvatar);
+			defaultAvatar.x = imageFrame.x + (imageFrame.width - defaultAvatar.width) / 2;
+			defaultAvatar.y = imageFrame.y + (imageFrame.height - defaultAvatar.height) / 2;
 		}
 		
 		private function mewUserLogin(event:MouseEvent):void
@@ -425,6 +441,7 @@ package mew.windows {
 			userAvatar = null;
 			labelMouseOutFormat = null;
 			labelMouseOverFormat = null;
+			defaultAvatar = null;
 		}
 	}
 }

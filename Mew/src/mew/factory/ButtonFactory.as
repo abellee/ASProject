@@ -20,14 +20,13 @@ package mew.factory {
 	public class ButtonFactory {
 		public function ButtonFactory() {
 		}
-		
-		public static function MainIndexButton():UIButton
-		{
-			var btn:Button = new Button();
+
+		public static function MainIndexButton() : UIButton {
+			var btn : Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			var upSkin:Bitmap = new Bitmap(StaticAssets.IndexButtonUp());
-			var overSkin:Bitmap = new Bitmap(StaticAssets.IndexButtonOver());
-			var downSkin:Bitmap = new Bitmap(StaticAssets.IndexButtonDown());
+			var upSkin : Bitmap = new Bitmap(StaticAssets.IndexButtonUp());
+			var overSkin : Bitmap = new Bitmap(StaticAssets.IndexButtonOver());
+			var downSkin : Bitmap = new Bitmap(StaticAssets.IndexButtonDown());
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", overSkin);
 			btn.setStyle("downSkin", downSkin);
@@ -42,14 +41,13 @@ package mew.factory {
 			btn.emphasized = false;
 			return new UIButton(btn, "首 页", 4);
 		}
-		
-		public static function MainAtButton():UIButton
-		{
-			var btn:Button = new Button();
+
+		public static function MainAtButton() : UIButton {
+			var btn : Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			var upSkin:Bitmap = new Bitmap(StaticAssets.AtButtonUp());
-			var overSkin:Bitmap = new Bitmap(StaticAssets.AtButtonOver());
-			var downSkin:Bitmap = new Bitmap(StaticAssets.AtButtonDown());
+			var upSkin : Bitmap = new Bitmap(StaticAssets.AtButtonUp());
+			var overSkin : Bitmap = new Bitmap(StaticAssets.AtButtonOver());
+			var downSkin : Bitmap = new Bitmap(StaticAssets.AtButtonDown());
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", overSkin);
 			btn.setStyle("downSkin", downSkin);
@@ -64,14 +62,13 @@ package mew.factory {
 			btn.emphasized = false;
 			return new UIButton(btn, "@ 我", 3);
 		}
-		
-		public static function MainCommentButton():UIButton
-		{
-			var btn:Button = new Button();
+
+		public static function MainCommentButton() : UIButton {
+			var btn : Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			var upSkin:Bitmap = new Bitmap(StaticAssets.CommentButtonUp());
-			var overSkin:Bitmap = new Bitmap(StaticAssets.CommentButtonOver());
-			var downSkin:Bitmap = new Bitmap(StaticAssets.CommentButtonDown());
+			var upSkin : Bitmap = new Bitmap(StaticAssets.CommentButtonUp());
+			var overSkin : Bitmap = new Bitmap(StaticAssets.CommentButtonOver());
+			var downSkin : Bitmap = new Bitmap(StaticAssets.CommentButtonDown());
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", overSkin);
 			btn.setStyle("downSkin", downSkin);
@@ -86,14 +83,13 @@ package mew.factory {
 			btn.emphasized = false;
 			return new UIButton(btn, "评 论", 4);
 		}
-		
-		public static function MainDMButton():UIButton
-		{
-			var btn:Button = new Button();
+
+		public static function MainDMButton() : UIButton {
+			var btn : Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			var upSkin:Bitmap = new Bitmap(StaticAssets.DMButtonUp());
-			var overSkin:Bitmap = new Bitmap(StaticAssets.DMButtonOver());
-			var downSkin:Bitmap = new Bitmap(StaticAssets.DMButtonDown());
+			var upSkin : Bitmap = new Bitmap(StaticAssets.DMButtonUp());
+			var overSkin : Bitmap = new Bitmap(StaticAssets.DMButtonOver());
+			var downSkin : Bitmap = new Bitmap(StaticAssets.DMButtonDown());
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", overSkin);
 			btn.setStyle("downSkin", downSkin);
@@ -108,14 +104,13 @@ package mew.factory {
 			btn.emphasized = false;
 			return new UIButton(btn, "私 信", 2);
 		}
-		
-		public static function MainCollectButton():UIButton
-		{
-			var btn:Button = new Button();
+
+		public static function MainCollectButton() : UIButton {
+			var btn : Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			var upSkin:Bitmap = new Bitmap(StaticAssets.CollectButtonUp());
-			var overSkin:Bitmap = new Bitmap(StaticAssets.CollectButtonOver());
-			var downSkin:Bitmap = new Bitmap(StaticAssets.CollectButtonDown());
+			var upSkin : Bitmap = new Bitmap(StaticAssets.CollectButtonUp());
+			var overSkin : Bitmap = new Bitmap(StaticAssets.CollectButtonOver());
+			var downSkin : Bitmap = new Bitmap(StaticAssets.CollectButtonDown());
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", overSkin);
 			btn.setStyle("downSkin", downSkin);
@@ -130,14 +125,13 @@ package mew.factory {
 			btn.emphasized = false;
 			return new UIButton(btn, "收 藏", 2);
 		}
-		
-		public static function MainFansButton():UIButton
-		{
-			var btn:Button = new Button();
+
+		public static function MainFansButton() : UIButton {
+			var btn : Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			var upSkin:Bitmap = new Bitmap(StaticAssets.FansButtonUp());
-			var overSkin:Bitmap = new Bitmap(StaticAssets.FansButtonOver());
-			var downSkin:Bitmap = new Bitmap(StaticAssets.FansButtonDown());
+			var upSkin : Bitmap = new Bitmap(StaticAssets.FansButtonUp());
+			var overSkin : Bitmap = new Bitmap(StaticAssets.FansButtonOver());
+			var downSkin : Bitmap = new Bitmap(StaticAssets.FansButtonDown());
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", overSkin);
 			btn.setStyle("downSkin", downSkin);
@@ -152,14 +146,13 @@ package mew.factory {
 			btn.emphasized = false;
 			return new UIButton(btn, "粉 丝", 2);
 		}
-		
-		public static function MainFollowButton():UIButton
-		{
-			var btn:Button = new Button();
+
+		public static function MainFollowButton() : UIButton {
+			var btn : Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			var upSkin:Bitmap = new Bitmap(StaticAssets.FollowButtonUp());
-			var overSkin:Bitmap = new Bitmap(StaticAssets.FollowButtonOver());
-			var downSkin:Bitmap = new Bitmap(StaticAssets.FollowButtonDown());
+			var upSkin : Bitmap = new Bitmap(StaticAssets.FollowButtonUp());
+			var overSkin : Bitmap = new Bitmap(StaticAssets.FollowButtonOver());
+			var downSkin : Bitmap = new Bitmap(StaticAssets.FollowButtonDown());
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", overSkin);
 			btn.setStyle("downSkin", downSkin);
@@ -174,14 +167,13 @@ package mew.factory {
 			btn.emphasized = false;
 			return new UIButton(btn, "关 注", 2);
 		}
-		
-		public static function MainSystemButton():UIButton
-		{
-			var btn:Button = new Button();
+
+		public static function MainSystemButton() : UIButton {
+			var btn : Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			var upSkin:Bitmap = new Bitmap(StaticAssets.SystemButtonUp());
-			var overSkin:Bitmap = new Bitmap(StaticAssets.SystemButtonOver());
-			var downSkin:Bitmap = new Bitmap(StaticAssets.SystemButtonDown());
+			var upSkin : Bitmap = new Bitmap(StaticAssets.SystemButtonUp());
+			var overSkin : Bitmap = new Bitmap(StaticAssets.SystemButtonOver());
+			var downSkin : Bitmap = new Bitmap(StaticAssets.SystemButtonDown());
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", overSkin);
 			btn.setStyle("downSkin", downSkin);
@@ -196,14 +188,13 @@ package mew.factory {
 			btn.emphasized = false;
 			return new UIButton(btn, "系 统", 2);
 		}
-		
-		public static function MainSearchButton():UIButton
-		{
-			var btn:Button = new Button();
+
+		public static function MainSearchButton() : UIButton {
+			var btn : Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			var upSkin:Bitmap = new Bitmap(StaticAssets.SearchButtonUp());
-			var overSkin:Bitmap = new Bitmap(StaticAssets.SearchButtonOver());
-			var downSkin:Bitmap = new Bitmap(StaticAssets.SearchButtonDown());
+			var upSkin : Bitmap = new Bitmap(StaticAssets.SearchButtonUp());
+			var overSkin : Bitmap = new Bitmap(StaticAssets.SearchButtonOver());
+			var downSkin : Bitmap = new Bitmap(StaticAssets.SearchButtonDown());
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", overSkin);
 			btn.setStyle("downSkin", downSkin);
@@ -218,14 +209,13 @@ package mew.factory {
 			btn.emphasized = false;
 			return new UIButton(btn, "搜 索", 2);
 		}
-		
-		public static function MainMewButton():Button
-		{
-			var btn:Button = new Button();
+
+		public static function MainMewButton() : Button {
+			var btn : Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			var upSkin:Bitmap = new Bitmap(StaticAssets.MewButtonUp());
-			var overSkin:Bitmap = new Bitmap(StaticAssets.MewButtonOver());
-			var downSkin:Bitmap = new Bitmap(StaticAssets.MewButtonDown());
+			var upSkin : Bitmap = new Bitmap(StaticAssets.MewButtonUp());
+			var overSkin : Bitmap = new Bitmap(StaticAssets.MewButtonOver());
+			var downSkin : Bitmap = new Bitmap(StaticAssets.MewButtonDown());
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", overSkin);
 			btn.setStyle("downSkin", downSkin);
@@ -240,14 +230,13 @@ package mew.factory {
 			btn.emphasized = false;
 			return btn;
 		}
-		
-		public static function MainPublishButton():UIButton
-		{
-			var btn:Button = new Button();
+
+		public static function MainPublishButton() : UIButton {
+			var btn : Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			var upSkin:Bitmap = new Bitmap(StaticAssets.PublishButtonUp());
-			var overSkin:Bitmap = new Bitmap(StaticAssets.PublishButtonOver());
-			var downSkin:Bitmap = new Bitmap(StaticAssets.PublishButtonDown());
+			var upSkin : Bitmap = new Bitmap(StaticAssets.PublishButtonUp());
+			var overSkin : Bitmap = new Bitmap(StaticAssets.PublishButtonOver());
+			var downSkin : Bitmap = new Bitmap(StaticAssets.PublishButtonDown());
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", overSkin);
 			btn.setStyle("downSkin", downSkin);
@@ -259,40 +248,89 @@ package mew.factory {
 			btn.emphasized = false;
 			return new UIButton(btn, "发微博", 0);
 		}
-		
+
 		public static function RepostButton() : Button {
 			var btn : Button = new Button();
+			var upSkin : Bitmap = new Resource.ReposeMouseUp();
+			var overSkin : Bitmap = new Resource.RepostMouseOver();
+			var downSkin : Bitmap = new Resource.RepostMouseDown();
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", overSkin);
+			btn.setStyle("downSkin", downSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.width = 10;
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
+			btn.label = "";
+			btn.emphasized = false;
 			return btn;
 		}
 
 		public static function DeleteButton() : Button {
 			var btn : Button = new Button();
+			var upSkin : Bitmap = new Resource.DeleteButtonUp();
+			var overSkin : Bitmap = new Resource.DeleteButtonOver();
+			var downSkin : Bitmap = new Resource.DeleteButtonDown();
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", overSkin);
+			btn.setStyle("downSkin", downSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.width = 10;
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
+			btn.label = "";
+			btn.emphasized = false;
 			return btn;
 		}
 
 		public static function CollectionButton() : Button {
 			var btn : Button = new Button();
+			var upSkin : Bitmap = new Resource.CollectButtonUp();
+			var overSkin : Bitmap = new Resource.CollectButtonOver();
+			var downSkin : Bitmap = new Resource.CollectButtonDown();
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", overSkin);
+			btn.setStyle("downSkin", downSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.width = 10;
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
+			btn.label = "";
+			btn.emphasized = false;
 			return btn;
 		}
 
 		public static function MessageButton() : Button {
 			var btn : Button = new Button();
+			var upSkin : Bitmap = new Resource.UserDMMouseUp();
+			var overSkin : Bitmap = new Resource.UserDMMouseOver();
+			var downSkin : Bitmap = new Resource.UserDMMouseDown();
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", overSkin);
+			btn.setStyle("downSkin", downSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "私";
-			btn.width = 10;
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
+			btn.label = "";
+			btn.emphasized = false;
 			return btn;
 		}
 
 		public static function CommentButton() : Button {
 			var btn : Button = new Button();
+			var upSkin : Bitmap = new Resource.CommentButtonUp();
+			var overSkin : Bitmap = new Resource.CommentButtonOver();
+			var downSkin : Bitmap = new Resource.CommentButtonDown();
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", overSkin);
+			btn.setStyle("downSkin", downSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.width = 10;
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
+			btn.label = "";
+			btn.emphasized = false;
 			return btn;
 		}
 
@@ -318,8 +356,23 @@ package mew.factory {
 			btn.emphasized = false;
 			return btn;
 		}
-		
-		public static function WhiteButton():Button{
+
+		public static function ImageDownloadButton() : Button {
+			var btn : Button = new Button();
+			var upSkin : Bitmap = new (Resource.ImageDownload)();
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", upSkin);
+			btn.setStyle("downSkin", upSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
+			btn.textField.autoSize = TextFieldAutoSize.LEFT;
+			btn.label = "";
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
+			btn.emphasized = false;
+			return btn;
+		}
+
+		public static function WhiteButton() : Button {
 			var btn : Button = new Button();
 			var upSkin : Bitmap = new ScaleBitmap((new (Resource.WhiteButtonUp)() as Bitmap).bitmapData, "auto", true);
 			upSkin.scale9Grid = new Rectangle(6, 6, 10, 12);
@@ -338,9 +391,8 @@ package mew.factory {
 			btn.emphasized = false;
 			return btn;
 		}
-		
-		public static function BlackButton():Button
-		{
+
+		public static function BlackButton() : Button {
 			var btn : Button = new Button();
 			var upSkin : Bitmap = new ScaleBitmap((new (Resource.ButtonSkin)() as Bitmap).bitmapData, "auto", true);
 			upSkin.scale9Grid = new Rectangle(8, 8, 12, 12);
@@ -474,7 +526,7 @@ package mew.factory {
 
 		public static function ScreenShotButton() : Button {
 			var btn : Button = new Button();
-			var upSkin:Bitmap = new Resource.ScreenShotSkin();
+			var upSkin : Bitmap = new Resource.ScreenShotSkin();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", upSkin);
@@ -488,7 +540,7 @@ package mew.factory {
 
 		public static function EmotionButton() : Button {
 			var btn : Button = new Button();
-			var upSkin:Bitmap = new Resource.EmotionButtonSkin();
+			var upSkin : Bitmap = new Resource.EmotionButtonSkin();
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", upSkin);
 			btn.setStyle("downSkin", upSkin);
@@ -518,7 +570,7 @@ package mew.factory {
 
 		public static function TopicButton() : Button {
 			var btn : Button = new Button();
-			var upSkin:Bitmap = new Resource.TopicButtonSkin();
+			var upSkin : Bitmap = new Resource.TopicButtonSkin();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", upSkin);
@@ -532,7 +584,7 @@ package mew.factory {
 
 		public static function ClearButton() : Button {
 			var btn : Button = new Button();
-			var upSkin:Bitmap = new Resource.ClearButtonSkin();
+			var upSkin : Bitmap = new Resource.ClearButtonSkin();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", upSkin);
@@ -546,7 +598,7 @@ package mew.factory {
 
 		public static function ShortURLButton() : Button {
 			var btn : Button = new Button();
-			var upSkin:Bitmap = new Resource.URLShorttenSkin();
+			var upSkin : Bitmap = new Resource.URLShorttenSkin();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", upSkin);
@@ -560,9 +612,9 @@ package mew.factory {
 
 		public static function PageButton() : Button {
 			var btn : Button = new Button();
-			var upSkin:Bitmap = new Resource.EmotionFlipperButtonUp();
-			var overSkin:Bitmap = new Resource.EmotionFlipperMouseOver();
-			var downSkin:Bitmap = new Resource.EmotionFlipperButtonDown();
+			var upSkin : Bitmap = new Resource.EmotionFlipperButtonUp();
+			var overSkin : Bitmap = new Resource.EmotionFlipperMouseOver();
+			var downSkin : Bitmap = new Resource.EmotionFlipperButtonDown();
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", overSkin);
 			btn.setStyle("downSkin", downSkin);
@@ -587,9 +639,9 @@ package mew.factory {
 			return btn;
 		}
 
-		public static function TimingArrow(scale:int) : Button {
+		public static function TimingArrow(scale : int) : Button {
 			var btn : Button = new Button();
-			var upSkin:Bitmap = new Resource.TimingArrow();
+			var upSkin : Bitmap = new Resource.TimingArrow();
 			upSkin.scaleX = scale;
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
 			btn.setStyle("upSkin", upSkin);
@@ -609,9 +661,8 @@ package mew.factory {
 			btn.width = 40;
 			return btn;
 		}
-		
-		public static function TimingComboBox():ComboBox
-		{
+
+		public static function TimingComboBox() : ComboBox {
 			var cb : ComboBox = new ComboBox();
 			var upSkin : ScaleBitmap = new ScaleBitmap((new (Resource.TimingComboBox)() as Bitmap).bitmapData, "auto", true);
 			upSkin.scale9Grid = new Rectangle(8, 8, 12, 12);
@@ -625,11 +676,11 @@ package mew.factory {
 			return cb;
 		}
 
-		public static function ArrowButton(scale:int = 1) : Button {
+		public static function ArrowButton(scale : int = 1) : Button {
 			var btn : Button = new Button();
-			var upSkin:Bitmap = new Resource.ArrowUp();
-			var overSkin:Bitmap = new Resource.ArrowOver();
-			var downSkin:Bitmap = new Resource.ArrowDown();
+			var upSkin : Bitmap = new Resource.ArrowUp();
+			var overSkin : Bitmap = new Resource.ArrowOver();
+			var downSkin : Bitmap = new Resource.ArrowDown();
 			upSkin.scaleX = scale;
 			overSkin.scaleX = scale;
 			downSkin.scaleX = scale;

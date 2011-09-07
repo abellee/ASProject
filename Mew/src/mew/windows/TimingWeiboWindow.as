@@ -1,4 +1,8 @@
 package mew.windows {
+	import fl.data.DataProvider;
+	import fl.controls.ComboBox;
+	import flash.events.FocusEvent;
+	import mew.data.SystemSettingData;
 	import fl.controls.Button;
 	import fl.controls.UIScrollBar;
 
@@ -56,7 +60,7 @@ package mew.windows {
 		private var rightArrow:Button = null;
 		private var masker:Sprite = null;
 		private var buttonContainer:Sprite = null;
-		private var timeButtons:Vector.<String> = null;
+		private var timeButtons:Vector.<Button> = null;
 		private var hline:Sprite = null;
 		
 		private var buttonGroup:WeiboPublisherButtonGroup = null;
@@ -67,6 +71,7 @@ package mew.windows {
 		private var scroller:UIScrollBar = null;
 		private var urlShortor:URLShortor = null;
 		private var sendButton:Button = null;
+		private var pointContainer:Sprite = null;
 		
 		private var timeline:ScaleBitmap = null;
 		
@@ -81,7 +86,16 @@ package mew.windows {
 		private var minTime:Number = 0;
 		private var maxTime:Number = 0;
 		private var perSize:Number = 0;
+		
+		private var curYear:Number = 0;
+		private var curMonth:Number = 0;
 		private var curDay:Number = 0;
+		private var curMillisecond:Number = 0;
+		
+		private var curDateSelector:ComboBox = null;
+		
+		private var detailWindow:TimingDetailWindow = null;
+		private var preTab:Button = null;
 		public function TimingWeiboWindow(initOptions:NativeWindowInitOptions)
 		{
 			super(initOptions);
@@ -89,8 +103,8 @@ package mew.windows {
 		
 		override protected function init():void
 		{
-			drawBackground(700, 450);
-			this.stage.nativeWindow.alwaysInFront = true;
+			drawBackground(700, 500);
+			this.stage.nativeWindow.alwaysInFront = SystemSettingData.alwaysInfront;
 			this.stage.nativeWindow.width = background.width + 20;
 			this.stage.nativeWindow.height = background.height + 20;
 			this.stage.nativeWindow.x = (Screen.mainScreen.visibleBounds.width - this.stage.nativeWindow.width) / 2;
@@ -133,7 +147,7 @@ package mew.windows {
 			addChild(rightArrow);
 			rightArrow.x = background.width - rightArrow.width + 5;
 			rightArrow.y = leftArrow.y;
-			timeButtons = new Vector.<String>();
+			timeButtons = new Vector.<Button>();
 			for(var i:int = 0; i<24; i++){
 				var btn:Button = ButtonFactory.TimingClockButton();
 				var str:String = "AM";
@@ -143,6 +157,7 @@ package mew.windows {
 				timeButtons.push(btn);
 				btn.x = buttonContainer.numChildren * (btn.width + 11);
 				buttonContainer.addChild(btn);
+				btn.toggle = true;
 				btn.addEventListener(MouseEvent.CLICK, showCurrentTimingWeibo);
 			}
 			masker.addChild(buttonContainer);
@@ -160,8 +175,8 @@ package mew.windows {
 			timeline.scale9Grid = new Rectangle(7, 0, 16, 10);
 			timeline.width = 620;
 			addChild(timeline);
-			timeline.x = 53;
-			timeline.y = 220;
+			timeline.x = 54;
+			timeline.y = 280;
 			
 			if(!buttonGroup) buttonGroup = new WeiboPublisherButtonGroup();
 			if(!imageViewer) imageViewer = new UploadImageViewer(100);
@@ -232,31 +247,93 @@ package mew.windows {
 			sendButton.y = (background.height + 110 + timeSettor.y) / 2 - sendButton.height / 2 - 5;
 			sendButton.addEventListener(MouseEvent.CLICK, sendButton_mouseClickHandler);
 			
+			pointContainer = new Sprite();
+			addChild(pointContainer);
+			
 			this.stage.focus = inputTextField;
 			
 			var now:Date = new Date();
 			var year:Number = now.getFullYear();
 			var month:Number = now.getMonth() + 1;
 			var day:Number = now.getDate();
+			var curHour:Number = now.getHours();
 			
 			TweenPlugin.activate([ShortRotationPlugin, TransformAroundCenterPlugin, TransformAroundPointPlugin]);
 			
-			curDay = new Date(year, month - 1, day, 0, 0, 0, 0).time;
-			curDay -= 3 * 24 * 60 * 60 * 1000;
-			getCurrentData(0);
+			curMillisecond = new Date(year, month - 1, day, 0, 0, 0, 0).time;
+			curDay = day;
+			curMonth = month;
+			curYear = year;
+			
+			timeButtons[curHour].dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+			
+			var curTabPosX:int = timeButtons[curHour].x;
+			var times:int = int(curTabPosX / masker.scrollRect.width);
+			var targetX:int = buttonContainer.x - times * masker.scrollRect.width <= -(buttonContainer.width - masker.scrollRect.width) ?
+			 -(buttonContainer.width - masker.scrollRect.width) : buttonContainer.x - times * masker.scrollRect.width;
+			 buttonContainer.x = targetX;
+			 
+			 curDateSelector = ButtonFactory.TimingComboBox();
+			 curDateSelector.setStyle("textFormat", Widget.normalFormat);
+			 curDateSelector.setSize(100, curDateSelector.height);
+			 addChild(curDateSelector);
+			 curDateSelector.x = 30;
+			 curDateSelector.y = 115;
+			 curDateSelector.addEventListener(Event.CHANGE, loadSelectedData);
+			 
+			 var obj:Object = MewSystem.app.timingWeiboManager.readDate();
+			 if(obj){
+				var dp:DataProvider = new DataProvider();
+				for(var key:String in obj){
+					dp.addItem({label: key, data: obj[key]["time"]});
+				}
+				dp.sortOn("data", [Array.DESCENDING, Array.NUMERIC]);
+				curDateSelector.dataProvider = dp;
+				var o:Object = {};
+				var monthStr:String = curMonth < 10 ? "0" + curMonth : curMonth + "";
+				var dayStr:String = curDay < 10 ? "0" + curDay : curDay + "";
+				o["label"] = curYear + "-" + monthStr + "-" + dayStr;
+				o["data"] = curMillisecond;
+				var index:int = dp.getItemIndex(o);
+				curDateSelector.selectedIndex = index;
+			 }
+		}
+
+		private function loadSelectedData(event : Event) : void
+		{
+			curMillisecond = curDateSelector.selectedItem.data;
+			var date:Date = new Date(curMillisecond);
+			curYear = date.getFullYear();
+			curMonth = date.getMonth() + 1;
+			curDay = date.getDate();
+			removeAllPoint();
+			closeDetailWindow();
+			if(preTab) getCurrentData(int(preTab.name));
 		}
 
 		private function showCurrentTimingWeibo(event : MouseEvent) : void
 		{
+			var btn:Button = event.currentTarget as Button;
+			if(preTab){
+				if(preTab == btn){
+					preTab.enabled = false;
+					return;
+				}
+				preTab.enabled = true;
+				preTab.toggle = false;
+				preTab.toggle = true;
+			}
+			preTab = btn;
 			removeAllPoint();
-			getCurrentData(int(event.currentTarget.name));
+			closeDetailWindow();
+			getCurrentData(int(btn.name));
 		}
 
 		private function getCurrentData(startHour:int) : void
 		{
-			minTime = curDay + startHour * 60 * 60 * 1000;
-			maxTime = minTime + 60 * 60 * 1000;
-			perSize = timeline.width / (maxTime - minTime);
+			minTime = curMillisecond + startHour * 3600000;
+			maxTime = minTime + 3600000;
+			perSize = timeline.width / 3600000;
 			MewSystem.app.timingWeiboManager.target = this;
 			MewSystem.app.timingWeiboManager.readData(minTime, maxTime, false);
 		}
@@ -317,6 +394,7 @@ package mew.windows {
 					}
 					data.state = 0;
 					data.time = targetTime;
+					
 					MewSystem.app.timingWeiboManager.target = this;
 					MewSystem.app.timingWeiboManager.writeData(data);
 					resetContent(true);
@@ -596,8 +674,7 @@ package mew.windows {
 			for each(var p:TimingPoint in pointList){
 				p.removeEventListener(MouseEvent.MOUSE_OVER, swapOver);
 				p.removeEventListener(MouseEvent.MOUSE_OUT, swapBack);
-				p.removeEventListener(MouseEvent.CLICK, showDetail);
-				removeChild(p);
+				pointContainer.removeChild(p);
 			}
 			pointList.length = 0;
 		}
@@ -607,38 +684,116 @@ package mew.windows {
 			if(data && data.length){
 				if(!pointList) pointList = new Vector.<TimingPoint>();
 				for each(var item:TimingWeiboVariable in data){
+					if(isInPointList(item)) continue;
+					var pointTime:Number = item.time;
+					var date:Date = new Date(pointTime);
+					var hour:Number = date.getHours();
+					if(preTab){
+						if(int(preTab.name) != hour || !checkIsNow(pointTime)){
+							continue;
+						}
+					}else{
+						continue;
+					}
 					var point:TimingPoint = new TimingPoint();
 					point.data = item;
 					point.initPoint();
-					addChild(point);
+					pointContainer.addChild(point);
 					point.scaleX = 0;
 					point.scaleY = 0;
-					point.index = container.numChildren - 1;
+					point.index = pointContainer.numChildren - 1;
 					TweenLite.to(point, .3, {transformAroundCenter:{scaleX:1, scaleY:1}, ease:Cubic.easeOut});
 					point.x = int((item.time - minTime) * perSize) - point.width / 2 + timeline.x;
 					point.y = timeline.y - point.height / 2 + timeline.height / 2;
 					point.addEventListener(MouseEvent.MOUSE_OVER, swapOver);
 					point.addEventListener(MouseEvent.MOUSE_OUT, swapBack);
-					point.addEventListener(MouseEvent.CLICK, showDetail);
 					pointList.push(point);
 				}
 			}
 		}
-
-		private function showDetail(event : MouseEvent) : void
+		
+		private function checkIsNow(time:Number):Boolean
 		{
+			var date:Date = new Date(time);
+			var year:Number = date.getFullYear();
+			var month:Number = date.getMonth() + 1;
+			var day:Number = date.getDate();
+			if(year == curYear && month == curMonth && day == curDay) return true;
+			return false;
+		}
+		
+		public function isInPointList(data:TimingWeiboVariable):Boolean
+		{
+			if(pointList){
+				for each(var point:TimingPoint in pointList){
+					if(point.data && point.data.id == data.id) return true;
+				}
+			}
+			return false;
 		}
 
 		private function swapBack(event : MouseEvent) : void
 		{
-			var curTarget:TimingPoint = event.currentTarget as TimingPoint;
-			container.setChildIndex(curTarget, curTarget.index);
+			var target:TimingPoint = event.currentTarget as TimingPoint;
+			pointContainer.setChildIndex(target, target.index);
 		}
 
 		private function swapOver(event : MouseEvent) : void
 		{
-			var curTarget:TimingPoint = event.currentTarget as TimingPoint;
-			container.setChildIndex(curTarget, container.numChildren - 1);
+			var target:TimingPoint = event.currentTarget as TimingPoint;
+			pointContainer.setChildIndex(target, pointContainer.numChildren - 1);
+			closeDetailWindow();
+			detailWindow = new TimingDetailWindow(target.data);
+			detailWindow.alpha = 0;
+			TweenLite.to(detailWindow, .5, {alpha: 1});
+			detailWindow.addEventListener(Event.CLOSE, closeDetailWindow);
+			detailWindow.addEventListener(MewEvent.DELETE, deleteTimingWeibo);
+			addChild(detailWindow);
+			detailWindow.x = target.x + target.width / 2 - detailWindow.width / 2;
+			if(detailWindow.x + detailWindow.width >= this.width){
+				var num:int = detailWindow.moveTriangleRight();
+				detailWindow.x = detailWindow.x - num;
+			}else if(detailWindow.x <= 0){
+				var lnum:int = detailWindow.moveTriangleLeft();
+				detailWindow.x = detailWindow.x - lnum;
+			}
+			detailWindow.y = target.y - detailWindow.height - 5;
+		}
+
+		private function deleteTimingWeibo(event : MewEvent) : void
+		{
+			var detailWin:TimingDetailWindow = event.currentTarget as TimingDetailWindow;
+			var timingData:TimingWeiboVariable = detailWin.data;
+			if(container.contains(detailWin)) removeChild(detailWin);
+			detailWin.removeEventListener(Event.CLOSE, closeDetailWindow);
+			detailWin.removeEventListener(MewEvent.DELETE, deleteTimingWeibo);
+			if(detailWindow == detailWin) detailWindow = null;
+			var len:int = pointList.length;
+			for(var i:int = 0; i<len; i++){
+				var timingPoint:TimingPoint = pointList[i];
+				if(timingPoint.data == timingData){
+					if(container.contains(timingPoint)) TweenLite.to(timingPoint, .3, {transformAroundCenter:{scaleX:0, scaleY:0},
+						 ease:Cubic.easeIn});
+					timingPoint.mouseEnabled = false;
+					timingPoint.mouseChildren = false;
+					timingPoint.removeEventListener(MouseEvent.MOUSE_OVER, swapOver);
+					timingPoint.removeEventListener(MouseEvent.MOUSE_OUT, swapBack);
+					MewSystem.app.timingWeiboManager.deleteData(timingData.id, timingData.time);
+					MewSystem.showLightAlert("定时微博删除成功!", container);
+					timingPoint.data = null;
+					return;
+				}
+			}
+		}
+
+		private function closeDetailWindow(event : Event = null) : void
+		{
+			if(detailWindow){
+				if(container.contains(detailWindow)) container.removeChild(detailWindow);
+				detailWindow.removeEventListener(Event.CLOSE, closeDetailWindow);
+				detailWindow.removeEventListener(MewEvent.DELETE, deleteTimingWeibo);
+				detailWindow = null;
+			}
 		}
 		public function showLightAlert(str:String):void
 		{
@@ -738,6 +893,19 @@ package mew.windows {
 				closeButton.removeEventListener(MouseEvent.CLICK, closeWindow);
 				closeButton = null;
 			}
+			if(curDateSelector){
+				curDateSelector.removeEventListener(Event.CHANGE, loadSelectedData);
+				curDateSelector = null;
+			}
+			if(detailWindow){
+				detailWindow.removeEventListener(Event.CLOSE, closeDetailWindow);
+				detailWindow.removeEventListener(MewEvent.DELETE, deleteTimingWeibo);
+				detailWindow = null;
+			}
+			pointContainer = null;
+			preTab = null;
+			removeAllPoint();
+			pointList = null;
 		}
 	}
 }
