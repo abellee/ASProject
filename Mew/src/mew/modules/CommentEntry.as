@@ -1,4 +1,6 @@
 package mew.modules {
+	import mew.data.UserData;
+	import mew.data.WeiboData;
 	import mew.utils.StringUtils;
 	import mew.utils.VideoChecker;
 
@@ -13,7 +15,12 @@ package mew.modules {
 	public class CommentEntry extends WeiboEntry
 	{
 		protected var id:String = null;
+		private var username:String = null;
 		public var showRepost:Boolean = true;
+		private var repostData:WeiboData = null;
+		private var repostUserData:UserData = null;
+		private var weiboUser:UserData = null;
+		private var commentText:String = null;
 		public function CommentEntry()
 		{
 			super();
@@ -23,7 +30,9 @@ package mew.modules {
 			var comment:MicroBlogComment = obj as MicroBlogComment;
 			
 			id = comment.id;
+			username = comment.user.name;
 			userData = MewSystem.app.dataCache.getUserDataCache(comment.user);
+			weiboUser = MewSystem.app.dataCache.getUserDataCache(comment.status.user);
 			
 			data = MewSystem.app.dataCache.getWeiboDataCache(comment.status);
 			
@@ -36,6 +45,8 @@ package mew.modules {
 			addChild(nameBox);
 			nameBox.x = userAvatar.x + userAvatar.width + 10;
 			nameBox.y = 0;
+			
+			commentText = comment.text;
 			
 			addChild(weiboText);
 			weiboText.x = nameBox.x;
@@ -50,6 +61,11 @@ package mew.modules {
 				videoChecker = new VideoChecker();
 				videoChecker.addEventListener(Event.COMPLETE, checkVideoUrlComplete);
 				videoChecker.isVideoURL(urls);
+			}
+			
+			if(comment.status.repost){
+				repostData = MewSystem.app.dataCache.getWeiboDataCache(comment.status.repost);
+				repostUserData = MewSystem.app.dataCache.getUserDataCache(comment.status.repost.user);
 			}
 			
 			timeAndFrom.time = comment.createdAt;
@@ -73,6 +89,27 @@ package mew.modules {
 			var h:int = timeAndFrom.y + timeAndFrom.height;
 			if(h != this.height) setSize(this.width, Math.max(this.height, h));
 			addListener();
+		}
+		override protected function showOperationButton(event : MouseEvent) : void
+		{
+			MewSystem.operationButton = new OperationGroup();
+			if(userData.id == MewSystem.app.userData.id) MewSystem.operationButton.showDeleteButton();
+			MewSystem.operationButton.showCommentButton();
+			MewSystem.operationButton.calculateSize();
+			data.cid = id;
+			data.username = username;
+			data.commentText = commentText;
+			MewSystem.operationButton.finalStep = finalStep;
+			MewSystem.operationButton.parentBox = this;
+			MewSystem.operationButton.parentWin = parentWin;
+			MewSystem.operationButton.cid = id;
+			MewSystem.operationButton.data = data;
+			MewSystem.operationButton.userData = weiboUser;
+			MewSystem.operationButton.repostData = repostData;
+			MewSystem.operationButton.repostUserData = repostUserData;
+			MewSystem.operationButton.sid = data.id;
+			addChild(MewSystem.operationButton);
+			MewSystem.operationButton.x = this.width - MewSystem.operationButton.width - 5;
 		}
 		override protected function dealloc(event:Event):void
 		{

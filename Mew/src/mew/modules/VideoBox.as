@@ -14,6 +14,9 @@ package mew.modules {
 	import flash.display.NativeWindowType;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.filters.BitmapFilter;
+	import flash.filters.BitmapFilterQuality;
+	import flash.filters.GlowFilter;
 	import flash.net.URLRequest;
 
 	public class VideoBox extends ImageBox
@@ -57,8 +60,40 @@ package mew.modules {
 			addChild(playBtn);
 			playBtn.x = (this.width - playBtn.width) / 2;
 			playBtn.y = (this.height - playBtn.height) / 2;
+			playBtn.addEventListener(MouseEvent.MOUSE_OVER, glowButton);
+			playBtn.addEventListener(MouseEvent.MOUSE_OUT, removeGlow);
 			playBtn.addEventListener(MouseEvent.CLICK, playVideo);
 			removeEventListener(MouseEvent.CLICK, showOriginalImage);
+		}
+
+		private function removeGlow(event : MouseEvent) : void
+		{
+			playBtn.filters = null;
+		}
+		
+		private function getBitmapFilter():BitmapFilter {
+            var color:Number = 0x33CCFF;
+            var alpha:Number = 0.8;
+            var blurX:Number = 20;
+            var blurY:Number = 20;
+            var strength:Number = 2;
+            var inner:Boolean = false;
+            var knockout:Boolean = false;
+            var quality:Number = BitmapFilterQuality.HIGH;
+
+            return new GlowFilter(color,
+                                  alpha,
+                                  blurX,
+                                  blurY,
+                                  strength,
+                                  quality,
+                                  inner,
+                                  knockout);
+        }
+
+		private function glowButton(event : MouseEvent) : void
+		{
+			playBtn.filters = [getBitmapFilter()];
 		}
 		
 		private function playVideo(event:MouseEvent):void

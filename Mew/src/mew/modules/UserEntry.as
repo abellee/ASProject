@@ -1,4 +1,5 @@
 package mew.modules {
+	import mew.windows.ALNativeWindow;
 	import mew.data.UserData;
 
 	import system.MewSystem;
@@ -22,6 +23,7 @@ package mew.modules {
 		private var fansNumText:TextField = null;
 		private var sexAndLocation:SexAndLocation = null;
 		private var background:Shape = null;
+		public var parentWin:ALNativeWindow = null;
 		public function UserEntry()
 		{
 			super();

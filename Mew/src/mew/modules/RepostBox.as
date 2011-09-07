@@ -50,7 +50,13 @@ package mew.modules {
 				MewSystem.repostOperationButton.showCommentButton();
 				MewSystem.repostOperationButton.calculateSize();
 			}
+			data.cid = "0";
+			MewSystem.repostOperationButton.finalStep = finalStep;
+			MewSystem.repostOperationButton.data = data;
+			MewSystem.repostOperationButton.parentWin = parentWin;
+			MewSystem.repostOperationButton.userData = userData;
 			MewSystem.repostOperationButton.sid = data.id;
+			MewSystem.repostOperationButton.parentBox = this;
 			addChild(MewSystem.repostOperationButton);
 			MewSystem.repostOperationButton.x = this.width - MewSystem.repostOperationButton.width - 5;
 		}

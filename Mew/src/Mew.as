@@ -1,4 +1,5 @@
 package {
+	import mew.data.WeiboData;
 	import mew.windows.UpdateCheckWindow;
 	import fl.controls.Button;
 	import fl.data.DataProvider;
@@ -375,6 +376,18 @@ package {
 			}
 		}
 		
+		public function openPublishWindow(state:String, userData:UserData = null, weiboData:WeiboData = null,
+		 repostUserData:UserData = null, repostData:WeiboData = null):void
+		{
+			if(weiboPublishWindow){
+				weiboPublishWindow.close();
+				weiboPublishWindow = null;
+			}
+			weiboPublishWindow = new WeiBoPublisher(getNativeWindowInitOption());
+			weiboPublishWindow.displayByState(state, userData, weiboData, repostUserData, repostData);
+			weiboPublishWindow.activate();
+		}
+		
 		private function openListWindow(event:MouseEvent):void
 		{
 			if(event.currentTarget == publishBtn){
@@ -383,9 +396,7 @@ package {
 					weiboPublishWindow = null;
 					return;
 				}
-				weiboPublishWindow = new WeiBoPublisher(getNativeWindowInitOption());
-				weiboPublishWindow.displayByState(WeiBoPublisher.NORMAL);
-				weiboPublishWindow.activate();
+				openPublishWindow(WeiBoPublisher.NORMAL);
 				return;
 			}
 			closeCurrentWindow();
@@ -760,7 +771,7 @@ package {
 						{
 							urlLoader.removeEventListener(Event.COMPLETE, func);
 							xml = XML(urlLoader.data);
-							list.listData(arr, currentActiveWindow.getContentWidth(), xml);
+							list.listData(arr, currentActiveWindow.getContentWidth(), xml, currentActiveWindow);
 							currentActiveWindow.showWeibo(arr, list);
 						};
 						urlLoader.addEventListener(Event.COMPLETE, func);
@@ -769,7 +780,7 @@ package {
 					case FANS:
 					case FOLLOW:
 						var userList:UserFormList = new UserFormList();
-						userList.listData(arr, currentActiveWindow.getContentWidth(), null);
+						userList.listData(arr, currentActiveWindow.getContentWidth(), null, currentActiveWindow);
 						currentActiveWindow.showWeibo(arr, userList);
 						break;
 				}
@@ -839,7 +850,7 @@ package {
 			{
 				urlLoader.removeEventListener(Event.COMPLETE, func);
 				xml = XML(urlLoader.data);
-				list.listData(arr, widgetWindow.getContentWidth(), xml);
+				list.listData(arr, widgetWindow.getContentWidth(), xml, widgetWindow);
 				widgetWindow.showWeibo(arr, list, ud);
 				if(currentActiveWindow) openWidgetWindow();
 			};

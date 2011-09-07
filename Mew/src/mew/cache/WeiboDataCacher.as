@@ -52,7 +52,7 @@ package mew.cache {
 		public function prefixData(arr:Array, fileName:String, limitNum:int):void
 		{
 			var result:Array = readLocalData(fileName);
-			var num:int = result.length + arr.length - limitNum;
+			var num:int = arr.length;
 			for (var i : int = 0; i < num; i++) result.pop();
 			arr = arr.concat(result);
 			MewSystem.setLastId(fileName, arr);

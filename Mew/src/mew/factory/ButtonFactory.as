@@ -336,8 +336,16 @@ package mew.factory {
 
 		public static function PlayButton() : Button {
 			var btn : Button = new Button();
+			var upSkin : Bitmap = new Resource.VideoPlayButton();
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", upSkin);
+			btn.setStyle("downSkin", upSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.width = 10;
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
+			btn.label = "";
+			btn.emphasized = false;
 			return btn;
 		}
 

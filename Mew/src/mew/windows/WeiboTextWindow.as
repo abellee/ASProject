@@ -56,6 +56,7 @@ package mew.windows {
 			drawBackground(465, 10, position);
 			super.init();
 			weiboEntry = new WeiboEntry();
+			weiboEntry.finalStep = true;
 			weiboEntry.x = 30;
 			weiboEntry.y = 30;
 			if(!scrollList) scrollList = new ScrollPane();
@@ -130,7 +131,7 @@ package mew.windows {
 				return;
 			}
 			if(!list) list = new WeiboFormList();
-			list.listData(commentList, getContentWidth(), xml, false);
+			list.listData(commentList, getContentWidth(), xml, this, false);
 			list.addEventListener(Event.RESIZE, listResize);
 			if(curPage < 2) showScrollList();
 		}
@@ -143,8 +144,10 @@ package mew.windows {
 		
 		private function listResize(event:Event):void
 		{
-			scrollList.update();
-			scrollList.drawNow();
+			if(scrollList.content){
+				scrollList.update();
+				scrollList.drawNow();
+			}
 		}
 		
 		private function showScrollList():void
@@ -153,6 +156,22 @@ package mew.windows {
 			weiboEntry.dispatchEvent(new Event(Event.RESIZE));
 			scrollList.addEventListener(ScrollEvent.SCROLL, onScroll);
 			addChild(scrollList);
+			scrollList.setStyle("upSkin", getSprite(scrollList.width, scrollList.height));
+			scrollBarSkin = new ScaleBitmap((new Resource.ScrollBarSkin() as Bitmap).bitmapData, "auto", true);
+			scrollBarSkin.scale9Grid = new Rectangle(0, 10, 16, 10);
+			scrollList.setStyle("thumbUpSkin", scrollBarSkin);
+			scrollList.setStyle("thumbOverSkin", scrollBarSkin);
+			scrollList.setStyle("thumbDownSkin", scrollBarSkin);
+			scrollList.setStyle("thumbIcon", new Sprite());
+			scrollList.setStyle("trackUpSkin", new Sprite());
+			scrollList.setStyle("trackOverSkin", new Sprite());
+			scrollList.setStyle("trackDownSkin", new Sprite());
+			scrollList.setStyle("upArrowUpSkin", new Sprite());
+			scrollList.setStyle("upArrowOverSkin", new Sprite());
+			scrollList.setStyle("upArrowDownSkin", new Sprite());
+			scrollList.setStyle("downArrowUpSkin", new Sprite());
+			scrollList.setStyle("downArrowOverSkin", new Sprite());
+			scrollList.setStyle("downArrowDownSkin", new Sprite());
 		}
 
 		private function onScroll(event : ScrollEvent) : void
@@ -186,24 +205,7 @@ package mew.windows {
 				}
 			}
 			scrollList.setSize(425, scrollListHeight);
-			scrollList.setStyle("upSkin", getSprite(scrollList.width, scrollList.height));
-			scrollBarSkin = new ScaleBitmap((new Resource.ScrollBarSkin() as Bitmap).bitmapData, "auto", true);
-			scrollBarSkin.scale9Grid = new Rectangle(0, 10, 16, 10);
-			scrollList.setStyle("thumbUpSkin", scrollBarSkin);
-			scrollList.setStyle("thumbOverSkin", scrollBarSkin);
-			scrollList.setStyle("thumbDownSkin", scrollBarSkin);
-			scrollList.setStyle("thumbIcon", new Sprite());
-			scrollList.setStyle("trackUpSkin", new Sprite());
-			scrollList.setStyle("trackOverSkin", new Sprite());
-			scrollList.setStyle("trackDownSkin", new Sprite());
-			scrollList.setStyle("upArrowUpSkin", new Sprite());
-			scrollList.setStyle("upArrowOverSkin", new Sprite());
-			scrollList.setStyle("upArrowDownSkin", new Sprite());
-			scrollList.setStyle("downArrowUpSkin", new Sprite());
-			scrollList.setStyle("downArrowOverSkin", new Sprite());
-			scrollList.setStyle("downArrowDownSkin", new Sprite());
 			scrollList.move(30, weiboEntry.y + weiboEntry.height + 5);
-			
 			drawBackground(465, weiboEntry.y + weiboEntry.height + scrollList.height + 15);
 			super.init();
 		}

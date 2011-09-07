@@ -1,5 +1,6 @@
 package com.iabel.core
 {
+	import mew.windows.ALNativeWindow;
 	import flash.display.Loader;
 	import com.iabel.system.CoreSystem;
 	import com.iabel.util.ScaleBitmap;
@@ -159,7 +160,7 @@ package com.iabel.core
 			return _tooltip;
 		}
 		
-		public function listData(arr:Array, w:Number, xml:XML, showRepost:Boolean = true):void
+		public function listData(arr:Array, w:Number, xml:XML, win:ALNativeWindow, showRepost:Boolean = true):void
 		{
 			return;
 		}

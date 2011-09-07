@@ -34,7 +34,7 @@ package mew.modules {
 		override protected function showOperationButton(event : MouseEvent) : void
 		{
 			MewSystem.operationButton = new OperationGroup();
-			if(userData.id == MewSystem.app.userData.id){
+			if(userData.id == MewSystem.app.userData.id || MewSystem.app.currentState == MewSystem.app.COLLECT){
 				MewSystem.operationButton.showAllButtons();
 			}else{
 				MewSystem.operationButton.showCollectionButton();
@@ -42,7 +42,18 @@ package mew.modules {
 				MewSystem.operationButton.showCommentButton();
 				MewSystem.operationButton.calculateSize();
 			}
+			data.cid = "0";
+			MewSystem.operationButton.finalStep = finalStep;
+			MewSystem.operationButton.parentWin = parentWin;
+			MewSystem.operationButton.data = data;
+			MewSystem.operationButton.userData = userData;
 			MewSystem.operationButton.sid = data.id;
+			MewSystem.operationButton.parentBox = this;
+			if(repostBox){
+				repostBox.data.cid = "0";
+				MewSystem.operationButton.repostData = repostBox.data;
+				MewSystem.operationButton.repostUserData = repostBox.userData;
+			}
 			addChild(MewSystem.operationButton);
 			MewSystem.operationButton.x = this.width - MewSystem.operationButton.width - 5;
 		}

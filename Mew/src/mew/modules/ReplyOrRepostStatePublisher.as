@@ -1,4 +1,5 @@
 package mew.modules {
+	import fl.controls.CheckBox;
 	import fl.controls.UIScrollBar;
 
 	import mew.communication.SuggestDataGetter;
@@ -6,6 +7,7 @@ package mew.modules {
 	import mew.data.UserData;
 	import mew.data.WeiboData;
 	import mew.events.MewEvent;
+	import mew.factory.ButtonFactory;
 	import mew.utils.StringUtils;
 	import mew.windows.WeiBoPublisher;
 
@@ -40,8 +42,15 @@ package mew.modules {
 		private var buttonGroup:WeiboPublisherButtonGroup = null;
 		private var nameBox:NameBox = null;
 		private var weiboText:TextField = null;
+		
+		private var firstCheckBox:CheckBox = null;
+		private var secondCheckBox:CheckBox = null;
+		
 		private var ud:UserData = null;
 		private var wd:WeiboData = null;
+		private var rud:UserData = null;
+		private var rwd:WeiboData = null;
+		
 		private var scroller:UIScrollBar = null;
 		private var urlShortor:URLShortor = null;
 		private var suggestGetter:SuggestDataGetter = null;
@@ -84,26 +93,45 @@ package mew.modules {
 			weiboText.mouseWheelEnabled = false;
 		}
 		
-		public function showWeiboContent(state:String, userData:UserData, weiboData:WeiboData, additionalStr:String):void
+		public function showWeiboContent(state:String, userData:UserData, weiboData:WeiboData, repostUserData:UserData, repostData:WeiboData):void
 		{
 			ud = userData;
 			wd = weiboData;
-			nameBox.userData = userData;
+			rud = repostUserData;
+			rwd = repostData;
+			var firstCBStr:String = "";
+			var secondCBStr:String = "";
+			switch(state){
+				case WeiBoPublisher.REPLY:
+					title.text = "回	复";
+					firstCBStr = "同时转发到我的微博";
+					nameBox.userData = userData;
+					break;
+				case WeiBoPublisher.REPOST:
+					title.text = "转	发";
+					firstCBStr = "同时评论给 " + userData.username;
+					if(rud) nameBox.userData = rud;
+					else nameBox.userData = userData;
+					break;
+				case WeiBoPublisher.COMMENT:
+					title.text = "评 论";
+					firstCBStr = "同时转发到我的微博";
+					nameBox.userData = userData;
+					break;
+			}
 			nameBox.create();
 			addChild(nameBox);
 			nameBox.x = 20;
 			nameBox.y = topBK.y + topBK.height + 20;
-			if(state == WeiBoPublisher.REPLY){
-				title.text = "回	复";
-			}else{
-				title.text = "转	发";
-			}
+			if(repostUserData) secondCBStr = "同时评论给原文作者 " + repostUserData.username;
 			title.width = title.textWidth;
 			title.height = title.textHeight;
 			addChild(title);
 			title.x = (topBK.width - title.width) / 2;
 			title.y = (topBK.height - title.height) / 2;
-			var str:String = weiboData.content.replace(/\</g, "&lt;");
+			var str:String = weiboData.content;
+			if(repostData && state == WeiBoPublisher.REPOST) str = repostData.content;
+			str = str.replace(/\</g, "&lt;");
 			str = StringUtils.displayTopicAndAt(str);
 			var urls:Array = StringUtils.getURLs(str);
 			if(urls && urls.length) for each(var s:String in urls) str.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
@@ -132,7 +160,11 @@ package mew.modules {
 			inputTextField.addEventListener(Event.CHANGE, inputTextField_onChangeHandler);
 			inputTextField.addEventListener(Event.ADDED_TO_STAGE, inputTextField_addToStageHandler);
 			inputTextField.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
-			inputTextField.text = additionalStr;
+			if(repostData && state == WeiBoPublisher.REPOST) inputTextField.text = "//@" + ud.username + ": " + weiboData.content;
+			else if(weiboData.username && state == WeiBoPublisher.REPLY){
+				inputTextField.text = "回复@" + weiboData.username + ": ";
+				inputTextField.setSelection(10000, 10000);
+			}
 			if(state == WeiBoPublisher.REPOST) inputTextField.setSelection(0, 0);
 			
 			textNumText = new TextField();
@@ -149,17 +181,80 @@ package mew.modules {
 			textNumText.x = bk.x + bk.width - textNumText.width - 15;
 			textNumText.y = bk.y + bk.height - textNumText.height - 10;
 			
+			var cbSize:int = 0;
+			if(firstCBStr != ""){
+				firstCheckBox = ButtonFactory.SystemCheckBox();
+				firstCheckBox.label = firstCBStr;
+				firstCheckBox.x = bk.x + 5;
+				firstCheckBox.y = bk.height + bk.y + 5;
+				addChild(firstCheckBox);
+				cbSize = firstCheckBox.x + firstCheckBox.width;
+			}
+			
+			if(secondCBStr != ""){
+				secondCheckBox = ButtonFactory.SystemCheckBox();
+				secondCheckBox.label = secondCBStr;
+				addChild(secondCheckBox);
+				if(firstCheckBox){
+					secondCheckBox.x = firstCheckBox.x;
+					secondCheckBox.y = firstCheckBox.y + firstCheckBox.height + 5;
+				}
+				if(secondCheckBox.x + secondCheckBox.width > cbSize) cbSize = secondCheckBox.x + secondCheckBox.width;
+			}
+			
 			addChild(buttonGroup);
-			buttonGroup.setSize(10, 70);
+			buttonGroup.setSize(10, 40);
 			buttonGroup.init(false);
-			buttonGroup.x = bk.x + bk.width - buttonGroup.width - 120;
-			buttonGroup.y = bk.height + bk.y + 20;
+			buttonGroup.x = bk.x + bk.width - buttonGroup.width - 150;
+			buttonGroup.y = bk.height + bk.y + 50;
 			buttonGroup.addEventListener(MewEvent.EMOTION, emotionHandler);
 			buttonGroup.addEventListener(MewEvent.TOPIC, topicHandler);
 			buttonGroup.addEventListener(MewEvent.CLEAR_CONTENT, clearContentHandler);
 			buttonGroup.addEventListener(MewEvent.SHORT_URL, shortURLHandler);
 			
 			topBK.addEventListener(MouseEvent.MOUSE_DOWN, dragNativeWindow);
+		}
+		
+		public function getFirstSelect():Boolean
+		{
+			return firstCheckBox.selected;
+		}
+		
+		public function getSecondSelect():Boolean
+		{
+			return secondCheckBox.selected;
+		}
+		
+		public function hasFirstCheckBox():Boolean
+		{
+			if(firstCheckBox) return true;
+			else return false;
+		}
+		
+		public function hasSecondCheckBox():Boolean
+		{
+			if(secondCheckBox) return true;
+			else return false;
+		}
+		
+		public function getUserData():UserData
+		{
+			return ud;
+		}
+		
+		public function getRepostUserData():UserData
+		{
+			return rud;
+		}
+		
+		public function getWeiboData():WeiboData
+		{
+			return wd;
+		}
+		
+		public function getRepostData():WeiboData
+		{
+			return rwd;
 		}
 		
 		private function dragNativeWindow(event:MouseEvent):void
@@ -170,6 +265,7 @@ package mew.modules {
 		private function inputTextField_addToStageHandler(event:Event):void
 		{
 			this.stage.focus = inputTextField;
+			inputTextField.dispatchEvent(new Event(Event.CHANGE));
 		}
 		
 		private function emotionHandler(event:MewEvent):void
@@ -188,11 +284,13 @@ package mew.modules {
 			if(selectedText && selectedText == "请在这里输入自定义话题") return;
 			if(selectedText){
 				inputTextField.replaceSelectedText("#" + selectedText + "#");
+				inputTextField.dispatchEvent(new Event(Event.CHANGE));
 				return;
 			}
-			var len:int = inputTextField.length;
-			inputTextField.appendText("#请在这里输入自定义话题#");
-			inputTextField.setSelection(len + 1, len + 12);
+			var pos:int = inputTextField.caretIndex;
+			inputTextField.replaceText(pos, pos, "#请在这里输入自定义话题#");
+			inputTextField.setSelection(pos + 1, pos + 12);
+			inputTextField.dispatchEvent(new Event(Event.CHANGE));
 		}
 		
 		private function clearContentHandler(event:MewEvent):void
@@ -389,21 +487,6 @@ package mew.modules {
 			return null;
 		}
 		
-		public function getReplyId():String
-		{
-			return wd.id;
-		}
-		
-		public function getCommentId():String
-		{
-			return wd.cid;
-		}
-		
-		public function isComment():int
-		{
-			return -1;
-		}
-		
 		public function resetContent(removeImage:Boolean = true):void
 		{
 			inputTextField.text = "";
@@ -419,10 +502,9 @@ package mew.modules {
 			if(!topBK) topBK = new Sprite();
 			topBK.graphics.clear();
 			topBK.graphics.beginFill(Widget.mainColor, 1.0);
-			topBK.graphics.drawRoundRectComplex(0, 0, 640, 30, 12, 12, 0, 0);
+			topBK.graphics.drawRoundRectComplex(0, 0, 640, 30, 8, 8, 0, 0);
 			topBK.graphics.endFill();
 			topBK.mouseChildren = false;
-			topBK.mouseEnabled = false;
 		}
 		
 		private function drawTextBackground():void
@@ -431,7 +513,7 @@ package mew.modules {
 			bk.graphics.clear();
 			bk.graphics.lineStyle(1, 0x000000, .3);
 			bk.graphics.beginFill(0xFFFFFF, 1.0);
-			bk.graphics.drawRoundRect(0, 0, topBK.width - 40, 280 - weiboText.y - weiboText.height, 12, 12);
+			bk.graphics.drawRoundRect(0, 0, topBK.width - 40, 240 - weiboText.y - weiboText.height, 12, 12);
 			bk.graphics.endFill();
 		}
 		

@@ -1,4 +1,5 @@
 package mew.modules {
+	import mew.windows.ALNativeWindow;
 	import com.iabel.core.UISprite;
 	import com.sina.microblog.data.MicroBlogComment;
 	import com.sina.microblog.data.MicroBlogDirectMessage;
@@ -16,7 +17,7 @@ package mew.modules {
 			super();
 		}
 		
-		override public function listData(arr:Array, w:Number, xml:XML, showRepost:Boolean = true):void
+		override public function listData(arr:Array, w:Number, xml:XML, win:ALNativeWindow, showRepost:Boolean = true):void
 		{
 			fromIndex = this.numChildren;
 			for each(var obj:Object in arr){
@@ -25,8 +26,12 @@ package mew.modules {
 				else if(obj is MicroBlogComment){
 					entry = new CommentEntry();
 					(entry as CommentEntry).showRepost = showRepost;
+					(entry as CommentEntry).finalStep = true;
+				}else if(obj is MicroBlogDirectMessage){
+					entry = new DirectMessageBox();
+					entry.finalStep = true;
 				}
-				else if(obj is MicroBlogDirectMessage) entry = new DirectMessageBox();
+				entry.parentWin = win;
 				entry.x = 0;
 				entry.setSize(w - entry.x, 10);
 				entry.initStatus(obj, xml);

@@ -63,7 +63,7 @@ package mew.utils
 		
 		public static function getStringLength(str:String):Number
 		{
-			var chinesePattern:RegExp = /[\u4e00-\u9fa5]+/g;
+			var chinesePattern:RegExp = /[^\x00-\xff]/g;
 			var arr:Array = str.match(chinesePattern);
 			var len:Number = 0;
 			for each(var s:String in arr){

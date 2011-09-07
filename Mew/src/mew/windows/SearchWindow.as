@@ -279,7 +279,7 @@ package mew.windows {
 				{
 					urlLoader.removeEventListener(Event.COMPLETE, func);
 					var emotionXML:XML = XML(urlLoader.data);
-					list.listData(arr, getContentWidth(), emotionXML);
+					list.listData(arr, getContentWidth(), emotionXML, this);
 					if(curPage < 2) showWeibo(arr, list, null);
 					else{
 						scrollList.update();
@@ -327,7 +327,7 @@ package mew.windows {
 					if(list) list.removeAllChildren();
 					list = new UserFormList();
 				}
-				list.listData(arr, getContentWidth(), null);
+				list.listData(arr, getContentWidth(), null, this);
 				if(curPage < 2) showWeibo(arr, list, null);
 				else{
 					scrollList.update();

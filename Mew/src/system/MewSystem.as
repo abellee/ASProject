@@ -72,6 +72,9 @@ package system {
 		public static var collectNum:int = 20;
 		public static var wbCommentNum:int = 10;
 		
+		public static var commentURL:String = "/statuses/comment.xml";
+		public static var repostURL:String = "/statuses/repost.xml";
+		
 		public static function initMicroBlog():void
 		{
 			microBlog = new MicroBlog();

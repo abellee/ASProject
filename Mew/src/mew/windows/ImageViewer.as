@@ -128,7 +128,6 @@ package mew.windows {
 		override protected function dealloc(event:Event):void
 		{
 			super.dealloc(event);
-			background.removeEventListener(MouseEvent.RIGHT_CLICK, closeVideoWindow);
 			originURL = null;
 			loadingText = null;
 			midURL = null;

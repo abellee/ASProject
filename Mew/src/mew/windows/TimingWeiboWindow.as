@@ -470,11 +470,13 @@ package mew.windows {
 			if(selectedText && selectedText == "请在这里输入自定义话题") return;
 			if(selectedText){
 				inputTextField.replaceSelectedText("#" + selectedText + "#");
+				inputTextField.dispatchEvent(new Event(Event.CHANGE));
 				return;
 			}
-			var len:int = inputTextField.length;
-			inputTextField.appendText("#请在这里输入自定义话题#");
-			inputTextField.setSelection(len + 1, len + 12);
+			var pos:int = inputTextField.caretIndex;
+			inputTextField.replaceText(pos, pos, "#请在这里输入自定义话题#");
+			inputTextField.setSelection(pos + 1, pos + 12);
+			inputTextField.dispatchEvent(new Event(Event.CHANGE));
 		}
 		
 		private function clearContentHandler(event:MewEvent):void

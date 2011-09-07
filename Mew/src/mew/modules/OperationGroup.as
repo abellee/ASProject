@@ -1,12 +1,14 @@
 package mew.modules {
-	import system.MewSystem;
-	import mew.data.WeiboData;
-	import mew.data.UserData;
+	import mew.windows.ALNativeWindow;
 	import fl.controls.Button;
 
-	import mew.data.WeiboCount;
+	import mew.data.UserData;
+	import mew.data.WeiboData;
 	import mew.events.MewEvent;
 	import mew.factory.ButtonFactory;
+	import mew.windows.WeiBoPublisher;
+
+	import system.MewSystem;
 
 	import com.iabel.core.UISprite;
 
@@ -15,9 +17,15 @@ package mew.modules {
 	
 	public class OperationGroup extends UISprite
 	{
-		public var data:WeiboCount = null;
-		public var _parent:WeiboCount = null;
+		public var data:WeiboData = null;
+		public var userData:UserData = null;
 		public var sid:String = null;
+		public var repostData:WeiboData = null;
+		public var repostUserData:UserData = null;
+		public var finalStep:Boolean = false;
+		public var parentBox:DirectMessageBox = null;
+		public var cid:String = null;
+		public var parentWin:ALNativeWindow = null;
 		
 		private var repostBtn:Button = null;
 		private var commentBtn:Button = null;
@@ -138,19 +146,44 @@ package mew.modules {
 		}
 		private function repostBtn_mouseClickHandler(event:MouseEvent):void
 		{
-			this.dispatchEvent(new MewEvent(MewEvent.REPOST_STATUS));
+//			this.dispatchEvent(new MewEvent(MewEvent.REPOST_STATUS));
+			MewSystem.app.openPublishWindow(WeiBoPublisher.REPOST, userData, data, repostUserData, repostData);
 		}
 		private function commentBtn_mouseClickHandler(event:MouseEvent):void
 		{
+			if(finalStep){
+				if(data.cid && data.cid != "0") MewSystem.app.openPublishWindow(WeiBoPublisher.REPLY, userData, data, repostUserData, repostData);
+				else MewSystem.app.openPublishWindow(WeiBoPublisher.COMMENT, userData, data, repostUserData, repostData);
+				return;
+			}
 			if(sid) MewSystem.app.showWeiboTextWindow(sid);
 		}
 		private function deleteBtn_mouseClickHandler(event:MouseEvent):void
 		{
-			this.dispatchEvent(new MewEvent(MewEvent.DELETE_STATUS));
+//			this.dispatchEvent(new MewEvent(MewEvent.DELETE_STATUS));
+			if(parentBox is CommentEntry){
+				MewSystem.app.alternationCenter.deleteComment(cid, parentWin.container);
+				return;
+			}else if(parentBox is WeiboEntry){
+				if(MewSystem.app.currentState == MewSystem.app.COLLECT){
+					MewSystem.app.alternationCenter.removeFavorite(data.id, parentWin.container);
+					return;
+				}
+				MewSystem.app.alternationCenter.deleteStatus(data.id, parentWin.container);
+				return;
+			}else if(parentBox is RepostBox){
+				MewSystem.app.alternationCenter.deleteStatus(data.id, parentWin.container);
+				return;
+			}else if(parentBox is DirectMessageBox){
+				MewSystem.app.alternationCenter.deleteDirectMessage(data.id, parentWin.container);
+				return;
+			}
+			
 		}
 		private function collectionBtn_mouseClickHandler(event:MouseEvent):void
 		{
-			this.dispatchEvent(new MewEvent(MewEvent.COLLECT_STATUS));	
+//			this.dispatchEvent(new MewEvent(MewEvent.COLLECT_STATUS));
+			MewSystem.app.alternationCenter.collectStatus(data.id, parentWin.container);
 		}
 		
 		override protected function dealloc(event:Event):void
@@ -158,7 +191,8 @@ package mew.modules {
 			super.dealloc(event);
 			
 			data = null;
-			_parent = null;
+			userData = null;
+			sid = null;
 			
 			if(repostBtn) repostBtn.removeEventListener(MouseEvent.CLICK, repostBtn_mouseClickHandler);
 			if(commentBtn) commentBtn.removeEventListener(MouseEvent.CLICK, commentBtn_mouseClickHandler);
@@ -171,6 +205,16 @@ package mew.modules {
 			deleteBtn = null;
 			collectionBtn = null;
 			messageBtn = null;
+			
+			
+			data = null;
+			userData = null;
+			sid = null;
+			repostData = null;
+			repostUserData = null;
+			parentBox = null;
+			cid = null;
+			parentWin = null;
 		}
 	}
 }

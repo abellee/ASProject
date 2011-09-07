@@ -19,6 +19,7 @@ package mew.modules {
 	{
 		public var data:WeiboData = null;
 		public var userData:UserData = null;
+		public var finalStep:Boolean = false;
 		
 		protected var targetUserData:UserData = null;
 		protected var userAvatar:Avatar = null;
@@ -26,6 +27,7 @@ package mew.modules {
 		protected var nameBox:NameBox = null;
 		protected var weiboText:EmotionTextField = null;
 		protected var urls:Array = null;
+		public var parentWin:ALNativeWindow = null;
 		
 		public function DirectMessageBox()
 		{
@@ -49,6 +51,12 @@ package mew.modules {
 			if(!MewSystem.operationButton) MewSystem.operationButton = new OperationGroup();
 			MewSystem.operationButton.showDeleteButton();
 			MewSystem.operationButton.showMessageButton();
+			MewSystem.operationButton.finalStep = finalStep;
+			data.cid = "0";
+			MewSystem.operationButton.parentWin = parentWin;
+			MewSystem.operationButton.data = data;
+			MewSystem.operationButton.userData = userData;
+			MewSystem.operationButton.parentBox = this;
 			MewSystem.operationButton.calculateSize();
 			addChild(MewSystem.operationButton);
 			MewSystem.operationButton.sid = data.id;
@@ -158,6 +166,7 @@ package mew.modules {
 			nameBox = null;
 			weiboText = null;
 			urls = null;
+			parentWin = null;
 		}
 	}
 }

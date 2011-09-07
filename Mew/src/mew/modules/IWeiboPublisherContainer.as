@@ -7,12 +7,17 @@ package mew.modules
 
 	public interface IWeiboPublisherContainer extends IDisplay
 	{
-		function showWeiboContent(state:String, userData:UserData, weiboData:WeiboData, additionalStr:String):void;
+		function showWeiboContent(state:String, userData:UserData, weiboData:WeiboData, repostUserData:UserData, repostData:WeiboData):void;
 		function getContent():String;
 		function getImageData():ByteArray;
-		function getReplyId():String;
-		function isComment():int;
-		function getCommentId():String;
 		function resetContent(removeImage:Boolean = true):void;
+		function getFirstSelect():Boolean;
+		function getSecondSelect():Boolean;
+		function hasFirstCheckBox():Boolean;
+		function hasSecondCheckBox():Boolean;
+		function getUserData():UserData;
+		function getRepostUserData():UserData;
+		function getWeiboData():WeiboData;
+		function getRepostData():WeiboData;
 	}
 }

@@ -362,5 +362,8 @@ package resource {
 		[Embed(source="res.swf", symbol="TimingArrow")]
 		public static var TimingArrow : Class;
 		
+		[Embed(source="res.swf", symbol="VideoPlayButton")]
+		public static var VideoPlayButton : Class;
+		
 	}
 }

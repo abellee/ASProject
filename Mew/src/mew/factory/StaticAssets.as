@@ -527,7 +527,8 @@ package mew.factory {
 		 */
 		public static function DefaultVideo() : BitmapData {
 			if (!_DefaultVideo) {
-				return new BitmapData(10, 10);
+				var bitmap : Bitmap = new (Resource.VideoPlayButton)();
+				_DefaultVideo = bitmap.bitmapData;
 			}
 			return _DefaultVideo;
 		}

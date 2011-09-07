@@ -14,9 +14,9 @@ package mew.data
 		public var repostData:WeiboData = null;
 		public var isCollected:Boolean = false;
 		
-		public var cid:String = null;               // 供微博发布器使用
-		public var time:Number = 0;                 // 供定时微博发布器使用
-		public var success:Boolean = false;         // 供定时微博发布器使用
+		public var cid:String = "0";               // 供微博发布器使用
+		public var username:String = null;         // 供微博发布器使用
+		public var commentText:String = null;      // 供微博发布器使用
 		
 		public function WeiboData()
 		{

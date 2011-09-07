@@ -280,7 +280,7 @@ package mew.windows {
 				var urlLoader:URLLoader = new URLLoader();
 				var func:Function = function(e:Event):void{
 					urlLoader.removeEventListener(Event.COMPLETE, func);
-					list.listData(tempArr, getContentWidth(), XML(e.target.data));
+					list.listData(tempArr, getContentWidth(), XML(e.target.data), this);
 					scrollList.update();
 					scrollList.drawNow();
 					urlLoader = null;
@@ -314,7 +314,7 @@ package mew.windows {
 			var urlLoader:URLLoader = new URLLoader();
 			var func:Function = function(e:Event):void{
 				urlLoader.removeEventListener(Event.COMPLETE, func);
-				list.listData(arr, getContentWidth(), XML(e.target.data));
+				list.listData(arr, getContentWidth(), XML(e.target.data), this);
 				scrollList.update();
 				scrollList.drawNow();
 				return;

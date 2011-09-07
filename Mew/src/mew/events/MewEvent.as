@@ -39,6 +39,11 @@ package mew.events
 		
 		public static const DELETE:String = "delete";
 		
+		public static const COMMENT_SUCCESS:String = "comment_success";
+		public static const COMMENT_FAILED:String = "comment_failed";
+		public static const REPOST_SUCCESS:String = "repost_success";
+		public static const REPOST_FAILED:String = "repost_failed";
+		
 		public function MewEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
