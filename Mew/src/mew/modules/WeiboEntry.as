@@ -1,19 +1,21 @@
 package mew.modules {
-	import flash.geom.Point;
-	import flash.events.MouseEvent;
 	import mew.utils.StringUtils;
 	import mew.utils.VideoChecker;
 
 	import system.MewSystem;
 
+	import com.iabel.util.DashLine;
 	import com.sina.microblog.data.MicroBlogStatus;
 
+	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	
 	public class WeiboEntry extends RepostBox
 	{
 		protected var repostBox:RepostBox = null;
+		protected var dashLine:Bitmap = null;
 		public function WeiboEntry()
 		{
 			super();
@@ -40,6 +42,7 @@ package mew.modules {
 				MewSystem.operationButton.showCollectionButton();
 				MewSystem.operationButton.showRepostButton();
 				MewSystem.operationButton.showCommentButton();
+				MewSystem.operationButton.showReadComment();
 				MewSystem.operationButton.calculateSize();
 			}
 			data.cid = "0";
@@ -118,6 +121,14 @@ package mew.modules {
 			timeAndFrom.x = preChild.x;
 			timeAndFrom.y = preChild.y + preChild.height + 10;
 			addChild(timeAndFrom);
+			
+			var bd:DashLine = new DashLine(this.width, 1);
+			bd.drawDashLine(5);
+			dashLine = new Bitmap(bd);
+			addChild(dashLine);
+			dashLine.alpha = .3;
+			dashLine.y = timeAndFrom.y + timeAndFrom.height + 10;
+			
 			setSize(this.width, this.height);
 			addListener();
 		}
@@ -141,7 +152,8 @@ package mew.modules {
 					videoBox.y = ypos;
 				}
 				timeAndFrom.y = preChild.y + preH + 10;
-				h = timeAndFrom.y + timeAndFrom.height;
+				if(dashLine) dashLine.y = timeAndFrom.y + timeAndFrom.height + 10;
+				h = timeAndFrom.y + timeAndFrom.height + 11;
 			}
 			setSize(this.width, h);
 			this.dispatchEvent(new Event(Event.RESIZE));
@@ -150,6 +162,8 @@ package mew.modules {
 		{
 			super.dealloc(event);
 			repostBox = null;
+			if(dashLine) dashLine.bitmapData.dispose();
+			dashLine = null;
 		}
 	}
 }

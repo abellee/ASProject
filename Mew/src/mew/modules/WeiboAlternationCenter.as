@@ -1,14 +1,19 @@
 package mew.modules {
-	import mew.events.MewEvent;
-	import flash.net.URLLoader;
-	import flash.display.DisplayObjectContainer;
+	import mew.windows.WeiboTextWindow;
+	import config.SQLConfig;
+
 	import mew.data.UserData;
-	import com.sina.microblog.data.MicroBlogStatus;
+	import mew.events.MewEvent;
+	import mew.windows.ALNativeWindow;
+
 	import system.MewSystem;
 
+	import com.sina.microblog.data.MicroBlogComment;
+	import com.sina.microblog.data.MicroBlogStatus;
 	import com.sina.microblog.events.MicroBlogErrorEvent;
 	import com.sina.microblog.events.MicroBlogEvent;
 
+	import flash.display.DisplayObjectContainer;
 	import flash.utils.ByteArray;
 
 	public class WeiboAlternationCenter
@@ -24,8 +29,15 @@ package mew.modules {
 				MewSystem.microBlog.removeEventListener(MewEvent.REPOST_SUCCESS, onResult);
 				MewSystem.microBlog.removeEventListener(MewEvent.REPOST_FAILED, onError);
 				if(report){
-					if(MewSystem.app.weiboPublishWindow) MewSystem.app.weiboPublishWindow.showResult(1);
+					if(MewSystem.app.weiboPublishWindow){
+						MewSystem.app.weiboPublishWindow.showResult(1);
+					}
 				}
+				if(isComment) MewSystem.app.preloader.preloadCommentsTimeline();
+				var data:MicroBlogStatus = new MicroBlogStatus();
+				data.init(XML(event.result));
+				MewSystem.app.localWriter.prefixData([data], SQLConfig.MEW_INDEX, MewSystem.atNum);
+				if(data.user.id == MewSystem.app.userData.id) MewSystem.app.localWriter.prefixData([data], SQLConfig.MEW_MY_WEIBO, MewSystem.userStatusNum);
 			};
 			var onError:Function = function(event:MicroBlogErrorEvent):void
 			{
@@ -50,7 +62,12 @@ package mew.modules {
 			{
 				MewSystem.microBlog.removeEventListener(MewEvent.COMMENT_SUCCESS, onResult);
 				MewSystem.microBlog.removeEventListener(MewEvent.COMMENT_FAILED, onError);
-				if(report && MewSystem.app.weiboPublishWindow) MewSystem.app.weiboPublishWindow.showResult(1);
+				if(report && MewSystem.app.weiboPublishWindow){
+					MewSystem.app.weiboPublishWindow.showResult(1);
+				}
+				var comment:MicroBlogComment = new MicroBlogComment();
+				comment.init(XML(event.result));
+				MewSystem.app.localWriter.prefixData([comment], SQLConfig.MEW_COMMENT, MewSystem.commentNum);
 			};
 			var onError:Function = function(event:MicroBlogErrorEvent):void
 			{
@@ -68,103 +85,138 @@ package mew.modules {
 			MewSystem.microBlog.callGeneralApi(MewSystem.commentURL, obj, MewEvent.COMMENT_SUCCESS, MewEvent.COMMENT_FAILED);
 		}
 		
-		public function deleteComment(id:String, container:DisplayObjectContainer):void
+		public function deleteComment(id:String, win:ALNativeWindow, sid:String = null):void
 		{
 			var onResult:Function = function(event:MicroBlogEvent):void
 			{
 				trace("delete comment success!");
 				MewSystem.microBlog.removeEventListener(MicroBlogEvent.DELETE_COMMENT_RESULT, onResult);
 				MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.DELETE_COMMENT_ERROR, onError);
-				if(container) MewSystem.showLightAlert("删除评论成功!", container);
+				MewSystem.app.preloader.preloadCommentsTimeline();
+				if(win){
+//					MewSystem.showLightAlert("删除评论成功!", win.container);
+					if(win is WeiboTextWindow && sid){
+						MewSystem.app.showWeiboTextWindow(sid);
+						return;
+					}
+					MewSystem.app.reloadCurrentWindow(win);
+				}
 			};
 			var onError:Function = function(event:MicroBlogErrorEvent):void
 			{
 				trace("delete comment failed!");
 				MewSystem.microBlog.removeEventListener(MicroBlogEvent.DELETE_COMMENT_RESULT, onResult);
 				MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.DELETE_COMMENT_ERROR, onError);
-				if(container) MewSystem.showLightAlert("删除评论失败!", container);
+				if(win) MewSystem.showLightAlert("删除评论失败!", win.container);
 			};
 			MewSystem.microBlog.addEventListener(MicroBlogEvent.DELETE_COMMENT_RESULT, onResult);
 			MewSystem.microBlog.addEventListener(MicroBlogErrorEvent.DELETE_COMMENT_ERROR, onError);
 			MewSystem.microBlog.deleteComment(id);
 		}
 		
-		public function deleteStatus(id:String, container:DisplayObjectContainer):void
+		public function deleteStatus(id:String, win:ALNativeWindow):void
 		{
 			var onResult:Function = function(event:MicroBlogEvent):void
 			{
 				trace("delete status success!");
 				MewSystem.microBlog.removeEventListener(MicroBlogEvent.DELETE_STATUS_RESULT, onResult);
 				MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.DELETE_STATUS_ERROR, onError);
-				if(container) MewSystem.showLightAlert("删除微博成功!", container);
+				var data:MicroBlogStatus = event.result as MicroBlogStatus;
+				switch(MewSystem.app.currentState){
+					case MewSystem.app.INDEX:
+						MewSystem.app.preloader.preloadFriendTimeline();
+						if(data.user.id == MewSystem.app.userData.id) MewSystem.app.preloader.preloadUserTimeline();
+						break;
+					case MewSystem.app.AT:
+						MewSystem.app.preloader.preloadMentions();
+						break;
+					case MewSystem.app.MY_WEIBO:
+						MewSystem.app.preloader.preloadFriendTimeline();
+						MewSystem.app.preloader.preloadUserTimeline();
+						break;
+				}
+				if(win){
+//					MewSystem.showLightAlert("删除微博成功!", win.container);
+					MewSystem.app.reloadCurrentWindow(win);
+				}
 			};
 			var onError:Function = function(event:MicroBlogErrorEvent):void
 			{
 				trace("delete status failed!");
 				MewSystem.microBlog.removeEventListener(MicroBlogEvent.DELETE_STATUS_RESULT, onResult);
 				MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.DELETE_STATUS_ERROR, onError);
-				if(container) MewSystem.showLightAlert("删除微博失败!", container);
+				if(win) MewSystem.showLightAlert("删除微博失败!", win.container);
 			};
 			MewSystem.microBlog.addEventListener(MicroBlogEvent.DELETE_STATUS_RESULT, onResult);
 			MewSystem.microBlog.addEventListener(MicroBlogErrorEvent.DELETE_STATUS_ERROR, onError);
 			MewSystem.microBlog.deleteStatus(id);
 		}
 		
-		public function removeFavorite(id:String, container:DisplayObjectContainer):void
+		public function removeFavorite(id:String, win:ALNativeWindow):void
 		{
 			var onResult:Function = function(event:MicroBlogEvent):void
 			{
 				MewSystem.microBlog.removeEventListener(MicroBlogEvent.REMOVE_FROM_FAVORITES_RESULT, onResult);
 				MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.REMOVE_FROM_FAVORITES_ERROR, onError);
-				if(container) MewSystem.showLightAlert("取消收藏成功!", container);
+				MewSystem.app.preloader.preloadFavoriteList();
+				if(win){
+//					MewSystem.showLightAlert("取消收藏成功!", win.container);
+					MewSystem.app.reloadCurrentWindow(win);
+				}
 			};
 			var onError:Function = function(event:MicroBlogErrorEvent):void
 			{
 				MewSystem.microBlog.removeEventListener(MicroBlogEvent.REMOVE_FROM_FAVORITES_RESULT, onResult);
 				MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.REMOVE_FROM_FAVORITES_ERROR, onError);
-				if(container) MewSystem.showLightAlert("取消收藏失败!", container);
+				if(win) MewSystem.showLightAlert("取消收藏失败!", win.container);
 			};
 			MewSystem.microBlog.addEventListener(MicroBlogEvent.REMOVE_FROM_FAVORITES_RESULT, onResult);
 			MewSystem.microBlog.addEventListener(MicroBlogErrorEvent.REMOVE_FROM_FAVORITES_ERROR, onError);
 			MewSystem.microBlog.removeFromFavorites(id);
 		}
 		
-		public function deleteDirectMessage(id:String, container:DisplayObjectContainer):void
+		public function deleteDirectMessage(id:String, win:ALNativeWindow):void
 		{
 			var onResult:Function = function(event:MicroBlogEvent):void
 			{
 				trace("delete DM success!");
 				MewSystem.microBlog.removeEventListener(MicroBlogEvent.DELETE_DIRECT_MESSAGE_RESULT, onResult);
 				MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.DELETE_DIRECT_MESSAGE_ERROR, onError);
-				if(container) MewSystem.showLightAlert("取消私信成功!", container);
+				MewSystem.app.preloader.preloadDirectMessagesSent();
+				MewSystem.app.preloader.preloadDirectMessagesReceived();
+				if(win){
+//					MewSystem.showLightAlert("取消私信成功!", win.container);
+					MewSystem.app.reloadCurrentWindow(win);
+				}
 			};
 			var onError:Function = function(event:MicroBlogErrorEvent):void
 			{
 				trace("delete DM failed!");
 				MewSystem.microBlog.removeEventListener(MicroBlogEvent.DELETE_DIRECT_MESSAGE_RESULT, onResult);
 				MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.DELETE_DIRECT_MESSAGE_ERROR, onError);
-				if(container) MewSystem.showLightAlert("取消私信失败!", container);
+				if(win) MewSystem.showLightAlert("取消私信失败!", win.container);
 			};
 			MewSystem.microBlog.addEventListener(MicroBlogEvent.DELETE_DIRECT_MESSAGE_RESULT, onResult);
 			MewSystem.microBlog.addEventListener(MicroBlogErrorEvent.DELETE_DIRECT_MESSAGE_ERROR, onError);
 			MewSystem.microBlog.deleteDirectMessage(id);
 		}
 		
-		public function collectStatus(id:String, container:DisplayObjectContainer):void
+		public function collectStatus(id:String, win:ALNativeWindow):void
 		{
 			var onResult:Function = function(event:MicroBlogEvent):void
 			{
 				trace("add favorite success!");
 				MewSystem.microBlog.removeEventListener(MicroBlogEvent.ADD_TO_FAVORITES_RESULT, onResult);
 				MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.ADD_TO_FAVORITES_ERROR, onError);
-				if(container) MewSystem.showLightAlert("收藏微博成功!", container);
+				if(win) MewSystem.showLightAlert("收藏微博成功!", win.container);
+				MewSystem.app.localWriter.prefixData([event.result as MicroBlogStatus], SQLConfig.MEW_COLLECT, MewSystem.collectNum);
 			};
 			var onError:Function = function(event:MicroBlogErrorEvent):void
 			{
 				trace("add favorite failed!");
 				MewSystem.microBlog.removeEventListener(MicroBlogEvent.ADD_TO_FAVORITES_RESULT, onResult);
 				MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.ADD_TO_FAVORITES_ERROR, onError);
-				if(container) MewSystem.showLightAlert("收藏微博失败!", container);
+				if(win) MewSystem.showLightAlert("收藏微博失败!", win.container);
 			};
 			MewSystem.microBlog.addEventListener(MicroBlogEvent.ADD_TO_FAVORITES_RESULT, onResult);
 			MewSystem.microBlog.addEventListener(MicroBlogErrorEvent.ADD_TO_FAVORITES_ERROR, onError);
@@ -216,6 +268,9 @@ package mew.modules {
 			{
 				MewSystem.microBlog.removeEventListener(MicroBlogEvent.UPDATE_STATUS_RESULT, successFunc);
 				MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.UPDATE_STATUS_ERROR, errorFunc);
+				var data:MicroBlogStatus = event.result as MicroBlogStatus;
+				MewSystem.app.localWriter.prefixData([data], SQLConfig.MEW_INDEX, MewSystem.statusNum);
+				MewSystem.app.localWriter.prefixData([data], SQLConfig.MEW_MY_WEIBO, MewSystem.userStatusNum);
 				if(MewSystem.app.weiboPublishWindow) MewSystem.app.weiboPublishWindow.showResult(1);
 				else if(target) target.updateSuccess();
 			};

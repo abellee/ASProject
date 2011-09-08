@@ -118,6 +118,7 @@ package mew.windows {
 			accChooser.x = weiboButton.x;
 			accChooser.y = weiboButton.y + weiboButton.height + 5;
 			accChooser.dataProvider = dp;
+			accChooser.selectedIndex = 0;
 			accChooser.addEventListener(Event.CHANGE, reloadAvatar);
 			
 			clearAccount = new Label();
@@ -189,7 +190,7 @@ package mew.windows {
 			
 			loadAvatar(0);
 			
-			if(SystemSettingData.autoLogin){
+			if(SystemSettingData.autoLogin && !MewSystem.app.isLogout){
 				if(SystemSettingData._verified){
 					verifyCredential();
 				}
@@ -232,6 +233,7 @@ package mew.windows {
 		
 		private function loadAvatar(index:int):void
 		{
+			addDefault();
 			var id:String = accChooser.getItemAt(index).id;
 			if(id){
 				var file:File = File.applicationStorageDirectory.resolvePath("cache/" + id + ".jpg");
@@ -265,8 +267,6 @@ package mew.windows {
 					//TODO: 显示默认图片
 					addDefault();
 				}
-			}else{
-				addDefault();
 			}
 		}
 		
@@ -347,14 +347,16 @@ package mew.windows {
 		{
 			MewSystem.microBlog.addEventListener(MicroBlogEvent.VERIFY_CREDENTIALS_RESULT, onVerifyCredentialResult);
 			MewSystem.microBlog.addEventListener(MicroBlogErrorEvent.VERIFY_CREDENTIALS_ERROR, onVerifyCredentialError);
-			if(accChooser.selectedItem["account"]){
+			if(accChooser.selectedItem && accChooser.selectedItem["account"]){
 				SystemSettingData._accessTokenKey = accChooser.selectedItem["account"];
 				SystemSettingData._accessTokenSecret = accChooser.selectedItem["password"];
 				MewSystem.microBlog.accessTokenKey = accChooser.selectedItem["account"];
 				MewSystem.microBlog.accessTokenSecrect = accChooser.selectedItem["password"];
-			}else{
+			}else if(SystemSettingData._accessTokenKey){
 				MewSystem.microBlog.accessTokenKey = SystemSettingData._accessTokenKey;
 				MewSystem.microBlog.accessTokenSecrect = SystemSettingData._accessTokenSecret;
+			}else{
+				return;
 			}
 			MewSystem.microBlog.verifyCredentials();
 		}
@@ -370,7 +372,7 @@ package mew.windows {
 			SystemSettingData._accessTokenKey = "";
 			SystemSettingData._accessTokenSecret = "";
 			SystemSettingData._verified = false;
-			if(oauthWindow.active){
+			if(oauthWindow && oauthWindow.active){
 				oauthWindow.close();
 				oauthWindow = null;
 			}

@@ -93,7 +93,7 @@ package mew.modules {
 			weiboText.mouseWheelEnabled = false;
 		}
 		
-		public function showWeiboContent(state:String, userData:UserData, weiboData:WeiboData, repostUserData:UserData, repostData:WeiboData):void
+		public function showWeiboContent(state:String, userData:UserData, weiboData:WeiboData, repostUserData:UserData, repostData:WeiboData, additionStr:String):void
 		{
 			ud = userData;
 			wd = weiboData;

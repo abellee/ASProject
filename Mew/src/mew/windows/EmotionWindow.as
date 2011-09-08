@@ -75,7 +75,7 @@ package mew.windows {
 			leftButton.y = 35;
 			emotionButtons = new Vector.<Button>();
 			for each(var str:String in emotionTabs){
-				var btn:Button = ButtonFactory.OrangeButton();
+				var btn:Button = ButtonFactory.WhiteButton();
 				btn.setStyle("textFormat", new TextFormat(Widget.systemFont, 12, Widget.orangeButtonFontColor));
 				btn.setStyle("disabledTextFormat", new TextFormat(Widget.systemFont, 12, Widget.orangeButtonFontColor));
 				btn.label = str;
@@ -95,7 +95,7 @@ package mew.windows {
 			masker.addChild(buttonsContainer);
 			addChild(masker);
 			masker.x = leftButton.x + leftButton.width + 5;
-			masker.y = leftButton.y - 2;
+			masker.y = leftButton.y - 5;
 			
 			addChild(rightButton);
 			rightButton.x = masker.scrollRect.width + masker.x + 20;
@@ -229,6 +229,7 @@ package mew.windows {
 			if(buttonsContainer.x >= 0 || scrolling) return;
 			scrolling = true;
 			var targetX:int = buttonsContainer.x + masker.scrollRect.width;
+			targetX = targetX >= 0 ? 0 : targetX;
 			TweenLite.to(buttonsContainer, .3, {x: targetX, onComplete: scrollComplete});
 		}
 		
@@ -237,6 +238,7 @@ package mew.windows {
 			if(buttonsContainer.x <= -(buttonsContainer.width - masker.scrollRect.width) || scrolling) return;
 			scrolling = true;
 			var targetX:int = buttonsContainer.x - masker.scrollRect.width;
+			targetX = targetX < -buttonsContainer.width + masker.scrollRect.width ? -buttonsContainer.width + masker.scrollRect.width : targetX;
 			TweenLite.to(buttonsContainer, .3, {x: targetX, onComplete: scrollComplete});
 		}
 		

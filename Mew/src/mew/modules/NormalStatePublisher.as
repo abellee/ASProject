@@ -322,9 +322,9 @@ package mew.modules {
 			inputTextField.dispatchEvent(new Event(Event.CHANGE));
 		}
 		
-		public function showWeiboContent(state:String, userData:UserData, weiboData:WeiboData, repostUserData:UserData, repostData:WeiboData):void
+		public function showWeiboContent(state:String, userData:UserData, weiboData:WeiboData, repostUserData:UserData, repostData:WeiboData, additionStr:String):void
 		{
-			
+			if(userData) appendText("@" + userData.username + ": ");
 		}
 		
 		public function getFirstSelect():Boolean

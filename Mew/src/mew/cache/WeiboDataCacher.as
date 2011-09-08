@@ -1,8 +1,9 @@
 package mew.cache {
-	import com.adobe.images.JPGEncoder;
-	import flash.utils.ByteArray;
+	import config.SQLConfig;
+
 	import system.MewSystem;
 
+	import com.adobe.images.JPGEncoder;
 	import com.sina.microblog.data.MicroBlogComment;
 	import com.sina.microblog.data.MicroBlogCount;
 	import com.sina.microblog.data.MicroBlogDirectMessage;
@@ -16,6 +17,7 @@ package mew.cache {
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 	import flash.net.registerClassAlias;
+	import flash.utils.ByteArray;
 
 	public class WeiboDataCacher
 	{
@@ -51,10 +53,12 @@ package mew.cache {
 		
 		public function prefixData(arr:Array, fileName:String, limitNum:int):void
 		{
+			trace(arr.length, "prefixData");
 			var result:Array = readLocalData(fileName);
 			var num:int = arr.length;
 			for (var i : int = 0; i < num; i++) result.pop();
 			arr = arr.concat(result);
+			trace(arr.length, result.length);
 			MewSystem.setLastId(fileName, arr);
 			writeData(arr, fileName);
 		}

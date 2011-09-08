@@ -27,6 +27,7 @@ package mew.modules {
 			nameTextField.defaultTextFormat = Widget.usernameFormat;
 			nameTextField.autoSize = TextFieldAutoSize.LEFT;
 			nameTextField.mouseWheelEnabled = false;
+			nameTextField.selectable = false;
 			
 			if(!userData) return;
 			var nameStr:String = userData.username;

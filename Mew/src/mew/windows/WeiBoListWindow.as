@@ -1,24 +1,29 @@
 package mew.windows {
-	import flash.events.MouseEvent;
 	import fl.containers.ScrollPane;
 	import fl.controls.Button;
 	import fl.events.ScrollEvent;
+
 	import mew.data.UserData;
 	import mew.events.MewEvent;
 	import mew.factory.ButtonFactory;
 	import mew.modules.UserDescription;
 	import mew.modules.UserFormList;
 	import mew.modules.WeiboFormList;
+
 	import resource.Resource;
+
 	import system.MewSystem;
+
 	import com.iabel.core.UISprite;
 	import com.iabel.utils.ScaleBitmap;
 	import com.sina.microblog.events.MicroBlogEvent;
+
 	import flash.display.Bitmap;
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.Screen;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.geom.Rectangle;
 	import flash.net.URLLoader;
@@ -36,6 +41,7 @@ package mew.windows {
 		protected var userDescription:UserDescription = null;
 		private var curUserData:UserData = null;
 		private var curState:String = MewSystem.app.INDEX;
+		private var preState:String = MewSystem.app.INDEX;
 		private var desH:int;
 		private var position:String = null;
 		private var scrollBarSkin:ScaleBitmap = null;
@@ -69,6 +75,8 @@ package mew.windows {
 			scrollList.setStyle("downArrowOverSkin", new Sprite());
 			scrollList.setStyle("downArrowDownSkin", new Sprite());
 			
+			
+			
 			if(showClose){
 				closeButton = ButtonFactory.CloseButton();
 				addChild(closeButton);
@@ -88,6 +96,12 @@ package mew.windows {
 			sp.graphics.drawRect(0, 0, w, h);
 			sp.graphics.endFill();
 			return sp;
+		}
+		
+		override public function reload():void
+		{
+			scrollList.source = null;
+			list = null;
 		}
 		override public function getContentWidth():Number
 		{
@@ -109,10 +123,10 @@ package mew.windows {
 					addChild(userDescription);
 					userDescription.x = 30;
 					userDescription.y = 30;
-					ypos = userDescription.y + userDescription.height;
-					desH = desH - userDescription.height;
 					addListener();
 				}
+				desH = desH - userDescription.height;
+				ypos = userDescription.y + userDescription.height;
 			}else if(MewSystem.app.currentState == MewSystem.app.MY_WEIBO){         // 当前用户
 				if(!userDescription){
 					userDescription = new UserDescription();
@@ -123,10 +137,10 @@ package mew.windows {
 					addChild(userDescription);
 					userDescription.x = 30;
 					userDescription.y = 30;
-					ypos = userDescription.y + userDescription.height;
-					desH = desH - userDescription.height;
 					addListener();
 				}
+				desH = desH - userDescription.height;
+				ypos = userDescription.y + userDescription.height;
 			}
 			list = content;
 			list.addEventListener(Event.RESIZE, onResize);
@@ -199,21 +213,24 @@ package mew.windows {
 		
 		private function loadDataByPage():void
 		{
-			if(dataLoading) return;
+			if(dataLoading && preState == curState) return;
 			dataLoading = true;
 			curPage++;
 			if(curUserData){
 				trace(curState, curPage);
 				switch(curState){
 					case MewSystem.app.INDEX:
+						preState = MewSystem.app.INDEX;
 						MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_USER_TIMELINE_RESULT, dataByPageLoadComplete);
 						MewSystem.microBlog.loadUserTimeline(curUserData.id, "0", null, "0", "0", MewSystem.statusNum, curPage);
 						break;
 					case MewSystem.app.FANS:
+						preState = MewSystem.app.FANS;
 						MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_FOLLOWERS_INFO_RESULT, dataByPageLoadComplete);
 						MewSystem.microBlog.loadFollowersInfo(curUserData.id, "0", null, MewSystem.fansNum * (curPage - 1), MewSystem.fansNum);
 						break;
 					case MewSystem.app.FOLLOW:
+						preState = MewSystem.app.FOLLOW;
 						MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_FRIENDS_INFO_RESULT, dataByPageLoadComplete);
 						MewSystem.microBlog.loadFriendsInfo(curUserData.id, "0", null, MewSystem.followNum * (curPage - 1), MewSystem.followNum);
 						break;
@@ -270,7 +287,7 @@ package mew.windows {
 		{
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_DIRECT_MESSAGES_RECEIVED_RESULT, loadDirectMessageReceivedResult);
 			var receivedArray:Array = event.result as Array;
-			if(!timer.hasEventListener(TimerEvent.TIMER)) timer.addEventListener(TimerEvent.TIMER, resetLoadingState);
+			if(timer && !timer.hasEventListener(TimerEvent.TIMER)) timer.addEventListener(TimerEvent.TIMER, resetLoadingState);
 			timer.reset();
 			timer.start();
 			MewSystem.removeCycleLoading(container);
@@ -302,7 +319,7 @@ package mew.windows {
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_USER_TIMELINE_RESULT, dataByPageLoadComplete);
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_FOLLOWERS_INFO_RESULT, dataByPageLoadComplete);
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_FRIENDS_INFO_RESULT, dataByPageLoadComplete);
-			if(!timer.hasEventListener(TimerEvent.TIMER)) timer.addEventListener(TimerEvent.TIMER, resetLoadingState);
+			if(timer && !timer.hasEventListener(TimerEvent.TIMER)) timer.addEventListener(TimerEvent.TIMER, resetLoadingState);
 			timer.reset();
 			timer.start();
 			MewSystem.removeCycleLoading(container);
@@ -311,10 +328,11 @@ package mew.windows {
 				if(curPage > 1) curPage--;
 				return;
 			}
+			var win:ALNativeWindow = this;
 			var urlLoader:URLLoader = new URLLoader();
 			var func:Function = function(e:Event):void{
 				urlLoader.removeEventListener(Event.COMPLETE, func);
-				list.listData(arr, getContentWidth(), XML(e.target.data), this);
+				list.listData(arr, getContentWidth(), XML(e.target.data), win);
 				scrollList.update();
 				scrollList.drawNow();
 				return;

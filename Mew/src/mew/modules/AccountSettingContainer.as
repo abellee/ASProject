@@ -1,15 +1,17 @@
-package mew.modules
-{
-	import com.iabel.core.UISprite;
-	
+package mew.modules {
+	import config.Config;
+
 	import fl.controls.Button;
 	import fl.controls.CheckBox;
-	
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	
+
 	import mew.data.SystemSettingData;
 	import mew.factory.ButtonFactory;
+
+	import com.iabel.core.UISprite;
+
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.net.SharedObject;
 	
 	public class AccountSettingContainer extends UISprite implements ISystemSettingContainer
 	{
@@ -23,8 +25,8 @@ package mew.modules
 		public function init():void
 		{
 			if(!autoLogin) autoLogin = ButtonFactory.SystemCheckBox();
-			if(!clearCacheButton) clearCacheButton = ButtonFactory.ClearAccountCacheButton();
-			
+			if(!clearCacheButton) clearCacheButton = ButtonFactory.WhiteButton();
+			clearCacheButton.width = 120;
 			autoLogin.label = "自动登录";
 			clearCacheButton.label = "清空帐号缓存";
 			
@@ -54,7 +56,20 @@ package mew.modules
 		
 		private function clearCacheButton_mouseClickHandler(event:MouseEvent):void
 		{
-			//clear the user accounts cache
+			var so:SharedObject = SharedObject.getLocal(Config.MEWCACHE);
+			so.data.accessTokenKey = null;
+			so.data.accessTokenSecret = null;
+			so.data.user = {};
+			so.flush();
+			so.close();
+		}
+		
+		public function save():void
+		{
+			var so:SharedObject = SharedObject.getLocal(Config.MEWCACHE);
+			so.data.autoLogin = autoLogin.selected;
+			so.flush();
+			SystemSettingData.autoLogin = autoLogin.selected;
 		}
 		
 		override protected function dealloc(event:Event):void

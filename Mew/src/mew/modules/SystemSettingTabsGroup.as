@@ -23,9 +23,15 @@ package mew.modules
 		}
 		private function init():void
 		{
-			systemSettingButton = ButtonFactory.SystemSettingTab();
-			noticeSettingButton = ButtonFactory.NoticeSettingTab();
-			accountSettingButton = ButtonFactory.AccountSettingTab();
+			systemSettingButton = ButtonFactory.WhiteButton();
+			noticeSettingButton = ButtonFactory.WhiteButton();
+			accountSettingButton = ButtonFactory.WhiteButton();
+			systemSettingButton.label = "系统设置";
+			systemSettingButton.width = 100;
+			noticeSettingButton.label = "提示设置";
+			noticeSettingButton.width = 100;
+			accountSettingButton.label = "帐号设置";
+			accountSettingButton.width = 100;
 			
 			addChild(systemSettingButton);
 			addChild(noticeSettingButton);

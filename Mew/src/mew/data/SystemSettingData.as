@@ -19,7 +19,7 @@ package mew.data
 		 * 系统设置
 		 */
 		public static var hideDirection:int = 1;                  // 主界面隐藏的方向 0：左 1：上 2：右
-		public static var autoRun:Boolean = false;                // 系统启动自动运行
+		public static var _autoRun:Boolean = false;               // 系统启动自动运行
 		public static var checkUpdateDelay:int = 0;               // 检测更新间隔天数
 		private static var _autoHide:Boolean = true;              // 鼠标离开时自动隐藏
 		private static var _alwaysInfront:Boolean = true;         // 界面始终在最顶部
@@ -58,6 +58,18 @@ package mew.data
 			if(!value) MewSystem.app.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
 			_autoHide = value;
 		}
+		
+		public static function get autoRun():Boolean
+		{
+			return _autoRun;
+		}
+		
+		public static function set autoRun(value:Boolean):void
+		{
+			if(value == _autoRun) return;
+			NativeApplication.nativeApplication.startAtLogin = value;
+			_autoRun = value;
+		}
 
 		public static function get alwaysInfront():Boolean
 		{
@@ -67,12 +79,12 @@ package mew.data
 		public static function set alwaysInfront(value:Boolean):void
 		{
 			if(_alwaysInfront == value) return;
+			_alwaysInfront = value;
 			if(NativeApplication.nativeApplication.openedWindows){
 				for each(var win:NativeWindow in NativeApplication.nativeApplication.openedWindows){
 					win.alwaysInFront = value;
 				}
 			}
-			_alwaysInfront = value;
 		}
 
 

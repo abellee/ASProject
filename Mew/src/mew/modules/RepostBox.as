@@ -1,4 +1,5 @@
 package mew.modules {
+	import widget.Widget;
 	import mew.data.MediaData;
 	import mew.events.MewEvent;
 	import mew.utils.StringUtils;
@@ -9,6 +10,7 @@ package mew.modules {
 	import com.sina.microblog.data.MicroBlogStatus;
 
 	import flash.display.DisplayObject;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
@@ -19,6 +21,9 @@ package mew.modules {
 		protected var videoBox:VideoBox = null;
 		protected var musicBox:MusicBox = null;
 		protected var videoChecker:VideoChecker = null;
+		protected var repostFrame:Sprite = null;
+		protected var repostTriangle:Sprite = null;
+		protected var shapeContainer:Sprite = null;
 		
 		public function RepostBox()
 		{
@@ -28,6 +33,8 @@ package mew.modules {
 		override protected function init():void
 		{
 			super.init();
+			shapeContainer = new Sprite();
+			addChild(shapeContainer);
 			timeAndFrom = new TimeAndFrom();
 		}
 		
@@ -48,6 +55,7 @@ package mew.modules {
 				MewSystem.repostOperationButton.showCollectionButton();
 				MewSystem.repostOperationButton.showRepostButton();
 				MewSystem.repostOperationButton.showCommentButton();
+				MewSystem.repostOperationButton.showReadComment();
 				MewSystem.repostOperationButton.calculateSize();
 			}
 			data.cid = "0";
@@ -58,7 +66,8 @@ package mew.modules {
 			MewSystem.repostOperationButton.sid = data.id;
 			MewSystem.repostOperationButton.parentBox = this;
 			addChild(MewSystem.repostOperationButton);
-			MewSystem.repostOperationButton.x = this.width - MewSystem.repostOperationButton.width - 5;
+			MewSystem.repostOperationButton.x = this.width - MewSystem.repostOperationButton.width - 10;
+			MewSystem.repostOperationButton.y = 20;
 		}
 		
 		override public function initStatus(obj:Object, xml:XML):void
@@ -66,10 +75,12 @@ package mew.modules {
 			var status:MicroBlogStatus = obj as MicroBlogStatus;
 			if(!status) return;
 			if(!status.user){
-				weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt("该微博已被删除") + "</span>", this.width, xml);
 				nameBox = null;
 				timeAndFrom = null;
 				addChild(weiboText);
+				weiboText.x = 10;
+				weiboText.y = 20;
+				weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt("该微博已被删除") + "</span>", this.width - 20, xml);
 			}else{
 				userData = MewSystem.app.dataCache.getUserDataCache(status.user);
 				data = MewSystem.app.dataCache.getWeiboDataCache(status);
@@ -84,14 +95,16 @@ package mew.modules {
 					videoChecker.addEventListener(Event.COMPLETE, checkVideoUrlComplete);
 					videoChecker.isVideoURL(urls);
 				}
-				weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt(contentStr) + "</span>", this.width, xml);
 				nameBox.userData = userData;
 				nameBox.create();
+				nameBox.x = 10;
+				nameBox.y = 20;
 				addChild(nameBox);
 				
 				addChild(weiboText);
 				weiboText.x = nameBox.x;
 				weiboText.y = nameBox.y + nameBox.height + 10;
+				weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt(contentStr) + "</span>", this.width - 20, xml);
 				
 				timeAndFrom.time = status.createdAt;
 				timeAndFrom.from = status.source;
@@ -113,6 +126,13 @@ package mew.modules {
 				addChild(timeAndFrom);
 			}
 			setSize(this.width, this.height);
+			
+			if(!repostTriangle) repostTriangle = MewSystem.getTriangle("up", 30, 0xFFFFFF);
+			drawFrame();
+			shapeContainer.addChild(repostTriangle);
+			shapeContainer.addChild(repostFrame);
+			repostFrame.y = 10;
+			Widget.widgetGlowFilter(shapeContainer, 5, 5);
 			addListener();
 //			userData = MewSystem.app.dataCache.getUserDataCache(status.user);
 //			data = MewSystem.app.dataCache.getWeiboDataCache(status);
@@ -164,6 +184,15 @@ package mew.modules {
 //			setSize(this.width, this.height);
 //			addListener();
 		}
+
+		private function drawFrame() : void
+		{
+			if(!repostFrame) repostFrame = new Sprite();
+			repostFrame.graphics.clear();
+			repostFrame.graphics.beginFill(0xFFFFFF, 1.0);
+			repostFrame.graphics.drawRect(0, 0, this.width - 2, this.height);
+			repostFrame.graphics.endFill();
+		}
 		
 		protected function onResize(event:Event):void
 		{
@@ -187,6 +216,7 @@ package mew.modules {
 				h = timeAndFrom.y + timeAndFrom.height;
 			}
 			setSize(this.width, h);
+			drawFrame();
 			this.dispatchEvent(new Event(Event.RESIZE));
 		}
 		protected function checkVideoUrlComplete(event:Event):void

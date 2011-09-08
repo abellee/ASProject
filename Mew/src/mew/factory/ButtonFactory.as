@@ -391,6 +391,10 @@ package mew.factory {
 			btn.setStyle("upSkin", upSkin);
 			btn.setStyle("overSkin", overSkin);
 			btn.setStyle("downSkin", downSkin);
+			btn.setStyle("disabledSkin", downSkin);
+			btn.setStyle("selectedUpSkin", downSkin);
+			btn.setStyle("selectedOverSkin", downSkin);
+			btn.setStyle("selectedDownSkin", downSkin);
 			btn.setStyle("focusRectSkin", new Sprite());
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
 			btn.label = "";
@@ -436,83 +440,24 @@ package mew.factory {
 			return btn;
 		}
 
-		public static function EnterButton() : Button {
-			var btn : Button = new Button();
-			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "确定";
-			btn.width = 60;
-			return btn;
-		}
-
-		public static function CancelButton() : Button {
-			var btn : Button = new Button();
-			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "取消";
-			btn.width = 60;
-			return btn;
-		}
-
-		public static function SearchWeiboButton() : Button {
-			var btn : Button = new Button();
-			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "搜微博";
-			btn.width = 60;
-			return btn;
-		}
-
-		public static function SearchUserButton() : Button {
-			var btn : Button = new Button();
-			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "找人";
-			btn.width = 60;
-			return btn;
-		}
-
 		public static function SearchButton() : Button {
 			var btn : Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "搜索";
-			btn.width = 60;
-			return btn;
-		}
-
-		public static function DefaultButton() : Button {
-			var btn : Button = new Button();
+			var upSkin : Bitmap = new (Resource.SearchMouseUpSkin)();
+			var overSkin : Bitmap = new (Resource.SearchMouseOverSkin)();
+			var downSkin : Bitmap = new (Resource.SearchMouseDownSkin)();
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", overSkin);
+			btn.setStyle("downSkin", downSkin);
+			btn.setStyle("selectedUpSkin", downSkin);
+			btn.setStyle("selectedOverSkin", downSkin);
+			btn.setStyle("selectedDownSkin", downSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "恢复默认";
-			btn.width = 100;
-			return btn;
-		}
-
-		public static function SystemSettingTab() : Button {
-			var btn : Button = new Button();
-			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "系统设置";
-			btn.width = 100;
-			return btn;
-		}
-
-		public static function NoticeSettingTab() : Button {
-			var btn : Button = new Button();
-			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "提示设置";
-			btn.width = 100;
-			return btn;
-		}
-
-		public static function AccountSettingTab() : Button {
-			var btn : Button = new Button();
-			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "帐号设置";
-			btn.width = 100;
-			return btn;
-		}
-
-		public static function ClearAccountCacheButton() : Button {
-			var btn : Button = new Button();
-			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "清除帐号缓存";
-			btn.width = 120;
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
+			btn.label = "";
+			btn.emphasized = false;
 			return btn;
 		}
 
@@ -562,17 +507,49 @@ package mew.factory {
 
 		public static function FollowButton() : Button {
 			var btn : Button = new Button();
+			var upSkin : Bitmap = new (Resource.AddButtonUp)();
+			var overSkin : Bitmap = new (Resource.AddButtonOver)();
+			var downSkin : Bitmap = new (Resource.AddButtonDown)();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "关注";
-			btn.width = 60;
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", overSkin);
+			btn.setStyle("downSkin", downSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
+			btn.label = "";
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
+			return btn;
+		}
+
+		public static function MinusButton() : Button {
+			var btn : Button = new Button();
+			var upSkin : Bitmap = new (Resource.MinusUp)();
+			var overSkin : Bitmap = new (Resource.MinusOver)();
+			var downSkin : Bitmap = new (Resource.MinusDown)();
+			btn.textField.autoSize = TextFieldAutoSize.LEFT;
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", overSkin);
+			btn.setStyle("downSkin", downSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
+			btn.label = "";
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
 			return btn;
 		}
 
 		public static function AtButton() : Button {
 			var btn : Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "@";
-			btn.width = 30;
+			var upSkin : Bitmap = new (Resource.UserAtMouseUp)();
+			var overSkin : Bitmap = new (Resource.UserAtMouseOver)();
+			var downSkin : Bitmap = new (Resource.UserAtMouseDown)();
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", overSkin);
+			btn.setStyle("downSkin", downSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
+			btn.label = "";
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
 			return btn;
 		}
 
@@ -663,10 +640,18 @@ package mew.factory {
 			return btn;
 		}
 
-		public static function TimingClockButton() : Button {
+		public static function ReadCommentButton() : Button {
 			var btn : Button = new Button();
+			var upSkin : Bitmap = new Resource.ReadComments();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.width = 40;
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", upSkin);
+			btn.setStyle("downSkin", upSkin);
+			btn.setStyle("disabledSkin", upSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
+			btn.label = "";
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
 			return btn;
 		}
 
@@ -705,30 +690,83 @@ package mew.factory {
 
 		public static function UserHomeButton() : Button {
 			var btn : Button = new Button();
+			var upSkin : Bitmap = new (Resource.UserHomeButtonUp)();
+			var overSkin : Bitmap = new (Resource.UserHomeButtonDown)();
+			var downSkin : Bitmap = new (Resource.UserHomeButtonOver)();
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", overSkin);
+			btn.setStyle("downSkin", downSkin);
+			btn.setStyle("disabledSkin", downSkin);
+			btn.setStyle("selectedUpSkin", downSkin);
+			btn.setStyle("selectedOverSkin", downSkin);
+			btn.setStyle("selectedDownSkin", downSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.width = 60;
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
+			btn.label = "";
 			return btn;
 		}
 
 		public static function UserFollowButton() : Button {
 			var btn : Button = new Button();
+			var upSkin : Bitmap = new (Resource.UserFollowButtonUp)();
+			var overSkin : Bitmap = new (Resource.UserFollowButtonDown)();
+			var downSkin : Bitmap = new (Resource.UserFollowButtonOver)();
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", overSkin);
+			btn.setStyle("downSkin", downSkin);
+			btn.setStyle("disabledSkin", downSkin);
+			btn.setStyle("selectedUpSkin", downSkin);
+			btn.setStyle("selectedOverSkin", downSkin);
+			btn.setStyle("selectedDownSkin", downSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.width = 60;
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
+			btn.label = "";
 			return btn;
 		}
 
 		public static function UserFansButton() : Button {
 			var btn : Button = new Button();
+			var upSkin : Bitmap = new (Resource.UserFansButtonUp)();
+			var overSkin : Bitmap = new (Resource.UserFansButtonDown)();
+			var downSkin : Bitmap = new (Resource.UserFansButtonOver)();
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", overSkin);
+			btn.setStyle("downSkin", downSkin);
+			btn.setStyle("disabledSkin", downSkin);
+			btn.setStyle("selectedUpSkin", downSkin);
+			btn.setStyle("selectedOverSkin", downSkin);
+			btn.setStyle("selectedDownSkin", downSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.width = 60;
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
+			btn.label = "";
 			return btn;
 		}
 
-		public static function UserCollectionButton() : Button {
+		public static function RefreshButton() : UIButton {
 			var btn : Button = new Button();
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.width = 60;
-			return btn;
+			var upSkin : Bitmap = new (Resource.RefreshButtonUpSkin)();
+			var overSkin : Bitmap = new (Resource.RefreshButtonOverSkin)();
+			var downSkin : Bitmap = new (Resource.RefreshButtonDownSkin)();
+			btn.setStyle("upSkin", upSkin);
+			btn.setStyle("overSkin", overSkin);
+			btn.setStyle("downSkin", downSkin);
+			btn.setStyle("selectedUpSkin", downSkin);
+			btn.setStyle("selectedOverSkin", downSkin);
+			btn.setStyle("selectedDownSkin", downSkin);
+			btn.setStyle("focusRectSkin", new Sprite());
+			btn.textField.autoSize = TextFieldAutoSize.LEFT;
+			btn.width = upSkin.width;
+			btn.height = upSkin.height;
+			btn.label = "";
+			btn.emphasized = false;
+			return new UIButton(btn, "刷 新", 4);
 		}
 
 		public static function SystemComboBox() : ComboBox {
@@ -761,6 +799,7 @@ package mew.factory {
 
 		public static function SystemNummericStepper() : NumericStepper {
 			var ns : NumericStepper = new NumericStepper();
+			ns.setStyle("focusRectSkin", new Sprite());
 			ns.textField.textField.autoSize = TextFieldAutoSize.LEFT;
 			ns.setStyle("textFormat", Widget.normalFormat);
 			return ns;

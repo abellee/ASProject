@@ -7,7 +7,7 @@ package mew.modules
 
 	public interface IWeiboPublisherContainer extends IDisplay
 	{
-		function showWeiboContent(state:String, userData:UserData, weiboData:WeiboData, repostUserData:UserData, repostData:WeiboData):void;
+		function showWeiboContent(state:String, userData:UserData, weiboData:WeiboData, repostUserData:UserData, repostData:WeiboData, additionStr:String):void;
 		function getContent():String;
 		function getImageData():ByteArray;
 		function resetContent(removeImage:Boolean = true):void;

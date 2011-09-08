@@ -1,19 +1,21 @@
-package mew.modules
-{
-	import com.iabel.core.UISprite;
-	
+package mew.modules {
+	import config.Config;
+
 	import fl.controls.CheckBox;
 	import fl.controls.NumericStepper;
-	
+
+	import mew.data.SystemSettingData;
+	import mew.factory.ButtonFactory;
+
+	import widget.Widget;
+
+	import com.iabel.core.UISprite;
+
 	import flash.events.Event;
+	import flash.net.SharedObject;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
-	
-	import mew.data.SystemSettingData;
-	import mew.factory.ButtonFactory;
-	
-	import widget.Widget;
 	
 	public class SystemSettingContainer extends UISprite implements ISystemSettingContainer
 	{
@@ -154,11 +156,16 @@ package mew.modules
 				addInterfaceHideDirection();
 				return;
 			}else{
-				removeChild(interfaceHideLabel);
-				removeChild(hideLeft);
-				removeChild(hideTop);
-				removeChild(hideRight);
+				removeDir();
 			}
+		}
+		
+		private function removeDir():void
+		{
+			if(this.contains(interfaceHideLabel)) removeChild(interfaceHideLabel);
+			if(this.contains(hideLeft)) removeChild(hideLeft);
+			if(this.contains(hideTop)) removeChild(hideTop);
+			if(this.contains(hideRight)) removeChild(hideRight);
 		}
 		
 		private function customSetting():void
@@ -167,7 +174,8 @@ package mew.modules
 			alwayInFront.selected = SystemSettingData.alwaysInfront;
 			autoHide.selected = SystemSettingData.autoHide;
 			autoRun.selected = SystemSettingData.autoRun;
-			if(autoHide) addInterfaceHideDirection();
+			if(autoHide.selected) addInterfaceHideDirection();
+			else removeDir();
 		}
 		
 		private function addInterfaceHideDirection():void
@@ -220,6 +228,8 @@ package mew.modules
 			hideRight.x = hideTop.x + hideTop.width + 10;
 			hideRight.y = hideTop.y;
 			hideTop.selected = true;
+			hideLeft.selected = false;
+			hideRight.selected = false;
 		}
 		
 		public function get hideDir():int
@@ -280,6 +290,29 @@ package mew.modules
 		public function get isVoice():Boolean
 		{
 			return true;
+		}
+		
+		public function save():void
+		{
+			var dir:int = 0;
+			if(hideLeft.selected) dir = 0;
+			else if(hideTop.selected) dir = 1;
+			else if(hideRight.selected) dir = 2;
+			var so:SharedObject = SharedObject.getLocal(Config.MEWCACHE);
+			so.data.autoRun = autoRun.selected;
+			so.data.hideDirection = dir;
+			so.data.checkUpdateDelay = updateDelayStepper.value;
+			so.data.autoHide = autoHide.selected;
+			so.data.alwaysInfront = alwayInFront.selected;
+			trace(so.data.autoRun);
+			so.flush();
+			trace("flush");
+			
+			SystemSettingData.autoRun = autoRun.selected;
+			SystemSettingData.hideDirection = dir;
+			SystemSettingData.checkUpdateDelay = updateDelayStepper.value;
+			SystemSettingData.autoHide = autoHide.selected;
+			SystemSettingData.alwaysInfront = alwayInFront.selected;
 		}
 		
 		public function get isWBNotice():Boolean

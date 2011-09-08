@@ -76,6 +76,7 @@ package mew.communication {
 				if(MewSystem.checkLastId(SQLConfig.MEW_AT, arr)) return;
 				MewSystem.app.localWriter.prefixData(arr, SQLConfig.MEW_AT, MewSystem.atNum);
 				MewSystem.atNotice(arr.length);
+				MewSystem.microBlog.resetCount(2);
 			}
 		}
 
@@ -95,25 +96,27 @@ package mew.communication {
 				if(MewSystem.checkLastId(SQLConfig.MEW_DIRECT, arr)) return;
 				MewSystem.app.localWriter.prefixData(arr, SQLConfig.MEW_DIRECT, MewSystem.directMessageNum);
 				MewSystem.dmNotice(arr.length);
+				MewSystem.microBlog.resetCount(3);
 			}
 		}
 
 		private function loadNewComment(comments : int) : void
 		{
 			if(comments){
-				MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_COMMENTS_TIMELINE_RESULT, loadCommentsTimeLineResult);
+				MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_COMMENTS_TIMELINE_RESULT, loadCommentsTimeLine);
 				MewSystem.microBlog.loadCommentsTimeline("0", "0", comments, 1);
 			}
 		}
 
-		private function loadCommentsTimeLineResult(event : MicroBlogEvent) : void
+		private function loadCommentsTimeLine(event : MicroBlogEvent) : void
 		{
-			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_COMMENTS_TIMELINE_RESULT, loadCommentsTimeLineResult);
+			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_COMMENTS_TIMELINE_RESULT, loadCommentsTimeLine);
 			var arr:Array = event.result as Array;
 			if(arr && arr.length){
 				if(MewSystem.checkLastId(SQLConfig.MEW_COMMENT, arr)) return;
 				MewSystem.app.localWriter.prefixData(arr, SQLConfig.MEW_COMMENT, MewSystem.commentNum);
 				MewSystem.commentNotice(arr.length);
+				MewSystem.microBlog.resetCount(1);
 			}
 		}
 		
@@ -160,6 +163,7 @@ package mew.communication {
 				if(MewSystem.checkLastId(SQLConfig.MEW_FANS, arr)) return;
 				MewSystem.app.localWriter.prefixData(arr, SQLConfig.MEW_FANS, MewSystem.fansNum);
 				MewSystem.fansNotice(arr.length);
+				MewSystem.microBlog.resetCount(4);
 			}
 		}
 	}

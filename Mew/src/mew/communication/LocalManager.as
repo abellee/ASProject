@@ -21,6 +21,20 @@ package mew.communication
 					SystemSettingData._accessTokenSecret = so.data.accessTokenSecret;
 					SystemSettingData._verified = true;
 				}
+				trace(so.data.aa);
+				if(so.data.autoLogin != undefined) SystemSettingData.autoLogin = so.data.autoLogin;
+				if(so.data.hideDirection != undefined) SystemSettingData.hideDirection = so.data.hideDirection;
+				if(so.data.autoRun != undefined) SystemSettingData.autoRun = so.data.autoRun;
+				if(so.data.checkUpdateDelay != undefined) SystemSettingData.checkUpdateDelay = so.data.checkUpdateDelay;
+				if(so.data.autoHide != undefined) SystemSettingData.autoHide = so.data.autoHide;
+				if(so.data.alwaysInfront != undefined) SystemSettingData.alwaysInfront = so.data.alwaysInfront;
+				if(so.data.isVoice != undefined) SystemSettingData.isVoice = so.data.isVoice;
+				if(so.data.atNotice != undefined) SystemSettingData.atNotice = so.data.atNotice;
+				if(so.data.dmNotice != undefined) SystemSettingData.dmNotice = so.data.dmNotice;
+				if(so.data.fansNotice != undefined) SystemSettingData.fansNotice = so.data.fansNotice;
+				if(so.data.weiboNotice != undefined) SystemSettingData.weiboNotice = so.data.weiboNotice;
+				if(so.data.commentNotice != undefined) SystemSettingData.commentNotice = so.data.commentNotice;
+				if(so.data.skipVersionNumber != undefined) SystemSettingData.skipVersionNumber = so.data.skipVersionNumber;
 			}
 			so.close();
 		}

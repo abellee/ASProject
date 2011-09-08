@@ -19,7 +19,7 @@ package mew.modules {
 	{
 		public var data:WeiboData = null;
 		public var userData:UserData = null;
-		public var finalStep:Boolean = false;
+		public var finalStep:Boolean = true;
 		
 		protected var targetUserData:UserData = null;
 		protected var userAvatar:Avatar = null;
@@ -51,13 +51,13 @@ package mew.modules {
 			if(!MewSystem.operationButton) MewSystem.operationButton = new OperationGroup();
 			MewSystem.operationButton.showDeleteButton();
 			MewSystem.operationButton.showMessageButton();
+			MewSystem.operationButton.calculateSize();
 			MewSystem.operationButton.finalStep = finalStep;
 			data.cid = "0";
 			MewSystem.operationButton.parentWin = parentWin;
 			MewSystem.operationButton.data = data;
 			MewSystem.operationButton.userData = userData;
 			MewSystem.operationButton.parentBox = this;
-			MewSystem.operationButton.calculateSize();
 			addChild(MewSystem.operationButton);
 			MewSystem.operationButton.sid = data.id;
 			if(userData.id == MewSystem.app.userData.id) MewSystem.operationButton.x = 5;

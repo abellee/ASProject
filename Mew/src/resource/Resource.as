@@ -365,5 +365,17 @@ package resource {
 		[Embed(source="res.swf", symbol="VideoPlayButton")]
 		public static var VideoPlayButton : Class;
 		
+		[Embed(source="res.swf", symbol="AddButtonUp")]
+		public static var AddButtonUp : Class;
+		
+		[Embed(source="res.swf", symbol="AddButtonOver")]
+		public static var AddButtonOver : Class;
+		
+		[Embed(source="res.swf", symbol="AddButtonDown")]
+		public static var AddButtonDown : Class;
+		
+		[Embed(source="res.swf", symbol="ReadComments")]
+		public static var ReadComments : Class;
+		
 	}
 }

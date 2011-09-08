@@ -67,7 +67,7 @@ package mew.windows {
 		}
 		
 		public function displayByState(state:String, userData:UserData = null, weiboData:WeiboData = null,
-		 repostUserData:UserData = null, repostData:WeiboData = null):void
+		 repostUserData:UserData = null, repostData:WeiboData = null, additionStr:String = null):void
 		{
 			if(curContainer){
 				removeChild(curContainer as UISprite);
@@ -91,7 +91,7 @@ package mew.windows {
 					break;
 			}
 			currentState = state;
-			if(userData && weiboData) curContainer.showWeiboContent(state, userData, weiboData, repostUserData, repostData);
+			if(userData) curContainer.showWeiboContent(state, userData, weiboData, repostUserData, repostData, additionStr);
 			addChild(curContainer as UISprite);
 			curContainer.x = 10;
 			curContainer.y = 15;

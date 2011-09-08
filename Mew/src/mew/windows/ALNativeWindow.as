@@ -32,7 +32,7 @@ package mew.windows {
 	{
 		protected var _listenerList:Object = null;
 		protected var background:UISprite = null;
-		protected var whiteBackground:Sprite = null;
+		protected var whiteBackground:UISprite = null;
 		protected var cover:Sprite = null;
 		protected var showTimer:Timer = null;
 		protected var curPoint:Point = null;
@@ -81,6 +81,11 @@ package mew.windows {
 //			TweenLite.to(this.stage.nativeWindow, .3, {y: ypos});
 		}
 		
+		public function reload():void
+		{
+			return;
+		}
+		
 		protected function drawBackground(w:int, h:int, position:String = null):void
 		{
 			if(!background) background = new UISprite();
@@ -105,7 +110,7 @@ package mew.windows {
 				}
 				addChild(triangle);
 			}
-			if(!whiteBackground) whiteBackground = new Sprite();
+			if(!whiteBackground) whiteBackground = new UISprite();
 			whiteBackground.mouseChildren = false;
 			whiteBackground.graphics.clear();
 			whiteBackground.graphics.beginFill(0xFFFFFF, 1.0);
@@ -329,6 +334,7 @@ package mew.windows {
 			}
 			container = null;
 			newLocation = null;
+			whiteBackground = null;
 		}
 	}
 }

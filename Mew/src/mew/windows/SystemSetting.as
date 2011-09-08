@@ -1,5 +1,6 @@
 package mew.windows
 {
+	import system.MewSystem;
 	import com.greensock.TweenLite;
 	import com.iabel.core.UISprite;
 	
@@ -55,9 +56,16 @@ package mew.windows
 			TweenLite.to(background, .5, {alpha: 1});
 			
 			tabsGroup = new SystemSettingTabsGroup();
-			enterButton = ButtonFactory.EnterButton();
-			cancelButton = ButtonFactory.CancelButton();
-			defaultButton = ButtonFactory.DefaultButton();
+			enterButton = ButtonFactory.WhiteButton();
+			cancelButton = ButtonFactory.WhiteButton();
+			defaultButton = ButtonFactory.WhiteButton();
+			
+			enterButton.label = "确 定";
+			enterButton.width = 60;
+			cancelButton.label = "取 消";
+			cancelButton.width = 60;
+			defaultButton.label = "恢复默认";
+			defaultButton.width = 100;
 			
 			addChild(tabsGroup);
 			tabsGroup.addEventListener(MewEvent.SYSTEM, systemTab_mouseClickHandler);
@@ -77,6 +85,8 @@ package mew.windows
 			defaultButton.x = background.x + 30;
 			defaultButton.y = enterButton.y;
 			
+			cancelButton.addEventListener(MouseEvent.CLICK, cancelButton_mouseClickHandler);
+			enterButton.addEventListener(MouseEvent.CLICK, enterButton_mouseClickHandler);
 			defaultButton.addEventListener(MouseEvent.CLICK, defaultButton_mouseClickHandler);
 			
 			drawDescriptionBackground();
@@ -86,24 +96,38 @@ package mew.windows
 			
 			showContainer();
 		}
+
+		private function enterButton_mouseClickHandler(event : MouseEvent) : void
+		{
+			if(curContainer) curContainer.save();
+			MewSystem.app.closeSystemSettingWindow();
+		}
+
+		private function cancelButton_mouseClickHandler(event : MouseEvent) : void
+		{
+			MewSystem.app.closeSystemSettingWindow();
+		}
 		private function defaultButton_mouseClickHandler(event:MouseEvent):void
 		{
 			if(curContainer) curContainer.setDefault();
 		}
 		private function systemTab_mouseClickHandler(event:MewEvent):void
 		{
+			trace(currentState);
 			if(currentState == SYSTEM) return;
 			currentState = SYSTEM;
 			showContainer();
 		}
 		private function noticeTab_mouseClickHandler(event:MewEvent):void
 		{
+			trace(currentState);
 			if(currentState == NOTICE) return;
 			currentState = NOTICE;
 			showContainer();
 		}
 		private function accountTab_mouseClickHandler(event:MewEvent):void
 		{
+			trace(currentState);
 			if(currentState == ACCOUNT) return;
 			currentState = ACCOUNT;
 			showContainer();
@@ -112,7 +136,8 @@ package mew.windows
 		override protected function drawBackground(w:int, h:int, position:String = null):void
 		{
 			super.drawBackground(w, h);
-			background.addEventListener(MouseEvent.MOUSE_DOWN, dragLoginPanel);
+			addChildAt(whiteBackground, 1);
+			whiteBackground.addEventListener(MouseEvent.MOUSE_DOWN, dragLoginPanel);
 		}
 		
 		private function dragLoginPanel(event:MouseEvent):void
@@ -133,6 +158,7 @@ package mew.windows
 		private function showContainer():void
 		{
 			if(curContainer && container.contains(curContainer as UISprite)){
+				curContainer.save();
 				removeChild(curContainer as UISprite);
 				curContainer = null;
 			}
@@ -166,9 +192,6 @@ package mew.windows
 			bk = null;
 			tabsGroup = null;
 			currentState = null;
-			SYSTEM = null;
-			ACCOUNT = null;
-			NOTICE = null;
 		}
 	}
 }

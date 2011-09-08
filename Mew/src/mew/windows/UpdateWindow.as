@@ -86,7 +86,7 @@ package mew.windows {
 			desTextField.multiline = true;
 			desTextField.width = 418;
 			
-			cancelButton = ButtonFactory.CancelButton();
+			cancelButton = ButtonFactory.WhiteButton();
 			updateButton = ButtonFactory.UpdateButton();
 			skipButton = ButtonFactory.SkipButton();
 			

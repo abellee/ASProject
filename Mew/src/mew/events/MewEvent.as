@@ -44,6 +44,17 @@ package mew.events
 		public static const REPOST_SUCCESS:String = "repost_success";
 		public static const REPOST_FAILED:String = "repost_failed";
 		
+		public static const FRIEND_TIME_LINE_LOADED:String = "friend_time_line_loaded";
+		public static const COMMENTS_TIME_LINE_LOADED:String = "comments_time_line_loaded";
+		public static const MENTIONS_LOADED:String = "mentions_loaded";
+		public static const DM_LOADED:String = "dm_loaded";
+		public static const FAVORITE_LOADED:String = "favorite_loaded";
+		public static const USER_TIME_LINE_LOADED:String = "user_time_line_loaded";
+		public static const FOLLOW_INFO_LOADED:String = "follow_info_loaded";
+		public static const FRIEND_INFO_LOADED:String = "friend_info_loaded";
+		
+		public var result:Object = null;
+		
 		public function MewEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);

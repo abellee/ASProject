@@ -100,10 +100,10 @@ package system {
 			}
 		}
 		
-		public static function getTriangle(dir:String = "up", size:int = 100):Sprite
+		public static function getTriangle(dir:String = "up", size:int = 100, color:Number = 0x000000):Sprite
 		{
 			var sp:Sprite = new Sprite();
-			sp.graphics.beginFill(Widget.mainColor, 1.0);
+			sp.graphics.beginFill(color, 1.0);
 			switch(dir){
 				case "up":
 					sp.graphics.moveTo(50, 0);
@@ -150,19 +150,69 @@ package system {
 		{
 			switch(fileName){
 				case SQLConfig.MEW_FANS:
-					MewSystem.lastFanId = (arr[0] as MicroBlogUser).id;
+					var user:MicroBlogUser;
+					for each(var userData:MicroBlogUser in arr){
+						if(!userData){
+							arr.shift();
+							continue;
+						}else{
+							user = userData;
+							break;
+						}
+					}
+					MewSystem.lastFanId = user.id;
 					break;
 				case SQLConfig.MEW_AT:
-					MewSystem.lastAtId = (arr[0] as MicroBlogStatus).id;
+					var status:MicroBlogStatus;
+					for each(var statusData:MicroBlogStatus in arr){
+						if(!statusData){
+							arr.shift();
+							continue;
+						}else{
+							status = statusData;
+							break;
+						}
+					}
+					MewSystem.lastAtId = status.id;
 					break;
 				case SQLConfig.MEW_DIRECT:
-					MewSystem.lastDMId = (arr[0] as MicroBlogDirectMessage).id;
+					var dm:MicroBlogDirectMessage;
+					for each(var dmData:MicroBlogDirectMessage in arr){
+						if(!dmData){
+							arr.shift();
+							continue;
+						}else{
+							dm = dmData;
+							break;
+						}
+					}
+					MewSystem.lastDMId = dm.id;
 					break;
 				case SQLConfig.MEW_INDEX:
-					MewSystem.lastStatusId = (arr[0] as MicroBlogStatus).id;
+					var indexStatus:MicroBlogStatus;
+					for each(var indexStatusData:MicroBlogStatus in arr){
+						if(!indexStatusData){
+							arr.shift();
+							continue;
+						}else{
+							indexStatus = indexStatusData;
+							break;
+						}
+					}
+					MewSystem.lastStatusId = indexStatus.id;
 					break;
 				case SQLConfig.MEW_COMMENT:
-					MewSystem.lastCommentId = (arr[0] as MicroBlogComment).id;
+					var comment:MicroBlogComment;
+					for each(var commentData:MicroBlogComment in arr){
+						if(!commentData){
+							arr.shift();
+							continue;
+						}else{
+							comment = commentData;
+							break;
+						}
+					}
+					MewSystem.lastCommentId = comment.id;
 					break;
 			}
 		}

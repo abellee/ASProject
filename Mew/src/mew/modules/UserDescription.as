@@ -1,16 +1,26 @@
-package mew.modules
-{
+package mew.modules {
+	import flash.events.MouseEvent;
+	import fl.controls.Button;
+
+	import mew.data.UserData;
 	import mew.events.MewEvent;
+	import mew.factory.ButtonFactory;
+
+	import system.MewSystem;
+
+	import widget.Widget;
+
 	import com.iabel.core.UISprite;
-	
+	import com.iabel.util.DashLine;
+	import com.sina.microblog.data.MicroBlogUsersRelationship;
+	import com.sina.microblog.events.MicroBlogErrorEvent;
+	import com.sina.microblog.events.MicroBlogEvent;
+
+	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
-	
-	import mew.data.UserData;
-	
-	import widget.Widget;
 	
 	public class UserDescription extends UISprite
 	{
@@ -24,6 +34,9 @@ package mew.modules
 		private var localAndSex:SexAndLocation = null;
 		private var operationButtonGroup:OperationGroup = null;
 		private var userCorrelationBtns:UserCorrelationButtons = null;
+		private var dashLine:Bitmap = null;
+		private var relationshipButton:Button = null;
+		private var isFollow:Boolean = false;
 		public function UserDescription()
 		{
 			super();
@@ -43,8 +56,7 @@ package mew.modules
 			if(!nameBox) nameBox = new NameBox();
 			if(!avatar) avatar = new Avatar(100);
 			if(!localAndSex) localAndSex = new SexAndLocation();
-			if(!operationButtonGroup) operationButtonGroup = new OperationGroup();
-			if(!userCorrelationBtns) userCorrelationBtns = new UserCorrelationButtons();
+			if(!userCorrelationBtns) userCorrelationBtns = new UserCorrelationButtons(userData);
 			
 			avatar.userData = userData;
 			avatar.loadAvatar(180);
@@ -119,22 +131,107 @@ package mew.modules
 			
 			setSize(this.width, userCorrelationBtns.y + userCorrelationBtns.height);
 			
+			var bd:DashLine = new DashLine(this.width, 1);
+			bd.drawDashLine(3);
+			dashLine = new Bitmap(bd);
+			dashLine.alpha = .3;
+			addChild(dashLine);
+			dashLine.y = this.height - 5;
+			
+			if(userData.id != MewSystem.app.userData.id){
+				if(!operationButtonGroup) operationButtonGroup = new OperationGroup();
+				addChild(operationButtonGroup);
+				operationButtonGroup.userData = userData;
+				operationButtonGroup.showAtButton();
+//				operationButtonGroup.showMessageButton();
+				operationButtonGroup.calculateSize();
+				operationButtonGroup.x = this.width - operationButtonGroup.width - 10;
+				operationButtonGroup.y = nameBox.y;
+				checkRelationShip();
+			}
+			
 			userCorrelationBtns.addEventListener(MewEvent.USER_FANS, bubbleEvent);
 			userCorrelationBtns.addEventListener(MewEvent.USER_FOLLOW, bubbleEvent);
 			userCorrelationBtns.addEventListener(MewEvent.USER_HOME, bubbleEvent);
+		}
+		
+		private function checkRelationShip():void
+		{
+			MewSystem.microBlog.addEventListener(MicroBlogEvent.CHECK_IS_FOLLOWING_RESULT, checkIsFollowingResult);
+			MewSystem.microBlog.addEventListener(MicroBlogErrorEvent.CHECK_IS_FOLLOWING_ERROR, checkIsFollowingError);
+			MewSystem.microBlog.checkIsFollowing(userData.id, userData.username);
+		}
+
+		private function checkIsFollowingError(event : MicroBlogErrorEvent) : void
+		{
+			MewSystem.microBlog.removeEventListener(MicroBlogEvent.CHECK_IS_FOLLOWING_RESULT, checkIsFollowingResult);
+			MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.CHECK_IS_FOLLOWING_ERROR, checkIsFollowingError);
+		}
+
+		private function checkIsFollowingResult(event : MicroBlogEvent) : void
+		{
+			MewSystem.microBlog.removeEventListener(MicroBlogEvent.CHECK_IS_FOLLOWING_RESULT, checkIsFollowingResult);
+			MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.CHECK_IS_FOLLOWING_ERROR, checkIsFollowingError);
+			var relation:MicroBlogUsersRelationship = event.result as MicroBlogUsersRelationship;
+			if(relation.target.isFollowedBy){
+				isFollow = true;
+				relationshipButton = ButtonFactory.MinusButton();
+			}else{
+				isFollow = false;
+				relationshipButton = ButtonFactory.FollowButton();
+			}
+			addChild(relationshipButton);
+			relationshipButton.x = operationButtonGroup.x;
+			relationshipButton.y = operationButtonGroup.y + operationButtonGroup.height;
+			relationshipButton.addEventListener(MouseEvent.CLICK, doFollow);
+		}
+
+		private function doFollow(event : MouseEvent) : void
+		{
+			if(isFollow){
+				MewSystem.microBlog.addEventListener(MicroBlogEvent.CANCEL_FOLLOWING_RESULT, onCancelFollowResult);
+				MewSystem.microBlog.addEventListener(MicroBlogErrorEvent.CANCEL_FOLLOWING_ERROR, onCancelFollowError);
+				MewSystem.microBlog.cancelFollowing(userData.id);
+			}else{
+				MewSystem.microBlog.addEventListener(MicroBlogEvent.FOLLOW_RESULT, onFollowResult);
+				MewSystem.microBlog.addEventListener(MicroBlogErrorEvent.FOLLOW_ERROR, onFollowError);
+				MewSystem.microBlog.follow(userData.id);
+			}
+		}
+		private function onCancelFollowError(event : MicroBlogErrorEvent) : void
+		{
+			MewSystem.microBlog.removeEventListener(MicroBlogEvent.CANCEL_FOLLOWING_RESULT, onCancelFollowResult);
+			MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.CANCEL_FOLLOWING_ERROR, onCancelFollowError);
+			MewSystem.showLightAlert("取消关注失败!", this);
+		}
+		private function onCancelFollowResult(event : MicroBlogEvent) : void
+		{
+			MewSystem.microBlog.removeEventListener(MicroBlogEvent.CANCEL_FOLLOWING_RESULT, onCancelFollowResult);
+			MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.CANCEL_FOLLOWING_ERROR, onCancelFollowError);
+			MewSystem.showLightAlert("取消关注成功!", this);
+			MewSystem.app.preloader.preloadFriendsInfo();
+			MewSystem.app.preloader.preloadFriendTimeline();
+		}
+		
+		private function onFollowResult(event:MicroBlogEvent):void
+		{
+			MewSystem.microBlog.removeEventListener(MicroBlogEvent.FOLLOW_RESULT, onFollowResult);
+			MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.FOLLOW_ERROR, onFollowError);
+			MewSystem.showLightAlert("关注成功!", this);
+			MewSystem.app.preloader.preloadFriendsInfo();
+			MewSystem.app.preloader.preloadFriendTimeline();
+		}
+		
+		private function onFollowError(event:MicroBlogErrorEvent):void
+		{
+			MewSystem.microBlog.removeEventListener(MicroBlogEvent.FOLLOW_RESULT, onFollowResult);
+			MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.FOLLOW_ERROR, onFollowError);
+			MewSystem.showLightAlert("关注失败!", this);
 		}
 
 		private function bubbleEvent(event : MewEvent) : void
 		{
 			this.dispatchEvent(event.clone() as MewEvent);
-		}
-		
-		public function showOperationButtons(operationGroup:OperationGroup):void
-		{
-			operationButtonGroup = operationGroup;
-			addChild(operationButtonGroup);
-			operationButtonGroup.x = this.width - operationButtonGroup.width;
-			operationButtonGroup.y = nameBox.y;
 		}
 		
 		override protected function dealloc(event:Event):void
@@ -155,6 +252,18 @@ package mew.modules
 				userCorrelationBtns.removeEventListener(MewEvent.USER_HOME, bubbleEvent);
 			}
 			userCorrelationBtns = null;
+			if(operationButtonGroup){
+				removeChild(operationButtonGroup);
+				operationButtonGroup = null;
+			}
+			if(dashLine){
+				dashLine.bitmapData.dispose();
+				dashLine = null;
+			}
+			if(relationshipButton){
+				relationshipButton.removeEventListener(MouseEvent.CLICK, doFollow);
+				relationshipButton = null;
+			}
 		}
 	}
 }

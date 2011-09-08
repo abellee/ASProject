@@ -1,13 +1,15 @@
-package mew.modules
-{
-	import com.iabel.core.UISprite;
-	
+package mew.modules {
+	import config.Config;
+
 	import fl.controls.CheckBox;
-	
-	import flash.events.Event;
-	
+
 	import mew.data.SystemSettingData;
 	import mew.factory.ButtonFactory;
+
+	import com.iabel.core.UISprite;
+
+	import flash.events.Event;
+	import flash.net.SharedObject;
 	
 	public class NoticeSettingContainer extends UISprite implements ISystemSettingContainer
 	{
@@ -82,6 +84,25 @@ package mew.modules
 		public function get isVoice():Boolean
 		{
 			return voiceNotice.selected;
+		}
+		
+		public function save():void
+		{
+			var so:SharedObject = SharedObject.getLocal(Config.MEWCACHE);
+			so.data.isVoice = voiceNotice.selected;
+			so.data.atNotice = atNotice.selected;
+			so.data.dmNotice = dmNotice.selected;
+			so.data.fansNotice = fansNotice.selected;
+			so.data.weiboNotice = weiboNotice.selected;
+			so.data.commentNotice = commentNotice.selected;
+			so.flush();
+			
+			SystemSettingData.isVoice = voiceNotice.selected;
+			SystemSettingData.atNotice = atNotice.selected;
+			SystemSettingData.dmNotice = dmNotice.selected;
+			SystemSettingData.fansNotice = fansNotice.selected;
+			SystemSettingData.weiboNotice = weiboNotice.selected;
+			SystemSettingData.commentNotice = commentNotice.selected;
 		}
 		
 		public function get isWBNotice():Boolean

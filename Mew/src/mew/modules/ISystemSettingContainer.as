@@ -4,6 +4,7 @@ package mew.modules
 	{
 		function init():void;
 		function setDefault():void;
+		function save():void;
 		function setSize(w:Number, h:Number, color:Number = 0):void;
 		
 		function get hideDir():int;

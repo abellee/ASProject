@@ -149,11 +149,14 @@ package mew.windows {
 			rightArrow.y = leftArrow.y;
 			timeButtons = new Vector.<Button>();
 			for(var i:int = 0; i<24; i++){
-				var btn:Button = ButtonFactory.TimingClockButton();
+				var btn:Button = ButtonFactory.WhiteButton();
+				btn.setStyle("textFormat", Widget.normalFormat);
+				btn.setStyle("disabledTextFormat", Widget.normalFormat);
 				var str:String = "AM";
 				if(i >= 12) str = "PM";
 				btn.label = i + str;
 				btn.name = i + "";
+				btn.width = 50;
 				timeButtons.push(btn);
 				btn.x = buttonContainer.numChildren * (btn.width + 11);
 				buttonContainer.addChild(btn);
@@ -289,12 +292,17 @@ package mew.windows {
 				}
 				dp.sortOn("data", [Array.DESCENDING, Array.NUMERIC]);
 				curDateSelector.dataProvider = dp;
-				var o:Object = {};
 				var monthStr:String = curMonth < 10 ? "0" + curMonth : curMonth + "";
 				var dayStr:String = curDay < 10 ? "0" + curDay : curDay + "";
-				o["label"] = curYear + "-" + monthStr + "-" + dayStr;
-				o["data"] = curMillisecond;
-				var index:int = dp.getItemIndex(o);
+				var timeStr:String = curYear + "-" + monthStr + "-" + dayStr;
+				var index:int = 0;
+				var len:int = dp.length;
+				for(var k:int = 0; k<len; k++){
+					if(dp.getItemAt(k).label == timeStr){
+						index = k;
+						break;
+					}
+				}
 				curDateSelector.selectedIndex = index;
 			 }
 		}

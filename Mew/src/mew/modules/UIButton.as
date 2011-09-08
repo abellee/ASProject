@@ -15,7 +15,7 @@ package mew.modules {
 	public class UIButton extends UISprite {
 		private var btn:Button = null;
 		private var label:TextField = null;
-		public function UIButton(button:Button, str:String, gap:int) {
+		public function UIButton(button:Button, str:String, gap:int, position:String = "bottom") {
 			super();
 			
 			btn = button;
@@ -29,11 +29,21 @@ package mew.modules {
 			label.height = label.textHeight;
 			label.text = str;
 			
-			label.y = button.height + 5;
-			label.x = (button.width - label.textWidth) / 2 - gap;
+			if(position == "right"){
+				label.y = button.height - label.height;
+				label.x = button.width + gap;
+			}else{
+				label.y = button.height + 5;
+				label.x = (button.width - label.textWidth) / 2 - gap;
+			}
 			
 			addChild(btn);
 			addChild(label);
+		}
+		
+		public function set enabled(bool:Boolean):void
+		{
+			btn.enabled = bool;
 		}
 		
 		public function set toggle(bool:Boolean):void

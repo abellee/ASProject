@@ -6,8 +6,10 @@ package mew.modules {
 
 	import system.MewSystem;
 
+	import com.iabel.utils.DashLine;
 	import com.sina.microblog.data.MicroBlogComment;
 
+	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -88,15 +90,23 @@ package mew.modules {
 			addChild(timeAndFrom);
 			var h:int = timeAndFrom.y + timeAndFrom.height;
 			if(h != this.height) setSize(this.width, Math.max(this.height, h));
+			
+			var bd:DashLine = new DashLine(this.width, 1);
+			bd.drawDashLine(5);
+			dashLine = new Bitmap(bd);
+			addChild(dashLine);
+			dashLine.alpha = .3;
+			dashLine.y = timeAndFrom.y + timeAndFrom.height + 10;
+			
 			addListener();
 		}
 		override protected function showOperationButton(event : MouseEvent) : void
 		{
 			MewSystem.operationButton = new OperationGroup();
-			if(userData.id == MewSystem.app.userData.id) MewSystem.operationButton.showDeleteButton();
+			if(userData.id == MewSystem.app.userData.id || weiboUser.id == MewSystem.app.userData.id) MewSystem.operationButton.showDeleteButton();
 			MewSystem.operationButton.showCommentButton();
 			MewSystem.operationButton.calculateSize();
-			data.cid = id;
+			data.cid = data.id;
 			data.username = username;
 			data.commentText = commentText;
 			MewSystem.operationButton.finalStep = finalStep;

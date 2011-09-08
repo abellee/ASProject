@@ -65,7 +65,9 @@ package mew.modules
 			textInput.y = bk.y + 10;
 			textInput.addEventListener(Event.ADDED_TO_STAGE, textInput_onAddedToStage);
 			
-			if(!enterButton) enterButton = ButtonFactory.EnterButton();
+			if(!enterButton) enterButton = ButtonFactory.WhiteButton();
+			enterButton.label = "确 定";
+			enterButton.width = 60;
 			addChild(enterButton);
 			enterButton.x = textInput.x + textInput.width + 5;
 			enterButton.y = textInput.y;

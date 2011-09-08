@@ -80,17 +80,26 @@ package mew.windows {
 			drawBackground(465, 50, "top");
 			super.init();
 			if(!scrollList) scrollList = new ScrollPane();
-//			scrollList.ho
 			drawSearchBackground();
 			
-			if(!searchWeiboButton) searchWeiboButton = ButtonFactory.SearchWeiboButton();
-			if(!searchUserButton) searchUserButton = ButtonFactory.SearchUserButton();
+			if(!searchWeiboButton) searchWeiboButton = ButtonFactory.WhiteButton();
+			if(!searchUserButton) searchUserButton = ButtonFactory.WhiteButton();
 			if(!searchButton) searchButton = ButtonFactory.SearchButton();
 			if(!inputText) inputText = new TextField();
+			
+			searchWeiboButton.width = 60;
+			searchUserButton.width = 60;
+			searchWeiboButton.label = "搜微博";
+			searchUserButton.label = "找人";
+			searchWeiboButton.setStyle("textFormat", Widget.normalFormat);
+			searchWeiboButton.setStyle("disabledTextFormat", Widget.normalFormat);
+			searchUserButton.setStyle("textFormat", Widget.normalFormat);
+			searchUserButton.setStyle("disabledTextFormat", Widget.normalFormat);
+			
 			inputText.defaultTextFormat = Widget.searchGrayFormat;
 			inputText.type = TextFieldType.INPUT;
 			inputText.text = "搜索微博、找人";
-			inputText.height = inputText.textHeight;
+			inputText.height = inputText.textHeight + 5;
 			
 			addChild(searchUserButton);
 			addChild(searchWeiboButton);
@@ -115,8 +124,8 @@ package mew.windows {
 			inputText.x = inputBackground.x + 5;
 			inputText.y = inputBackground.y + (inputBackground.height - inputText.height) / 2;
 			
-			searchButton.x = inputBackground.x + inputBackground.width + 5;
-			searchButton.y = inputBackground.y;
+			searchButton.x = inputBackground.x + inputBackground.width;
+			searchButton.y = inputBackground.y + (inputBackground.height - searchButton.height) / 2;
 			
 			searchWeiboButton.setMouseState("selectedUp");
 			searchWeiboButton.enabled = false;
@@ -149,7 +158,7 @@ package mew.windows {
 		override public function showWeibo(arr:Array, content:UISprite, ud:UserData = null):void
 		{
 			var xpos:int = 30;
-			var ypos:int = searchBackground.y + searchBackground.height;
+			var ypos:int = searchBackground.y + searchBackground.height + 10;
 			desH = Screen.mainScreen.visibleBounds.height - MewSystem.app.height - 100;
 			scrollList.source = list;
 			list.addEventListener(Event.RESIZE, onResize);
@@ -159,7 +168,7 @@ package mew.windows {
 				super.init();
 				scrollList.move(xpos, ypos);
 				addChild(scrollList);
-				scrollList.setSize(this.background.width - 40, desH - searchBackground.height - searchBackground.y - 10);
+				scrollList.setSize(this.background.width - 40, desH - searchBackground.height - searchBackground.y - 20);
 				scrollList.setStyle("upSkin", getSprite(scrollList.width, scrollList.height));
 				scrollBarSkin = new ScaleBitmap((new Resource.ScrollBarSkin() as Bitmap).bitmapData, "auto", true);
 				scrollBarSkin.scale9Grid = new Rectangle(0, 10, 16, 10);
@@ -274,12 +283,13 @@ package mew.windows {
 					if(list) list.removeAllChildren();
 					list = new WeiboFormList();
 				}
+				var win:ALNativeWindow = this.stage.nativeWindow as ALNativeWindow;
 				var urlLoader:URLLoader = new URLLoader();
 				var func:Function = function(event:Event):void
 				{
 					urlLoader.removeEventListener(Event.COMPLETE, func);
 					var emotionXML:XML = XML(urlLoader.data);
-					list.listData(arr, getContentWidth(), emotionXML, this);
+					list.listData(arr, getContentWidth(), emotionXML, win);
 					if(curPage < 2) showWeibo(arr, list, null);
 					else{
 						scrollList.update();
