@@ -17,7 +17,7 @@ package mew.windows {
 	import widget.Widget;
 
 	import com.greensock.TweenLite;
-	import com.iabel.utils.ScaleBitmap;
+	import com.iabel.util.ScaleBitmap;
 	import com.sina.microblog.data.MicroBlogUser;
 	import com.sina.microblog.events.MicroBlogErrorEvent;
 	import com.sina.microblog.events.MicroBlogEvent;
@@ -51,6 +51,7 @@ package mew.windows {
 		private var userAvatar:Bitmap;
 		private var defaultAvatar:Bitmap;
 		private var clearAccount:Label;
+		private var file:File;
 		
 		private var labelMouseOutFormat:TextFormat = new TextFormat(Widget.systemFont, 12, 0x434343);
 		private var labelMouseOverFormat:TextFormat = new TextFormat(Widget.systemFont, 12, 0x767676);
@@ -110,6 +111,7 @@ package mew.windows {
 			}
 			dp.addItem({label: "其它帐号登录..."});
 			accChooser = ButtonFactory.SystemComboBox();
+			accChooser.dropdown.setRendererStyle("textFormat", Widget.normalFormat);
 			accChooser.textField.setStyle("textFormat", Widget.normalGrayFormat);
 			accChooser.textField.setStyle("textPadding", 4);
 			addChild(accChooser);
@@ -230,44 +232,42 @@ package mew.windows {
 		{
 			loadAvatar(accChooser.selectedIndex);
 		}
-		
 		private function loadAvatar(index:int):void
 		{
-			addDefault();
+			if(!userAvatar) addDefault();
 			var id:String = accChooser.getItemAt(index).id;
 			if(id){
-				var file:File = File.applicationStorageDirectory.resolvePath("cache/" + id + ".jpg");
+				file = File.applicationStorageDirectory.resolvePath("cache/" + id + ".jpg");
 				if(file.exists){
-					var func:Function = function(event:Event):void
-					{
-						file.removeEventListener(Event.COMPLETE, func);
-						var loader:Loader = new Loader();
-						var nfunc:Function = function(event:Event):void
-						{
-							if(userAvatar) userAvatar.bitmapData.dispose();
-							userAvatar = null;
-							loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, nfunc);
-							userAvatar = loader.content as Bitmap;
-							if(defaultAvatar){
-								if(container.contains(defaultAvatar)) removeChild(defaultAvatar);
-								defaultAvatar = null;
-							}
-							addChild(userAvatar);
-							userAvatar.alpha = 0;
-							userAvatar.x = imageFrame.x + (imageFrame.width - userAvatar.width) / 2;
-							userAvatar.y = imageFrame.y + (imageFrame.height - userAvatar.height) / 2;
-							TweenLite.to(userAvatar, .3, {alpha: 1});
-						};
-						loader.contentLoaderInfo.addEventListener(Event.COMPLETE, nfunc);
-						loader.loadBytes(file.data);
-					};
-					file.addEventListener(Event.COMPLETE, func);
+					file.addEventListener(Event.COMPLETE, fileLoadComplete);
 					file.load();
-				}else{
-					//TODO: 显示默认图片
-					addDefault();
 				}
 			}
+		}
+		
+		private function fileLoadComplete(event:Event):void
+		{
+			trace("load Complete");
+			file.removeEventListener(Event.COMPLETE, fileLoadComplete);
+			var loader:Loader = new Loader();
+			var nfunc:Function = function(event:Event):void
+			{
+				if(userAvatar) userAvatar.bitmapData.dispose();
+				userAvatar = null;
+				loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, nfunc);
+				userAvatar = loader.content as Bitmap;
+				if(defaultAvatar){
+					if(container.contains(defaultAvatar)) removeChild(defaultAvatar);
+					defaultAvatar = null;
+				}
+				addChild(userAvatar);
+				userAvatar.alpha = 0;
+				userAvatar.x = imageFrame.x + (imageFrame.width - userAvatar.width) / 2;
+				userAvatar.y = imageFrame.y + (imageFrame.height - userAvatar.height) / 2;
+				TweenLite.to(userAvatar, .3, {alpha: 1});
+			};
+			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, nfunc);
+			loader.loadBytes(file.data);
 		}
 		
 		private function addDefault():void
@@ -322,6 +322,8 @@ package mew.windows {
 				var thisTargetPos:int = oauthTargetPos + oauthWindow.stage.nativeWindow.width + 20;
 				if(Screen.mainScreen.visibleBounds.width >= 1200){
 					TweenLite.to(this.stage.nativeWindow, .3, {x:thisTargetPos});
+				}else{
+					oauthWindow.x = centerX;
 				}
 				
 			}else{
@@ -444,6 +446,8 @@ package mew.windows {
 			labelMouseOutFormat = null;
 			labelMouseOverFormat = null;
 			defaultAvatar = null;
+			if(file) file.removeEventListener(Event.COMPLETE, fileLoadComplete);
+			file = null;
 		}
 	}
 }

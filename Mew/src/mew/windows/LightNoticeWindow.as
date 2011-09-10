@@ -50,12 +50,18 @@ package mew.windows {
 			
 			container.alpha = 0;
 			drawBackground(txt.width + txt.x, txt.height + txt.y);
-			this.stage.nativeWindow.alwaysInFront = true;
+			if(MewSystem.isFullScreen){
+				trace("is full screen, so always in front set to false!");
+				this.stage.nativeWindow.alwaysInFront = false;
+			}else{
+				trace("is not full screen, so always in front set to true!");
+				this.stage.nativeWindow.alwaysInFront = true;
+			}
 			super.init();
 			this.stage.nativeWindow.x = Screen.mainScreen.visibleBounds.width - this.stage.nativeWindow.width;
-			this.stage.nativeWindow.y = MewSystem.app.stage.nativeWindow.y + MewSystem.app.stage.nativeWindow.height - 10;
+			this.stage.nativeWindow.y = MewSystem.app.mainWindow.y + MewSystem.app.mainWindow.height - 10;
 			
-			TweenLite.to(container, .5, {alpha: 1, onComplete: showComplete});
+			TweenLite.to(container, .3, {alpha: 1, onComplete: showComplete});
 		}
 		
 		override protected function drawBackground(w:int, h:int, position:String = null):void
@@ -72,7 +78,7 @@ package mew.windows {
 		
 		private function showComplete():void
 		{
-			TweenLite.to(container, .5, {alpha: 0, delay: 2, onComplete: closeSelf});
+			TweenLite.to(container, .3, {alpha: 0, delay: 2, onComplete: closeSelf});
 		}
 		
 		private function closeSelf():void

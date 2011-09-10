@@ -67,13 +67,10 @@ package mew.windows {
 				return;
 			}
 			var xpos:int = 0;
-			if(MewSystem.app.currentState != MewSystem.app.NONE){
-			
-				xpos = MewSystem.app.currentButton.x + MewSystem.app.currentButton.width / 2 - this.stage.nativeWindow.width / 2;
-				
-			}
+			if(MewSystem.app.currentState != MewSystem.app.NONE) xpos = MewSystem.app.mainWindow.currentButton.x + MewSystem.app.mainWindow.currentButton.width / 2
+			 - this.stage.nativeWindow.width / 2;
 //			var startPos:int = Screen.mainScreen.visibleBounds.height + this.stage.nativeWindow.height;
-			var ypos:int = Screen.mainScreen.visibleBounds.y + MewSystem.app.height;
+			var ypos:int = Screen.mainScreen.visibleBounds.y + MewSystem.app.mainWindow.height - 10;
 			if(xpos < Screen.mainScreen.visibleBounds.x) xpos = Screen.mainScreen.visibleBounds.x;
 			else if(xpos + this.stage.nativeWindow.width > Screen.mainScreen.visibleBounds.width) xpos = Screen.mainScreen.visibleBounds.width - this.stage.nativeWindow.width;
 			this.stage.nativeWindow.x = xpos;

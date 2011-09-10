@@ -16,7 +16,7 @@ package mew.windows {
 	import widget.Widget;
 
 	import com.iabel.core.UISprite;
-	import com.iabel.utils.ScaleBitmap;
+	import com.iabel.util.ScaleBitmap;
 	import com.sina.microblog.data.MicroBlogStatus;
 	import com.sina.microblog.data.MicroBlogUser;
 	import com.sina.microblog.events.MicroBlogErrorEvent;
@@ -159,7 +159,7 @@ package mew.windows {
 		{
 			var xpos:int = 30;
 			var ypos:int = searchBackground.y + searchBackground.height + 10;
-			desH = Screen.mainScreen.visibleBounds.height - MewSystem.app.height - 100;
+			desH = Screen.mainScreen.visibleBounds.height - MewSystem.app.mainWindow.height - 100;
 			scrollList.source = list;
 			list.addEventListener(Event.RESIZE, onResize);
 			scrollList.addEventListener(ScrollEvent.SCROLL, onScroll);

@@ -1,21 +1,23 @@
 package mew.modules {
+	import com.iabel.core.UISprite;
+	
 	import config.Config;
-
+	
 	import fl.controls.CheckBox;
 	import fl.controls.NumericStepper;
-
-	import mew.data.SystemSettingData;
-	import mew.factory.ButtonFactory;
-
-	import widget.Widget;
-
-	import com.iabel.core.UISprite;
-
+	
 	import flash.events.Event;
 	import flash.net.SharedObject;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
+	
+	import mew.data.SystemSettingData;
+	import mew.factory.ButtonFactory;
+	
+	import system.MewSystem;
+	
+	import widget.Widget;
 	
 	public class SystemSettingContainer extends UISprite implements ISystemSettingContainer
 	{
@@ -304,15 +306,14 @@ package mew.modules {
 			so.data.checkUpdateDelay = updateDelayStepper.value;
 			so.data.autoHide = autoHide.selected;
 			so.data.alwaysInfront = alwayInFront.selected;
-			trace(so.data.autoRun);
 			so.flush();
-			trace("flush");
-			
+			so.close();
 			SystemSettingData.autoRun = autoRun.selected;
 			SystemSettingData.hideDirection = dir;
 			SystemSettingData.checkUpdateDelay = updateDelayStepper.value;
 			SystemSettingData.autoHide = autoHide.selected;
 			SystemSettingData.alwaysInfront = alwayInFront.selected;
+			if(!autoHide.selected) MewSystem.app.mainWindowNoHide();
 		}
 		
 		public function get isWBNotice():Boolean

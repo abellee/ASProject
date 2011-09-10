@@ -377,5 +377,26 @@ package resource {
 		[Embed(source="res.swf", symbol="ReadComments")]
 		public static var ReadComments : Class;
 		
+		[Embed(source="res.swf", symbol="X16")]
+		public static var X16 : Class;
+		
+		[Embed(source="res.swf", symbol="X32")]
+		public static var X32 : Class;
+		
+		[Embed(source="res.swf", symbol="X36")]
+		public static var X36 : Class;
+		
+		[Embed(source="res.swf", symbol="X48")]
+		public static var X48 : Class;
+		
+		[Embed(source="res.swf", symbol="X72")]
+		public static var X72 : Class;
+		
+		[Embed(source="res.swf", symbol="X114")]
+		public static var X114 : Class;
+		
+		[Embed(source="res.swf", symbol="X128")]
+		public static var X128 : Class;
+		
 	}
 }

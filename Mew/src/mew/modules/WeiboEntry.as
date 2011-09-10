@@ -1,8 +1,13 @@
 package mew.modules {
+	import com.sina.microblog.data.MicroBlogCount;
+	import com.sina.microblog.events.MicroBlogErrorEvent;
+	import com.sina.microblog.events.MicroBlogEvent;
 	import mew.utils.StringUtils;
 	import mew.utils.VideoChecker;
 
 	import system.MewSystem;
+
+	import widget.Widget;
 
 	import com.iabel.util.DashLine;
 	import com.sina.microblog.data.MicroBlogStatus;
@@ -11,14 +16,17 @@ package mew.modules {
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
 	
 	public class WeiboEntry extends RepostBox
 	{
 		protected var repostBox:RepostBox = null;
 		protected var dashLine:Bitmap = null;
-		public function WeiboEntry()
+		public function WeiboEntry(showCount:Boolean = false)
 		{
-			super();
+			showWeiboCount = showCount;
+			super(showCount);
 		}
 		override protected function init():void
 		{
@@ -64,9 +72,11 @@ package mew.modules {
 		{
 			var status:MicroBlogStatus = obj as MicroBlogStatus;
 			if(!status) return;
+			var ids:Array = [];
 			userData = MewSystem.app.dataCache.getUserDataCache(status.user);
 			data = MewSystem.app.dataCache.getWeiboDataCache(status);
 			
+			ids.push(data.id);
 			userAvatar.userData = userData;
 			userAvatar.loadAvatar();
 			addChild(userAvatar);
@@ -108,7 +118,8 @@ package mew.modules {
 			}
 			
 			if(data.repostData){
-				repostBox = new RepostBox();
+				ids.push(data.repostData.id);
+				repostBox = new RepostBox(showWeiboCount);
 				repostBox.setSize(this.width - weiboText.x, 10);
 				repostBox.x = weiboText.x;
 				repostBox.y = weiboText.y + weiboText.height + 10;
@@ -129,8 +140,43 @@ package mew.modules {
 			dashLine.alpha = .3;
 			dashLine.y = timeAndFrom.y + timeAndFrom.height + 10;
 			
+			if(showWeiboCount){
+				weiboCount = new TextField();
+				weiboCount.defaultTextFormat = Widget.normalGrayFormat;
+				weiboCount.autoSize = TextFieldAutoSize.LEFT;
+				weiboCount.selectable = false;
+				weiboCount.mouseEnabled = false;
+				MewSystem.microBlog.addEventListener(MicroBlogEvent.LOAD_STATUS_COUNTS_RESULT, onLoadCountsResult);
+				MewSystem.microBlog.addEventListener(MicroBlogErrorEvent.LOAD_STATUS_COUNTS_ERROR, onLoadCountsError);
+				MewSystem.microBlog.loadStatusCounts(ids);
+			}
+			
 			setSize(this.width, this.height);
 			addListener();
+		}
+		
+		private function onLoadCountsResult(event:MicroBlogEvent):void
+		{
+			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_STATUS_COUNTS_RESULT, onLoadCountsResult);
+			MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.LOAD_STATUS_COUNTS_ERROR, onLoadCountsError);
+			var arr:Array = event.result as Array;
+			if(arr && arr.length){
+				for each(var count:MicroBlogCount in arr){
+					if(count.id == data.id) setWeiboCount(count);
+					if(repostBox && repostBox.data.id == count.id) repostBox.setWeiboCount(count);
+				}
+			}
+		}
+		
+		private function onLoadCountsError(event:MicroBlogErrorEvent):void
+		{
+			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_STATUS_COUNTS_RESULT, onLoadCountsResult);
+			MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.LOAD_STATUS_COUNTS_ERROR, onLoadCountsError);
+			var count:MicroBlogCount = new MicroBlogCount();
+			count.repostsCount = 0;
+			count.commentsCount = 0;
+			setWeiboCount(count);
+			if(repostBox) repostBox.setWeiboCount(count);
 		}
 
 		override protected function onResize(event:Event):void
@@ -154,6 +200,11 @@ package mew.modules {
 				timeAndFrom.y = preChild.y + preH + 10;
 				if(dashLine) dashLine.y = timeAndFrom.y + timeAndFrom.height + 10;
 				h = timeAndFrom.y + timeAndFrom.height + 11;
+				if(weiboCount){
+					addChild(weiboCount);
+					weiboCount.x = weiboText.x + weiboText.width - weiboCount.width;
+					weiboCount.y = timeAndFrom.y;
+				}
 			}
 			setSize(this.width, h);
 			this.dispatchEvent(new Event(Event.RESIZE));
@@ -164,6 +215,8 @@ package mew.modules {
 			repostBox = null;
 			if(dashLine) dashLine.bitmapData.dispose();
 			dashLine = null;
+			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_STATUS_COUNTS_RESULT, onLoadCountsResult);
+			MewSystem.microBlog.removeEventListener(MicroBlogErrorEvent.LOAD_STATUS_COUNTS_ERROR, onLoadCountsError);
 		}
 	}
 }

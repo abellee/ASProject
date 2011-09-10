@@ -1,4 +1,6 @@
 package mew.windows {
+	import flash.text.TextFieldAutoSize;
+	import widget.Widget;
 	import fl.containers.ScrollPane;
 	import fl.controls.Button;
 	import fl.events.ScrollEvent;
@@ -25,6 +27,7 @@ package mew.windows {
 	import flash.geom.Rectangle;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.text.TextField;
 	import flash.utils.Timer;
 
 	/**
@@ -52,10 +55,10 @@ package mew.windows {
 		
 		override protected function init():void
 		{
-			realHeight = Screen.mainScreen.visibleBounds.height - MewSystem.app.height - 100;
+			realHeight = Screen.mainScreen.visibleBounds.height - MewSystem.app.mainWindow.height - 100;
 			drawBackground(465, 10, position);
 			super.init();
-			weiboEntry = new WeiboEntry();
+			weiboEntry = new WeiboEntry(true);
 			weiboEntry.finalStep = true;
 			weiboEntry.x = 30;
 			weiboEntry.y = 30;
@@ -181,6 +184,7 @@ package mew.windows {
 
 		private function commentLoadError() : void
 		{
+			MewSystem.removeCycleLoading(container);
 			MewSystem.showLightAlert("加载评论信息失败!", container);
 		}
 		

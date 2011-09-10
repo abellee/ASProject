@@ -32,6 +32,7 @@ package mew.modules {
 		private var file:File = null;
 		private var bk:Sprite = null;
 		private var clearButton:Button = null;
+		private var tempByteArray:ByteArray = null;
 		public function UploadImageViewer(value:int = 180)
 		{
 			super();
@@ -100,7 +101,12 @@ package mew.modules {
 		private function onCompleteHandler(event:Event):void
 		{
 			file.removeEventListener(Event.COMPLETE, onCompleteHandler);
-			var ba:ByteArray = file.data;
+			tempByteArray = file.data;
+			showThumbnail();
+		}
+		
+		private function showThumbnail():void
+		{
 			var loader:Loader = new Loader();
 			var func:Function = function(event:Event):void
 			{
@@ -152,7 +158,7 @@ package mew.modules {
 				return;
 			};
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, func);
-			loader.loadBytes(ba);
+			loader.loadBytes(tempByteArray);
 		}
 		
 		private function clearChildren():void
@@ -171,7 +177,8 @@ package mew.modules {
 			tip.alpha = 0;
 			TweenLite.to(defaultBackground, .3, {alpha: 1});
 			TweenLite.to(tip, .3, {alpha: 1});
-			
+			if(tempByteArray) tempByteArray.clear();
+			tempByteArray = null;
 			if(file){
 				file.removeEventListener(Event.SELECT, onSelectHandler);
 				file.removeEventListener(Event.COMPLETE, onCompleteHandler);
@@ -183,12 +190,20 @@ package mew.modules {
 		
 		public function get byteArray():ByteArray
 		{
+			if(tempByteArray) return tempByteArray;
 			if(!file) return null;
 			return file.data;
 		}
 		
+		public function set byteArray(value:ByteArray):void
+		{
+			tempByteArray = value;
+			showThumbnail();
+		}
+		
 		public function get imageExtension():String
 		{
+			if(tempByteArray) return "jpg";
 			if(!file) return null;
 			return file.extension;
 		}

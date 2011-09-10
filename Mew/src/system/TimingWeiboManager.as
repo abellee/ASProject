@@ -79,6 +79,38 @@ package system {
 			timer.addEventListener(TimerEvent.TIMER, timingWeibo_sendHandler);
 			timer.start();
 		}
+		public function stop():void
+		{
+			if(timer){
+				timer.stop();
+				timer.removeEventListener(TimerEvent.TIMER, timingWeibo_sendHandler);
+				timer = null;
+			}
+			if(file){
+				file.removeEventListener(IOErrorEvent.IO_ERROR, noImageFile);
+				file.removeEventListener(Event.COMPLETE, fileLoadComplete);
+			}
+			if(dbStatement){
+				dbStatement.removeEventListener(SQLEvent.RESULT, createDBComplete);
+				dbStatement.removeEventListener(SQLEvent.RESULT, writeDataComplete);
+				dbStatement.removeEventListener(SQLEvent.RESULT, readByIdSuccess);
+				dbStatement.removeEventListener(SQLEvent.RESULT, dataReadComplete);
+				dbStatement.removeEventListener(SQLEvent.RESULT, updateComplete);
+				dbStatement.removeEventListener(SQLEvent.RESULT, deleteComplete);
+			}
+			if(conn){
+				try{
+					conn.close();
+				}catch(e:Error){}
+			}
+			filePath = null;
+			conn = null;
+			dbStatement = null;
+			timingWeiboList = null;
+			file = null;
+			dateFile = null;
+			target = null;
+		}
 		private function timingWeibo_sendHandler(event:TimerEvent):void
 		{
 			timer.stop();

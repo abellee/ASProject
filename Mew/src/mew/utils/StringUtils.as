@@ -22,14 +22,15 @@ package mew.utils
 			var ndate:Number = now.getDate();
 			var nhour:Number = now.getHours();
 			var nminute:Number = now.getMinutes();
+			var nsecond:Number = now.getSeconds();
 			
 			if(year != nyear) return year + "年" + month + "月" + date + "日 " + (hour < 10 ? "0" + hour : hour) + ":" + (minute < 10 ? "0" + minute : minute);
 			if(month != nmonth) return month  + "月" + date + "日 " + (hour < 10 ? "0" + hour : hour) + ":" + (minute < 10 ? "0" + minute : minute);
 			if(date != ndate) return month  + "月" + date + "日 " + (hour < 10 ? "0" + hour : hour) + ":" + (minute < 10 ? "0" + minute : minute);
 			else{
 				if(hour != nhour) return "今天 " + (hour < 10 ? "0" + hour : hour) + ":" + (minute < 10 ? "0" + minute : minute);
-				if(minute < 1) return second + "秒前";
-				else return minute + "分钟前";
+				if(minute != nminute) return (nminute - minute) + "分钟前";
+				else return (nsecond - second) + "秒前";
 			}
 		}
 		public static function displayTopicAndAt(str:String):String

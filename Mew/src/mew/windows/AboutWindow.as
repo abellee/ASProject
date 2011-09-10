@@ -1,4 +1,5 @@
 package mew.windows {
+	import resource.Resource;
 	import fl.controls.Button;
 
 	import mew.factory.ButtonFactory;
@@ -39,19 +40,16 @@ package mew.windows {
 		override protected function init():void
 		{
 			drawBackground(400, 300);
-			background.alpha = 0;
 			this.stage.nativeWindow.alwaysInFront = true;
-			super.init();
+			this.stage.nativeWindow.width = background.width + 20;
+			this.stage.nativeWindow.height = background.height + 20;
 			this.stage.nativeWindow.x = (Screen.mainScreen.visibleBounds.width - this.stage.nativeWindow.width) / 2;
 			this.stage.nativeWindow.y = (Screen.mainScreen.visibleBounds.height - this.stage.nativeWindow.height) / 2;
 			
-			TweenLite.to(background, .5, {alpha: 1});
-			
 			closeButton = ButtonFactory.CloseButton();
 			
-			mewFace = new Bitmap(StaticAssets.MewFace());
-			
-			mewFont = new Bitmap(StaticAssets.MewFont());
+			mewFace = new (Resource.MewFace)();
+			mewFont = new (Resource.MewFont)();
 			
 			var appDescription:XML = NativeApplication.nativeApplication.applicationDescriptor;
 			var ns:Namespace = appDescription.namespace();
@@ -70,7 +68,7 @@ package mew.windows {
 			descriptionText.wordWrap = true;
 			descriptionText.multiline = true;
 			descriptionText.defaultTextFormat = new TextFormat(Widget.systemFont, 12, 0x4C4C4C, null, null, null, null, null, null, null, null, null, 8);
-			var des:String = appDescription.ns::description;
+			var des:String = '<p align="center"><b>版权归Abel Lee所有<br>Copyright © 2011 All Rights Reserved.</p><b><font color="#3FB9F8"><a href="http://mew.iabel.com">Mew微博官方网站</a></font><br>Developer: </b><font color="#3FB9F8"><a href="http://weibo.com/abellee"><b>Abel Lee</b></a></font><br><b>Designer: </b><font color="#3FB9F8"><a href="http://weibo.com/sll1004"><b>沈-叉叉</b></a></font>';
 			descriptionText.htmlText = des;
 			descriptionText.autoSize = TextFieldAutoSize.LEFT;
 			descriptionText.width = bk.width - 20;
@@ -87,8 +85,8 @@ package mew.windows {
 			addChild(mewVersion);
 			addChild(closeButton);
 			
-			closeButton.x = this.width - closeButton.width - 10;
-			closeButton.y = 15;
+			closeButton.x = this.width - closeButton.width - 20;
+			closeButton.y = 20;
 			mewFace.x = (this.width - mewFace.width) / 2;
 			mewFace.y = 40;
 			mewFont.x = (this.width - mewFont.width) / 2 - mewVersion.width / 2 - 2;
@@ -110,7 +108,8 @@ package mew.windows {
 		override protected function drawBackground(w:int, h:int, position:String = null):void
 		{
 			super.drawBackground(w, h);
-			background.addEventListener(MouseEvent.MOUSE_DOWN, dragLoginPanel);
+			addChildAt(whiteBackground, 1);
+			whiteBackground.addEventListener(MouseEvent.MOUSE_DOWN, dragLoginPanel);
 		}
 		
 		private function dragLoginPanel(event:MouseEvent):void
@@ -124,13 +123,14 @@ package mew.windows {
 			bk.graphics.clear();
 			bk.graphics.lineStyle(1, 0x000000, .5);
 			bk.graphics.beginFill(0xFFFFFF, 1.0);
-			bk.graphics.drawRoundRect(0, 0, 250, 100, 12, 12);
+			bk.graphics.drawRoundRect(0, 0, 250, 120, 12, 12);
 			bk.graphics.endFill();
 			bk.scrollRect = new Rectangle(0, 0, bk.width, bk.height);
 		}
 		
 		override protected function dealloc(event:Event):void
 		{
+			whiteBackground.removeEventListener(MouseEvent.MOUSE_DOWN, dragLoginPanel);
 			super.dealloc(event);
 			closeButton.removeEventListener(MouseEvent.CLICK, closeWindow);
 			bk = null;

@@ -21,7 +21,6 @@ package mew.communication
 					SystemSettingData._accessTokenSecret = so.data.accessTokenSecret;
 					SystemSettingData._verified = true;
 				}
-				trace(so.data.aa);
 				if(so.data.autoLogin != undefined) SystemSettingData.autoLogin = so.data.autoLogin;
 				if(so.data.hideDirection != undefined) SystemSettingData.hideDirection = so.data.hideDirection;
 				if(so.data.autoRun != undefined) SystemSettingData.autoRun = so.data.autoRun;

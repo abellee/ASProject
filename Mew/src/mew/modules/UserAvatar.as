@@ -1,10 +1,11 @@
 package mew.modules {
+	import com.greensock.TweenLite;
 	import resource.Resource;
 
 	import system.MewSystem;
 
 	import com.iabel.core.UISprite;
-	import com.iabel.utils.ScaleBitmap;
+	import com.iabel.util.ScaleBitmap;
 
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -34,35 +35,32 @@ package mew.modules {
 			frame.width = 66;
 			frame.height = 66;
 			addChild(frame);
+			
+			avatar = new (Resource.MewDefault50)();
+			addChild(avatar);
+			avatar.x = (frame.width - avatar.width) / 2;
+			avatar.y = (frame.height - avatar.height) / 2;
 			loadAvatar();
 		}
 		private function loadAvatar():void
 		{
-			var bd:BitmapData = null;
-			if(!bd){
-				loader = new Loader();
-				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loadAvatarComplete);
-				loader.load(new URLRequest("http://tp1.sinaimg.cn/1579288532/50/5603442187/1"));
-			}else{
-				avatar = new Bitmap(bd);
-				addChild(avatar);
-				avatar.x = (frame.width - avatar.width) / 2;
-				avatar.y = (frame.height - avatar.height) / 2;
-			}
+			loader = new Loader();
+			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loadAvatarComplete);
+			loader.load(new URLRequest(MewSystem.app.userData.src));
 		}
 
 		private function loadAvatarComplete(event : Event) : void
 		{
 			loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadAvatarComplete);
-			var bd:BitmapData = null;
-			if(!bd){
-				avatar = event.target.content as Bitmap;
-//				MewSystem.app.assetsCache.setAvatarCache(MewSystem.app.userData.id, avatar.bitmapData);
-			}else{
-				avatar = new Bitmap(bd);
+			if(avatar){
+				avatar.bitmapData.dispose();
+				avatar = null;
 			}
+			avatar = event.target.content as Bitmap;
 			loader = null;
+			avatar.alpha = 0;
 			addChild(avatar);
+			TweenLite.to(avatar, .3, {alpha: 1});
 			avatar.x = (frame.width - avatar.width) / 2;
 			avatar.y = (frame.height - avatar.height) / 2;
 		}
@@ -77,6 +75,8 @@ package mew.modules {
 				loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadAvatarComplete);
 				loader = null;
 			}
+			if(avatar) avatar.bitmapData.dispose();
+			avatar = null;
 			if(frame){
 				frame.bitmapData.dispose();
 				frame = null;

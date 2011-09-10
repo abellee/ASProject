@@ -1,13 +1,14 @@
 package mew.update {
-	import system.MewSystem;
 	import air.update.descriptors.UpdateDescriptor;
 	import air.update.events.StatusUpdateEvent;
 	import air.update.events.UpdateEvent;
-
+	
 	import com.iabel.nativeApplicationUpdater.NativeApplicationUpdater;
-
+	
 	import flash.desktop.NativeApplication;
 	import flash.events.ProgressEvent;
+	
+	import system.MewSystem;
 
 	public class Update
 	{
@@ -29,11 +30,10 @@ package mew.update {
 			var updator:NativeApplicationUpdater = event.target as NativeApplicationUpdater;
 			var curVersion:String = NativeApplication.nativeApplication.applicationDescriptor.xmlns::versionNumber;
 			if(updator.updateVersion == curVersion){
-				
+				if(MewSystem.isManual) MewSystem.show("当前为最新版本!");
 				MewSystem.app.noUpdate();
 				this.clearSelf();
 				return;
-				
 			}
 			MewSystem.app.openUpdateWindow(Number(updator.updateVersion), updator.updateDescription);
 		}
@@ -51,11 +51,7 @@ package mew.update {
 		}
 		private function updateDownload_progressHandler(event:ProgressEvent):void
 		{
-//			if(DataCenter.updateDescriptor){
-//				
-//				DataCenter.updateDescriptor.showDownloadingPercent(uint(event.bytesLoaded / event.bytesTotal * 100));
-//				
-//			}
+			if(MewSystem.app.updateCheckingWindow) MewSystem.app.updateCheckingWindow.showDownloading(event.bytesLoaded / event.bytesTotal);
 		}
 		private function updateDownload_completeHandler(event:UpdateEvent):void
 		{

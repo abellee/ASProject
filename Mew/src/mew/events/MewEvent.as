@@ -53,6 +53,8 @@ package mew.events
 		public static const FOLLOW_INFO_LOADED:String = "follow_info_loaded";
 		public static const FRIEND_INFO_LOADED:String = "friend_info_loaded";
 		
+		public static const SCREEN_SHOT_SUCCESS:String = "screen_shot_success";
+		
 		public var result:Object = null;
 		
 		public function MewEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)

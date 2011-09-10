@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties analytics="false" mainApplicationPath="Mew.as" projectUUID="859eb910-9f82-46f1-9e87-809c5ba24cf0" version="10">
   <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="true" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
-    <compilerSourcePath>
-      <compilerSourcePathEntry kind="1" linkType="1" path="/Users/abellee/Documents/SVN(Git)/ASLib/AbelAS3Lib/src/com"/>
-    </compilerSourcePath>
+    <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
         <excludedEntries>
@@ -32,6 +30,8 @@
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_agent.swc" useDefaultLinkType="false"/>
         </excludedEntries>
       </libraryPathEntry>
+      <libraryPathEntry kind="3" linkType="1" path="src/FlashUI.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="src/as3corelib.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
@@ -45,8 +45,20 @@
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
   <buildTargets>
     <buildTarget buildTargetName="default">
-      <airSettings airCertificatePath="" airTimestamp="true" version="1">
-        <airExcludes/>
+      <airSettings airCertificatePath="/Users/abellee/Desktop/Everything/Mew Certification.p12" airTimestamp="true" version="1">
+        <airExcludes>
+          <pathEntry path="com"/>
+          <pathEntry path="resource/res.fla"/>
+          <pathEntry path="config/magic.xml"/>
+          <pathEntry path="1.jpg"/>
+          <pathEntry path="resource/loading.fla"/>
+          <pathEntry path="config/emotions-.xml"/>
+          <pathEntry path="theme"/>
+          <pathEntry path="resource/loadingMotion.fla"/>
+          <pathEntry path="org"/>
+          <pathEntry path=".DS_Store"/>
+          <pathEntry path="config/.DS_Store"/>
+        </airExcludes>
       </airSettings>
       <actionScriptSettings version="1"/>
     </buildTarget>

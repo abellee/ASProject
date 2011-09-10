@@ -1,17 +1,19 @@
 package mew.modules {
+	import com.iabel.core.UISprite;
+	
 	import config.Config;
-
+	
 	import fl.controls.Button;
 	import fl.controls.CheckBox;
-
-	import mew.data.SystemSettingData;
-	import mew.factory.ButtonFactory;
-
-	import com.iabel.core.UISprite;
-
+	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.net.SharedObject;
+	
+	import mew.data.SystemSettingData;
+	import mew.factory.ButtonFactory;
+	
+	import widget.Widget;
 	
 	public class AccountSettingContainer extends UISprite implements ISystemSettingContainer
 	{
@@ -27,6 +29,7 @@ package mew.modules {
 			if(!autoLogin) autoLogin = ButtonFactory.SystemCheckBox();
 			if(!clearCacheButton) clearCacheButton = ButtonFactory.WhiteButton();
 			clearCacheButton.width = 120;
+			clearCacheButton.setStyle("textFormat", Widget.normalFormat);
 			autoLogin.label = "自动登录";
 			clearCacheButton.label = "清空帐号缓存";
 			
@@ -69,6 +72,7 @@ package mew.modules {
 			var so:SharedObject = SharedObject.getLocal(Config.MEWCACHE);
 			so.data.autoLogin = autoLogin.selected;
 			so.flush();
+			so.close();
 			SystemSettingData.autoLogin = autoLogin.selected;
 		}
 		

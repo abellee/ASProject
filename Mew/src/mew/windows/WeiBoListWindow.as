@@ -15,7 +15,7 @@ package mew.windows {
 	import system.MewSystem;
 
 	import com.iabel.core.UISprite;
-	import com.iabel.utils.ScaleBitmap;
+	import com.iabel.util.ScaleBitmap;
 	import com.sina.microblog.events.MicroBlogEvent;
 
 	import flash.display.Bitmap;
@@ -56,7 +56,7 @@ package mew.windows {
 		
 		override protected function init():void
 		{
-			drawBackground(465, Screen.mainScreen.visibleBounds.height - MewSystem.app.height - 100, position);
+			drawBackground(465, Screen.mainScreen.visibleBounds.height - MewSystem.app.mainWindow.height - 100, position);
 			super.init();
 			if(!scrollList) scrollList = new ScrollPane();
 			scrollBarSkin = new ScaleBitmap((new Resource.ScrollBarSkin() as Bitmap).bitmapData, "auto", true);
@@ -294,10 +294,11 @@ package mew.windows {
 			tempArr = tempArr.concat(receivedArray);
 			if(tempArr && tempArr.length){
 				tempArr.sortOn("id", Array.DESCENDING);
+				var win:ALNativeWindow = this;
 				var urlLoader:URLLoader = new URLLoader();
 				var func:Function = function(e:Event):void{
 					urlLoader.removeEventListener(Event.COMPLETE, func);
-					list.listData(tempArr, getContentWidth(), XML(e.target.data), this);
+					list.listData(tempArr, getContentWidth(), XML(e.target.data), win);
 					scrollList.update();
 					scrollList.drawNow();
 					urlLoader = null;

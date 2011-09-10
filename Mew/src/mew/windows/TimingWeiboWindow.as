@@ -1,18 +1,19 @@
 package mew.windows {
-	import fl.data.DataProvider;
-	import fl.controls.ComboBox;
-	import flash.events.FocusEvent;
-	import mew.data.SystemSettingData;
 	import fl.controls.Button;
+	import fl.controls.ComboBox;
 	import fl.controls.UIScrollBar;
+	import fl.data.DataProvider;
 
 	import mew.communication.SuggestDataGetter;
 	import mew.data.SuggestData;
+	import mew.data.SystemSettingData;
 	import mew.data.TimingWeiboVariable;
 	import mew.events.MewEvent;
 	import mew.factory.ButtonFactory;
 	import mew.modules.IEmotionCorrelation;
+	import mew.modules.IScreenShot;
 	import mew.modules.ITiming;
+	import mew.modules.ScreenShotor;
 	import mew.modules.TimeSettor;
 	import mew.modules.TimingPoint;
 	import mew.modules.URLShortor;
@@ -41,9 +42,12 @@ package mew.windows {
 	import flash.display.Screen;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.FocusEvent;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.filesystem.File;
+	import flash.filesystem.FileMode;
+	import flash.filesystem.FileStream;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
@@ -51,8 +55,9 @@ package mew.windows {
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
 	import flash.ui.Keyboard;
+	import flash.utils.ByteArray;
 	
-	public class TimingWeiboWindow extends ALNativeWindow implements IEmotionCorrelation, ITiming
+	public class TimingWeiboWindow extends ALNativeWindow implements IEmotionCorrelation, ITiming, IScreenShot
 	{
 		private var topBK:Sprite = null;
 		private var titleText:TextField = null;
@@ -96,6 +101,7 @@ package mew.windows {
 		
 		private var detailWindow:TimingDetailWindow = null;
 		private var preTab:Button = null;
+		private var screenShotor:ScreenShotor = null;
 		public function TimingWeiboWindow(initOptions:NativeWindowInitOptions)
 		{
 			super(initOptions);
@@ -117,8 +123,8 @@ package mew.windows {
 			
 			closeButton = ButtonFactory.CloseButton();
 			addChild(closeButton);
-			closeButton.x = topBK.width + topBK.x - closeButton.width;
-			closeButton.y = 20;
+			closeButton.x = topBK.width + topBK.x - closeButton.width - 5;
+			closeButton.y = 25;
 			closeButton.addEventListener(MouseEvent.CLICK, closeWindow);
 			
 			if(!titleText) titleText = new TextField();
@@ -222,6 +228,7 @@ package mew.windows {
 			inputTextField.addEventListener(Event.CHANGE, inputTextField_onChangeHandler);
 			inputTextField.addEventListener(Event.ADDED_TO_STAGE, inputTextField_addToStageHandler);
 			inputTextField.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+			inputTextField.addEventListener(FocusEvent.FOCUS_IN, onFocusIn);
 			
 			addChild(buttonGroup);
 			buttonGroup.gap = 36;
@@ -281,7 +288,7 @@ package mew.windows {
 			 curDateSelector.setSize(100, curDateSelector.height);
 			 addChild(curDateSelector);
 			 curDateSelector.x = 30;
-			 curDateSelector.y = 115;
+			 curDateSelector.y = 125;
 			 curDateSelector.addEventListener(Event.CHANGE, loadSelectedData);
 			 
 			 var obj:Object = MewSystem.app.timingWeiboManager.readDate();
@@ -305,10 +312,24 @@ package mew.windows {
 				}
 				curDateSelector.selectedIndex = index;
 			 }
+			 curDateSelector.dispatchEvent(new Event(Event.CHANGE));
+		}
+		
+		private function onFocusIn(event:FocusEvent):void
+		{
+			MewSystem.reactivateFunc = reactivate;
+		}
+		
+		public function reactivate():void
+		{
+			MewSystem.reactivateFunc = null;
+			this.stage.nativeWindow.activate();
+			this.stage.focus = inputTextField;
 		}
 
 		private function loadSelectedData(event : Event) : void
 		{
+			if(!curDateSelector.selectedItem) return;
 			curMillisecond = curDateSelector.selectedItem.data;
 			var date:Date = new Date(curMillisecond);
 			curYear = date.getFullYear();
@@ -414,10 +435,15 @@ package mew.windows {
 
 		private function copyImage(newName:String) : void
 		{
+			var file:File = File.applicationStorageDirectory.resolvePath("timing/" + newName);
 			if(imageViewer.imageFile){
-				var file:File = File.applicationStorageDirectory.resolvePath("timing/" + newName);
 				trace(imageViewer.imageFile.nativePath, file.exists, file.nativePath);
 				imageViewer.imageFile.copyTo(file);
+			}else if(imageViewer.byteArray){
+				var fileStream:FileStream = new FileStream();
+				fileStream.open(file, FileMode.WRITE);
+				fileStream.writeBytes(imageViewer.byteArray);
+				fileStream.close();
 			}
 		}
 		
@@ -459,7 +485,16 @@ package mew.windows {
 		
 		private function screenShotHandler(event:MewEvent):void
 		{
-			
+			if(!screenShotor){
+				screenShotor = new ScreenShotor();
+				screenShotor.parent = this;
+			}
+			screenShotor.screenshot();
+		}
+		
+		public function screenComplete(byteArray:ByteArray):void
+		{
+			imageViewer.byteArray = byteArray;
 		}
 		
 		private function emotionHandler(event:MewEvent):void
@@ -837,7 +872,7 @@ package mew.windows {
 			if(!topBK) topBK = new Sprite();
 			topBK.graphics.clear();
 			topBK.graphics.beginFill(Widget.mainColor, 1.0);
-			topBK.graphics.drawRoundRectComplex(10, 10, background.width, 30, 12, 12, 0, 0);
+			topBK.graphics.drawRoundRectComplex(10, 10, background.width, 40, 12, 12, 0, 0);
 			topBK.graphics.endFill();
 			topBK.mouseChildren = false;
 		}
@@ -877,6 +912,7 @@ package mew.windows {
 				inputTextField.removeEventListener(Event.CHANGE, inputTextField_onChangeHandler);
 				inputTextField.removeEventListener(Event.ADDED_TO_STAGE, inputTextField_addToStageHandler);
 				inputTextField.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+				inputTextField.removeEventListener(FocusEvent.FOCUS_IN, onFocusIn);
 				inputTextField = null;
 			}
 			textNumText = null;
@@ -916,6 +952,8 @@ package mew.windows {
 			preTab = null;
 			removeAllPoint();
 			pointList = null;
+			screenShotor = null;
+			MewSystem.reactivateFunc = null;
 		}
 	}
 }

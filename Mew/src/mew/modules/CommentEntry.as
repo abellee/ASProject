@@ -6,7 +6,7 @@ package mew.modules {
 
 	import system.MewSystem;
 
-	import com.iabel.utils.DashLine;
+	import com.iabel.util.DashLine;
 	import com.sina.microblog.data.MicroBlogComment;
 
 	import flash.display.Bitmap;

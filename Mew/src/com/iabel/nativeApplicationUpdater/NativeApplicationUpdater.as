@@ -87,7 +87,6 @@ package com.iabel.nativeApplicationUpdater
 		 **/
 		public static const INSTALLING:String = "INSTALLING";
 		
-		[Bindable]		
 		public var updateURL:String;
 		
 		protected var _isNewerVersionFunction:Function;
@@ -457,62 +456,56 @@ package com.iabel.nativeApplicationUpdater
 			}
 		}
 		
-		[Bindable]
 		public function get currentVersion():String
 		{
 			return _currentVersion;
 		}
 
-		protected function set currentVersion(value:String):void
+		public function set currentVersion(value:String):void
 		{
 			_currentVersion = value;
 		}
 
-		[Bindable]
 		public function get updateVersion():String
 		{
 			return _updateVersion;
 		}
 
-		protected function set updateVersion(value:String):void
+		public function set updateVersion(value:String):void
 		{
 			_updateVersion = value;
 		}
 
-		[Bindable]
 		public function get updateDescriptor():XML
 		{
 			return _updateDescriptor;
 		}
 
-		protected function set updateDescriptor(value:XML):void
+		public function set updateDescriptor(value:XML):void
 		{
 			_updateDescriptor = value;
 		}
 
-		[Bindable]
 		public function get currentState():String
 		{
 			return _currentState;
 		}
 
-		protected function set currentState(value:String):void
+		public function set currentState(value:String):void
 		{
 			_currentState = value;
 		}
 
-		[Bindable]
 		public function get downloadedFile():File
 		{
 			return _downloadedFile;
 		}
 
-		protected function set downloadedFile(value:File):void
+		public function set downloadedFile(value:File):void
 		{
 			_downloadedFile = value;
 		}
 
-		[Bindable]
 		public function get isNewerVersionFunction():Function
 		{
 			if (_isNewerVersionFunction != null)
@@ -526,35 +519,32 @@ package com.iabel.nativeApplicationUpdater
 			_isNewerVersionFunction = value;
 		}
 
-		[Bindable]
 		public function get installerType():String
 		{
 			return _installerType;
 		}
 
-		protected function set installerType(value:String):void
+		public function set installerType(value:String):void
 		{
 			_installerType = value;
 		}
 
-		[Bindable]
 		public function get updatePackageURL():String
 		{
 			return _updatePackageURL;
 		}
 		
-		protected function set updatePackageURL(value:String):void
+		public function set updatePackageURL(value:String):void
 		{
 			_updatePackageURL = value;
 		}
 		
-		[Bindable]
 		public function get updateDescription():String
 		{
 			return _updateDescription;
 		}
 		
-		protected function set updateDescription(value:String):void
+		public function set updateDescription(value:String):void
 		{
 			_updateDescription = value;
 		}

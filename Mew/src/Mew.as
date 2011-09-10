@@ -1,8 +1,36 @@
 package {
-	import com.sina.microblog.data.MicroBlogDirectMessage;
-	import com.sina.microblog.data.MicroBlogComment;
-	import fl.controls.Button;
+	import com.sina.microblog.data.MicroBlogStatus;
+	
 	import fl.data.DataProvider;
+	
+	import flash.desktop.DockIcon;
+	import flash.desktop.NativeApplication;
+	import flash.desktop.SystemTrayIcon;
+	import flash.display.Bitmap;
+	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
+	import flash.display.Loader;
+	import flash.display.MovieClip;
+	import flash.display.NativeMenu;
+	import flash.display.NativeMenuItem;
+	import flash.display.NativeWindow;
+	import flash.display.NativeWindowInitOptions;
+	import flash.display.NativeWindowType;
+	import flash.display.Screen;
+	import flash.display.Sprite;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
+	import flash.events.Event;
+	import flash.events.InvokeEvent;
+	import flash.events.MouseEvent;
+	import flash.events.ScreenMouseEvent;
+	import flash.geom.Point;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
+	import flash.system.LoaderContext;
+	import flash.text.StyleSheet;
+	
 	import mew.cache.AssetsCache;
 	import mew.cache.DataCache;
 	import mew.cache.WeiboDataCacher;
@@ -13,12 +41,9 @@ package {
 	import mew.data.UserData;
 	import mew.data.WeiboData;
 	import mew.events.MewEvent;
-	import mew.factory.ButtonFactory;
 	import mew.modules.FloatUserInfo;
 	import mew.modules.Suggesttor;
 	import mew.modules.UIButton;
-	import mew.modules.UnreadTip;
-	import mew.modules.UserAvatar;
 	import mew.modules.UserFormList;
 	import mew.modules.WeiboAlternationCenter;
 	import mew.modules.WeiboFormList;
@@ -29,47 +54,30 @@ package {
 	import mew.windows.EmotionWindow;
 	import mew.windows.ImageViewer;
 	import mew.windows.LoginWindow;
+	import mew.windows.MainWindow;
 	import mew.windows.SearchWindow;
 	import mew.windows.SystemSetting;
 	import mew.windows.ThemeWindow;
 	import mew.windows.TimingWeiboWindow;
 	import mew.windows.UpdateCheckWindow;
 	import mew.windows.UpdateWindow;
+	import mew.windows.UserSuggestion;
 	import mew.windows.VideoViewer;
 	import mew.windows.WeiBoListWindow;
 	import mew.windows.WeiBoPublisher;
 	import mew.windows.WeiboTextWindow;
+	
 	import resource.Resource;
+	
 	import system.MewSystem;
 	import system.TimingWeiboManager;
+	
 	import widget.Widget;
-	import com.greensock.TweenLite;
-	import com.sina.microblog.data.MicroBlogStatus;
-	import flash.desktop.NativeApplication;
-	import flash.display.Bitmap;
-	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Loader;
-	import flash.display.MovieClip;
-	import flash.display.NativeWindow;
-	import flash.display.NativeWindowInitOptions;
-	import flash.display.NativeWindowType;
-	import flash.display.Screen;
-	import flash.display.Sprite;
-	import flash.display.StageAlign;
-	import flash.display.StageScaleMode;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	import flash.net.URLLoader;
-	import flash.net.URLRequest;
-	import flash.net.navigateToURL;
-	import flash.system.LoaderContext;
-	import flash.text.StyleSheet;
 	
 	[SWF(frameRate=30)]
 	public class Mew extends Sprite
 	{
+		public var mainWindow:MainWindow;                // 主界面
 		private var loginPanel:LoginWindow;               // 登录界面
 		private var weiboListWindow:WeiBoListWindow;      // 微博列表界面
 		public var imageViewer:ImageViewer;               // 查看大图界面 
@@ -86,24 +94,6 @@ package {
 		public var searchWindow:SearchWindow;
 		public var widgetWindow:ALNativeWindow;           // 目标用户界面 或者搜索界面
 		public var updateCheckingWindow:UpdateCheckWindow;
-		
-		private var background:Sprite;     	   // 主界面背景
-		
-		private var indexBtn:UIButton;         // 首页按钮
-		private var atBtn:UIButton;            // @按钮
-		private var commentBtn:UIButton;       // 评论按钮
-		private var dmBtn:UIButton;            // 私信按钮
-		private var collectBtn:UIButton;       // 收藏按钮
-		private var avatarBtn:UserAvatar;      // 头像按钮
-		private var fansBtn:UIButton;          // 粉丝按钮
-		private var followBtn:UIButton;        // 关注按钮
-		private var sysBtn:UIButton;           // 系统按钮
-		private var searchBtn:UIButton;        // 搜索按钮
-		private var mewBtn:Button;             // Mew图标按钮
-		private var publishBtn:UIButton;       // 发布按钮
-		private var themeChooserBtn:UIButton;  // 主题按钮
-		private var listBtn:UIButton;          // 帐号列表按钮
-		private var refreshButton:UIButton;
 		
 		public const NONE:String = "none";     // 未开任何窗口
 		public const INDEX:String = "index";
@@ -122,7 +112,6 @@ package {
 		
 		public var currentActiveWindow:ALNativeWindow = null;
 		public var currentState:String = NONE;
-		public var currentButton:DisplayObject = null;
 		
 		public var timingWeiboManager:TimingWeiboManager = null;        // 定时微博管理器
 		public var localWriter:WeiboDataCacher = null;
@@ -138,11 +127,8 @@ package {
 		public var alternationCenter:WeiboAlternationCenter = null;
 		public var suggestor:Suggesttor = null;
 		
-		private var unreadStatusButton:UnreadTip = null;
-		private var unreadCommentButton:UnreadTip = null;
-		private var unreadFansButton:UnreadTip = null;
-		private var unreadDMButton:UnreadTip = null;
-		private var unreadAtButton:UnreadTip = null;
+		private var suggestionWindow:UserSuggestion = null;
+		private var bugWindow:UserSuggestion = null;
 		
 		public var isLogout:Boolean = false;
 		
@@ -154,10 +140,42 @@ package {
 		}
 		private function init():void
 		{
+			if(NativeApplication.supportsSystemTrayIcon){
+				
+				var systemTrayIcon:SystemTrayIcon = NativeApplication.nativeApplication.icon as SystemTrayIcon;
+				systemTrayIcon.tooltip = "Mew";
+				var iconMenu:NativeMenu = new NativeMenu();
+				var showPanelCmd:NativeMenuItem = iconMenu.addItem(new NativeMenuItem("显示Mew主界面"));
+				var exitCommand:NativeMenuItem = iconMenu.addItem(new NativeMenuItem("退出Mew"));
+				exitCommand.addEventListener(Event.SELECT,closeWindowByDock);
+				showPanelCmd.addEventListener(Event.SELECT,showMewPanel);
+				systemTrayIcon.addEventListener(ScreenMouseEvent.CLICK,clickShowMewPanel);
+				systemTrayIcon.menu = iconMenu;
+				
+			}
+			if(NativeApplication.supportsDockIcon){
+				
+				var dockIcon:DockIcon = NativeApplication.nativeApplication.icon as DockIcon;
+				var dockMenu:NativeMenu = new NativeMenu();
+				var setCmd:NativeMenuItem = dockMenu.addItem(new NativeMenuItem("显示Mew主界面"));
+				setCmd.addEventListener(Event.SELECT,showMewPanel);
+				NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, showMewPanelForMac);
+				dockIcon.menu = dockMenu;
+				
+			}
+			
 			this.stage.scaleMode = StageScaleMode.NO_SCALE;
 			this.stage.align = StageAlign.TOP_LEFT;
 			
+			this.stage.nativeWindow.close();
+			
+			// 初始化应用图标
+			initIcons();
+			
 			MewSystem.app = this;
+			
+			// 初始化样式
+			MewSystem.initStyle();
 			
 			// 根据本地缓存 更新内存设置
 			LocalManager.settingsBySharedObject();
@@ -173,15 +191,59 @@ package {
 			
 			if(SystemSettingData.checkUpdateDelay == 0) checkUpdate();
 			
-			// 初始化主界面
-//			this.visible = false;
-			this.stage.nativeWindow.width = Screen.mainScreen.visibleBounds.width;
-			this.stage.nativeWindow.height = 90;
-			this.stage.nativeWindow.x = Screen.mainScreen.visibleBounds.x;
-			this.stage.nativeWindow.y = Screen.mainScreen.visibleBounds.y;
-			this.stage.nativeWindow.alwaysInFront = SystemSettingData.alwaysInfront;
-			drawBackground();
-			drawButtons();
+//			drawBackground();
+//			drawButtons();
+		}
+		
+		public function mainWindowNoHide():void
+		{
+			mainWindow.noHide();
+		}
+		
+		private function closeWindowByDock(event:Event):void
+		{
+			NativeApplication.nativeApplication.exit();
+		}
+		
+		private function showMewPanel(event:Event):void
+		{
+			var arr:Array = NativeApplication.nativeApplication.openedWindows;
+			for each(var win:NativeWindow in arr){
+				win.alwaysInFront = true;
+				win.alwaysInFront = SystemSettingData.alwaysInfront;
+			}
+		}
+		
+		private function showMewPanelForMac(event:InvokeEvent):void
+		{
+			var arr:Array = NativeApplication.nativeApplication.openedWindows;
+			for each(var win:NativeWindow in arr){
+				win.alwaysInFront = true;
+				win.alwaysInFront = SystemSettingData.alwaysInfront;
+			}
+		}
+		
+		private function clickShowMewPanel(event:ScreenMouseEvent):void
+		{
+			var arr:Array = NativeApplication.nativeApplication.openedWindows;
+			for each(var win:NativeWindow in arr){
+				win.alwaysInFront = true;
+				win.alwaysInFront = SystemSettingData.alwaysInfront;
+			}
+		}
+		
+		private function initIcons():void
+		{
+			var bitmap16:Bitmap = new (Resource.X16)();
+			var bitmap32:Bitmap = new (Resource.X32)();
+			var bitmap36:Bitmap = new (Resource.X36)();
+			var bitmap48:Bitmap = new (Resource.X48)();
+			var bitmap72:Bitmap = new (Resource.X72)();
+			var bitmap114:Bitmap = new (Resource.X114)();
+			var bitmap128:Bitmap = new (Resource.X128)();
+			
+			NativeApplication.nativeApplication.icon.bitmaps = [bitmap16.bitmapData, bitmap32.bitmapData, bitmap36.bitmapData,
+			 bitmap48.bitmapData, bitmap72.bitmapData, bitmap114.bitmapData, bitmap128.bitmapData];
 		}
 		
 		private function doLogin():void
@@ -191,207 +253,17 @@ package {
 			loginPanel.activate();
 		}
 		
-		private function drawBackground():void
-		{
-			if(!background) background = new Sprite();
-			background.mouseChildren = false;
-			background.graphics.beginFill(Widget.mainColor, 1.0);
-			background.graphics.drawRect(0, 0, this.stage.nativeWindow.width, this.stage.nativeWindow.height - 10);
-			background.graphics.endFill();
-			addChildAt(background, 0);
-			Widget.widgetGlowFilter(background);
-			this.addEventListener(MouseEvent.MOUSE_OVER, showMainPanel);
-			this.addEventListener(MouseEvent.ROLL_OUT, hideMainPanel);
-		}
-		
-		private function showMainPanel(event:MouseEvent):void
-		{
-			if(SystemSettingData.autoHide && !currentActiveWindow && currentState == NONE){
-				var pos:int = Screen.mainScreen.visibleBounds.y;
-				switch(SystemSettingData.hideDirection){
-					case 0:
-						TweenLite.to(this.stage.nativeWindow, .3, {x: Screen.mainScreen.visibleBounds.x});
-						break;
-					case 1:
-						TweenLite.to(this.stage.nativeWindow, .3, {y: pos});
-						break;
-					case 2:
-						TweenLite.to(this.stage.nativeWindow, .3, {x: Screen.mainScreen.visibleBounds.x});
-						break;
-				}
-			}
-		}
-		
-		private function hideMainPanel(event:MouseEvent):void
-		{
-			if(SystemSettingData.autoHide && !currentActiveWindow && currentState == NONE){
-				var pos:int = Screen.mainScreen.visibleBounds.y - this.stage.nativeWindow.height + 13;
-				var xpos:int;
-				switch(SystemSettingData.hideDirection){
-					case 0:
-						xpos = Screen.mainScreen.visibleBounds.x - this.stage.nativeWindow.width + 10;
-						TweenLite.to(this.stage.nativeWindow, .3, {x: xpos});
-						break;
-					case 1:
-						TweenLite.to(this.stage.nativeWindow, .3, {y: pos});
-						break;
-					case 2:
-						xpos = Screen.mainScreen.visibleBounds.width - 10;
-						TweenLite.to(this.stage.nativeWindow, .3, {x: xpos});
-						break;
-				}
-			}
-		}
-		
 		public function refreshCurrentList():void
 		{
-			if(currentButton){
+			if(mainWindow.currentButton){
 				currentState = NONE;
-				currentButton.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+				mainWindow.currentButton.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
 			}
-		}
-		
-		private function drawButtons():void
-		{
-			if(!indexBtn) indexBtn = ButtonFactory.MainIndexButton();
-			if(!atBtn) atBtn = ButtonFactory.MainAtButton();
-			if(!commentBtn) commentBtn = ButtonFactory.MainCommentButton();
-			if(!dmBtn) dmBtn = ButtonFactory.MainDMButton();
-			if(!collectBtn) collectBtn= ButtonFactory.MainCollectButton();
-			if(!avatarBtn) avatarBtn = new UserAvatar();
-			if(!fansBtn) fansBtn= ButtonFactory.MainFansButton();
-			if(!followBtn) followBtn = ButtonFactory.MainFollowButton();
-			if(!sysBtn) sysBtn = ButtonFactory.MainSystemButton();
-			if(!searchBtn) searchBtn = ButtonFactory.MainSearchButton();
-			if(!mewBtn) mewBtn = ButtonFactory.MainMewButton();
-			if(!publishBtn) publishBtn = ButtonFactory.MainPublishButton();
-			if(!refreshButton) refreshButton = ButtonFactory.RefreshButton();
-//			if(!listBtn) listBtn = new Button();
-//			if(!themeChooserBtn) themeChooserBtn = new Button();
-			
-//			listBtn.label = "下拉箭头";
-//			listBtn.width = 60;
-			
-//			themeChooserBtn.label = "主题";
-//			themeChooserBtn.width = 60;
-			
-			addChild(indexBtn);
-			addChild(atBtn);
-			addChild(commentBtn);
-			addChild(dmBtn);
-			addChild(collectBtn);
-			addChild(avatarBtn);
-			addChild(fansBtn);
-			addChild(followBtn);
-			addChild(sysBtn);
-			addChild(mewBtn);
-			addChild(publishBtn);
-//			addChild(listBtn);
-			addChild(searchBtn);
-//			addChild(themeChooserBtn);
-			addChild(refreshButton);
-			
-			addListener(indexBtn);
-			addListener(atBtn);
-			addListener(commentBtn);
-			addListener(dmBtn);
-			addListener(collectBtn);
-			addListener(avatarBtn);
-			addListener(fansBtn);
-			addListener(followBtn);
-			addListener(sysBtn);
-			addListener(mewBtn);
-			addListener(publishBtn);
-//			addListener(listBtn);
-			addListener(searchBtn);
-//			addListener(themeChooserBtn);
-			addListener(refreshButton);
-			
-			var gap:uint = 40;
-			var bottomSpace:uint = 20;
-			
-			avatarBtn.x = (this.stage.nativeWindow.width - avatarBtn.width) / 2;
-			avatarBtn.y = (this.stage.nativeWindow.height - avatarBtn.height) / 2 - 5;
-			
-//			listBtn.x = avatarBtn.x + (avatarBtn.width - listBtn.width) / 2;
-//			listBtn.y = avatarBtn.y + avatarBtn.height + 5;
-			
-			/**
-			 * 左边按钮
-			 */
-			collectBtn.toggle = true;
-			collectBtn.x = avatarBtn.x - collectBtn.width - gap;
-			collectBtn.y = this.stage.nativeWindow.height - collectBtn.height - bottomSpace;
-			
-			dmBtn.toggle = true;
-			dmBtn.x = collectBtn.x - dmBtn.width - gap;
-			dmBtn.y = this.stage.nativeWindow.height - dmBtn.height - bottomSpace;
-			
-			commentBtn.toggle = true;
-			commentBtn.x = dmBtn.x - commentBtn.width - gap;
-			commentBtn.y = this.stage.nativeWindow.height - commentBtn.height - bottomSpace;
-			
-			atBtn.toggle = true;
-			atBtn.x = commentBtn.x - atBtn.width - gap;
-			atBtn.y = this.stage.nativeWindow.height - atBtn.height - bottomSpace;
-			
-			indexBtn.toggle = true;
-			indexBtn.x = atBtn.x - indexBtn.width - gap;
-			indexBtn.y = this.stage.nativeWindow.height - indexBtn.height - bottomSpace;
-			
-			/**
-			 * 右边按钮
-			 */
-			fansBtn.toggle = true;
-			fansBtn.x = avatarBtn.x + avatarBtn.width + gap;
-			fansBtn.y = this.stage.nativeWindow.height - fansBtn.height - bottomSpace;
-			
-			followBtn.toggle = true;
-			followBtn.x = fansBtn.x + fansBtn.width + gap;
-			followBtn.y = this.stage.nativeWindow.height - followBtn.height - bottomSpace;
-			
-			sysBtn.toggle = true;
-			sysBtn.x = followBtn.x + followBtn.width + gap;
-			sysBtn.y = this.stage.nativeWindow.height - sysBtn.height - bottomSpace;
-			
-			searchBtn.toggle = true;
-			searchBtn.x = sysBtn.x + sysBtn.width + gap;
-			searchBtn.y = this.stage.nativeWindow.height - searchBtn.height - bottomSpace;
-			
-//			themeChooserBtn.x = searchBtn.x + searchBtn.width + gap;
-//			themeChooserBtn.y = this.stage.nativeWindow.height - themeChooserBtn.height - bottomSpace;
-			
-			publishBtn.x = searchBtn.x + searchBtn.width + gap;
-			publishBtn.y = this.stage.nativeWindow.height - publishBtn.height - bottomSpace;
-			
-			refreshButton.x = publishBtn.x + publishBtn.width + gap;
-			refreshButton.y = this.stage.nativeWindow.height - refreshButton.height - bottomSpace;
-			
-			mewBtn.x = this.stage.nativeWindow.width - mewBtn.width - 20;
-			mewBtn.y = (this.stage.nativeWindow.height - mewBtn.height) / 2 - 10;
-			
-		}
-		
-		private function addListener(displayObject:DisplayObject):void
-		{
-			displayObject.addEventListener(MouseEvent.CLICK, openListWindow);
-			displayObject.addEventListener(MouseEvent.MOUSE_OVER, mouseOverHandler);
-			displayObject.addEventListener(MouseEvent.MOUSE_OUT, mouseOutHandler);
-		}
-		
-		private function mouseOverHandler(event:MouseEvent):void
-		{
-			
-		}
-		
-		private function mouseOutHandler(event:MouseEvent):void
-		{
-			
 		}
 		
 		public function closePublishWindow():void
 		{
-			publishBtn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+			mainWindow.closePublishWindow();
 		}
 		
 		public function closeTimingWindow():void
@@ -414,9 +286,9 @@ package {
 			weiboPublishWindow.activate();
 		}
 		
-		private function openListWindow(event:MouseEvent):void
+		public function openListWindow(event:MouseEvent):void
 		{
-			if(event.currentTarget == publishBtn){
+			if(event.currentTarget == mainWindow.publishBtn){
 				if(weiboPublishWindow){
 					weiboPublishWindow.close();
 					weiboPublishWindow = null;
@@ -427,107 +299,107 @@ package {
 			}
 			closeCurrentWindow();
 			resetCurrentButton();
-			if(event.currentTarget == refreshButton){
+			if(event.currentTarget == mainWindow.refreshButton){
 				preloader.preload();
 				return;
 			}
-			currentButton = event.currentTarget as DisplayObject;
+			mainWindow.currentButton = event.currentTarget as DisplayObject;
 			if(MewSystem.app.dataCache) MewSystem.app.dataCache.destroy();
 			if(MewSystem.app.assetsCache) MewSystem.app.assetsCache.destroy();
 			switch(event.currentTarget){
-				case indexBtn:
-					if(unreadStatusButton){
+				case mainWindow.indexBtn:
+					if(mainWindow.unreadStatusButton){
 						currentState = NONE;
-						removeChild(unreadStatusButton);
-						unreadStatusButton = null;
+						mainWindow.container.removeChild(mainWindow.unreadStatusButton);
+						mainWindow.unreadStatusButton = null;
 					}
 					if(currentState == INDEX){
 						currentState = NONE;
-						currentButton = null;
+						mainWindow.currentButton = null;
 						return;
 					}
 					currentState = INDEX;
 					break;
-				case atBtn:
-					if(unreadAtButton){
+				case mainWindow.atBtn:
+					if(mainWindow.unreadAtButton){
 						currentState = NONE;
-						removeChild(unreadAtButton);
-						unreadAtButton = null;
+						mainWindow.container.removeChild(mainWindow.unreadAtButton);
+						mainWindow.unreadAtButton = null;
 					}
 					if(currentState == AT){
 						currentState = NONE;
-						currentButton = null;
+						mainWindow.currentButton = null;
 						return;
 					}
 					currentState = AT;
 					break;
-				case commentBtn:
-					if(unreadCommentButton){
+				case mainWindow.commentBtn:
+					if(mainWindow.unreadCommentButton){
 						currentState = NONE;
-						removeChild(unreadCommentButton);
-						unreadCommentButton = null;
+						mainWindow.container.removeChild(mainWindow.unreadCommentButton);
+						mainWindow.unreadCommentButton = null;
 					}
 					if(currentState == COMMENT){
 						currentState = NONE;
-						currentButton = null;
+						mainWindow.currentButton = null;
 						return;
 					}
 					currentState = COMMENT;
 					break;
-				case dmBtn:
-					if(unreadDMButton){
+				case mainWindow.dmBtn:
+					if(mainWindow.unreadDMButton){
 						currentState = NONE;
-						removeChild(unreadDMButton);
-						unreadDMButton = null;
+						mainWindow.container.removeChild(mainWindow.unreadDMButton);
+						mainWindow.unreadDMButton = null;
 					}
 					if(currentState == DIRECT_MESSAGE){
 						currentState = NONE;
-						currentButton = null;
+						mainWindow.currentButton = null;
 						return;
 					}
 					currentState = DIRECT_MESSAGE;
 					break;
-				case collectBtn:
+				case mainWindow.collectBtn:
 					if(currentState == COLLECT){
 						currentState = NONE;
-						currentButton = null;
+						mainWindow.currentButton = null;
 						return;
 					}
 					currentState = COLLECT;
 					break;
-				case avatarBtn:
+				case mainWindow.avatarBtn:
 					if(currentState == MY_WEIBO){
 						currentState = NONE;
-						currentButton = null;
+						mainWindow.currentButton = null;
 						return;
 					}
 					currentState = MY_WEIBO;
 					break;
-				case fansBtn:
-					if(unreadFansButton){
+				case mainWindow.fansBtn:
+					if(mainWindow.unreadFansButton){
 						currentState = NONE;
-						removeChild(unreadFansButton);
-						unreadFansButton = null;
+						mainWindow.container.removeChild(mainWindow.unreadFansButton);
+						mainWindow.unreadFansButton = null;
 					}
 					if(currentState == FANS){
 						currentState = NONE;
-						currentButton = null;
+						mainWindow.currentButton = null;
 						return;
 					}
 					currentState = FANS;
 					break;
-				case followBtn:
+				case mainWindow.followBtn:
 					if(currentState == FOLLOW){
 						currentState = NONE;
-						currentButton = null;
+						mainWindow.currentButton = null;
 						return;
 					}
 					currentState = FOLLOW;
 					break;
-				case sysBtn:
+				case mainWindow.sysBtn:
 					if(currentState == SYSTEM){
 						currentState = NONE;
-						currentButton = null;
+						mainWindow.currentButton = null;
 						if(dropListWindow){
 							dropListWindow.close();
 							dropListWindow = null;
@@ -547,10 +419,10 @@ package {
 					currentActiveWindow = dropListWindow;
 					return;
 					break;
-				case mewBtn:
+				case mainWindow.mewBtn:
 					if(currentState == MEW){
 						currentState = NONE;
-						currentButton = null;
+						mainWindow.currentButton = null;
 						if(dropListWindow){
 							dropListWindow.close();
 							dropListWindow = null;
@@ -570,10 +442,10 @@ package {
 					currentActiveWindow = dropListWindow;
 					return;
 					break;
-				case listBtn:
+				case mainWindow.listBtn:
 					if(currentState == ACCOUNT_LIST){
 						currentState = NONE;
-						currentButton = null;
+						mainWindow.currentButton = null;
 						if(dropListWindow){
 							dropListWindow.close();
 							dropListWindow = null;
@@ -586,10 +458,10 @@ package {
 					currentActiveWindow = dropListWindow;
 					return;
 					break;
-				case searchBtn:
+				case mainWindow.searchBtn:
 					if(currentState == SEARCH){
 						currentState = NONE;
-						currentButton = null;
+						mainWindow.currentButton = null;
 						return;
 					}
 					currentState = SEARCH;
@@ -598,10 +470,10 @@ package {
 					currentActiveWindow = searchWindow;
 					return;
 					break;
-				case themeChooserBtn:
+				case mainWindow.themeChooserBtn:
 					if(currentState == THEME){
 						currentState = NONE;
-						currentButton = null;
+						mainWindow.currentButton = null;
 						return;
 					}
 					currentState = THEME;
@@ -642,7 +514,7 @@ package {
 					}
 					break;
 				case DIRECT_MESSAGE:
-					if(!preloader.favoriteListReadComplete){
+					if(!preloader.dmReadComplete){
 						preloader.addEventListener(MewEvent.DM_LOADED, onDMLoaded);
 						return;
 					}
@@ -726,16 +598,41 @@ package {
 		private function openBugsSubmitWindow():void
 		{
 			resetCurrentButton();
+			if(!bugWindow){
+				bugWindow = new UserSuggestion(getNativeWindowInitOption(), "Bug提交");
+				bugWindow.activate();
+			}
 		}
 		
 		private function openUserSuggestionWindow():void
 		{
 			resetCurrentButton();
+			if(!suggestionWindow){
+				suggestionWindow = new UserSuggestion(getNativeWindowInitOption(), "用户意见");
+				suggestionWindow.activate();
+			}
+		}
+		
+		public function closeUserSuggestionWindow():void
+		{
+			if(suggestionWindow){
+				suggestionWindow.close();
+				suggestionWindow = null;
+			}
+		}
+		
+		public function closeBugSubmitWindow():void
+		{
+			if(bugWindow){
+				bugWindow.close();
+				bugWindow = null;
+			}
 		}
 		
 		private function updateLogs():void
 		{
 			resetCurrentButton();
+			navigateToURL(new URLRequest("http://mew.iabel.com"));
 		}
 		
 		private function goOfficialSite():void
@@ -751,11 +648,20 @@ package {
 			aboutWindow.activate();
 		}
 		
-		private function openUpdateCheckWindow():void
+		public function openUpdateCheckWindow(state:String = "check"):void
 		{
 			resetCurrentButton();
+			if(updateCheckingWindow){
+				if(state != updateCheckingWindow.curState){
+					if(updateCheckingWindow.curState == "download") return;
+					else{
+						updateCheckingWindow.close();
+						updateCheckingWindow = null;
+					}
+				}
+			}
 			if(!updateCheckingWindow){
-				updateCheckingWindow = new UpdateCheckWindow(getNativeWindowInitOption());
+				updateCheckingWindow = new UpdateCheckWindow(getNativeWindowInitOption(), state);
 				updateCheckingWindow.activate();
 			}
 		}
@@ -771,13 +677,50 @@ package {
 			unreadChecker.stopRunning();
 			unreadChecker = null;
 			MewSystem.initMicroBlog();
-			resetCurrentButton();
 			var activeWindowList:Array = NativeApplication.nativeApplication.openedWindows;
 			for each(var win:NativeWindow in activeWindowList){
-				if(win == this.stage.nativeWindow) continue;
 				win.close();
 			}
-			this.visible = false;
+			
+			mainWindow = null;
+			loginPanel = null;
+			weiboListWindow = null;
+			imageViewer = null;
+			videoViewer = null;
+			systemSetting = null;
+			dropListWindow = null;
+			emotionWindow = null;
+			aboutWindow = null;
+			themeWindow = null;
+			timingWindow = null;
+			updateWindow = null;
+			weiboPublishWindow = null;
+			userFloat = null;
+			searchWindow = null;
+			widgetWindow = null;
+			updateCheckingWindow = null;
+			currentActiveWindow = null;
+			
+			currentState = NONE;
+		
+			if(timingWeiboManager) timingWeiboManager.stop();
+			timingWeiboManager = null;
+			localWriter = null;
+			unreadChecker = null;
+		
+			update = null;                                // 更新检测
+			userData = null;
+			dataCache = null;
+			assetsCache = null;
+		
+			preloader = null;
+		
+			alternationCenter = null;
+			suggestor = null;
+		
+			suggestionWindow = null;
+			bugWindow = null;
+			
 			doLogin();
 		}
 		
@@ -805,12 +748,13 @@ package {
 		}
 
 		private function resetCurrentButton() : void {
-			if(currentButton){
-				if(currentButton is UIButton){
-					(currentButton as UIButton).toggle = false;
-					(currentButton as UIButton).toggle = true;
+			if(!mainWindow) return;
+			if(mainWindow.currentButton){
+				if(mainWindow.currentButton is UIButton){
+					(mainWindow.currentButton as UIButton).toggle = false;
+					(mainWindow.currentButton as UIButton).toggle = true;
 				}
-				currentButton = null;
+				mainWindow.currentButton = null;
 			}
 		}
 		
@@ -848,9 +792,10 @@ package {
 			if(!alternationCenter) alternationCenter = new WeiboAlternationCenter();
 			if(!Widget.linkStyle){
 				Widget.linkStyle = new StyleSheet();
-				Widget.linkStyle.setStyle(".mainStyle", {fontFamily: Widget.systemFont, color:Widget.mainTextColor, fontSize:12, leading:10});
-				Widget.linkStyle.setStyle("a:link", {fontFamily: Widget.systemFont, color:Widget.linkColor, fontSize:12, leading:11, textDecoration:"none"});
-				Widget.linkStyle.setStyle("a:hover", {fontFamily: Widget.systemFont, color:Widget.linkColor, fontSize:12, leading:11, textDecoration:"underline"});
+				Widget.linkStyle.setStyle(".mainStyle", {fontFamily: Widget.systemFont, color: Widget.mainTextColor, fontSize: 12, leading: 10});
+				Widget.linkStyle.setStyle(".whiteStyle", {fontFamily: Widget.systemFont, color: "#bebebe", fontSize: 12, leading: 10});
+				Widget.linkStyle.setStyle("a:link", {fontFamily: Widget.systemFont, color: Widget.linkColor, fontSize: 12, leading: 11, textDecoration: "none"});
+				Widget.linkStyle.setStyle("a:hover", {fontFamily: Widget.systemFont, color: Widget.linkColor, fontSize: 12, leading: 11, textDecoration: "underline"});
 			}
 			if(!timingWeiboManager) timingWeiboManager = new TimingWeiboManager();
 			if(!unreadChecker) unreadChecker = new WeiboChecker();
@@ -884,12 +829,15 @@ package {
 		public function checkUpdate():void
 		{
 			// 检测版本更新
-//			if(!update) update = new Update();
+			if(!update) update = new Update();
 		}
 		
 		public function destroyUpdate():void
 		{
-			if(update) update = null;
+			if(update){
+				update.clearSelf();
+				update = null;
+			}
 		}
 		
 		public function noUpdate():void
@@ -903,14 +851,20 @@ package {
 		
 		public function openUpdateWindow(vnum:Number, str:String):void
 		{
-			if(vnum != SystemSettingData.skipVersionNumber){
+			if(updateCheckingWindow){
+				updateCheckingWindow.close();
+				updateCheckingWindow = null;
+			}
+			if(vnum != SystemSettingData.skipVersionNumber || MewSystem.isManual){
+				MewSystem.isManual = false;
 				if(!updateWindow){
 					updateWindow = new UpdateWindow(getNativeWindowInitOption());
 					updateWindow.activate();
 					updateWindow.showData(vnum, str);
 				}
+			}else{
+				destroyUpdate();
 			}
-			destroyUpdate();
 		}
 		
 		public function callFromSQLiteManager(arr:Array):void
@@ -1020,68 +974,20 @@ package {
 		
 		public function showUnread(cate:String, num:int):void
 		{
-			var curButton:UnreadTip;
-			var finalNum:int = num;
-			switch(cate){
-				case INDEX:
-					if(!unreadStatusButton){
-						unreadStatusButton = new UnreadTip(num);
-						unreadStatusButton.x = indexBtn.x + indexBtn.width + 2;
-						addChild(unreadStatusButton);
-					}else finalNum = uint(unreadStatusButton.label) + num;
-					curButton = unreadStatusButton;
-					break;
-				case FANS:
-					if(!unreadFansButton){
-						unreadFansButton = new UnreadTip(num);
-						unreadFansButton.x = fansBtn.x + fansBtn.width;
-						addChild(unreadFansButton);
-					}else finalNum = uint(unreadFansButton.label) + num;
-					curButton = unreadFansButton;
-					break;
-				case DIRECT_MESSAGE:
-					if(!unreadDMButton){
-						unreadDMButton = new UnreadTip(num);
-						unreadDMButton.x = dmBtn.x + dmBtn.width + 5;
-						addChild(unreadDMButton);
-					}else finalNum = uint(unreadDMButton.label) + num;
-					curButton = unreadDMButton;
-					break;
-				case COMMENT:
-					if(!unreadCommentButton){
-						unreadCommentButton = new UnreadTip(num);
-						unreadCommentButton.x = commentBtn.x + commentBtn.width + 4;
-						addChild(unreadCommentButton);
-					}else finalNum = uint(unreadCommentButton.label) + num;
-					curButton = unreadCommentButton;;
-					break;
-				case AT:
-					if(!unreadAtButton){
-						unreadAtButton = new UnreadTip(num);
-						unreadAtButton.x = atBtn.x + atBtn.width + 2;
-						addChild(unreadAtButton);
-					}else finalNum = uint(unreadAtButton.label) + num;
-					curButton = unreadAtButton;;
-					break;
-			}
-			curButton.y = 8;
-			if(curButton){
-				if(finalNum > 10) curButton.label = "10+";
-				else curButton.label = finalNum + "";
-			}
+			if(mainWindow) mainWindow.showUnread(cate, num);
 		}
 		
 		public function loginSuccess():void
 		{
-			//TODO: 正式版需要在登陆后绘制主界面
-//			drawBackground();
-//			drawButtons();
+			if(!mainWindow) mainWindow = new MainWindow(MewSystem.getNativeWindowInitOption());
+			mainWindow.app = this;
+			mainWindow.init();
+			mainWindow.activate();
 			isLogout = false;
 			if(loginPanel){
 				loginPanel.close();
 				loginPanel = null;
 			}
-			this.visible = true;
 			if(!localWriter) localWriter = new WeiboDataCacher();
 			if(!preloader) preloader =  new DataPreloader();
 			preloader.preload();

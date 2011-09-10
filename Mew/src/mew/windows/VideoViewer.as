@@ -54,11 +54,17 @@ package mew.windows {
 			trace("detecting");
 			if(SystemSettingData.alwaysInfront){
 				if(bool){
-					if(Screen.mainScreen.visibleBounds.height >= Screen.mainScreen.bounds.height) setAllWindows(false, false);
+					if(Screen.mainScreen.visibleBounds.height >= Screen.mainScreen.bounds.height){
+						MewSystem.isFullScreen = true;
+						setAllWindows(false, false);
+					}
 				}else{
-					if(Screen.mainScreen.visibleBounds.height < Screen.mainScreen.bounds.height) setAllWindows(SystemSettingData.alwaysInfront, true);
-					if((MewSystem.app.stage.nativeWindow.y + MewSystem.app.stage.nativeWindow.height) <= 30 && Screen.mainScreen.visibleBounds.y > 0){
-						MewSystem.app.stage.nativeWindow.y = Screen.mainScreen.visibleBounds.y - MewSystem.app.stage.nativeWindow.height + 30;
+					if(Screen.mainScreen.visibleBounds.height < Screen.mainScreen.bounds.height){
+						MewSystem.isFullScreen = false;
+						setAllWindows(SystemSettingData.alwaysInfront, true);
+					}
+					if((MewSystem.app.mainWindow.y + MewSystem.app.mainWindow.height) <= 30 && Screen.mainScreen.visibleBounds.y > 0){
+						MewSystem.app.mainWindow.y = Screen.mainScreen.visibleBounds.y - MewSystem.app.mainWindow.height + 30;
 					}
 				}
 			}

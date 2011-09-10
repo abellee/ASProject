@@ -136,7 +136,7 @@ package com.adobe.serialization.json {
 						
 			// store the string part of an object member so
 			// that we can assign it a value in the object
-			var key:String;
+			var key:String
 			
 			// grab the next token from the tokenizer
 			nextToken();

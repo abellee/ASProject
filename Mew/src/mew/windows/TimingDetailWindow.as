@@ -16,7 +16,7 @@ package mew.windows {
 
 	import com.iabel.core.UISprite;
 	import com.iabel.util.DashLine;
-	import com.iabel.utils.ScaleBitmap;
+	import com.iabel.util.ScaleBitmap;
 
 	import flash.display.Bitmap;
 	import flash.display.Loader;
@@ -135,7 +135,7 @@ package mew.windows {
 			scrollPane.setStyle("downArrowOverSkin", new Sprite());
 			scrollPane.setStyle("downArrowDownSkin", new Sprite());
 			
-			deleteButton = ButtonFactory.OrangeButton();
+			deleteButton = ButtonFactory.WhiteButton();
 			deleteButton.setStyle("textFormat", Widget.usernameFormat);
 			deleteButton.width = 60;
 			deleteButton.height = 30;
@@ -145,7 +145,7 @@ package mew.windows {
 			deleteButton.y = scrollPane.y + scrollPane.height + 10;
 			deleteButton.addEventListener(MouseEvent.CLICK, deleteTimingWeibo);
 			
-			postNow = ButtonFactory.OrangeButton();
+			postNow = ButtonFactory.WhiteButton();
 			postNow.setStyle("textFormat", Widget.usernameFormat);
 			postNow.width = 100;
 			postNow.height = 30;

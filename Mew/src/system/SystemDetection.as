@@ -9,16 +9,21 @@ package system
 		public function SystemDetection()
 		{
 		}
-		
-		public static function isLion():Boolean
-		{
-			if(Capabilities.os == Config.LION) return true;
-			else return false;
-		}
-		
 		public static function isWindows():Boolean
 		{
 			if(Capabilities.os.toLowerCase().indexOf("win") != -1) return true;
+			else return false;
+		}
+		
+		public static function isXP():Boolean
+		{
+			if(Capabilities.os.indexOf("Windows XP") != -1) return true;
+			else return false;
+		}
+		
+		public static function isWin7():Boolean
+		{
+			if(Capabilities.os == "Windows 7") return true;
 			else return false;
 		}
 		

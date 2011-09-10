@@ -1,4 +1,5 @@
 package mew.modules {
+	import flash.events.FocusEvent;
 	import fl.controls.UIScrollBar;
 
 	import mew.communication.SuggestDataGetter;
@@ -28,7 +29,7 @@ package mew.modules {
 	import flash.ui.Keyboard;
 	import flash.utils.ByteArray;
 	
-	public class NormalStatePublisher extends UISprite implements IWeiboPublisherContainer, IEmotionCorrelation
+	public class NormalStatePublisher extends UISprite implements IWeiboPublisherContainer, IEmotionCorrelation, IScreenShot
 	{
 		private var buttonGroup:WeiboPublisherButtonGroup = null;
 		private var imageViewer:UploadImageViewer = null;
@@ -39,6 +40,7 @@ package mew.modules {
 		private var urlShortor:URLShortor = null;
 		private var suggestGetter:SuggestDataGetter = null;
 		private var explicitHeight:int;
+		private var screenShotor:ScreenShotor = null;
 		public function NormalStatePublisher()
 		{
 			super();
@@ -94,6 +96,7 @@ package mew.modules {
 			inputTextField.addEventListener(Event.CHANGE, inputTextField_onChangeHandler);
 			inputTextField.addEventListener(Event.ADDED_TO_STAGE, inputTextField_addToStageHandler);
 			inputTextField.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+			inputTextField.addEventListener(FocusEvent.FOCUS_IN, onFocusIn);
 			
 			addChild(buttonGroup);
 			buttonGroup.setSize(10, 70);
@@ -107,6 +110,18 @@ package mew.modules {
 			buttonGroup.addEventListener(MewEvent.SHORT_URL, shortURLHandler);
 		}
 		
+		private function onFocusIn(event:FocusEvent):void
+		{
+			MewSystem.reactivateFunc = reactivate;
+		}
+		
+		public function reactivate():void
+		{
+			MewSystem.reactivateFunc = null;
+			this.stage.nativeWindow.activate();
+			this.stage.focus = inputTextField;
+		}
+		
 		private function inputTextField_addToStageHandler(event:Event):void
 		{
 			this.stage.focus = inputTextField;
@@ -114,7 +129,11 @@ package mew.modules {
 		
 		private function screenShotHandler(event:MewEvent):void
 		{
-			
+			if(!screenShotor){
+				screenShotor = new ScreenShotor();
+				screenShotor.parent = this;
+			}
+			screenShotor.screenshot();
 		}
 		
 		private function emotionHandler(event:MewEvent):void
@@ -407,6 +426,11 @@ package mew.modules {
 			bk.graphics.endFill();
 		}
 		
+		public function screenComplete(byteArray:ByteArray):void
+		{
+			imageViewer.byteArray = byteArray;
+		}
+		
 		override protected function dealloc(event:Event):void
 		{
 			super.dealloc(event);
@@ -421,6 +445,7 @@ package mew.modules {
 				inputTextField.removeEventListener(Event.CHANGE, inputTextField_onChangeHandler);
 				inputTextField.removeEventListener(Event.ADDED_TO_STAGE, inputTextField_addToStageHandler);
 				inputTextField.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+				inputTextField.removeEventListener(FocusEvent.FOCUS_IN, onFocusIn);
 				inputTextField = null;
 			}
 			if(urlShortor){
@@ -443,6 +468,7 @@ package mew.modules {
 			bk = null;
 			textNumText = null;
 			scroller = null;
+			MewSystem.reactivateFunc = null;
 		}
 	}
 }

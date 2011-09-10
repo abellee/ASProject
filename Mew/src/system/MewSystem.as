@@ -1,33 +1,35 @@
 package system {
-	import config.Config;
-	import config.SQLConfig;
-
-	import mew.data.SuggestData;
-	import mew.data.SystemSettingData;
-	import mew.modules.Alert;
-	import mew.modules.IEmotionCorrelation;
-	import mew.modules.LightAlert;
-	import mew.modules.OperationGroup;
-	import mew.modules.Suggesttor;
-	import mew.modules.ToolTip;
-	import mew.windows.EmotionWindow;
-	import mew.windows.LightNoticeWindow;
-
-	import widget.Widget;
-
 	import com.sina.microblog.MicroBlog;
 	import com.sina.microblog.data.MicroBlogComment;
 	import com.sina.microblog.data.MicroBlogDirectMessage;
 	import com.sina.microblog.data.MicroBlogStatus;
 	import com.sina.microblog.data.MicroBlogUnread;
 	import com.sina.microblog.data.MicroBlogUser;
-
+	
+	import config.Config;
+	import config.SQLConfig;
+	
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
 	import flash.display.NativeWindowInitOptions;
 	import flash.display.NativeWindowType;
 	import flash.display.Sprite;
 	import flash.geom.Point;
+	import flash.media.Sound;
+	import flash.net.URLRequest;
+	
+	import mew.data.SuggestData;
+	import mew.data.SystemSettingData;
+	import mew.modules.IEmotionCorrelation;
+	import mew.modules.LightAlert;
+	import mew.modules.OperationGroup;
+	import mew.modules.Suggesttor;
+	import mew.modules.ToolTip;
+	import mew.windows.Alert;
+	import mew.windows.EmotionWindow;
+	import mew.windows.LightNoticeWindow;
+	
+	import widget.Widget;
 
 	public class MewSystem
 	{
@@ -75,6 +77,19 @@ package system {
 		public static var commentURL:String = "/statuses/comment.xml";
 		public static var repostURL:String = "/statuses/repost.xml";
 		
+		public static var isManual:Boolean = false;
+		public static var isFullScreen:Boolean = false;
+		public static var reactivateFunc:Function = null;
+		
+		public static var sound:Sound = null;
+		public static var soundPrePlay:Number = 0;
+		
+		public static function initStyle():void
+		{
+			if(SystemDetection.isXP()) Widget.systemFont = "宋体";
+			else if(SystemDetection.isWin7()) Widget.systemFont = "微软雅黑";
+		}
+		
 		public static function initMicroBlog():void
 		{
 			microBlog = new MicroBlog();
@@ -87,9 +102,18 @@ package system {
 		public static function showNoticeWindow(data:MicroBlogUnread):void
 		{
 			if(!data.comments && !data.dm && !data.followers && !data.mentions && !data.new_status) return;
-			if(!noticeWindow) noticeWindow = new LightNoticeWindow(getNativeWindowInitOption());
-			noticeWindow.showNotice(data);
-			noticeWindow.activate();
+			if(!isFullScreen){
+				if(!noticeWindow) noticeWindow = new LightNoticeWindow(getNativeWindowInitOption());
+				noticeWindow.showNotice(data);
+				noticeWindow.activate();
+				if(reactivateFunc) reactivateFunc();
+				var now:Number = new Date().time;
+				if(now - soundPrePlay >= 300000 && SystemSettingData.isVoice){
+					if(!sound) sound = new Sound(new URLRequest("resource/sound.mp3"));
+					sound.play();
+					soundPrePlay = now;
+				}
+			}
 		}
 		
 		public static function closeNoticeWindow():void
@@ -266,10 +290,13 @@ package system {
 			if(SystemSettingData.commentNotice && num > 0) app.showUnread(app.COMMENT, num);
 		}
 		
-		public static function show(text:String, parent:DisplayObjectContainer):void
+		public static function show(text:String):void
 		{
-			if(!parent.contains(alert)) parent.addChild(alert);
-			alert.show(text);
+			if(!alert){
+				alert = new Alert(getNativeWindowInitOption());
+				alert.activate();
+				alert.show(text);
+			}
 		}
 		
 		public static function showLightAlert(str:String, parent:DisplayObjectContainer):void
@@ -286,6 +313,14 @@ package system {
 			parent.addChild(MewSystem.cycleMotion);
 			MewSystem.cycleMotion.x = (parent.width - MewSystem.cycleMotion.width) / 2;
 			MewSystem.cycleMotion.y = (parent.height - MewSystem.cycleMotion.height) / 2;
+		}
+		
+		public static function closeAlert():void
+		{
+			if(alert){
+				alert.close();
+				alert = null;
+			}
 		}
 		
 		public static function removeCycleLoading(parent:DisplayObjectContainer):void

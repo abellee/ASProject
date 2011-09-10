@@ -10,6 +10,8 @@ package mew.modules
 	import mew.events.MewEvent;
 	import mew.factory.ButtonFactory;
 	
+	import widget.Widget;
+	
 	public class SystemSettingTabsGroup extends UISprite
 	{
 		private var systemSettingButton:Button = null;
@@ -26,6 +28,10 @@ package mew.modules
 			systemSettingButton = ButtonFactory.WhiteButton();
 			noticeSettingButton = ButtonFactory.WhiteButton();
 			accountSettingButton = ButtonFactory.WhiteButton();
+			systemSettingButton.setStyle("textFormat", Widget.normalFormat);
+			noticeSettingButton.setStyle("textFormat", Widget.normalFormat);
+			accountSettingButton.setStyle("textFormat", Widget.normalFormat);
+			
 			systemSettingButton.label = "系统设置";
 			systemSettingButton.width = 100;
 			noticeSettingButton.label = "提示设置";

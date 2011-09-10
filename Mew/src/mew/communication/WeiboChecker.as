@@ -13,6 +13,9 @@ package mew.communication {
 	 */
 	public class WeiboChecker {
 		private var timer:Timer = new Timer(40000);
+		private var unread:MicroBlogUnread = null;
+		private var count:int = 0;
+		private var totalCount:int = 0;
 		public function WeiboChecker(){
 		}
 		public function startRunning():void
@@ -49,12 +52,28 @@ package mew.communication {
 			if(unreadData){
 				trace("unread checking: (status:" + unreadData.new_status + ")...(followers:" + unreadData.followers
 				 + ")...(comments:" + unreadData.comments + ")...(dm:" + unreadData.dm + ")...(metions:" + unreadData.mentions + ")");
-				loadNewStatus(unreadData.new_status);
-				loadNewFans(unreadData.followers);
-				loadNewComment(unreadData.comments);
-				loadNewDM(unreadData.dm);
-				loadNewAt(unreadData.mentions);
-				MewSystem.showNoticeWindow(unreadData);
+				if(unreadData.new_status){
+					loadNewStatus(unreadData.new_status);
+					addTotalCount();
+				}
+				if(unreadData.followers){
+					loadNewFans(unreadData.followers);
+					addTotalCount();
+				}
+				if(unreadData.comments){
+					loadNewComment(unreadData.comments);
+					addTotalCount();
+				}
+				if(unreadData.dm){
+					loadNewDM(unreadData.dm);
+					addTotalCount();
+				}
+				if(unreadData.mentions){
+					loadNewAt(unreadData.mentions);
+					addTotalCount();
+				}
+				trace("unread checking and totalCount is:" + totalCount);
+				if(totalCount) unread = unreadData;
 			}
 			timer.reset();
 			timer.start();
@@ -67,11 +86,31 @@ package mew.communication {
 				MewSystem.microBlog.loadMentions("0", "0", mentions, 1);
 			}
 		}
+		
+		private function addTotalCount():void
+		{
+			totalCount ++;
+			trace("totalCount is:" + totalCount);
+		}
+		
+		private function addCount():void
+		{
+			count ++;
+			trace("count:" + count);
+			if(count >= totalCount){
+				trace("show notice window");
+				MewSystem.showNoticeWindow(unread);
+				unread = null;
+				count = 0;
+				totalCount = 0;
+			}
+		}
 
 		private function loadMentionsResult(event : MicroBlogEvent) : void
 		{
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_MENSIONS_RESULT, loadMentionsResult);
 			var arr:Array = event.result as Array;
+			addCount();
 			if(arr && arr.length){
 				if(MewSystem.checkLastId(SQLConfig.MEW_AT, arr)) return;
 				MewSystem.app.localWriter.prefixData(arr, SQLConfig.MEW_AT, MewSystem.atNum);
@@ -92,6 +131,7 @@ package mew.communication {
 		{
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_DIRECT_MESSAGES_RECEIVED_RESULT, loadDirectMessagesReceivedResult);
 			var arr:Array = event.result as Array;
+			addCount();
 			if(arr && arr.length){
 				if(MewSystem.checkLastId(SQLConfig.MEW_DIRECT, arr)) return;
 				MewSystem.app.localWriter.prefixData(arr, SQLConfig.MEW_DIRECT, MewSystem.directMessageNum);
@@ -112,6 +152,7 @@ package mew.communication {
 		{
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_COMMENTS_TIMELINE_RESULT, loadCommentsTimeLine);
 			var arr:Array = event.result as Array;
+			addCount();
 			if(arr && arr.length){
 				if(MewSystem.checkLastId(SQLConfig.MEW_COMMENT, arr)) return;
 				MewSystem.app.localWriter.prefixData(arr, SQLConfig.MEW_COMMENT, MewSystem.commentNum);
@@ -132,6 +173,7 @@ package mew.communication {
 		{
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_FRIENDS_TIMELINE_RESULT, loadFriendTimeLine);
 			var arr:Array = event.result as Array;
+			addCount();
 			if(arr && arr.length){
 				if(MewSystem.checkLastId(SQLConfig.MEW_INDEX, arr)) return;
 				MewSystem.app.localWriter.prefixData(arr, SQLConfig.MEW_INDEX, MewSystem.statusNum);
@@ -159,6 +201,7 @@ package mew.communication {
 		{
 			MewSystem.microBlog.removeEventListener(MicroBlogEvent.LOAD_FOLLOWERS_INFO_RESULT, loadFollowersInfoResult);
 			var arr:Array = event.result as Array;
+			addCount();
 			if(arr && arr.length){
 				if(MewSystem.checkLastId(SQLConfig.MEW_FANS, arr)) return;
 				MewSystem.app.localWriter.prefixData(arr, SQLConfig.MEW_FANS, MewSystem.fansNum);

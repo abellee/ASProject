@@ -1,6 +1,5 @@
 package mew.windows
 {
-	import system.MewSystem;
 	import com.greensock.TweenLite;
 	import com.iabel.core.UISprite;
 	
@@ -20,6 +19,10 @@ package mew.windows
 	import mew.modules.NoticeSettingContainer;
 	import mew.modules.SystemSettingContainer;
 	import mew.modules.SystemSettingTabsGroup;
+	
+	import system.MewSystem;
+	
+	import widget.Widget;
 	
 	public class SystemSetting extends ALNativeWindow
 	{
@@ -46,19 +49,19 @@ package mew.windows
 		override protected function init():void
 		{
 			drawBackground(400, 350);
-			background.alpha = 0;
 			this.stage.nativeWindow.alwaysInFront = true;
 			this.stage.nativeWindow.width = background.width + 20;
 			this.stage.nativeWindow.height = background.height + 20;
 			this.stage.nativeWindow.x = (Screen.mainScreen.visibleBounds.width - this.stage.nativeWindow.width) / 2;
 			this.stage.nativeWindow.y = (Screen.mainScreen.visibleBounds.height - this.stage.nativeWindow.height) / 2;
 			
-			TweenLite.to(background, .5, {alpha: 1});
-			
 			tabsGroup = new SystemSettingTabsGroup();
 			enterButton = ButtonFactory.WhiteButton();
 			cancelButton = ButtonFactory.WhiteButton();
 			defaultButton = ButtonFactory.WhiteButton();
+			enterButton.setStyle("textFormat", Widget.normalFormat);
+			cancelButton.setStyle("textFormat", Widget.normalFormat);
+			defaultButton.setStyle("textFormat", Widget.normalFormat);
 			
 			enterButton.label = "确 定";
 			enterButton.width = 60;

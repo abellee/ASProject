@@ -1,4 +1,6 @@
 package mew.modules {
+	import widget.Widget;
+	import flash.display.Sprite;
 	import mew.data.UserData;
 	import mew.data.WeiboData;
 	import mew.events.MewEvent;
@@ -28,6 +30,10 @@ package mew.modules {
 		protected var weiboText:EmotionTextField = null;
 		protected var urls:Array = null;
 		public var parentWin:ALNativeWindow = null;
+		
+		private var triangle:Sprite = null;
+		private var roundRect:Sprite = null;
+		private var skinContainer:Sprite = null;
 		
 		public function DirectMessageBox()
 		{
@@ -73,6 +79,7 @@ package mew.modules {
 		{
 			nameBox = new NameBox();
 			weiboText = new EmotionTextField();
+			skinContainer = new Sprite();
 		}
 		
 		public function initStatus(obj:Object, xml:XML):void
@@ -91,16 +98,23 @@ package mew.modules {
 			userAvatar.loadAvatar();
 			
 			nameBox.userData = userData;
-			nameBox.create();
 			
 			addChild(userAvatar);
 			addChild(nameBox);
 			addChild(weiboText);
 			
-			if(userData.id == MewSystem.app.userData.id) userAvatar.x = this.width - userAvatar.width - 2;
-			else userAvatar.x = 0;
+			var textStyle:String = "mainStyle";
+			if(userData.id == MewSystem.app.userData.id){
+				nameBox.create(0, true, 0xffffff);
+				textStyle = "whiteStyle";
+				userAvatar.x = this.width - userAvatar.width - 2;
+			}else{
+				nameBox.create();
+				userAvatar.x = 0;
+			}
 			
-			nameBox.x = userAvatar.width + 5;
+			nameBox.x = userAvatar.width + 15;
+			nameBox.y = 10;
 			var contentStr:String = data.content.replace(/\</g, "&lt;");
 			urls = StringUtils.getURLs(contentStr);
 			if(urls && urls.length){
@@ -108,13 +122,65 @@ package mew.modules {
 					contentStr = contentStr.replace(new RegExp(s), "<a href=\"" + s + "\">" + s + "</a>");
 				}
 			}
-			weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt(contentStr + " (" + StringUtils.transformTime(dm.createdAt) + ")") + "</span>",
-			 this.width - userAvatar.width * 2 - 10, xml);
+			weiboText.setText("<span class=\"" + textStyle + "\">" + StringUtils.displayTopicAndAt(contentStr + " (" + StringUtils.transformTime(dm.createdAt) + ")") + "</span>",
+			 this.width - userAvatar.width * 2 - 25, xml);
 			weiboText.x = nameBox.x;
 			weiboText.y = nameBox.y + nameBox.height + 5;
 			
-			setSize(this.width, this.height);
+			if(userData.id == MewSystem.app.userData.id){
+				drawTriangle("right");
+				drawRoundRect("right");
+				skinContainer.addChild(triangle);
+				skinContainer.addChild(roundRect);
+				triangle.x = roundRect.width - 5;
+				triangle.y = 10;
+				skinContainer.x = 63;
+			}else{
+				drawTriangle("left");
+				drawRoundRect("left");
+				skinContainer.addChild(triangle);
+				skinContainer.addChild(roundRect);
+				roundRect.x = 10;
+				triangle.y = 10;
+				skinContainer.x = userAvatar.width;
+			}
+			Widget.widgetGlowFilter(skinContainer);
+			addChildAt(skinContainer, 0);
+			setSize(this.width, this.height + 20);
 			addListener();
+		}
+		
+		private function drawTriangle(dir:String):void
+		{
+			if(!triangle) triangle = new  Sprite();
+			triangle.graphics.clear();
+			if(dir == "left"){
+				triangle.graphics.beginFill(0xFFFFFF, 1.0);
+				triangle.graphics.moveTo(20, 0);
+				triangle.graphics.lineTo(20, 40);
+				triangle.graphics.lineTo(0, 20);
+				triangle.graphics.lineTo(20, 0);
+			}else{
+				triangle.graphics.beginFill(Widget.mainColor, 1.0);
+				triangle.graphics.moveTo(0, 0);
+				triangle.graphics.lineTo(0, 40);
+				triangle.graphics.lineTo(20, 20);
+				triangle.graphics.lineTo(0, 0);
+			}
+			triangle.graphics.endFill();
+		}
+		
+		private function drawRoundRect(dir:String):void
+		{
+			if(!roundRect) roundRect = new Sprite();
+			roundRect.graphics.clear();
+			if(dir == "right"){
+				roundRect.graphics.beginFill(Widget.mainColor, 1.0);
+			}else{
+				roundRect.graphics.beginFill(0xFFFFFF, 1.0);
+			}
+			roundRect.graphics.drawRoundRect(0, 0, this.width - userAvatar.width - 80, this.height + 20, 12);
+			roundRect.graphics.endFill();
 		}
 		
 		protected function addListener():void
@@ -167,6 +233,9 @@ package mew.modules {
 			weiboText = null;
 			urls = null;
 			parentWin = null;
+			triangle = null;
+			roundRect = null;
+			skinContainer = null;
 		}
 	}
 }

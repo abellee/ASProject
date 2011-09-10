@@ -1,5 +1,4 @@
 package mew.modules {
-	import widget.Widget;
 	import mew.data.MediaData;
 	import mew.events.MewEvent;
 	import mew.utils.StringUtils;
@@ -7,12 +6,17 @@ package mew.modules {
 
 	import system.MewSystem;
 
+	import widget.Widget;
+
+	import com.sina.microblog.data.MicroBlogCount;
 	import com.sina.microblog.data.MicroBlogStatus;
 
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
 	
 	public class RepostBox extends DirectMessageBox
 	{
@@ -24,9 +28,12 @@ package mew.modules {
 		protected var repostFrame:Sprite = null;
 		protected var repostTriangle:Sprite = null;
 		protected var shapeContainer:Sprite = null;
+		protected var weiboCount:TextField = null;
+		protected var showWeiboCount:Boolean = false;
 		
-		public function RepostBox()
+		public function RepostBox(showCount:Boolean = false)
 		{
+			showWeiboCount = showCount;
 			super();
 		}
 		
@@ -70,10 +77,23 @@ package mew.modules {
 			MewSystem.repostOperationButton.y = 20;
 		}
 		
+		public function setWeiboCount(data:MicroBlogCount):void
+		{
+			if(weiboCount){
+				weiboCount.text = "转发(" + data.repostsCount + ") | 评论(" + data.commentsCount + ")";
+				weiboCount.width = weiboCount.textWidth;
+				weiboCount.height = weiboCount.textHeight;
+				weiboCount.x = weiboText.x + weiboText.width - weiboCount.width;
+				weiboCount.y = timeAndFrom.y;
+				addChild(weiboCount);
+			}
+		}
+		
 		override public function initStatus(obj:Object, xml:XML):void
 		{
 			var status:MicroBlogStatus = obj as MicroBlogStatus;
 			if(!status) return;
+			
 			if(!status.user){
 				nameBox = null;
 				timeAndFrom = null;
@@ -82,6 +102,13 @@ package mew.modules {
 				weiboText.y = 20;
 				weiboText.setText("<span class=\"mainStyle\">" + StringUtils.displayTopicAndAt("该微博已被删除") + "</span>", this.width - 20, xml);
 			}else{
+				if(showWeiboCount){
+					weiboCount = new TextField();
+					weiboCount.defaultTextFormat = Widget.normalGrayFormat;
+					weiboCount.autoSize = TextFieldAutoSize.LEFT;
+					weiboCount.selectable = false;
+					weiboCount.mouseEnabled = false;
+				}
 				userData = MewSystem.app.dataCache.getUserDataCache(status.user);
 				data = MewSystem.app.dataCache.getWeiboDataCache(status);
 				
@@ -214,6 +241,11 @@ package mew.modules {
 				}
 				timeAndFrom.y = preChild.y + preH + 10;
 				h = timeAndFrom.y + timeAndFrom.height;
+				if(weiboCount){
+					addChild(weiboCount);
+					weiboCount.x = weiboText.x + weiboText.width - weiboCount.width;
+					weiboCount.y = timeAndFrom.y;
+				}
 			}
 			setSize(this.width, h);
 			drawFrame();
@@ -268,6 +300,7 @@ package mew.modules {
 			musicBox = null;
 			if(videoChecker) videoChecker.removeEventListener(Event.COMPLETE, checkVideoUrlComplete);
 			videoChecker = null;
+			weiboCount = null;
 		}
 	}
 }

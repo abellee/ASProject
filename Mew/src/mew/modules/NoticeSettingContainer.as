@@ -1,15 +1,17 @@
 package mew.modules {
-	import config.Config;
-
-	import fl.controls.CheckBox;
-
-	import mew.data.SystemSettingData;
-	import mew.factory.ButtonFactory;
-
 	import com.iabel.core.UISprite;
-
+	
+	import config.Config;
+	
+	import fl.controls.CheckBox;
+	
 	import flash.events.Event;
 	import flash.net.SharedObject;
+	
+	import mew.data.SystemSettingData;
+	import mew.factory.ButtonFactory;
+	
+	import system.MewSystem;
 	
 	public class NoticeSettingContainer extends UISprite implements ISystemSettingContainer
 	{
@@ -96,7 +98,17 @@ package mew.modules {
 			so.data.weiboNotice = weiboNotice.selected;
 			so.data.commentNotice = commentNotice.selected;
 			so.flush();
+			so.close();
 			
+			if(!voiceNotice.selected){
+				if(MewSystem.sound){
+					try{
+						MewSystem.sound.close()
+					}catch(e:Error){}
+				}
+				MewSystem.sound = null;
+				MewSystem.soundPrePlay = 0;
+			}
 			SystemSettingData.isVoice = voiceNotice.selected;
 			SystemSettingData.atNotice = atNotice.selected;
 			SystemSettingData.dmNotice = dmNotice.selected;

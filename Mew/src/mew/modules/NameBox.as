@@ -11,6 +11,7 @@ package mew.modules {
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
 	
 	public class NameBox extends UISprite
 	{
@@ -21,10 +22,11 @@ package mew.modules {
 		{
 			super();
 		}
-		public function create(trunck:int = 0):void
+		public function create(trunck:int = 0, custom:Boolean = false, color:Number = 0x4C4C4C):void
 		{
 			if(!nameTextField) nameTextField = new TextField();
-			nameTextField.defaultTextFormat = Widget.usernameFormat;
+			if(!custom) nameTextField.defaultTextFormat = Widget.usernameFormat;
+			else nameTextField.defaultTextFormat = new TextFormat(Widget.systemFont, 13, color, true);
 			nameTextField.autoSize = TextFieldAutoSize.LEFT;
 			nameTextField.mouseWheelEnabled = false;
 			nameTextField.selectable = false;

@@ -44,7 +44,7 @@ package mew.modules
 		{
 			if(!bk) bk = new Sprite();
 			bk.graphics.beginFill(0xFFFFFF, 1.0);
-			bk.graphics.drawRoundRect(0, 0, 300, 50, 12, 12);
+			bk.graphics.drawRoundRect(0, 0, 300, 60, 12, 12);
 			bk.graphics.endFill();
 			
 			Widget.widgetGlowFilter(bk);
@@ -66,11 +66,12 @@ package mew.modules
 			textInput.addEventListener(Event.ADDED_TO_STAGE, textInput_onAddedToStage);
 			
 			if(!enterButton) enterButton = ButtonFactory.WhiteButton();
+			enterButton.setStyle("textFormat", Widget.normalFormat);
 			enterButton.label = "确 定";
 			enterButton.width = 60;
 			addChild(enterButton);
 			enterButton.x = textInput.x + textInput.width + 5;
-			enterButton.y = textInput.y;
+			enterButton.y = textInput.y - 2;
 			enterButton.addEventListener(MouseEvent.CLICK, enterButton_mouseClickHandler);
 			
 			if(!tipText) tipText = new TextField();

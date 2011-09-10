@@ -28,11 +28,6 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>[source path] com</name>
-			<type>2</type>
-			<location>/Users/abellee/Documents/SVN(Git)/ASLib/AbelAS3Lib/src/com</location>
-		</link>
-		<link>
 			<name>as3corelib</name>
 			<type>2</type>
 			<locationURI>as3corelib</locationURI>

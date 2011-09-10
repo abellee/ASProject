@@ -1,5 +1,6 @@
 package mew.modules
 {
+	import com.greensock.TweenLite;
 	import com.iabel.core.UISprite;
 	import com.iabel.util.ScaleBitmap;
 	
@@ -39,7 +40,7 @@ package mew.modules
 		
 		public function showPercent(value:Number):void
 		{
-			masker.scaleX = value;
+			TweenLite.to(masker, .5, {scaleX: value});
 		}
 		
 		private function drawMasker():void

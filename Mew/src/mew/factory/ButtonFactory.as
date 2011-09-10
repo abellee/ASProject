@@ -10,7 +10,7 @@ package mew.factory {
 
 	import widget.Widget;
 
-	import com.iabel.utils.ScaleBitmap;
+	import com.iabel.util.ScaleBitmap;
 
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -461,22 +461,6 @@ package mew.factory {
 			return btn;
 		}
 
-		public static function UpdateButton() : Button {
-			var btn : Button = new Button();
-			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "更新";
-			btn.width = 60;
-			return btn;
-		}
-
-		public static function SkipButton() : Button {
-			var btn : Button = new Button();
-			btn.textField.autoSize = TextFieldAutoSize.LEFT;
-			btn.label = "跳过些版本";
-			btn.width = 100;
-			return btn;
-		}
-
 		public static function ScreenShotButton() : Button {
 			var btn : Button = new Button();
 			var upSkin : Bitmap = new Resource.ScreenShotSkin();
@@ -700,6 +684,7 @@ package mew.factory {
 			btn.setStyle("selectedUpSkin", downSkin);
 			btn.setStyle("selectedOverSkin", downSkin);
 			btn.setStyle("selectedDownSkin", downSkin);
+			btn.setStyle("selectedDisabledSkin", downSkin);
 			btn.setStyle("focusRectSkin", new Sprite());
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
 			btn.width = upSkin.width;
@@ -720,6 +705,7 @@ package mew.factory {
 			btn.setStyle("selectedUpSkin", downSkin);
 			btn.setStyle("selectedOverSkin", downSkin);
 			btn.setStyle("selectedDownSkin", downSkin);
+			btn.setStyle("selectedDisabledSkin", downSkin);
 			btn.setStyle("focusRectSkin", new Sprite());
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
 			btn.width = upSkin.width;
@@ -740,6 +726,7 @@ package mew.factory {
 			btn.setStyle("selectedUpSkin", downSkin);
 			btn.setStyle("selectedOverSkin", downSkin);
 			btn.setStyle("selectedDownSkin", downSkin);
+			btn.setStyle("selectedDisabledSkin", downSkin);
 			btn.setStyle("focusRectSkin", new Sprite());
 			btn.textField.autoSize = TextFieldAutoSize.LEFT;
 			btn.width = upSkin.width;

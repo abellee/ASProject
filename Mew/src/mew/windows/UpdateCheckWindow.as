@@ -12,7 +12,9 @@ package mew.windows {
 	 */
 	public class UpdateCheckWindow extends ALNativeWindow {
 		private var progressBar:ProgressBar = null;
-		public function UpdateCheckWindow(initOptions : NativeWindowInitOptions) {
+		public var curState:String = "check";
+		public function UpdateCheckWindow(initOptions : NativeWindowInitOptions, state:String = "check") {
+			curState = state;
 			super(initOptions);
 		}
 		
@@ -26,12 +28,19 @@ package mew.windows {
 			this.stage.nativeWindow.y = (Screen.mainScreen.visibleBounds.height - this.stage.nativeWindow.height) / 2;
 			
 			progressBar = new ProgressBar();
-			progressBar.showPercent(1);
+			if(curState == "check"){
+				MewSystem.isManual = true;
+				progressBar.showPercent(1);
+				MewSystem.app.checkUpdate();
+			}
 			addChild(progressBar);
 			progressBar.x = (background.width - 182) / 2 + 10;
 			progressBar.y = (background.height - 20) / 2 + 10;
-			
-			MewSystem.app.checkUpdate();
+		}
+		
+		public function showDownloading(value:Number):void
+		{
+			progressBar.showPercent(value);
 		}
 		
 		override protected function dealloc(event:Event):void
@@ -39,6 +48,7 @@ package mew.windows {
 			super.dealloc(event);
 			
 			progressBar = null;
+			curState = null;
 		}
 	}
 }

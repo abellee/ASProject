@@ -70,7 +70,7 @@ package mew.modules {
 			if(!background) background = new Sprite();
 			background.graphics.clear();
 			background.graphics.beginFill(Widget.mainColor);
-			background.graphics.drawRect(0, 0, this.width, this.height);
+			background.graphics.drawRect(0, 0, this.width - 10, this.height);
 			background.graphics.endFill();
 			background.mouseEnabled = false;
 			background.mouseChildren = false;

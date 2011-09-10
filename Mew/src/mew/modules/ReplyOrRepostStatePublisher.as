@@ -21,6 +21,7 @@ package mew.modules {
 
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.FocusEvent;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -160,6 +161,7 @@ package mew.modules {
 			inputTextField.addEventListener(Event.CHANGE, inputTextField_onChangeHandler);
 			inputTextField.addEventListener(Event.ADDED_TO_STAGE, inputTextField_addToStageHandler);
 			inputTextField.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+			inputTextField.addEventListener(FocusEvent.FOCUS_IN, onFocusIn);
 			if(repostData && state == WeiBoPublisher.REPOST) inputTextField.text = "//@" + ud.username + ": " + weiboData.content;
 			else if(weiboData.username && state == WeiBoPublisher.REPLY){
 				inputTextField.text = "回复@" + weiboData.username + ": ";
@@ -213,6 +215,18 @@ package mew.modules {
 			buttonGroup.addEventListener(MewEvent.SHORT_URL, shortURLHandler);
 			
 			topBK.addEventListener(MouseEvent.MOUSE_DOWN, dragNativeWindow);
+		}
+		
+		private function onFocusIn(event:FocusEvent):void
+		{
+			MewSystem.reactivateFunc = reactivate;
+		}
+		
+		public function reactivate():void
+		{
+			MewSystem.reactivateFunc = null;
+			this.stage.nativeWindow.activate();
+			this.stage.focus = inputTextField;
 		}
 		
 		public function getFirstSelect():Boolean
@@ -530,6 +544,7 @@ package mew.modules {
 				inputTextField.removeEventListener(Event.CHANGE, inputTextField_onChangeHandler);
 				inputTextField.removeEventListener(Event.ADDED_TO_STAGE, inputTextField_addToStageHandler);
 				inputTextField.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+				inputTextField.removeEventListener(FocusEvent.FOCUS_IN, onFocusIn);
 				inputTextField = null;
 			}
 			
@@ -561,6 +576,7 @@ package mew.modules {
 			ud = null;
 			wd = null;
 			scroller = null;
+			MewSystem.reactivateFunc = null;
 		}
 	}
 }
