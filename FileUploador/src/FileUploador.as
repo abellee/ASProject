@@ -1,31 +1,30 @@
 package {
-	import flash.net.URLRequest;
-	import flash.events.ProgressEvent;
-	import fl.events.DataChangeEvent;
-	import flash.text.TextFieldAutoSize;
-	import flash.text.TextField;
-	import fl.containers.ScrollPane;
 	import fl.controls.Button;
 	import fl.controls.DataGrid;
 	import fl.controls.dataGridClasses.DataGridColumn;
 	import fl.data.DataProvider;
+	import fl.events.DataChangeEvent;
 
 	import flash.display.Bitmap;
 	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.events.ProgressEvent;
 	import flash.external.ExternalInterface;
 	import flash.net.FileFilter;
 	import flash.net.FileReference;
 	import flash.net.FileReferenceList;
+	import flash.net.URLRequest;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	
 	[SWF(width="680", height="450", backgroundColor="#e8f0f9")]
 	public class FileUploador extends Sprite
 	{
-		private var scrollList:ScrollPane = null;
-		private var scrollContent:FileContainer = null;
+//		private var scrollList:ScrollPane = null;
+//		private var scrollContent:FileContainer = null;
 		private var browseButton:Button = null;
 		private var uploadButton:Button = null;
 		private var deleteAll:Button = null;
@@ -208,13 +207,17 @@ package {
 		
 		private function browseFiles(event:MouseEvent):void
 		{
+			if(dp.length >= limitNum){
+				if(ExternalInterface.available) ExternalInterface.call("outLimit");
+				return;
+			}
 			if(!fileRef) fileRef = new FileReferenceList();
 			fileRef.addEventListener(Event.SELECT, filesSelected);
 			fileRef.addEventListener(Event.OPEN, fileRefOpenHandler);
 			fileRef.browse([fileType]);
 		}
 		
-		private function removeAllItems(event:MouseEvent):void
+		private function removeAllItems(event:MouseEvent = null):void
 		{
 			dp = new DataProvider();
 			imageList.dataProvider = dp;
@@ -306,6 +309,7 @@ package {
 			if(curRow >= dp.length){
 				curRow = 0;
 				uploading = false;
+				removeAllItems();
 				FileUploador.tellJS("AllComplete", totalNum, totalSize);
 				return;
 			}
