@@ -83,7 +83,7 @@ package mew.windows {
 			background.graphics.drawRect(0, 0, this.stage.nativeWindow.width, this.stage.nativeWindow.height - 10);
 			background.graphics.endFill();
 			container.addChildAt(background, 0);
-			Widget.widgetGlowFilter(background);
+			Widget.widgetGlowFilter(background, 5, 5);
 			container.addEventListener(MouseEvent.MOUSE_OVER, showMainPanel);
 			container.addEventListener(MouseEvent.ROLL_OUT, hideMainPanel);
 		}

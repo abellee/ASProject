@@ -34,13 +34,7 @@
 
 	<!-- Description, displayed in the AIR application installer.
 	May have multiple values for each language. See samples or xsd schema file. Optional. -->
-	<description>
-	Mew微博是新浪微博的桌面工具，支持表情显示、定时微博、截图、视频播放等等的功能。
-	更多内容请关注:
-	开发者微博: http://weibo.com/abellee
-	设计师微博: http://weibo.com/sll1004
-	谢谢您对Mew微博的支持!
-	</description>
+	<!--<description></description>-->
 
 	<!-- Copyright information. Optional -->
 	<copyright>Abel Lee</copyright>

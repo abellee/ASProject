@@ -21,6 +21,7 @@ package mew.utils
 		private var num:int = 0;
 		private var index:int = 0;
 		public var videoURLs:Array = null;
+		private var charset:String = "utf-8";
 		public function VideoChecker(target:IEventDispatcher=null)
 		{
 			super(target);
@@ -74,6 +75,7 @@ package mew.utils
 				videoURLs[index]["source"] = "youku";
 				arr = realURL.match(/id_(?P<id>.+?).html/);
 				if(arr && arr["id"]) videoURLs[index]["id"] = arr["id"];
+				charset = "utf-8";
 				urlLoader.addEventListener(Event.COMPLETE, urlLoadComplete);
 				return;
 			}
@@ -85,18 +87,21 @@ package mew.utils
 					arr = realURL.match(/[&#\?]iid=(?P<id>\d+)/);
 					if(arr) videoURLs[index]["id"] = arr["id"];
 				}else videoURLs[index]["id"] = arr["id"];
+				charset = "gbk";
 				urlLoader.addEventListener(Event.COMPLETE, urlLoadComplete);
 				return;
 			}
 			var isKu6:int = realURL.search(/http:\/\/v.ku6.com/);
 			if(isKu6 != -1){                                            // is ku6 video
 				videoURLs[index]["source"] = "ku6";
+				charset = "gbk";
 				urlLoader.addEventListener(Event.COMPLETE, urlLoadComplete);
 				return;
 			}
 			var isSina:int = realURL.search(/http:\/\/video.sina.com.cn/);
 			if(isSina != -1){                                            // is sina video
 				videoURLs[index]["source"] = "sina";
+				charset = "utf-8";
 				urlLoader.addEventListener(Event.COMPLETE, urlLoadComplete);
 				return;
 			}
@@ -107,42 +112,49 @@ package mew.utils
 				var pointIndex:int = realURL.lastIndexOf(".");
 				var ida:String = realURL.substring(slashIndex+1, pointIndex);
 				if(ida) videoURLs[index]["id"] = ida;
+				charset = "utf-8";
 				urlLoader.addEventListener(Event.COMPLETE, urlLoadComplete);
 				return;
 			}
 			var isSohu:int = realURL.search(/http:\/\/tv.sohu.com/);
 			if(isSohu != -1){                                            // is sohu video
 				videoURLs[index]["source"] = "sohu";
+				charset = "gbk";
 				urlLoader.addEventListener(Event.COMPLETE, urlLoadComplete);
 				return;
 			}
 			var isYinYueTai:int = realURL.search(/http:\/\/www.yinyuetai.com/);
 			if(isYinYueTai != -1){                                       // is yinyuetai video
 				videoURLs[index]["source"] = "yinyuetai";
+				charset = "utf-8";
 				urlLoader.addEventListener(Event.COMPLETE, urlLoadComplete);
 				return;
 			}
 			var isV1:int = realURL.search(/http:\/\/[a-zA-z\d]+.v1.cn/);
 			if(isV1 != -1){                                             // is v1 video
 				videoURLs[index]["source"] = "v1";
+				charset = "utf-8";
 				urlLoader.addEventListener(Event.COMPLETE, urlLoadComplete);
 				return;
 			}
 			var isCNTV:int = realURL.search(/http:\/\/bugu.cntv.cn/);
 			if(isCNTV != -1){                                          // is cntv video
 				videoURLs[index]["source"] = "cntv";
+				charset = "gbk";
 				urlLoader.addEventListener(Event.COMPLETE, urlLoadComplete);
 				return;
 			}
 			var isJoy:int = realURL.search(/http:\/\/[a-zA-z\d]+.joy.cn/);
 			if(isJoy != -1){                                          // is joy video
 				videoURLs[index]["source"] = "joy";
+				charset = "utf-8";
 				urlLoader.addEventListener(Event.COMPLETE, urlLoadComplete);
 				return;
 			}
 			var isQiyi:int = realURL.search(/http:\/\/[a-zA-z\d]+.qiyi.com/);
 			if(isQiyi != -1){                                         // is qiyi video
 				videoURLs[index]["source"] = "qiyi";
+				charset = "utf-8";
 				urlLoader.addEventListener(Event.COMPLETE, urlLoadComplete);
 				return;
 			}
@@ -152,7 +164,7 @@ package mew.utils
 		{
 			urlLoader.removeEventListener(Event.COMPLETE, urlLoadComplete);
 			var ba:ByteArray = event.target.data;
-			var str:String = ba.readMultiByte(ba.length, "gb2312");
+			var str:String = ba.readMultiByte(ba.bytesAvailable, charset);
 			var value:String = "";
 			switch(videoURLs[index]["source"]){
 				case "youku":
