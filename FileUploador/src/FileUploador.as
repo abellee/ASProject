@@ -230,12 +230,19 @@ package {
 		private function filesSelected(event:Event):void
 		{
 			var list:Array = fileRef.fileList;
+			var len:int = list.length;
+			var tlen:int = totalNum + len;
+			var extraNum:int = tlen - limitNum;
+			for (var i : int = 0; i < extraNum; i++) {
+				if(list && list.length) list.pop();
+			}
 			if(list && list.length){
 				for each(var file:FileReference in list){
 					file.addEventListener(Event.COMPLETE, preloadFileComplete);
 					file.load();
 				}
 			}
+			trace(dp.length);
 		}
 		private function preloadFileComplete(event:Event):void
 		{
