@@ -314,10 +314,10 @@ package {
 			obj.uploaded = true;
 			curRow++;
 			if(curRow >= dp.length){
+				FileUploador.tellJS("AllComplete", totalNum, totalSize * 1024 * 1024);
 				curRow = 0;
 				uploading = false;
 				removeAllItems();
-				FileUploador.tellJS("AllComplete", totalNum, totalSize);
 				return;
 			}
 			uploadFile(curRow);
