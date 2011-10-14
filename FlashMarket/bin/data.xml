@@ -1,8 +1,10 @@
-<root width="64" height="32">
+<root width="64" height="32" background="images/bk.jpg" baseURL="http://localhost/">
 <item>
 <x>1</x>
 <y>0</y>
 <tid>2</tid>
+<offsetX>10</offsetX>
+<offsetY>20</offsetY>
 <text>鞋帽店</text>
 <image>images/1.jpg</image>
 <rotation>0</rotation>

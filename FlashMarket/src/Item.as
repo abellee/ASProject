@@ -1,5 +1,6 @@
 package
 {
+	import flash.filters.BitmapFilter;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
@@ -19,6 +20,8 @@ package
 		private var _background:BitmapData = null;
 		private var textBitmap:Bitmap = null;
 		private var _index:int = -1;
+		private var _offsetX:int = 0;
+		private var _offsetY:int = 0;
 		public function Item()
 		{
 			super();
@@ -53,6 +56,18 @@ package
 			
 			if(textBitmap) textBitmap.rotation = _rotate;
 			if(bitmap) bitmap.rotation = _rotate;
+		}
+		
+		public function showFilter(filter:BitmapFilter):void
+		{
+			var bitmap:Bitmap = this.getChildAt(0) as Bitmap;
+			if(bitmap) bitmap.filters = [filter];
+		}
+		
+		public function removeFilter():void
+		{
+			var bitmap:Bitmap = this.getChildAt(0) as Bitmap;
+			if(bitmap) bitmap.filters = null;
 		}
 		
 		public function hasKeyword(str:String):Boolean
@@ -159,7 +174,26 @@ package
 		{
 			_index = value;
 		}
-
+		
+		public function get offsetX():int
+		{
+			return _offsetX;
+		}
+		
+		public function set offsetX(value:int):void
+		{
+			if(_offsetX != value) _offsetX = value;
+		}
+		
+		public function get offsetY():int
+		{
+			return _offsetY;
+		}
+		
+		public function set offsetY(value:int):void
+		{
+			if(_offsetY != value) _offsetY = value;
+		}
 
 	}
 }
