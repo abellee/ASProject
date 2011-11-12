@@ -8,7 +8,7 @@ package
 
 	public class Cache
 	{
-		public static var normalFormat:TextFormat = new TextFormat("华文黑体", 12, 0x000000, true, null, null, null, null, "center", null, null, null);
+		public static var normalFormat:TextFormat = new TextFormat("华文黑体", 12, 0xFFFFFF, true, null, null, null, null, "center", null, null, null);
 		public static var bitmapDataList:Object = null;
 		public function Cache()
 		{

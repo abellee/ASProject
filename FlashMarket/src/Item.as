@@ -1,10 +1,10 @@
 package
 {
-	import flash.filters.BitmapFilter;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.filters.BitmapFilter;
 	import flash.geom.Point;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
@@ -80,9 +80,30 @@ package
 		public function showInfoPanel(infoPanel:InfoPanel):void
 		{
 			addChild(infoPanel);
-			var localPos:Point = this.globalToLocal(new Point(this.stage.mouseX, this.stage.mouseY));
-			infoPanel.x = localPos.x;
-			infoPanel.y = localPos.y;
+			var bitmap:Bitmap = this.getChildAt(0) as Bitmap;
+			infoPanel.x = bitmap.width - 10;
+			infoPanel.y = bitmap.height - 10;
+			infoPanel.drawBackground("lt");
+			var horizontal:Boolean = false;
+			if(_rotate != 0){
+				var localPos:Point = this.globalToLocal(new Point(this.stage.mouseX, this.stage.mouseY));
+				infoPanel.x = localPos.x;
+				infoPanel.y = localPos.y;
+			}
+			if((this.x + infoPanel.x + infoPanel.width) > this.stage.stageWidth){
+				infoPanel.x = -infoPanel.width + 10;
+				infoPanel.drawBackground("rt");
+				horizontal = true;
+			}
+			if((this.y + infoPanel.y + infoPanel.height) > this.stage.stageHeight){
+				infoPanel.y = -infoPanel.height + 15;
+				if(!horizontal){
+					infoPanel.drawBackground("bl");
+				}else{
+					infoPanel.x += 10;
+					infoPanel.drawBackground("br");
+				}
+			}
 		}
 		
 		public function removeInfoPanel(infoPanel:InfoPanel):void

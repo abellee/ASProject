@@ -1,6 +1,4 @@
 package {
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Loader;
@@ -8,6 +6,7 @@ package {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.events.TimerEvent;
 	import flash.external.ExternalInterface;
 	import flash.filters.BitmapFilter;
 	import flash.filters.BitmapFilterQuality;
@@ -15,6 +14,9 @@ package {
 	import flash.geom.Point;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.system.LoaderContext;
+	import flash.text.TextField;
+	import flash.utils.Timer;
 	
 	[SWF(width="1000", height="600")]
 	public class FlashMarket extends Sprite
@@ -30,14 +32,16 @@ package {
 		private var highlightedList:Array = null;
 		private var urlLoaderFunc:Function = null;
 		private var houseContainer:Sprite = new Sprite();
+		public static var instance:FlashMarket = null;
 		public function FlashMarket()
 		{
+			instance = this;
 			Cache.bitmapDataList = {};
 			spriteList = {};
 			addChild(houseContainer);
 			if(!urlLoader) urlLoader = new URLLoader();
 			urlLoader.addEventListener(Event.COMPLETE, xmlDataFile_loadCompleteHandler);
-			urlLoader.load(new URLRequest("data.xml"));
+			urlLoader.load(new URLRequest("data.xml?t="+ new Date().getTime()));
 		}
 		
 		private function xmlDataFile_loadCompleteHandler(event:Event):void
@@ -71,7 +75,9 @@ package {
 					spriteList[baseURL + item.image].push(house);
 					var loader:Loader = new Loader();
 					loader.contentLoaderInfo.addEventListener(Event.COMPLETE, bitmapLoaded);
-					loader.load(new URLRequest(baseURL + item.image));
+					var lc:LoaderContext = new LoaderContext();
+					lc.checkPolicyFile = true;
+					loader.load(new URLRequest(baseURL + item.image), lc);
 				}
 			}
 			if(ExternalInterface.available) ExternalInterface.addCallback("searchHouse", searchHouseFromJs);
@@ -80,12 +86,16 @@ package {
 		private function searchHouseFromJs(str:String):void
 		{
 			removeHighlightedFromItems();
-			if(str && str != "" && this.numChildren){
-				var len:int = this.numChildren;
+			if(str && str != "" && houseContainer.numChildren){
+				var len:int = houseContainer.numChildren;
 				for(var i:int = 0; i<len; i++){
-					var item:Item = this.getChildAt(i) as Item;
+					var item:Item = houseContainer.getChildAt(i) as Item;
 					if(item){
-						if(item.hasKeyword(str)) highlightedItem(item);
+						if(item.hasKeyword(str)){
+							highlightedItem(item);
+							if(!highlightedList) highlightedList = [];
+							highlightedList.push(item);
+						}
 					}
 				}
 			}
@@ -174,25 +184,26 @@ package {
 		private function swapCurrentHouse(event:MouseEvent):void
 		{
 			var item:Item = event.currentTarget as Item;
+			if(!item.tid) return;
 			houseContainer.setChildIndex(item, houseContainer.numChildren - 1);
-			initInfoPanel(null);
-			item.showInfoPanel(infoPanel);
+//			initInfoPanel(null);
+//			item.showInfoPanel(infoPanel);
 			
-//			urlLoaderFunc = function(event:Event):void
-//			{
-//				urlLoader.removeEventListener(Event.COMPLETE, urlLoaderFunc);
-//				var xml:XML = XML(event.target.data);
-//				if(xml){
-//					initInfoPanel(xml);
-//					item.showInfoPanel(infoPanel);
-//				}
-//				urlLoader = null;
-//				urlLoaderFunc = null;
-//			};
-//			
-//			if(!urlLoader) urlLoader = new URLLoader();
-//			urlLoader.addEventListener(Event.COMPLETE, urlLoaderFunc);
-//			urlLoader.load(new URLRequest(baseURL + "info.php?tid=" + item.tid));
+			urlLoaderFunc = function(event:Event):void
+			{
+				urlLoader.removeEventListener(Event.COMPLETE, urlLoaderFunc);
+				var xml:XML = XML(event.target.data);
+				if(xml){
+					initInfoPanel(xml);
+					item.showInfoPanel(infoPanel);
+				}
+				urlLoader = null;
+				urlLoaderFunc = null;
+			};
+			
+			if(!urlLoader) urlLoader = new URLLoader();
+			urlLoader.addEventListener(Event.COMPLETE, urlLoaderFunc);
+			urlLoader.load(new URLRequest(baseURL + "api.php?op=booth&tid=" + item.tid + "&rad="+ new Date().getTime()));
 		}
 		
 		private function reswapCurrentHouse(event:MouseEvent):void
@@ -207,6 +218,7 @@ package {
 			}
 			var item:Item = event.currentTarget as Item;
 			houseContainer.setChildIndex(item, item.index);
+			if(!infoPanel) return;
 			item.removeInfoPanel(infoPanel);
 			infoPanel = null;
 		}
@@ -214,42 +226,42 @@ package {
 		private function initInfoPanel(data:XML):void
 		{
 			if(!infoPanel) infoPanel = new InfoPanel();
-			var xml:XML = new XML("<root>" +
-			"<number>096</number>" +
-			"<name>秋水伊人服饰店</name>" +
-			"<detailPage>http://www.iabel.com</detailPage>" +
-			"<info>" +
-			"<detailPage>http://www.iabel.com</detailPage>" +
-			"<entry>" +
-			"<name>皮衣处理</name>" +
-			"<time>11-10-10</time>" +
-			"</entry>" +
-			"<entry>" +
-			"<name>皮衣处理2</name>" +
-			"<time>11-10-10</time>" +
-			"</entry>" +
-			"</info>" +
-			"<products>" +
-			"<detailPage>http://www.iabel.com</detailPage>" +
-			"<product>" +
-			"<image>" + baseURL + "images/img0.jpg</image>" +
-			"<url>http://www.iabel.com</url>" +
-			"</product>" +
-			"<product>" +
-			"<image>" + baseURL + "images/img0.jpg</image>" +
-			"<url>http://www.iabel.com</url>" +
-			"</product>" +
-			"<product>" +
-			"<image>" + baseURL + "images/img0.jpg</image>" +
-			"<url>http://www.iabel.com</url>" +
-			"</product>" +
-			"<product>" +
-			"<image>" + baseURL + "images/img0.jpg</image>" +
-			"<url>http://www.iabel.com</url>" +
-			"</product>" +
-			"</products>" +
-			"</root>");
-			infoPanel.initInfoPanel(xml);
+//			var xml:XML = new XML("<root>" +
+//			"<number>096</number>" +
+//			"<name>秋水伊人服饰店</name>" +
+//			"<detailPage>http://www.iabel.com</detailPage>" +
+//			"<info>" +
+//			"<detailPage>http://www.iabel.com</detailPage>" +
+//			"<entry>" +
+//			"<name>皮衣处理</name>" +
+//			"<time>11-10-10</time>" +
+//			"</entry>" +
+//			"<entry>" +
+//			"<name>皮衣处理2</name>" +
+//			"<time>11-10-10</time>" +
+//			"</entry>" +
+//			"</info>" +
+//			"<products>" +
+//			"<detailPage>http://www.iabel.com</detailPage>" +
+//			"<product>" +
+//			"<image>" + baseURL + "images/img0.jpg</image>" +
+//			"<url>http://www.iabel.com</url>" +
+//			"</product>" +
+//			"<product>" +
+//			"<image>" + baseURL + "images/img0.jpg</image>" +
+//			"<url>http://www.iabel.com</url>" +
+//			"</product>" +
+//			"<product>" +
+//			"<image>" + baseURL + "images/img0.jpg</image>" +
+//			"<url>http://www.iabel.com</url>" +
+//			"</product>" +
+//			"<product>" +
+//			"<image>" + baseURL + "images/img0.jpg</image>" +
+//			"<url>http://www.iabel.com</url>" +
+//			"</product>" +
+//			"</products>" +
+//			"</root>");
+			infoPanel.initInfoPanel(data);
 		}
 	}
 }
