@@ -81,17 +81,17 @@ package
 		{
 			addChild(infoPanel);
 			var bitmap:Bitmap = this.getChildAt(0) as Bitmap;
-			infoPanel.x = bitmap.width - 10;
-			infoPanel.y = bitmap.height - 10;
+			infoPanel.x = bitmap.width - 8;
+			infoPanel.y = bitmap.height - 5;
 			infoPanel.drawBackground("lt");
 			var horizontal:Boolean = false;
 			if(_rotate != 0){
 				var localPos:Point = this.globalToLocal(new Point(this.stage.mouseX, this.stage.mouseY));
-				infoPanel.x = localPos.x;
-				infoPanel.y = localPos.y;
+				infoPanel.x = localPos.x + 5;
+				infoPanel.y = localPos.y + 5;
 			}
 			if((this.x + infoPanel.x + infoPanel.width) > this.stage.stageWidth){
-				infoPanel.x = -infoPanel.width + 10;
+				infoPanel.x = -infoPanel.width +30;
 				infoPanel.drawBackground("rt");
 				horizontal = true;
 			}
@@ -100,7 +100,7 @@ package
 				if(!horizontal){
 					infoPanel.drawBackground("bl");
 				}else{
-					infoPanel.x += 10;
+					infoPanel.x += 5;
 					infoPanel.drawBackground("br");
 				}
 			}
@@ -130,67 +130,67 @@ package
 		{
 			return _keywords;
 		}
-
+		
 		public function set keywords(value:Array):void
 		{
 			_keywords = value;
 		}
-
+		
 		public function get pos():Point
 		{
 			return _pos;
 		}
-
+		
 		public function set pos(value:Point):void
 		{
 			_pos = value;
 		}
-
+		
 		public function get content():String
 		{
 			return _content;
 		}
-
+		
 		public function set content(value:String):void
 		{
 			_content = value;
 		}
-
+		
 		public function get tid():int
 		{
 			return _tid;
 		}
-
+		
 		public function set tid(value:int):void
 		{
 			_tid = value;
 		}
-
+		
 		public function get rotate():Number
 		{
 			return _rotate;
 		}
-
+		
 		public function set rotate(value:Number):void
 		{
 			_rotate = value;
 		}
-
+		
 		public function get background():BitmapData
 		{
 			return _background;
 		}
-
+		
 		public function set background(value:BitmapData):void
 		{
 			_background = value;
 		}
-
+		
 		public function get index():int
 		{
 			return _index;
 		}
-
+		
 		public function set index(value:int):void
 		{
 			_index = value;
@@ -215,6 +215,6 @@ package
 		{
 			if(_offsetY != value) _offsetY = value;
 		}
-
+		
 	}
 }

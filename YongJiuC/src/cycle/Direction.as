@@ -14,30 +14,12 @@ package cycle
 	public class Direction extends Sprite implements IDirection
 	{
 		private var _dir:uint;
-		//正面 0
-		private var posList0:Object = {"body": {"com":null, "pos":new Point(99, 63)}, "hand": {"com":null, "pos":new Point(313, 0)}, "group": {"com":null, "pos":new Point(14, 1)},
-									"round": {"com":null, "pos":new Point(0, 103)}, "innerRound": {"com":null, "pos":new Point(8, 112)}, "crankset": {"com":null, "pos":new Point(222, 199)},
-									"seat": {"com":null, "pos":new Point(140, 13)}, "brake": {"com":null, "pos":new Point(357, 1)}, "chain": {"com":null, "pos":new Point(93, 197)}};
-		//左转1   1
-		private var posList1:Object = {"body": {"com":null, "pos":new Point(90, 62)}, "hand": {"com":null, "pos":new Point(139, 0)}, "group": {"com":null, "pos":new Point(15, 0)},
-			"round": {"com":null, "pos":new Point(0, 97)}, "innerRound": {"com":null, "pos":new Point(12, 105)}, "crankset": {"com":null, "pos":new Point(225, 195)},
-			"seat": {"com":null, "pos":new Point(267, 16)}, "brake": {"com":null, "pos":new Point(102, 0)}, "chain": {"com":null, "pos":new Point(220, 185)}};
-		//左转2   2
-		private var posList2:Object = {"body": {"com":null, "pos":new Point(99, 63)}, "hand": {"com":null, "pos":new Point(313, 0)}, "group": {"com":null, "pos":new Point(14, 1)},
-			"round": {"com":null, "pos":new Point(0, 103)}, "innerRound": {"com":null, "pos":new Point(8, 112)}, "crankset": {"com":null, "pos":new Point(222, 199)},
-			"seat": {"com":null, "pos":new Point(140, 13)}, "brake": {"com":null, "pos":new Point(357, 1)}, "chain": {"com":null, "pos":new Point(93, 197)}};
-		//反面   3
-		private var posList3:Object = {"body": {"com":null, "pos":new Point(99, 63)}, "hand": {"com":null, "pos":new Point(313, 0)}, "group": {"com":null, "pos":new Point(14, 1)},
-			"round": {"com":null, "pos":new Point(0, 103)}, "innerRound": {"com":null, "pos":new Point(8, 112)}, "crankset": {"com":null, "pos":new Point(222, 199)},
-			"seat": {"com":null, "pos":new Point(140, 13)}, "brake": {"com":null, "pos":new Point(357, 1)}, "chain": {"com":null, "pos":new Point(93, 197)}};
-		//右转1  4
-		private var posList4:Object = {"body": {"com":null, "pos":new Point(99, 63)}, "hand": {"com":null, "pos":new Point(313, 0)}, "group": {"com":null, "pos":new Point(14, 1)},
-			"round": {"com":null, "pos":new Point(0, 103)}, "innerRound": {"com":null, "pos":new Point(8, 112)}, "crankset": {"com":null, "pos":new Point(222, 199)},
-			"seat": {"com":null, "pos":new Point(140, 13)}, "brake": {"com":null, "pos":new Point(357, 1)}, "chain": {"com":null, "pos":new Point(93, 197)}};
-		//右转1  5
-		private var posList5:Object = {"body": {"com":null, "pos":new Point(97, 63)}, "hand": {"com":null, "pos":new Point(200, 0)}, "group": {"com":null, "pos":new Point(64, 1)},
-			"round": {"com":null, "pos":new Point(8, 98)}, "innerRound": {"com":null, "pos":new Point(57, 106)}, "crankset": {"com":null, "pos":new Point(179, 199)},
-			"seat": {"com":null, "pos":new Point(126, 14)}, "brake": {"com":null, "pos":new Point(238, 0)}, "chain": {"com":null, "pos":new Point(97, 188)}};
+		private var posList0:Object = {"body":{"com":null, "pos":new Point(99, 63)}, "hand":{"com":null, "pos":new Point(313, 0)}, "group":{"com":null, "pos":new Point(14, 1)}, "round":{"com":null, "pos":new Point(0, 103)}, "innerRound":{"com":null, "pos":new Point(8, 112)}, "crankset":{"com":null, "pos":new Point(222, 199)}, "seat":{"com":null, "pos":new Point(140, 13)}, "brake":{"com":null, "pos":new Point(357, 1)}, "chain":{"com":null, "pos":new Point(93, 197)}};
+		private var posList1:Object = {"body":{"com":null, "pos":new Point(96, 65)}, "hand":{"com":null, "pos":new Point(199, 1)}, "group":{"com":null, "pos":new Point(64, 1)}, "round":{"com":null, "pos":new Point(23, 100)}, "innerRound":{"com":null, "pos":new Point(56, 107)}, "crankset":{"com":null, "pos":new Point(179, 200)}, "seat":{"com":null, "pos":new Point(125, 16)}, "brake":{"com":null, "pos":new Point(238, 1)}, "chain":{"com":null, "pos":new Point(97, 189)}};
+		private var posList2:Object = {"body":{"com":null, "pos":new Point(87, 62)}, "hand":{"com":null, "pos":new Point(138, 1)}, "group":{"com":null, "pos":new Point(15, 1)}, "round":{"com":null, "pos":new Point(1, 99)}, "innerRound":{"com":null, "pos":new Point(13, 107)}, "crankset":{"com":null, "pos":new Point(226, 196)}, "seat":{"com":null, "pos":new Point(268, 17)}, "brake":{"com":null, "pos":new Point(103, 1)}, "chain":{"com":null, "pos":new Point(221, 186)}};
+		private var posList3:Object = {"body":{"com":null, "pos":new Point(104, 63)}, "hand":{"com":null, "pos":new Point(210, 0)}, "group":{"com":null, "pos":new Point(13, 1)}, "round":{"com":null, "pos":new Point(0, 103)}, "innerRound":{"com":null, "pos":new Point(9, 113)}, "crankset":{"com":null, "pos":new Point(283, 196)}, "seat":{"com":null, "pos":new Point(330, 15)}, "brake":{"com":null, "pos":new Point(130, 5)}, "chain":{"com":null, "pos":new Point(280, 195)}};
+		private var posList4:Object = {"body":{"com":null, "pos":new Point(45, 61)}, "hand":{"com":null, "pos":new Point(72, 0)}, "group":{"com":null, "pos":new Point(9, 1)}, "round":{"com":null, "pos":new Point(0, 99)}, "innerRound":{"com":null, "pos":new Point(4, 107)}, "crankset":{"com":null, "pos":new Point(186, 202)}, "seat":{"com":null, "pos":new Point(207, 12)}, "brake":{"com":null, "pos":new Point(59, 1)}, "chain":{"com":null, "pos":new Point(183, 200)}};
+		private var posList5:Object = {"body":{"com":null, "pos":new Point(115, 68)}, "hand":{"com":null, "pos":new Point(239, 1)}, "group":{"com":null, "pos":new Point(51, 3)}, "round":{"com":null, "pos":new Point(38, 100)}, "innerRound":{"com":null, "pos":new Point(46, 108)}, "crankset":{"com":null, "pos":new Point(239, 207)}, "seat":{"com":null, "pos":new Point(154, 14)}, "brake":{"com":null, "pos":new Point(274, 4)}, "chain":{"com":null, "pos":new Point(136, 205)}};
 		
 		private var highlightFilter:ColorMatrixFilter;
 		public function Direction()
@@ -172,7 +154,7 @@ package cycle
 		}
 		private function highlightMC(event:MouseEvent):void
 		{
-			var mc:MovieClip = event.currentTarget as MovieClip;
+			var mc:Sprite = event.currentTarget as Sprite;
 			if(!highlightFilter){
 				
 				var adjustColor:AdjustColor = new AdjustColor();
@@ -187,12 +169,12 @@ package cycle
 		}
 		private function removeHightlight(event:MouseEvent):void
 		{
-			var mc:MovieClip = event.currentTarget as MovieClip;
+			var mc:Sprite = event.currentTarget as Sprite;
 			mc.filters = null;
 		}
 		private function showColorHad(event:MouseEvent):void
 		{
-			var mc:MovieClip = event.currentTarget as MovieClip;
+			var mc:Sprite = event.currentTarget as Sprite;
 			var partName:String = getPartName(mc);
 			if(!partName){
 				
@@ -201,7 +183,7 @@ package cycle
 			}
 			YongJiuC.app.showColorPickr(partName);
 		}
-		private function getPartName(mc:MovieClip):String
+		private function getPartName(mc:Sprite):String
 		{
 			var pList:Object = this["posList" + _dir];
 			for (var key:String in pList){
@@ -215,7 +197,7 @@ package cycle
 			}
 			return null;
 		}
-		public function replaceComponent(name:String, mc:MovieClip):void
+		public function replaceComponent(name:String, mc:Sprite):void
 		{
 			var pList:Object = this["posList" + _dir];
 			var oindex:uint;

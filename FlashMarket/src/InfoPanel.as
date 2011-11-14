@@ -1,4 +1,5 @@
 package {
+	import flash.display.Bitmap;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -9,8 +10,13 @@ package {
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	
+	import flashx.textLayout.formats.BackgroundColor;
+	
 	public class InfoPanel extends Sprite
 	{
+		[Embed(source="120.jpg")]
+		private var BackgroundImage:Class;
+		
 		private var background:Shape = null;
 		private var w:int = 435;
 		private var numPerRow:int = 4;
@@ -18,6 +24,7 @@ package {
 		private var imageHeight:int = 86;
 		private var line:int;
 		private var textHeight:int = 0;
+		private var backgroundImage:Bitmap;
 		public function InfoPanel()
 		{
 			super();
@@ -33,7 +40,7 @@ package {
 			numberTF.autoSize = TextFieldAutoSize.LEFT;
 			numberTF.wordWrap = false;
 			numberTF.mouseWheelEnabled = false;
-			numberTF.htmlText = "摊位号: <font color=\"#FF0000\">" + xml.number + "</font>";
+			numberTF.htmlText = "摊位号: <font color=\"#FF0000\" size=\"17\">" + xml.number + "</font>";
 			addChild(numberTF);
 			numberTF.x = 10;
 			numberTF.y = 10;
@@ -57,7 +64,7 @@ package {
 			nameTF.autoSize = TextFieldAutoSize.LEFT;
 			nameTF.wordWrap = false;
 			nameTF.mouseWheelEnabled = false;
-			nameTF.htmlText = "摊位名称: <font color=\"#09c8ff\">" + String(xml.name) + "</font>";
+			nameTF.htmlText = "摊位名称: <font color=\"#1171f4\" size=\"17\">" + String(xml.name) + "</font>";
 			addChild(nameTF);
 			nameTF.x = numberTF.x + numberTF.textWidth + 10;
 			nameTF.y = numberTF.y;
@@ -78,7 +85,7 @@ package {
 				var morePage:String = xml.info.detailPage;
 				if(morePage && morePage != ""){
 					var moreTF:TextField = new TextField();
-					moreTF.defaultTextFormat = new TextFormat("宋体", 13, 0x5a8504, true);
+					moreTF.defaultTextFormat = new TextFormat("宋体", 13, 0xf4255b, true);
 					moreTF.autoSize = TextFieldAutoSize.LEFT;
 					moreTF.wordWrap = false;
 					moreTF.mouseWheelEnabled = false;
@@ -95,14 +102,24 @@ package {
 				if(xmlList && xmlList.length()){
 					var len:int = xmlList.length();
 					for(var i:int = 0; i<len; i++){
+						var infoCatTF:TextField = new TextField();
+						infoCatTF.defaultTextFormat = new TextFormat("宋体", 13, 0x000000,true);
+						infoCatTF.autoSize = TextFieldAutoSize.LEFT;
+						infoCatTF.wordWrap = false;
+						infoCatTF.mouseWheelEnabled = false;
+						infoCatTF.htmlText = "[<font color=\"#1171f4\" >" +  xmlList[i].cat+ "</font>]";
+						addChild(infoCatTF);
+						infoCatTF.x = numberTF.x;
+						infoCatTF.y = textHeight + 10;
+						
 						var infoNameTF:TextField = new TextField();
-						infoNameTF.defaultTextFormat = new TextFormat("宋体", 12, 0x565656);
+						infoNameTF.defaultTextFormat = new TextFormat("宋体", 13, 0x565656);
 						infoNameTF.autoSize = TextFieldAutoSize.LEFT;
 						infoNameTF.wordWrap = false;
 						infoNameTF.mouseWheelEnabled = false;
-						infoNameTF.htmlText = "<a href=\"" + xmlList[i].url + "\">" + xmlList[i].name + "</a>";
+						infoNameTF.htmlText = "<a href=\"" + xmlList[i].url + "\" target=\"_blank\" >" + xmlList[i].name + "</a>";
 						addChild(infoNameTF);
-						infoNameTF.x = numberTF.x;
+						infoNameTF.x = numberTF.x+42;
 						infoNameTF.y = textHeight + 10;
 						
 						var timeTF:TextField = new TextField();
@@ -170,71 +187,86 @@ package {
 			if(!background) background = new Shape();
 			background.graphics.clear();
 			background.graphics.lineStyle(3, 0x484848);
-			background.graphics.beginFill(0xFFFFFF);
+			if(!backgroundImage) backgroundImage = new BackgroundImage();
+			background.graphics.beginBitmapFill(backgroundImage.bitmapData, null, false, true);
+//			background.graphics.beginFill(0xFFFFFF);
+			var radius:int = 10;
 			switch(dir){
 				case "lt":
 					background.graphics.moveTo(-15, -5);
 					background.graphics.lineTo(0, 0);
-					background.graphics.lineTo(w, 0);
-					background.graphics.lineTo(w, line * imageHeight + textHeight + (line - 1) * 10 + 20);
-					background.graphics.lineTo(0, line * imageHeight + textHeight + (line - 1) * 10 + 20);
+					background.graphics.lineTo(w - 15, 0);
+					background.graphics.curveTo(w, 0, w, radius);
+					background.graphics.lineTo(w, line * imageHeight + textHeight + (line - 1) * 10 + 20 - radius);
+					background.graphics.curveTo(w, line * imageHeight + textHeight + (line - 1) * 10 + 20, w - radius, line * imageHeight + textHeight + (line - 1) * 10 + 20);
+					background.graphics.lineTo(radius, line * imageHeight + textHeight + (line - 1) * 10 + 20);
+					background.graphics.curveTo(0, line * imageHeight + textHeight + (line - 1) * 10 + 20, 0, line * imageHeight + textHeight + (line - 1) * 10 + 20 - radius);
 					background.graphics.lineTo(0, 10);
 					background.graphics.lineTo(-15, -5);
 					break;
 				case "rt":
 					background.graphics.moveTo(w + 15, -5);
 					background.graphics.lineTo(w, 0);
-					background.graphics.lineTo(0, 0);
-					background.graphics.lineTo(0, line * imageHeight + textHeight + (line - 1) * 10 + 20);
-					background.graphics.lineTo(w, line * imageHeight + textHeight + (line - 1) * 10 + 20);
+					background.graphics.lineTo(radius, 0);
+					background.graphics.curveTo(0, 0, 0, radius);
+					background.graphics.lineTo(0, line * imageHeight + textHeight + (line - 1) * 10 + 20 - radius);
+					background.graphics.curveTo(0, line * imageHeight + textHeight + (line - 1) * 10 + 20, radius, line * imageHeight + textHeight + (line - 1) * 10 + 20);
+					background.graphics.lineTo(w - radius, line * imageHeight + textHeight + (line - 1) * 10 + 20);
+					background.graphics.curveTo(w, line * imageHeight + textHeight + (line - 1) * 10 + 20, w, line * imageHeight + textHeight + (line - 1) * 10 + 20 - radius);
 					background.graphics.lineTo(w, 10);
 					background.graphics.lineTo(w + 15, -5);
 					break;
 				case "bl":
 					background.graphics.moveTo(-15, line * imageHeight + textHeight + (line - 1) * 10 + 25);
 					background.graphics.lineTo(0, line * imageHeight + textHeight + (line - 1) * 10 + 15);
-					background.graphics.lineTo(0, 0);
-					background.graphics.lineTo(w, 0);
-					background.graphics.lineTo(w, line * imageHeight + textHeight + (line - 1) * 10 + 20);
+					background.graphics.lineTo(0, radius);
+					background.graphics.curveTo(0, 0, radius, 0);
+					background.graphics.lineTo(w - radius, 0);
+					background.graphics.curveTo(w, 0, w, radius);
+					background.graphics.lineTo(w, line * imageHeight + textHeight + (line - 1) * 10 + 20 - radius);
+					background.graphics.curveTo(w, line * imageHeight + textHeight + (line - 1) * 10 + 20, w - radius, line * imageHeight + textHeight + (line - 1) * 10 + 20);
 					background.graphics.lineTo(10, line * imageHeight + textHeight + (line - 1) * 10 + 20);
 					background.graphics.lineTo(-15, line * imageHeight + textHeight + (line - 1) * 10 + 25);
 					break;
 				case "br":
 					background.graphics.moveTo(w + 15, line * imageHeight + textHeight + (line - 1) * 10 + 25);
 					background.graphics.lineTo(w, line * imageHeight + textHeight + (line - 1) * 10 + 15);
-					background.graphics.lineTo(w, 0);
-					background.graphics.lineTo(0, 0);
-					background.graphics.lineTo(0, line * imageHeight + textHeight + (line - 1) * 10 + 20);
+					background.graphics.lineTo(w, radius);
+					background.graphics.curveTo(w, 0, w - radius, 0);
+					background.graphics.lineTo(radius, 0);
+					background.graphics.curveTo(0, 0, 0, radius);
+					background.graphics.lineTo(0, line * imageHeight + textHeight + (line - 1) * 10 + 20 - radius);
+					background.graphics.curveTo(0, line * imageHeight + textHeight + (line - 1) * 10 + 20, radius, line * imageHeight + textHeight + (line - 1) * 10 + 20);
 					background.graphics.lineTo(w - 10, line * imageHeight + textHeight + (line - 1) * 10 + 20);
 					background.graphics.lineTo(w + 15, line * imageHeight + textHeight + (line - 1) * 10 + 25);
 					break;
 			}
-//			background.graphics.drawRect(0, 0, w, line * imageHeight + textHeight + (line - 1) * 10 + 20);
+			//			background.graphics.drawRect(0, 0, w, line * imageHeight + textHeight + (line - 1) * 10 + 20);
 			background.graphics.endFill();
-			background.alpha = .8;
+			background.alpha = .95;
 			addChildAt(background, 0);
 		}
 		
-//		private function getShadow():BitmapFilter
-//		{
-//			var color:Number = 0x000000;
-//            var alpha:Number = 1;
-//            var blurX:Number = 1;
-//            var blurY:Number = 1;
-//            var strength:Number = 1;
-//            var inner:Boolean = false;
-//            var knockout:Boolean = false;
-//            var quality:Number = BitmapFilterQuality.HIGH;
-//
-//            return new GlowFilter(color,
-//                                  alpha,
-//                                  blurX,
-//                                  blurY,
-//                                  strength,
-//                                  quality,
-//                                  inner,
-//                                  knockout);
-//		}
+		//		private function getShadow():BitmapFilter
+		//		{
+		//			var color:Number = 0x000000;
+		//            var alpha:Number = 1;
+		//            var blurX:Number = 1;
+		//            var blurY:Number = 1;
+		//            var strength:Number = 1;
+		//            var inner:Boolean = false;
+		//            var knockout:Boolean = false;
+		//            var quality:Number = BitmapFilterQuality.HIGH;
+		//
+		//            return new GlowFilter(color,
+		//                                  alpha,
+		//                                  blurX,
+		//                                  blurY,
+		//                                  strength,
+		//                                  quality,
+		//                                  inner,
+		//                                  knockout);
+		//		}
 		
 		private function dealloc(event:Event):void
 		{

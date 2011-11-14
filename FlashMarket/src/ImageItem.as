@@ -14,7 +14,9 @@ package
 		private var targetURL:String = null;
 		private var loader:Loader = null;
 		private var bitmap:Bitmap = null;
-		private var maxHeight:Number = 86;
+		//private var maxHeight:Number = 86;
+		private var maxWidth:Number = 90;
+		private var maxHeight:Number = 90;
 		public function ImageItem()
 		{
 			super();
@@ -40,9 +42,13 @@ package
 			var bitmap:Bitmap = event.target.content as Bitmap;
 			addChild(bitmap);
 			// 保持所有图片高度一致 所以只作高度上的处理
-			var scale:Number = maxHeight / bitmap.height;
+			var scale:Number;
+			if(bitmap.width > maxWidth && bitmap.width > bitmap.height)
+				scale = maxWidth / bitmap.width;
+			if(bitmap.height > maxHeight && bitmap.height > bitmap.width)
+				scale = maxHeight / bitmap.height;
 			bitmap.width = scale * bitmap.width;
-			bitmap.height = maxHeight;
+			bitmap.height = scale * bitmap.height;
 			loader = null;
 		}
 		private function gotoTargetPage(event:MouseEvent):void

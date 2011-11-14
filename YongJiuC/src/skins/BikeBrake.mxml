@@ -45,6 +45,7 @@
         <s:State name="disabled" />
     </s:states>
     
-   	<s:BitmapImage source="{WebResource.Brake}" includeIn="up, over, disabled, down" />
+   	<s:BitmapImage source="{WebResource.Brake}" includeIn="up" />
+	<s:BitmapImage source="{WebResource.BrakeOver}" includeIn="over, disabled, down" />
     
 </s:SparkSkin>

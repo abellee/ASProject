@@ -28,7 +28,12 @@
 			private var row:uint;
 			private var _com:String = null;
 			private var _curColorList:Array;
-			private var configXML:XML;
+			private var _pantonColorList:Array;
+			private var _priceList:Array;
+			private var configXML:XMLList;
+			
+			[Bindable]
+			private var comTitle:String = "";
 			
 			protected function button1_clickHandler(event:MouseEvent):void
 			{
@@ -49,9 +54,9 @@
 			}
 			public function setConfigXML(xml:XML):void
 			{
-				configXML = xml;
-				iconW = configXML.@width;
-				iconH = configXML.@height;
+				configXML = xml.type.(@id == Config.curType);
+				iconW = xml.@width;
+				iconH = xml.@height;
 			}
 			private function getBitmapFilter(co:Number = 0x000000, an:Number = 0, al:Number = 0.8, bx:Number = 8, by:Number = 8, dis:Number = 1, str:Number = 0.65):BitmapFilter {
 				var color:Number = co;
@@ -94,14 +99,15 @@
 				
 				_curColorList = [];
 				_curColorList = String(configXML[_com].@colorValue).split(",");
+				_pantonColorList = String(configXML[_com].@pantoneValue).split(",");
+				_priceList = String(configXML[_com].@price).split(",");
 				
 				var column:uint = uint(154 / (hgap + iconW));
 				
-				var len:uint = comXML.@colorNum;
+				var len:uint = _curColorList.length;
 				row = Math.ceil(len / column);
 				for (var i:uint = 0; i < len; i++){
-					
-					var colorIcon:Color = new Color(_com, i, Number(_curColorList[i]));
+					var colorIcon:Color = new Color(Number(_curColorList[i]), _priceList[i], _pantonColorList[i], 14, 14);
 					colorIcon.mouseChildren = false;
 					istage.addChild(colorIcon);
 					colorIcon.addEventListener(MouseEvent.MOUSE_OVER, scaleOut);
@@ -109,8 +115,7 @@
 					colorIcon.addEventListener(MouseEvent.CLICK, changeButtonColor);
 					colorIcon.x = (i % column) * (hgap + iconW) + 17;
 					colorIcon.y = uint(i / column) * (vgap + iconH) + 63;
-					this.dispatchEvent(new Event(Event.RENDER));
-					
+//					this.dispatchEvent(new Event(Event.RENDER));
 				}
 				layoutSize();
 			}
@@ -132,8 +137,8 @@
 			private function changeButtonColor(event:MouseEvent):void
 			{
 				YongJiuC.app.changeButtonColor((event.target as Color).value);
-				YongJiuC.app.changeArrayColor((event.target as Color).order);
-				YongJiuC.app.loadCom((event.target as Color).order);
+				YongJiuC.app.changeArrayColor((event.target as Color).value);
+				YongJiuC.app.loadCom((event.target as Color).value);
 			}
 			public function chooseRandomColor():void
 			{
@@ -142,26 +147,59 @@
 					"round": getColorList("round"), "seat": getColorList("seat")};
 				for (var key:String in allColors){
 					
-					if(key == "crankset" || key == "chain"){
-						
-						continue;
-						
-					}
+//					if(key == "crankset" || key == "chain"){
+//						
+//						continue;
+//						
+//					}
+					var colorList:Array = String(allColors[key].@colorValue).split(",");
+					var pantoneList:Array = String(allColors[key].@pantoneValue).split(",");
+					var priceList:Array = String(allColors[key].@price).split(",");
 					var ran:Number = Math.random();
-					var coo:uint = uint(allColors[key] * ran);
-					YongJiuC.app.changeArrayColor(coo, key);
+					var coo:uint = uint(colorList.length * ran);
+					YongJiuC.app.changeArrayColor(colorList[coo], key);
+					YongJiuC.app.changeButtonRadom(key, colorList[coo]);
 					
 				}
 				YongJiuC.app.loadComponents();
 				
 			}
-			private function getColorList(name:String):Number
+			private function getColorList(name:String):XMLList
 			{
-				return configXML[name].@colorNum;
+				return configXML[name];
 			}
 			public function set com(str:String):void
 			{
 				_com = str;
+				switch(str){
+					case "body":
+						comTitle = "车 架";
+						break;
+					case "hand":
+						comTitle = "把 手";
+						break;
+					case "round":
+						comTitle = "外 胎";
+						break;
+					case "innerRound":
+						comTitle = "车 圈";
+						break;
+					case "seat":
+						comTitle = "坐 椅";
+						break;
+					case "brake":
+						comTitle = "刹车线";
+						break;
+					case "chain":
+						comTitle = "链 条";
+						break;
+					case "crankset":
+						comTitle = "牙 盘";
+						break;
+					case "group":
+						comTitle = "组 件";
+						break;
+				}
 			}
 			public function get com():String{
 				
@@ -192,11 +230,8 @@
 	<s:Label text="选择一种颜色" x="15" y="40" />
 	<s:BorderContainer width="190" backgroundImage="{WebResource.BlackTop}" height="29" borderVisible="false"
 					   mouseDown="bordercontainer2_mouseDownHandler(event)" mouseUp="bordercontainer2_mouseUpHandler(event)">
-		<s:layout>
-			<s:HorizontalLayout verticalAlign="middle" gap="110" paddingLeft="10" />
-		</s:layout>
-		<s:Label text="颜色/图案" fontSize="12" color="0xffffff" />
-		<s:Button skinClass="skins.CloseButton" width="9" height="9" buttonMode="true" click="button1_clickHandler(event)" />
+		<s:Label text="{comTitle}" fontSize="12" color="0xffffff" y="9" x="10" />
+		<s:Button skinClass="skins.CloseButton" width="9" height="9" buttonMode="true" click="button1_clickHandler(event)" right="10" y="10" />
 	</s:BorderContainer>
 	<s:SpriteVisualElement id="istage" width="100%" height="100%" />
 </s:BorderContainer>
