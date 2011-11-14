@@ -186,24 +186,24 @@ package {
 			var item:Item = event.currentTarget as Item;
 			if(!item.tid) return;
 			houseContainer.setChildIndex(item, houseContainer.numChildren - 1);
-//			initInfoPanel(null);
-//			item.showInfoPanel(infoPanel);
+			initInfoPanel(null);
+			item.showInfoPanel(infoPanel);
 			
-			urlLoaderFunc = function(event:Event):void
-			{
-				urlLoader.removeEventListener(Event.COMPLETE, urlLoaderFunc);
-				var xml:XML = XML(event.target.data);
-				if(xml){
-					initInfoPanel(xml);
-					item.showInfoPanel(infoPanel);
-				}
-				urlLoader = null;
-				urlLoaderFunc = null;
-			};
-			
-			if(!urlLoader) urlLoader = new URLLoader();
-			urlLoader.addEventListener(Event.COMPLETE, urlLoaderFunc);
-			urlLoader.load(new URLRequest(baseURL + "api.php?op=booth&tid=" + item.tid + "&rad="+ new Date().getTime()));
+//			urlLoaderFunc = function(event:Event):void
+//			{
+//				urlLoader.removeEventListener(Event.COMPLETE, urlLoaderFunc);
+//				var xml:XML = XML(event.target.data);
+//				if(xml){
+//					initInfoPanel(xml);
+//					item.showInfoPanel(infoPanel);
+//				}
+//				urlLoader = null;
+//				urlLoaderFunc = null;
+//			};
+//			
+//			if(!urlLoader) urlLoader = new URLLoader();
+//			urlLoader.addEventListener(Event.COMPLETE, urlLoaderFunc);
+//			urlLoader.load(new URLRequest(baseURL + "api.php?op=booth&tid=" + item.tid + "&rad="+ new Date().getTime()));
 		}
 		
 		private function reswapCurrentHouse(event:MouseEvent):void
@@ -226,42 +226,42 @@ package {
 		private function initInfoPanel(data:XML):void
 		{
 			if(!infoPanel) infoPanel = new InfoPanel();
-//			var xml:XML = new XML("<root>" +
-//			"<number>096</number>" +
-//			"<name>秋水伊人服饰店</name>" +
-//			"<detailPage>http://www.iabel.com</detailPage>" +
-//			"<info>" +
-//			"<detailPage>http://www.iabel.com</detailPage>" +
-//			"<entry>" +
-//			"<name>皮衣处理</name>" +
-//			"<time>11-10-10</time>" +
-//			"</entry>" +
-//			"<entry>" +
-//			"<name>皮衣处理2</name>" +
-//			"<time>11-10-10</time>" +
-//			"</entry>" +
-//			"</info>" +
-//			"<products>" +
-//			"<detailPage>http://www.iabel.com</detailPage>" +
-//			"<product>" +
-//			"<image>" + baseURL + "images/img0.jpg</image>" +
-//			"<url>http://www.iabel.com</url>" +
-//			"</product>" +
-//			"<product>" +
-//			"<image>" + baseURL + "images/img0.jpg</image>" +
-//			"<url>http://www.iabel.com</url>" +
-//			"</product>" +
-//			"<product>" +
-//			"<image>" + baseURL + "images/img0.jpg</image>" +
-//			"<url>http://www.iabel.com</url>" +
-//			"</product>" +
-//			"<product>" +
-//			"<image>" + baseURL + "images/img0.jpg</image>" +
-//			"<url>http://www.iabel.com</url>" +
-//			"</product>" +
-//			"</products>" +
-//			"</root>");
-			infoPanel.initInfoPanel(data);
+			var xml:XML = new XML("<root>" +
+			"<number>096</number>" +
+			"<name>秋水伊人服饰店</name>" +
+			"<detailPage>http://www.iabel.com</detailPage>" +
+			"<info>" +
+			"<detailPage>http://www.iabel.com</detailPage>" +
+			"<entry>" +
+			"<name>皮衣处理</name>" +
+			"<time>11-10-10</time>" +
+			"</entry>" +
+			"<entry>" +
+			"<name>皮衣处理2</name>" +
+			"<time>11-10-10</time>" +
+			"</entry>" +
+			"</info>" +
+			"<products>" +
+			"<detailPage>http://www.iabel.com</detailPage>" +
+			"<product>" +
+			"<image>" + baseURL + "images/img0.jpg</image>" +
+			"<url>http://www.iabel.com</url>" +
+			"</product>" +
+			"<product>" +
+			"<image>" + baseURL + "images/img0.jpg</image>" +
+			"<url>http://www.iabel.com</url>" +
+			"</product>" +
+			"<product>" +
+			"<image>" + baseURL + "images/img0.jpg</image>" +
+			"<url>http://www.iabel.com</url>" +
+			"</product>" +
+			"<product>" +
+			"<image>" + baseURL + "images/img0.jpg</image>" +
+			"<url>http://www.iabel.com</url>" +
+			"</product>" +
+			"</products>" +
+			"</root>");
+			infoPanel.initInfoPanel(xml);
 		}
 	}
 }
