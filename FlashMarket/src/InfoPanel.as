@@ -1,21 +1,18 @@
 package {
+	import flash.net.URLRequest;
 	import flash.display.Bitmap;
+	import flash.display.Loader;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.filters.BitmapFilter;
-	import flash.filters.BitmapFilterQuality;
-	import flash.filters.GlowFilter;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	
-	import flashx.textLayout.formats.BackgroundColor;
-	
 	public class InfoPanel extends Sprite
 	{
-		[Embed(source="120.jpg")]
-		private var BackgroundImage:Class;
+//		[Embed(source="120.jpg")]
+//		private var BackgroundImage:Class;
 		
 		private var background:Shape = null;
 		private var w:int = 435;
@@ -25,6 +22,7 @@ package {
 		private var line:int;
 		private var textHeight:int = 0;
 		private var backgroundImage:Bitmap;
+		private var _dir:String;
 		public function InfoPanel()
 		{
 			super();
@@ -34,6 +32,18 @@ package {
 		
 		public function initInfoPanel(xml:XML):void
 		{
+			if(xml.bgurl && xml.bgurl != ""){
+				var loader:Loader = new Loader();
+				var func:Function = function(event:Event):void
+				{
+					loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, func);
+					backgroundImage = loader.content as Bitmap;
+					drawBackground(_dir, "self");
+				};
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, func);
+				loader.load(new URLRequest(xml.bgurl));
+			}
+			
 			var imageLine:int = 0;
 			var numberTF:TextField = new TextField();
 			numberTF.defaultTextFormat = new TextFormat("宋体", 13, 0x000000, true);
@@ -182,13 +192,18 @@ package {
 			
 		}
 		
-		public function drawBackground(dir:String):void
+		public function drawBackground(dir:String, from:String = "outside"):void
 		{
+			if(from == "outside" && backgroundImage) return;
+			_dir = dir;
 			if(!background) background = new Shape();
 			background.graphics.clear();
 			background.graphics.lineStyle(3, 0x484848);
-			if(!backgroundImage) backgroundImage = new BackgroundImage();
-			background.graphics.beginBitmapFill(backgroundImage.bitmapData, null, false, true);
+			if(backgroundImage){
+				background.graphics.beginBitmapFill(backgroundImage.bitmapData, null, false, true);
+			}else{
+				background.graphics.beginFill(0xFFFFFF, 0.8);
+			}
 //			background.graphics.beginFill(0xFFFFFF);
 			var radius:int = 10;
 			switch(dir){

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="630" height="480" backgroundColor="14408667" cornerRadius="10" borderVisible="false" dropShadowVisible="true"
+		 creationComplete="group1_creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			private var baseURL:String = "http://xiangqu.net/customize";
+			
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:HGroup width="100%" verticalAlign="middle" y="20">
+		<s:Label backgroundColor="14887459" text="选择配件" color="0xFFFFFF" verticalAlign="middle" textAlign="center" width="70" height="24" />
+		<mx:HRule width="100%" />
+		<s:Label backgroundColor="14887459" text="X" color="0xFFFFFF" verticalAlign="middle" textAlign="center" width="30" height="24" />
+	</s:HGroup>
+	<s:HGroup width="100%" y="55">
+		
+	</s:HGroup>
+	<s:HGroup horizontalAlign="center" width="100%" y="145">
+		<s:Button skinClass="skins.ArrowLeft" />
+		<s:Button skinClass="skins.ArrowRight" />
+	</s:HGroup>
+	<s:HGroup width="100%" y="180" verticalAlign="middle">
+		<s:Label backgroundColor="14887459" text="配送信息" color="0xFFFFFF" verticalAlign="middle" textAlign="center" width="70" height="24" />
+		<mx:HRule width="86%" />
+	</s:HGroup>
+	<s:VGroup width="100%" y="215" gap="13">
+		<s:HGroup width="100%" verticalAlign="middle">
+			<mx:Label htmlText="&lt;font color=&quot;#ff0000&quot;&gt;*&lt;/font&gt; 省:" textAlign="right" width="100" />
+			<s:DropDownList width="90" id="province" />
+			<mx:Label text="市" />
+			<s:DropDownList width="90" id="city" />
+			<mx:Label text="区" />
+			<s:DropDownList width="90" id="area" />
+			<mx:Label htmlText="&lt;font color=&quot;#ff0000&quot;&gt;*&lt;/font&gt; 邮政编码:" />
+			<s:TextInput width="80" id="zipCode" />
+		</s:HGroup>
+		<s:HGroup width="100%" verticalAlign="top">
+			<mx:Label htmlText="&lt;font color=&quot;#ff0000&quot;&gt;*&lt;/font&gt; 街道地址:" textAlign="right" width="100" />
+			<s:TextArea width="490" height="45" />
+		</s:HGroup>
+		<s:HGroup width="100%" verticalAlign="middle">
+			<mx:Label htmlText="&lt;font color=&quot;#ff0000&quot;&gt;*&lt;/font&gt; 收货人姓名:" textAlign="right" width="100" />
+			<s:TextInput width="110" id="receiver" />
+			<mx:Label text="电子邮箱:" />
+			<s:TextInput width="150" id="email" />
+		</s:HGroup>
+		<s:HGroup width="100%" verticalAlign="middle">
+			<mx:Label text="手机:" textAlign="right" width="100" />
+			<s:TextInput width="110" id="phoneNumber" />
+			<mx:Label text="电话:" />
+			<s:TextInput width="60" id="areaNum" />
+			<mx:Label text="-" textAlign="center" />
+			<s:TextInput width="100" id="tellNum" />
+			<mx:Label text="-" textAlign="center" />
+			<s:TextInput width="60" id="otherNum" />
+		</s:HGroup>
+		<s:Label text="手机与电话请至少填写一项，电话的格式：区号-电话号码-分机号" paddingLeft="100" color="0x999999" fontSize="13" paddingBottom="20" />
+		<mx:HRule width="100%" />
+		<s:HGroup width="100%" verticalAlign="middle" paddingRight="20">
+			<s:HGroup horizontalAlign="left" verticalAlign="middle" width="100%" paddingLeft="20">
+				<s:BitmapImage source="{WebResource.Price}" />
+				<s:Label text="500" fontSize="16" />
+			</s:HGroup>
+			<s:Button label="提交" />
+		</s:HGroup>
+	</s:VGroup>
+</s:BorderContainer>

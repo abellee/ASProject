@@ -38,7 +38,7 @@
 			
 			private var curColor:Number = undefined;
 			private var curColorIndex:uint = 0;
-			//                        部位     颜色
+			//                        部位     颜色  价格  pantone
 			private var arr:Array = [["body", "0", "0", "0"],
 									["hand", "0", "0", "0"],
 									["group", "0", "0", "0"],
@@ -89,7 +89,7 @@
 				colorPickr.setConfigXML(configXML);
 				
 			}
-			public function changeArrayColor(num:uint, name:String = null):void
+			public function changeArrayColor(num:uint, name:String = null, priceNum:Number = 0, pantoneValue:String = null):void
 			{
 				var curN:String;
 				if(curSelected){
@@ -107,12 +107,25 @@
 					if(item[0] == curN){
 						
 						item[1] = num + "";
+						item[2] = priceNum;
+						item[3] = pantoneValue;
+						setPrice();
 						return;
 						
 					}
 					
 				}
 			}
+			
+			private function setPrice():void
+			{
+				var p:Number = 0;
+				for each(var ar:Array in arr){
+					p += ar[2];
+				}
+				totalPrice = p + "";
+			}
+			
 			public function loadCom(o:uint):void
 			{
 				if(!curSelected){
@@ -174,6 +187,9 @@
 					index = 0;
 					nb.alpha = 0;
 					TweenLite.to(nb, 1, {alpha: 1});
+					nb.addEventListener(MouseEvent.MOUSE_MOVE, nb_mouseMoveHandler);
+					nb.addEventListener(MouseEvent.MOUSE_OUT, nb_mouseOutHandler);
+					nb.addEventListener(MouseEvent.CLICK, nb_mouseClickHandler);
 					if(loader){
 						loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadComplete_handler);
 						loader = null;
@@ -223,10 +239,23 @@
 					var xmlList:XMLList = getColorList(str, param);
 					var colors:Array = String(xmlList.@colorValue).split(",");
 					var prices:Array = String(xmlList.@price).split(",");
+					var pantones:Array = String(xmlList.@pantoneValue).split(",");
 					var index:int = colors.indexOf("0x000000");
+					setArray(str, 0, prices[index], pantones[index]);
 					p += uint(prices[index]);
 				}
 				totalPrice = p + "";
+			}
+			
+			private function setArray(com:String, color:Number, price:Number, pantone:String):void
+			{
+				for each(var ar:Array in arr){
+					if(ar[0] == com){
+						ar[1] = color;
+						ar[2] = price;
+						ar[3] = pantone;
+					}
+				}
 			}
 			
 			private function getColorList(name:String, xmlList:XMLList):XMLList
@@ -297,13 +326,9 @@
 			private function setPreSelected(target:BottomButton):void{
 				
 				if(preSelected){
-					
 					if(preSelected.id != target.id){
-						
 						return;
-						
 					}
-					
 				}
 //				if(curColor){
 //					
@@ -327,20 +352,15 @@
 			private function setCurSelected(str:String):void
 			{
 				if(this[str]){
-					
 					this.curSelected = this[str];
 					setPreSelected(curSelected);
-					
 				}
 			}
 			public function changeButtonColor(value:Number):void
 			{
 				curColor = value;
-				if(!curSelected){
-					
+				if(!curSelected)
 					return;
-					
-				}
 				curSelected.changeColor(value);
 				
 			}
@@ -359,11 +379,8 @@
 
 			protected function bottombutton10_clickHandler(event:MouseEvent):void
 			{
-				if(colorPickr){
-					
+				if(colorPickr)
 					colorPickr.chooseRandomColor();
-					
-				}
 			}
 			
 			protected function leftButton_clickHandler(event:MouseEvent):void
@@ -384,6 +401,45 @@
 				else if(dir < 0)
 					dir = 5;
 				this.loadComponents();
+			}
+			
+			protected function nb_mouseMoveHandler(event:MouseEvent):void
+			{
+				var objs:Array = (this.bike as Sprite).getObjectsUnderPoint(new Point(this.istage.mouseX, this.istage.mouseY));
+				var bool:Boolean = false;
+				if(objs.length){
+					for each(var bitmap:Bitmap in objs){
+						if(!bool){
+							var pixelColor:Number = bitmap.bitmapData.getPixel32(bitmap.mouseX, bitmap.mouseY);
+							if(pixelColor >> 24 != 0){
+								this.bike.highlightMC(bitmap.parent as Sprite);
+								bool = true;
+								continue;
+							}
+						}
+						this.bike.removeHightlightSprite(bitmap.parent as Sprite);
+					}
+				}
+				event.updateAfterEvent();
+			}
+			
+			protected function nb_mouseOutHandler(event:MouseEvent):void
+			{
+				if(this.bike)
+					this.bike.removeHightlight();
+			}
+			
+			protected function nb_mouseClickHandler(event:MouseEvent):void
+			{
+				var objs:Array = (this.bike as Sprite).getObjectsUnderPoint(new Point(this.istage.mouseX, this.istage.mouseY));
+				if(objs.length){
+					for each(var bitmap:Bitmap in objs){
+						var pixelColor:Number = bitmap.bitmapData.getPixel32(bitmap.mouseX, bitmap.mouseY);
+						if(pixelColor >> 24 != 0){
+							this.bike.showColorHad(bitmap.parent as Sprite);
+						}
+					}
+				}
 			}
 			
 		]]>
@@ -420,4 +476,5 @@
 	<s:Button skinClass="{skins.LeftButton}" id="leftButton" x="150" y="250" click="leftButton_clickHandler(event)" />
 	<s:Button skinClass="{skins.RightButton}" id="rightButton" x="780" y="250" click="rightButton_clickHandler(event)" />
 	<s:SpriteVisualElement id="istage" width="100%" height="100%" mouseEnabled="false" mouseChildren="true" />
+	<s:BorderContainer backgroundColor="0x000000" alpha="0.7" width="100%" height="100%" id="popUpLayer" visible="false" />
 </s:Application>

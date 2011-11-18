@@ -137,7 +137,7 @@
 			private function changeButtonColor(event:MouseEvent):void
 			{
 				YongJiuC.app.changeButtonColor((event.target as Color).value);
-				YongJiuC.app.changeArrayColor((event.target as Color).value);
+				YongJiuC.app.changeArrayColor((event.target as Color).value, null, (event.target as Color).price, (event.target as Color).pantone);
 				YongJiuC.app.loadCom((event.target as Color).value);
 			}
 			public function chooseRandomColor():void
@@ -157,7 +157,7 @@
 					var priceList:Array = String(allColors[key].@price).split(",");
 					var ran:Number = Math.random();
 					var coo:uint = uint(colorList.length * ran);
-					YongJiuC.app.changeArrayColor(colorList[coo], key);
+					YongJiuC.app.changeArrayColor(colorList[coo], key, priceList[coo], pantoneList[coo]);
 					YongJiuC.app.changeButtonRadom(key, colorList[coo]);
 					
 				}

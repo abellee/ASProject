@@ -42,10 +42,10 @@ package
 			var bitmap:Bitmap = event.target.content as Bitmap;
 			addChild(bitmap);
 			// 保持所有图片高度一致 所以只作高度上的处理
-			var scale:Number;
-			if(bitmap.width > maxWidth && bitmap.width > bitmap.height)
+			var scale:Number = 1;
+			if(bitmap.width != maxWidth && bitmap.width >= bitmap.height)
 				scale = maxWidth / bitmap.width;
-			if(bitmap.height > maxHeight && bitmap.height > bitmap.width)
+			else if(bitmap.height != maxHeight && bitmap.height >= bitmap.width)
 				scale = maxHeight / bitmap.height;
 			bitmap.width = scale * bitmap.width;
 			bitmap.height = scale * bitmap.height;

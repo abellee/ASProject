@@ -142,9 +142,9 @@ package cycle
 		}
 		private function addListener(obj:DisplayObject):void
 		{
-			obj.addEventListener(MouseEvent.MOUSE_OVER, highlightMC);
-			obj.addEventListener(MouseEvent.MOUSE_OUT, removeHightlight);
-			obj.addEventListener(MouseEvent.CLICK, showColorHad);
+//			obj.addEventListener(MouseEvent.MOUSE_OVER, highlightMC);
+//			obj.addEventListener(MouseEvent.MOUSE_OUT, removeHightlight);
+//			obj.addEventListener(MouseEvent.CLICK, showColorHad);
 		}
 		private function removeListener(obj:DisplayObject):void
 		{
@@ -152,9 +152,9 @@ package cycle
 			obj.removeEventListener(MouseEvent.MOUSE_OUT, removeHightlight);
 			obj.removeEventListener(MouseEvent.CLICK, showColorHad);
 		}
-		private function highlightMC(event:MouseEvent):void
+		public function highlightMC(mc:Sprite):void
 		{
-			var mc:Sprite = event.currentTarget as Sprite;
+//			var mc:Sprite = event.currentTarget as Sprite;
 			if(!highlightFilter){
 				
 				var adjustColor:AdjustColor = new AdjustColor();
@@ -167,19 +167,29 @@ package cycle
 			}
 			mc.filters = [highlightFilter];
 		}
-		private function removeHightlight(event:MouseEvent):void
+		
+		public function removeHightlight():void
 		{
-			var mc:Sprite = event.currentTarget as Sprite;
+			var num:int = this.numChildren;
+			for(var i:int = 0; i<num; i++){
+				var sp:Sprite = this.getChildAt(i) as Sprite;
+				if(sp){
+					sp.filters = null;
+				}
+			}
+		}
+		
+		public function removeHightlightSprite(mc:Sprite):void
+		{
+//			var mc:Sprite = event.currentTarget as Sprite;
 			mc.filters = null;
 		}
-		private function showColorHad(event:MouseEvent):void
+		public function showColorHad(mc:Sprite):void
 		{
-			var mc:Sprite = event.currentTarget as Sprite;
+//			var mc:Sprite = event.currentTarget as Sprite;
 			var partName:String = getPartName(mc);
 			if(!partName){
-				
 				return;
-				
 			}
 			YongJiuC.app.showColorPickr(partName);
 		}
