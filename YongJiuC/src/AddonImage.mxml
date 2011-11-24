@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx" width="102" height="74" removedFromStage="bordercontainer1_removedFromStageHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			[Bindable]
+			public var imageSrc:String = "";
+			
+			protected function bordercontainer1_removedFromStageHandler(event:Event):void
+			{
+				image.source = null;
+				imageSrc = null;
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Image source="{imageSrc}" width="100%" height="100%" id="image" />
+</s:BorderContainer>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="300" height="280" backgroundColor="14408667" cornerRadius="10" borderVisible="false" dropShadowVisible="true">
+	
+	<fx:Script>
+		<![CDATA[
+			protected function button3_clickHandler(event:MouseEvent):void
+			{
+				YongJiuC.app.hideNoticePanel();
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Label x="105" y="22" fontSize="14" fontWeight="bold" text="银行汇款支付"/>
+	<mx:HRule x="0" y="45" width="100%"/>
+	<mx:Text x="53" y="60" leading="10"
+			 text="公司：中路股份有限公司&#xd;银行帐号：31001616311056001231&#xd;开户银行：建行大连路支行&#xd;户名：王忠华&#xd;手机：15202169056"/>
+	<s:Label x="22" y="194" color="0xFF0000" text="注：请在汇款时，备注您填写订单时的手机号码&#xd;或电话号码，以及您的姓名，以便我们核对款项。"/>
+	<s:HGroup width="100%" y="240" verticalAlign="middle" horizontalAlign="center">
+		<s:Button label="提交" click="button3_clickHandler(event)" color="0xFFFFFF"
+				  skinClass="skins.SubmitButton"/>
+	</s:HGroup>
+</s:BorderContainer>

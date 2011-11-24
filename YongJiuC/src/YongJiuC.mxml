@@ -14,6 +14,7 @@
 			
 			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
 			import mx.preloaders.Preloader;
 			
 			import resource.WebResource;
@@ -39,7 +40,7 @@
 			private var curColor:Number = undefined;
 			private var curColorIndex:uint = 0;
 			//                        部位     颜色  价格  pantone
-			private var arr:Array = [["body", "0", "0", "0"],
+			public var arr:Array = [["body", "0", "0", "0"],
 									["hand", "0", "0", "0"],
 									["group", "0", "0", "0"],
 									["round", "0", "0", "0"],
@@ -53,6 +54,9 @@
 			private var loader:Loader;
 			
 			private var colorPickr:ColorPickr = new ColorPickr();
+			private var preorder:PreorderPanel = new PreorderPanel();
+			private var alertPanel:AlertPanel = new AlertPanel();
+			private var noticePanel:NoticePanel;
 			
 			private var obj:Object;
 			private var index:uint = 0;
@@ -321,7 +325,10 @@
 
 			protected function bottombutton9_clickHandler(event:MouseEvent):void
 			{
-				var tt:Array = arr;
+				preorder.init();
+				preorder.totalPriceValue = totalPrice;
+				popUpLayer.visible = true;
+				panelContainer.addElement(preorder);
 			}
 			private function setPreSelected(target:BottomButton):void{
 				
@@ -442,6 +449,40 @@
 				}
 			}
 			
+			public function closePreorderPanel():void
+			{
+				panelContainer.removeAllElements();
+				popUpLayer.visible = false;
+			}
+			
+			public function showAlertPanel(str:String):void
+			{
+				if(!alertPanel) alertPanel = new AlertPanel();
+				alertPanel.alertStr = str;
+				PopUpManager.addPopUp(alertPanel, this, false);
+				PopUpManager.centerPopUp(alertPanel);
+			}
+			
+			public function hideAlertPanel():void
+			{
+				if(alertPanel && alertPanel.isPopUp)
+					PopUpManager.removePopUp(alertPanel);
+				alertPanel.alertStr = "";
+			}
+			
+			public function showNoticePanel():void
+			{
+				if(!noticePanel) noticePanel = new NoticePanel();
+				PopUpManager.addPopUp(noticePanel, this, true);
+				PopUpManager.centerPopUp(noticePanel);
+			}
+			
+			public function hideNoticePanel():void
+			{
+				if(noticePanel && noticePanel.isPopUp) PopUpManager.removePopUp(noticePanel);
+				noticePanel = null;
+			}
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
@@ -477,4 +518,5 @@
 	<s:Button skinClass="{skins.RightButton}" id="rightButton" x="780" y="250" click="rightButton_clickHandler(event)" />
 	<s:SpriteVisualElement id="istage" width="100%" height="100%" mouseEnabled="false" mouseChildren="true" />
 	<s:BorderContainer backgroundColor="0x000000" alpha="0.7" width="100%" height="100%" id="popUpLayer" visible="false" />
+	<s:HGroup id="panelContainer" verticalAlign="middle" horizontalAlign="center" width="100%" height="100%" />
 </s:Application>

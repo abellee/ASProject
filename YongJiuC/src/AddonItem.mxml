@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:local="*" horizontalAlign="center">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			public var index:int = 0;
+			public var priceNum:Number = 0;
+			
+			public function setInfo(typeStr:String, priceValue:Number, imageSrc:String):void
+			{
+				priceNum = priceValue;
+				if(img)
+					img.imageSrc = imageSrc;
+				if(type)
+					type.text = "型号: " + typeStr;
+				if(price)
+					price.text = "价格: ¥" + priceValue + "元";
+			}
+			
+			protected function checkBox_clickHandler(event:MouseEvent):void
+			{
+				this.dispatchEvent(new Event(Event.SELECT));
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<local:AddonImage id="img" />
+	<s:Label id="type" />
+	<s:Label id="price" />
+	<s:CheckBox id="checkBox" click="checkBox_clickHandler(event)" />
+</s:VGroup>

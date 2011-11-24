@@ -1,18 +1,417 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="630" height="480" backgroundColor="14408667" cornerRadius="10" borderVisible="false" dropShadowVisible="true"
-		 creationComplete="group1_creationCompleteHandler(event)">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="630" height="510" backgroundColor="14408667" cornerRadius="10" borderVisible="false" dropShadowVisible="true"
+		 creationComplete="group1_creationCompleteHandler(event)" removedFromStage="bordercontainer1_removedFromStageHandler(event)">
 	<fx:Script>
 		<![CDATA[
-			import mx.events.FlexEvent;
+			import com.adobe.utils.StringUtil;
 			
-			private var baseURL:String = "http://xiangqu.net/customize";
+			import flash.net.navigateToURL;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			import mx.utils.Base64Encoder;
+			
+			import resource.WebResource;
+			
+			import spark.events.IndexChangeEvent;
+			
+//			private var baseURL:String = "http://xiangqu.net/customize/";
+			private var baseURL:String = "http://localhost/yongjiuc/";
+			private var addonXML:String = "addons.xml";
+			private var postURL:String = "postOrder.php";
+			private var provinceURL:String = "simpleQuery.php?action=getProvince";
+			private var cityURL:String = "simpleQuery.php?action=getCity&id=";
+			private var areaURL:String = "simpleQuery.php?action=getArea&id=";
+			
+			private var curPage:int = 0;
+			private var totalPages:int = 0;
+			private var perPage:int = 4;
+			
+			private var urlLoader:URLLoader;
+			
+			private var addonsXML:XMLList;
+			
+			[Bindable]
+			public var totalPriceValue:String = "";
+			
+			private var selectedList:Array = [];
+			
+			private var creationComplete:Boolean = false;
 			
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
-				// TODO Auto-generated method stub
+				loadAddons();
+				loadProvince();
+				loadCity();
+				loadArea();
+				creationComplete = true;
+			}
+			
+			public function init():void
+			{
+				if(creationComplete){
+					loadAddons();
+					loadProvince();
+					loadCity();
+					loadArea();
+				}
+			}
+			
+			private function loadProvince():void
+			{
+				var provinceLoader:URLLoader = new URLLoader();
+				provinceLoader.addEventListener(Event.COMPLETE, province_loadCompleteHandler);
+				provinceLoader.load(new URLRequest(baseURL + provinceURL));
+			}
+			
+			private function loadCity():void
+			{
 				
+			}
+			
+			private function loadArea():void
+			{
+				
+			}
+			
+			private function loadAddons():void
+			{
+				var addonsLoader:URLLoader = new URLLoader();
+				addonsLoader.addEventListener(Event.COMPLETE, addons_loadCompleteHandler);
+				addonsLoader.load(new URLRequest(baseURL + addonXML));
+			}
+			
+			private function submitPreorder():void
+			{
+				
+			}
+			
+			protected function label1_clickHandler(event:MouseEvent):void
+			{
+				YongJiuC.app.closePreorderPanel();
+			}
+			
+			protected function bordercontainer1_removedFromStageHandler(event:Event):void
+			{
+				province.selectedIndex = -1;
+				city.selectedIndex = -1;
+				area.selectedIndex = -1;
+				zipCode.text = "";
+				street.text = "";
+				receiver.text = "";
+				email.text = "";
+				phoneNumber.text = "";
+				areaNum.text = "";
+				tellNum.text = "";
+				otherNum.text = "";
+				totalPrice.text = "";
+				totalPriceValue = "";
+				addonsList.removeAllElements();
+				selectedList = [];
+			}
+			
+			protected function addons_loadCompleteHandler(event:Event):void
+			{
+				var addonsLoader:URLLoader = event.target as URLLoader;
+				addonsLoader.removeEventListener(Event.COMPLETE, addons_loadCompleteHandler);
+				addonsXML = XML(event.target.data).type.(@id == Config.curType);
+				if(addonsXML && addonsXML.children().length()){
+					if(noAddonsLabel && this.contains(noAddonsLabel))
+						this.removeElement(noAddonsLabel);
+					totalPages = Math.ceil(addonsXML.children().length() / perPage);
+				}else{
+					if(this.noAddonsLabel)
+						noAddonsLabel.visible = true;
+				}
+				if(totalPages > 0) showAddonsByPage();
+			}
+			
+			private function showAddonsByPage():void
+			{
+				if(addonsList.numChildren){
+					for each(var aitem:AddonItem in addonsList){
+						aitem.removeEventListener(Event.SELECT, onItemSelect);
+					}
+					addonsList.removeAllElements();
+				}
+				for(var i:int = curPage * perPage; i< (curPage + 1) * perPage; i++){
+					if(!addonsXML.children()[i]) continue;
+					var item:AddonItem = new AddonItem();
+					item.checkBox.selected = Boolean(selectedList[i]);
+					item.index = i;
+					item.setInfo(addonsXML.children()[i].@type, addonsXML.children()[i].@price, baseURL + Config.curType + "/addons/" + addonsXML.children()[i].@type + "_s.jpg");
+					addonsList.addElement(item);
+					item.addEventListener(Event.SELECT, onItemSelect);
+				}
+			}
+			
+			protected function onItemSelect(event:Event):void
+			{
+				var item:AddonItem = event.currentTarget as AddonItem;
+				selectedList[item.index] = Number(item.checkBox.selected);
+				if(item.checkBox.selected){
+					totalPriceValue = Number(totalPriceValue) + item.priceNum + "";
+				}else{
+					totalPriceValue = Number(totalPriceValue) - item.priceNum + "";
+				}
+			}
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				if(curPage <= 0) return;
+				curPage--;
+				showAddonsByPage();
+			}
+			
+			protected function button2_clickHandler(event:MouseEvent):void
+			{
+				if(curPage >= (totalPages - 1)) return;
+				curPage++;
+				showAddonsByPage();
+			}
+			
+			protected function province_loadCompleteHandler(event:Event):void
+			{
+				var provinceLoader:URLLoader = event.target as URLLoader;
+				provinceLoader.removeEventListener(Event.COMPLETE, province_loadCompleteHandler);
+				var data:String = provinceLoader.data;
+				if(data){
+					var provinceAC:ArrayCollection = new ArrayCollection();
+					var cityAC:ArrayCollection = new ArrayCollection();
+					var areaAC:ArrayCollection = new ArrayCollection();
+					var firstArr:Array = data.split("|");
+					if(firstArr && firstArr.length){
+						var provinceArray:Array = firstArr[0].split(",");
+						var cityArray:Array = firstArr[1].split(",");
+						var areaArray:Array = firstArr[2].split(",");
+						var num0:int = provinceArray.length;
+						var num1:int = cityArray.length;
+						var num2:int = areaArray.length;
+						for(var i:int = 0; i<num0; i++){
+							var p:Array = provinceArray[i].split("#");
+							if(p[0] != "" && p[1] != "") provinceAC.addItem({id:p[0], label:p[1]});
+						}
+						for(var j:int = 0; j<num1; j++){
+							var c:Array = cityArray[j].split("#");
+							if(c[0] != "" && c[1] != "") cityAC.addItem({id:c[0], label:c[1]});
+						}
+						for(var k:int = 0; k<num2; k++){
+							var a:Array = areaArray[k].split("#");
+							if(a[0] != "" && a[1] != "") areaAC.addItem({id:a[0], label:a[1]});
+						}
+					}
+					if(provinceAC){
+						province.dataProvider = provinceAC;
+						province.selectedIndex = 0;
+					}
+					if(cityAC){
+						city.dataProvider = cityAC;
+						city.selectedIndex = 0;
+					}
+					if(areaAC){
+						area.dataProvider = areaAC;
+						area.selectedIndex = 0;
+					}
+				}
+			}
+			
+			protected function province_changeHandler(event:IndexChangeEvent):void
+			{
+				var id:int = province.selectedItem.id;
+				var cityLoader:URLLoader = new URLLoader();
+				cityLoader.addEventListener(Event.COMPLETE, onCityLoadComplete);
+				cityLoader.load(new URLRequest(baseURL + cityURL + id));
+			}
+			
+			protected function city_changeHandler(event:IndexChangeEvent):void
+			{
+				var id:int = city.selectedItem.id;
+				var areaLoader:URLLoader = new URLLoader();
+				areaLoader.addEventListener(Event.COMPLETE, onAreaLoadComplete);
+				areaLoader.load(new URLRequest(baseURL + areaURL + id));
+			}
+			
+			protected function onCityLoadComplete(event:Event):void
+			{
+				var cityLoader:URLLoader = event.target as URLLoader;
+				cityLoader.removeEventListener(Event.COMPLETE, onCityLoadComplete);
+				var data:String = cityLoader.data;
+				if(data){
+					var cityAC:ArrayCollection = new ArrayCollection();
+					var areaAC:ArrayCollection = new ArrayCollection();
+					
+					var list:Array = data.split("|");
+					var cityArray:Array = list[0].split(",");
+					var areaArray:Array = list[1].split(",");
+					var num0:int = cityArray.length;
+					var num1:int = areaArray.length;
+					for(var i:int = 0; i<num0; i++){
+						var c:Array = cityArray[i].split("#");
+						if(c[0] != "" && c[1] != "") cityAC.addItem({id:c[0], label:c[1]});
+					}
+					for(var j:int = 0; j<num1; j++){
+						var a:Array = areaArray[j].split("#");
+						if(a[0] != "" && a[1] != "") areaAC.addItem({id:a[0], label:a[1]});
+					}
+				}
+				if(cityAC){
+					city.dataProvider = cityAC;
+					city.selectedIndex = 0;
+				}
+				if(areaAC){
+					area.dataProvider = areaAC;
+					area.selectedIndex = 0;
+				}
+			}
+			
+			protected function onAreaLoadComplete(event:Event):void
+			{
+				var areaLoader:URLLoader = event.target as URLLoader;
+				areaLoader.removeEventListener(Event.COMPLETE, onAreaLoadComplete);
+				var data:String = areaLoader.data;
+				if(data){
+					var areaAC:ArrayCollection = new ArrayCollection();
+					
+					var list:Array = data.split(",");
+					if(list && list.length){
+						var len:int = list.length;
+						for(var i:int = 0; i<len; i++){
+							var a:Array = list[i].split("#");
+							if(a[0] != "" && a[1] != "") areaAC.addItem({id:a[0], label:a[1]});
+						}
+					}
+				}
+				if(areaAC){
+					area.dataProvider = areaAC;
+					area.selectedIndex = 0;
+				}
+			}
+			
+			protected function button3_clickHandler(event:MouseEvent):void
+			{
+				if(zipCode.text == ""){
+					YongJiuC.app.showAlertPanel("邮政编码不能为空!");
+					return;
+				}
+				var emptyPattern:RegExp = /\s+/g;
+				var emailPattern:RegExp = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+				var streetStr:String = street.text.replace(emptyPattern, "");
+				if(streetStr == ""){
+					YongJiuC.app.showAlertPanel("街道地址不能为空!");
+					return;
+				}
+				var receiverName:String = this.receiver.text.replace(emptyPattern, "");
+				if(receiverName == ""){
+					YongJiuC.app.showAlertPanel("收货人姓名不能为空!");
+					return;
+				}
+				var emailBoolean:Boolean = emailPattern.test(email.text);
+				if(!emailBoolean){
+					YongJiuC.app.showAlertPanel("邮箱格式不正确，请重新填写!");
+					return;
+				}
+				var bool:Boolean = false;
+				if(phoneNumber.text != ""){
+					bool = true;
+				}
+				if(areaNum.text != "" && tellNum.text != "" && otherNum.text != ""){
+					bool = true;
+				}
+				if(!bool){
+					YongJiuC.app.showAlertPanel("手机与电话请至少填写一项!");
+					return;
+				}
+				var urlVar:URLVariables = new URLVariables();
+				urlVar.zipCode = this.zipCode.text;
+				urlVar.type = Config.curType;
+				urlVar.pid = province.selectedItem.id;
+				urlVar.cid = city.selectedItem.id;
+				urlVar.aid = area.selectedItem.id;
+				urlVar.email = email.text;
+				urlVar.name = receiver.text;
+				urlVar.address = street.text;
+				urlVar.cellPhoneNum = phoneNumber.text;
+				urlVar.phoneNumber = "(" + areaNum.text + ")" + tellNum.text + "-" + otherNum.text;
+				for each(var arr:Array in YongJiuC.app.arr){
+					urlVar[arr[0]] = arr[3];
+				}
+				urlVar.addons = getAddons();
+				var postURLReq:URLRequest = new URLRequest(baseURL + postURL);
+				postURLReq.method = URLRequestMethod.POST;
+				postURLReq.data = urlVar;
+				var postLoader:URLLoader = new URLLoader();
+				postLoader.addEventListener(Event.COMPLETE, order_loadComplete);
+				postLoader.load(postURLReq);
+			}
+			
+			private function getAddons():String
+			{
+				var len:int = selectedList.length;
+				var str:String = "";
+				for(var i:int = 0; i<len; i++){
+					if(selectedList[i] == 1){
+						str += addonsXML.children()[i].@type + ",";
+					}
+				}
+				return str.substr(0, str.length - 1);
+			}
+			
+			protected function order_loadComplete(event:Event):void
+			{
+				var postLoader:URLLoader = event.target as URLLoader;
+				postLoader.removeEventListener(Event.COMPLETE, order_loadComplete);
+				var result:XML = XML(event.target.data);
+				if(!result){
+					YongJiuC.app.showAlertPanel("订单提交失败!");
+				}else{
+					
+					YongJiuC.app.showAlertPanel("订单生成成功!");
+					
+					if(alipay.selected){
+						var pro:String = result.province;
+						var city:String = result.city;
+						var area:String = result.area;
+						var street:String = result.street;
+						var totalPrice:Number = Number(result.totalPrice);
+						var email:String = result.email;
+						var type:String = result.type;
+						var receiver:String = result.receiver;
+						var phoneNumber:String = result.phoneNumber;
+						var cellPhoneNumber:String = result.cellPhoneNumber;
+						var addons:String = result.addons;
+						var orderID:String = result.orderID;
+						var zipCode:String = result.zipCode;
+						
+						var alipayURL:URLRequest = new URLRequest(baseURL + "alipay/alipayto.php");
+						alipayURL.method = URLRequestMethod.POST;
+						var alipayVar:URLVariables = new URLVariables();
+						alipayVar.out_trade_no = Base64.encode(orderID + "");
+						alipayVar.subject = Base64.encode("永久C自行车个性定制");
+						alipayVar.body = Base64.encode("收货人:" + receiver + "	地址:" + pro + city + area + street + "	邮编: " + zipCode + "	邮箱: "
+							+ email + "	电话: " + phoneNumber + "	" + cellPhoneNumber + "	型号: " + type + "	配件: " + addons);
+						alipayVar.total_fee = Base64.encode(totalPrice + "");
+						alipayURL.data = alipayVar;
+						navigateToURL(alipayURL, "_self");
+					}else if(bank.selected){
+						YongJiuC.app.showNoticePanel();
+					}
+				}
+			}
+			
+			protected function radiobutton1_clickHandler(event:MouseEvent):void
+			{
+				if(bank.selected){
+					alipay.selected = false;
+				}
+			}
+			
+			protected function radiobutton2_clickHandler(event:MouseEvent):void
+			{
+				if(alipay.selected){
+					bank.selected = false;
+				}
 			}
 			
 		]]>
@@ -23,33 +422,35 @@
 	<s:HGroup width="100%" verticalAlign="middle" y="20">
 		<s:Label backgroundColor="14887459" text="选择配件" color="0xFFFFFF" verticalAlign="middle" textAlign="center" width="70" height="24" />
 		<mx:HRule width="100%" />
-		<s:Label backgroundColor="14887459" text="X" color="0xFFFFFF" verticalAlign="middle" textAlign="center" width="30" height="24" />
+		<s:Label backgroundColor="14887459" text="X" color="0xFFFFFF" verticalAlign="middle" textAlign="center"
+				 width="30" height="24" click="label1_clickHandler(event)" buttonMode="true" />
 	</s:HGroup>
-	<s:HGroup width="100%" y="55">
-		
+	<s:HGroup id="addonsList" y="55" width="100%" horizontalAlign="center"
+			  verticalAlign="middle" gap="20">
 	</s:HGroup>
-	<s:HGroup horizontalAlign="center" width="100%" y="145">
-		<s:Button skinClass="skins.ArrowLeft" />
-		<s:Button skinClass="skins.ArrowRight" />
+	<s:Label text="无供选择的配件!" id="noAddonsLabel" visible="false" />
+	<s:HGroup x="0" y="195" width="100%" horizontalAlign="center">
+		<s:Button skinClass="skins.ArrowLeft" click="button1_clickHandler(event)" />
+		<s:Button skinClass="skins.ArrowRight" click="button2_clickHandler(event)" />
 	</s:HGroup>
-	<s:HGroup width="100%" y="180" verticalAlign="middle">
+	<s:HGroup x="0" y="224" width="100%" verticalAlign="middle">
 		<s:Label backgroundColor="14887459" text="配送信息" color="0xFFFFFF" verticalAlign="middle" textAlign="center" width="70" height="24" />
 		<mx:HRule width="86%" />
 	</s:HGroup>
-	<s:VGroup width="100%" y="215" gap="13">
+	<s:VGroup x="0" y="256" width="100%" gap="8">
 		<s:HGroup width="100%" verticalAlign="middle">
 			<mx:Label htmlText="&lt;font color=&quot;#ff0000&quot;&gt;*&lt;/font&gt; 省:" textAlign="right" width="100" />
-			<s:DropDownList width="90" id="province" />
+			<s:DropDownList width="90" id="province" change="province_changeHandler(event)" />
 			<mx:Label text="市" />
-			<s:DropDownList width="90" id="city" />
+			<s:DropDownList width="90" id="city" change="city_changeHandler(event)" />
 			<mx:Label text="区" />
 			<s:DropDownList width="90" id="area" />
 			<mx:Label htmlText="&lt;font color=&quot;#ff0000&quot;&gt;*&lt;/font&gt; 邮政编码:" />
-			<s:TextInput width="80" id="zipCode" />
+			<s:TextInput width="80" id="zipCode" restrict="0-9" />
 		</s:HGroup>
 		<s:HGroup width="100%" verticalAlign="top">
 			<mx:Label htmlText="&lt;font color=&quot;#ff0000&quot;&gt;*&lt;/font&gt; 街道地址:" textAlign="right" width="100" />
-			<s:TextArea width="490" height="45" />
+			<s:TextArea width="490" height="45" id="street" />
 		</s:HGroup>
 		<s:HGroup width="100%" verticalAlign="middle">
 			<mx:Label htmlText="&lt;font color=&quot;#ff0000&quot;&gt;*&lt;/font&gt; 收货人姓名:" textAlign="right" width="100" />
@@ -59,22 +460,26 @@
 		</s:HGroup>
 		<s:HGroup width="100%" verticalAlign="middle">
 			<mx:Label text="手机:" textAlign="right" width="100" />
-			<s:TextInput width="110" id="phoneNumber" />
+			<s:TextInput width="110" id="phoneNumber" restrict="0-9" />
 			<mx:Label text="电话:" />
-			<s:TextInput width="60" id="areaNum" />
+			<s:TextInput width="60" id="areaNum" restrict="0-9" />
 			<mx:Label text="-" textAlign="center" />
-			<s:TextInput width="100" id="tellNum" />
+			<s:TextInput width="100" id="tellNum" restrict="0-9" />
 			<mx:Label text="-" textAlign="center" />
-			<s:TextInput width="60" id="otherNum" />
+			<s:TextInput width="60" id="otherNum" restrict="0-9" />
 		</s:HGroup>
-		<s:Label text="手机与电话请至少填写一项，电话的格式：区号-电话号码-分机号" paddingLeft="100" color="0x999999" fontSize="13" paddingBottom="20" />
+		<s:Label text="手机与电话请至少填写一项，电话的格式：区号-电话号码-分机号" paddingLeft="100" color="0x999999" fontSize="13" paddingBottom="10" />
+		<s:HGroup width="100%" paddingLeft="30" gap="20">
+			<s:RadioButton label="支付宝支付(推荐)" click="radiobutton1_clickHandler(event)" id="alipay" selected="true" />
+			<s:RadioButton label="银行汇款支付" click="radiobutton2_clickHandler(event)" id="bank" />
+		</s:HGroup>
 		<mx:HRule width="100%" />
 		<s:HGroup width="100%" verticalAlign="middle" paddingRight="20">
 			<s:HGroup horizontalAlign="left" verticalAlign="middle" width="100%" paddingLeft="20">
 				<s:BitmapImage source="{WebResource.Price}" />
-				<s:Label text="500" fontSize="16" />
+				<s:Label text="{totalPriceValue}" fontSize="16" id="totalPrice" />
 			</s:HGroup>
-			<s:Button label="提交" />
+			<s:Button label="提交" skinClass="skins.SubmitButton" color="0xFFFFFF" click="button3_clickHandler(event)" />
 		</s:HGroup>
 	</s:VGroup>
 </s:BorderContainer>
