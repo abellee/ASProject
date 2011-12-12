@@ -6,7 +6,6 @@ package {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.events.TimerEvent;
 	import flash.external.ExternalInterface;
 	import flash.filters.BitmapFilter;
 	import flash.filters.BitmapFilterQuality;
@@ -15,8 +14,6 @@ package {
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.system.LoaderContext;
-	import flash.text.TextField;
-	import flash.utils.Timer;
 	
 	[SWF(width="1000", height="600")]
 	public class FlashMarket extends Sprite
@@ -33,6 +30,10 @@ package {
 		private var urlLoaderFunc:Function = null;
 		private var houseContainer:Sprite = new Sprite();
 		public static var instance:FlashMarket = null;
+		
+		[Embed(source="im.jpg")]
+		private var IM : Class;
+		
 		public function FlashMarket()
 		{
 			instance = this;
@@ -42,6 +43,10 @@ package {
 			if(!urlLoader) urlLoader = new URLLoader();
 			urlLoader.addEventListener(Event.COMPLETE, xmlDataFile_loadCompleteHandler);
 			urlLoader.load(new URLRequest("data.xml?t="+ new Date().getTime()));
+		}
+		
+		public function getIMImage():Bitmap{
+			return new IM() as Bitmap;
 		}
 		
 		private function xmlDataFile_loadCompleteHandler(event:Event):void

@@ -1,4 +1,6 @@
 package {
+	import flash.net.navigateToURL;
+	import flash.events.MouseEvent;
 	import flash.net.URLRequest;
 	import flash.display.Bitmap;
 	import flash.display.Loader;
@@ -23,6 +25,8 @@ package {
 		private var textHeight:int = 0;
 		private var backgroundImage:Bitmap;
 		private var _dir:String;
+		private var imBox:Sprite = new Sprite();
+		private var imPath:String = "";
 		public function InfoPanel()
 		{
 			super();
@@ -55,26 +59,32 @@ package {
 			numberTF.x = 10;
 			numberTF.y = 10;
 			
-			var detailPage:String = xml.detailPage;
-			if(detailPage && detailPage != ""){
-				var detailTF:TextField = new TextField();
-				detailTF.defaultTextFormat = new TextFormat("宋体", 13, 0x001cff, true);
-				detailTF.autoSize = TextFieldAutoSize.LEFT;
-				detailTF.wordWrap = false;
-				detailTF.mouseWheelEnabled = false;
-				detailTF.htmlText = "<font color=\"#f6a61a\" fontWeight=\"bold\"><a href=\"" + detailPage + "\" target=\"_blank\">详情>></a></font>";;
-				addChild(detailTF);
-				detailTF.x = w - detailTF.textWidth - 10;
-				detailTF.y = textHeight + 10;
+			imPath = xml.imimg;
+			if(imPath && imPath != ""){
+//				var detailTF:TextField = new TextField();
+//				detailTF.defaultTextFormat = new TextFormat("宋体", 13, 0x001cff, true);
+//				detailTF.autoSize = TextFieldAutoSize.LEFT;
+//				detailTF.wordWrap = false;
+//				detailTF.mouseWheelEnabled = false;
+//				detailTF.htmlText = "<font color=\"#f6a61a\" fontWeight=\"bold\"><a href=\"" + detailPage + "\" target=\"_blank\">详情>></a></font>";;
+//				addChild(detailTF);
+				var bitmap:Bitmap = FlashMarket.instance.getIMImage();
+				imBox.addChild(bitmap);
+				imBox.mouseChildren = false;
+				imBox.x = w - imBox.width - 10;
+				imBox.y = textHeight + 10;
+				addChild(imBox);
+				imBox.addEventListener(MouseEvent.CLICK, onIMBoxClick);
 			}
 			textHeight = numberTF.y + numberTF.textHeight;
 			
+			var detailPage:String = xml.detailPage;
 			var nameTF:TextField = new TextField();
 			nameTF.defaultTextFormat = new TextFormat("宋体", 13, 0x000000, true);
 			nameTF.autoSize = TextFieldAutoSize.LEFT;
 			nameTF.wordWrap = false;
 			nameTF.mouseWheelEnabled = false;
-			nameTF.htmlText = "摊位名称: <font color=\"#1171f4\" size=\"17\">" + String(xml.name) + "</font>";
+			nameTF.htmlText = "摊位名称: <font color=\"#1171f4\" size=\"17\"><a href=\"" + detailPage + "\" target=\"_blank\">" + String(xml.name) + "</a></font>";
 			addChild(nameTF);
 			nameTF.x = numberTF.x + numberTF.textWidth + 10;
 			nameTF.y = numberTF.y;
@@ -190,6 +200,10 @@ package {
 			line = Math.ceil(imageLine / numPerRow);
 			line = line < 0 ? 0 : line;
 			
+		}
+
+		private function onIMBoxClick(event : MouseEvent) : void {
+			navigateToURL(new URLRequest(imPath));
 		}
 		
 		public function drawBackground(dir:String, from:String = "outside"):void
