@@ -48,8 +48,8 @@ in accordance with the terms of the license agreement accompanying it.
 		</fx:Script>
 	</s:states>
 	
-	<s:BitmapImage source="{WebResource.ButtonUp}" includeIn="up, down" />
-	<s:BitmapImage source="{WebResource.ButtonOver}" includeIn="over, disabled" />
+	<s:BitmapImage source="{WebResource.ButtonUp}" includeIn="up, down" width="100%" />
+	<s:BitmapImage source="{WebResource.ButtonOver}" includeIn="over, disabled" width="100%" />
 	<s:Label id="labelDisplay"
 			 textAlign="center"
 			 maxDisplayedLines="1"

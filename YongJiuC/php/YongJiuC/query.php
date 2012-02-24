@@ -885,6 +885,18 @@ if(isset($_GET["action"])){
 		echo $str;
 	
 	}
+
+	if($_GET["action"] == "deleteColor" && $_GET["page"] == "color"){
+		$id=$_GET["id"];
+		$res = $db -> queryOrderWithoutReturn("delete from yjc_comcolor where id=".$id);
+		if($res){
+			echo "<script>alert(\"删除成功!\")</script>";
+		}else{
+			echo "<script>alert(\"删除失败!\")</script>";
+		}
+		echo "<script>window.location = \"index.php?page=comColor\"</script>";
+	}
+
 	if($_GET["action"] == "modifyColor"){
 	
 		$type = $_POST["type"];
@@ -909,7 +921,21 @@ if(isset($_GET["action"])){
 			mkdir($type."/".$com."/color", 0777);
 		
 		}
-		$bool = $db -> queryOrderWithoutReturn("update yjc_comcolor set colorValue='".$colorValue."', pantone='".$pantone."' where id=".$id);
+		$bool = false;
+		$res = $db -> queryOrder("select * from yjc_comcolor where id=".$id);
+		if($res[0]["component"] != $com){
+			$typeId = $res[0]["type"];
+			$bool = $db -> queryOrderWithoutReturn("delete from yjc_comcolor where id=".$id);
+			if($bool){
+				$bool = $db -> queryOrderWithoutReturn("insert into yjc_comcolor(type, component, colorValue, pantone) values('".$typeId."', '".$com."','".$colorValue."','".$pantone."')");
+				$result = $db -> queryOrder("select * from yjc_comcolor where type='".$typeId."' and component='".$com."' and colorValue='".$colorValue."' and pantone='".$pantone."'");
+				$id = $result[0]["id"];
+				$imageName = $id.".jpg";
+				$bool = $db -> queryOrderWithoutReturn("update yjc_comcolor set colorImage='".$imageName."' where id=".$result[0]["id"]);
+			}
+		}else{
+			$bool = $db -> queryOrderWithoutReturn("update yjc_comcolor set colorValue='".$colorValue."', pantone='".$pantone."' where id=".$id);
+		}
 		
 		if($bool){
 		

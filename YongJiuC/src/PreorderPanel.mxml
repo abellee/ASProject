@@ -17,8 +17,8 @@
 			
 			import spark.events.IndexChangeEvent;
 			
-//			private var baseURL:String = "http://xiangqu.net/customize/";
-			private var baseURL:String = "http://localhost/yongjiuc/";
+			private var baseURL:String = "http://122.226.62.60/";
+//			private var baseURL:String = "http://localhost/yongjiuc/";
 			private var addonXML:String = "addons.xml";
 			private var postURL:String = "postOrder.php";
 			private var provinceURL:String = "simpleQuery.php?action=getProvince";
@@ -333,7 +333,7 @@
 				urlVar.name = receiver.text;
 				urlVar.address = street.text;
 				urlVar.cellPhoneNum = phoneNumber.text;
-				urlVar.phoneNumber = "(" + areaNum.text + ")" + tellNum.text + "-" + otherNum.text;
+				urlVar.phoneNumber = areaNum.text == "" || tellNum.text == "" || otherNum.text == "" ? "" : "(" + areaNum.text + ")" + tellNum.text + "-" + otherNum.text;
 				for each(var arr:Array in YongJiuC.app.arr){
 					urlVar[arr[0]] = arr[3];
 				}
@@ -363,7 +363,7 @@
 				var postLoader:URLLoader = event.target as URLLoader;
 				postLoader.removeEventListener(Event.COMPLETE, order_loadComplete);
 				var result:XML = XML(event.target.data);
-				if(!result){
+				if(!event.target.data){
 					YongJiuC.app.showAlertPanel("订单提交失败!");
 				}else{
 					
@@ -385,7 +385,7 @@
 						var zipCode:String = result.zipCode;
 						
 						var alipayURL:URLRequest = new URLRequest(baseURL + "alipay/alipayto.php");
-						alipayURL.method = URLRequestMethod.POST;
+						alipayURL.method = URLRequestMethod.GET;
 						var alipayVar:URLVariables = new URLVariables();
 						alipayVar.out_trade_no = Base64.encode(orderID + "");
 						alipayVar.subject = Base64.encode("永久C自行车个性定制");
@@ -428,7 +428,7 @@
 	<s:HGroup id="addonsList" y="55" width="100%" horizontalAlign="center"
 			  verticalAlign="middle" gap="20">
 	</s:HGroup>
-	<s:Label text="无供选择的配件!" id="noAddonsLabel" visible="false" />
+	<s:Label id="noAddonsLabel" visible="false" x="271" y="83" text="无供选择的配件!"/>
 	<s:HGroup x="0" y="195" width="100%" horizontalAlign="center">
 		<s:Button skinClass="skins.ArrowLeft" click="button1_clickHandler(event)" />
 		<s:Button skinClass="skins.ArrowRight" click="button2_clickHandler(event)" />
@@ -479,7 +479,7 @@
 				<s:BitmapImage source="{WebResource.Price}" />
 				<s:Label text="{totalPriceValue}" fontSize="16" id="totalPrice" />
 			</s:HGroup>
-			<s:Button label="提交" skinClass="skins.SubmitButton" color="0xFFFFFF" click="button3_clickHandler(event)" />
+			<s:Button label="确定" skinClass="skins.SubmitButton" color="0xFFFFFF" click="button3_clickHandler(event)" />
 		</s:HGroup>
 	</s:VGroup>
 </s:BorderContainer>

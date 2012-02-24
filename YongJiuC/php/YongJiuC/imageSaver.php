@@ -1,4 +1,14 @@
 <?php
+if(isset($_GET["action"])){
+	if($_GET["action"] == "screenshot"){
+		$data = file_get_contents('php://input');
+		$fileName = time().".png";
+		if(file_put_contents("ScreenShot/".$fileName,$data)){
+			echo $fileName;
+		}
+	}
+	return 0;
+}
 function createPng($w, $h, $path, $color)
 {
 	$canvas = imagecreate($w, $h);

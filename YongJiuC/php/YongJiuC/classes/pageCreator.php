@@ -1721,7 +1721,7 @@ class PageCreator
                             <td>".$comName."</td>
                             <td>".$value["colorValue"]."</td>
                             <td>".$value["pantone"]."</td>
-                            <td><a href=\"index.php?page=color&action=modify&id=".$value["id"]."\"><img src=\"img/icons/icon_edit.png\" alt=\"编辑\" title=\"编辑\" /></a></td>
+                            <td><a href=\"index.php?page=color&action=modify&id=".$value["id"]."\"><img src=\"img/icons/icon_edit.png\" alt=\"编辑\" title=\"编辑\" /></a> <a href=\"query.php?page=color&action=deleteColor&id=".$value["id"]."\"><img src=\"img/icons/icon_unapprove.png\" alt=\"删除\" title=\"删除\" /></a></td>
                         </tr>";
 		
 		}

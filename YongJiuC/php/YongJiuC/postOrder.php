@@ -21,7 +21,7 @@ if(isset($_POST["type"]) && $_POST["type"] != ""){
 
 	$type = $_POST["type"];
 	$types = $db -> queryOrder("select * from yjc_type where type='".$type."'");
-	if(!count($types) || !types){
+	if(!count($types) || !$types){
 	
 		return 0;
 	
@@ -183,15 +183,15 @@ $aid = $astr[0]["region_name"];
 $curTime = time();
 $bool = $db -> queryOrder("select id from yjc_order where preorderNum=".$curTime);
 if($bool){
-	echo "exist";
+	echo 0;
 	exit();	
 }
-$bool = $db -> queryOrderWithoutReturn("insert into yjc_order(type, username, email, address, telnumber, cellphone, price, state, createTime, addons, preoderNum, zipCode) values ('".$type."', '".$name."', '".$email."', '".$pid.$cid.$aid.$address."', '".$phoneNumber."', '".$cellPhoneNum."', '".($bodyPrice[0]["price"] + $handPrice[0]["price"] + $groupPrice[0]["price"] + $roundPrice[0]["price"] + $innerRoundPrice[0]["price"] + $cranksetPrice[0]["price"] + $seatPrice[0]["price"] + $brakePrice[0]["price"] + $chainPrice[0]["price"] + $addonsPrice)."', '0', '".$curTime."', '".$addonsIDs."', '".$curTime."', '".$zipCode."')");
+$bool = $db -> queryOrderWithoutReturn("insert into yjc_order(type, username, email, address, telnumber, cellphone, price, state, createTime, addons, preorderNum, zipCode) values ('".$type."', '".$name."', '".$email."', '".$pid.$cid.$aid.$address."', '".$phoneNumber."', '".$cellPhoneNum."', '".($bodyPrice[0]["price"] + $handPrice[0]["price"] + $groupPrice[0]["price"] + $roundPrice[0]["price"] + $innerRoundPrice[0]["price"] + $cranksetPrice[0]["price"] + $seatPrice[0]["price"] + $brakePrice[0]["price"] + $chainPrice[0]["price"] + $addonsPrice)."', '0', '".$curTime."', '".$addonsIDs."', '".$curTime."', '".$zipCode."')");
 if($bool){
 	$lastId = mysql_insert_id();
 	$db -> queryOrderWithoutReturn("insert into yjc_orderDetail(pid, comName, comColor, price) values ('".$lastId."', 'body', '".$body."', '".$bodyPrice[0]["price"]."'), ('".$lastId."', 'hand', '".$hand."', '".$handPrice[0]["price"]."'), ('".$lastId."', 'group', '".$group."', '".$groupPrice[0]["price"]."'), ('".$lastId."', 'round', '".$round."', '".$roundPrice[0]["price"]."'), ('".$lastId."', 'innerRound', '".$innerRound."', '".$innerRoundPrice[0]["price"]."'), ('".$lastId."', 'crankset', '".$crankset."', '".$cranksetPrice[0]["price"]."'), ('".$lastId."', 'seat', '".$seat."', '".$seatPrice[0]["price"]."'), ('".$lastId."', 'brake', '".$brake."', '".$brakePrice[0]["price"]."'), ('".$lastId."', 'chain', '".$chain."', '".$chainPrice[0]["price"]."')");
     echo "<info><province>".$pid."</province><city>".$cid."</city><area>".$aid."</area><street>".$address."</street><totalPrice>".($bodyPrice[0]["price"] + $handPrice[0]["price"] + $groupPrice[0]["price"] + $roundPrice[0]["price"] + $innerRoundPrice[0]["price"] + $cranksetPrice[0]["price"] + $seatPrice[0]["price"] + $brakePrice[0]["price"] + $chainPrice[0]["price"] + $addonsPrice)."</totalPrice><email>".$email."</email><type>".$type."</type><receiver>".$name."</receiver><phoneNumber>".$phoneNumber."</phoneNumber><cellPhoneNumber>".$cellPhoneNumber."</cellPhoneNumber><addons>".$addonsIDs."</addons><orderID>".$curTime."</orderID><zipCode>".$zipCode."</zipCode></info>";
 }else{
-    echo "error";
+    echo 0;
 }
 ?>
