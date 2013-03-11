@@ -2,12 +2,12 @@ package
 {
 	public class ItemTypes
 	{
-		public static var BOOK:String = "book";
-		public static var WEAPON:String = "weapon";
-		public static var FOOD:String = "food";
-		public static var MONEY:String = "money";
-		public static var PLANT:String = "plant";
-		public static var LIVING_GOODS:String = "living_goods";
+		public static var BOOK:int = 0;
+		public static var WEAPON:int = 1;
+		public static var FOOD:int = 2;
+		public static var MONEY:int = 3;
+		public static var PLANT:int = 4;
+		public static var LIVING_GOODS:int = 5;
 		public function ItemTypes()
 		{
 		}

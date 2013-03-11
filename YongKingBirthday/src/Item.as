@@ -5,16 +5,23 @@ package
 	
 	public class Item extends Sprite
 	{
-		public var itemType:String;
+		public var itemType:int;
 		public var itemImage:Bitmap;
-		public function Item()
+		public var isJY:Boolean;
+		public function Item(bitmap:Bitmap, type:int, _isJy:Boolean = false)
 		{
 			super();
+			
+			itemType = type;
+			itemImage = bitmap;
+			itemImage.scaleX = itemImage.scaleY = 0.5;
+			isJY = _isJy;
+			
+			addChild(itemImage);
 		}
 		
 		public function dealloc():void
 		{
-			itemType = null;
 			itemImage.bitmapData.dispose();
 			itemImage = null;
 		}
