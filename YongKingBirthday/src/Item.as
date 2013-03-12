@@ -14,7 +14,6 @@ package
 			
 			itemType = type;
 			itemImage = bitmap;
-			itemImage.scaleX = itemImage.scaleY = 0.5;
 			isJY = _isJy;
 			
 			addChild(itemImage);

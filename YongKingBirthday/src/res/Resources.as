@@ -7,35 +7,8 @@ package res
 		public static var Background:Class;
 		
 		//数字
-		[Embed(source="res.swf", symbol="One")]
-		public static var One:Class;
-		
-		[Embed(source="res.swf", symbol="Two")]
-		public static var Two:Class;
-		
-		[Embed(source="res.swf", symbol="Three")]
-		public static var Three:Class;
-		
-		[Embed(source="res.swf", symbol="Four")]
-		public static var Four:Class;
-		
-		[Embed(source="res.swf", symbol="Five")]
-		public static var Five:Class;
-		
-		[Embed(source="res.swf", symbol="Six")]
-		public static var Six:Class;
-		
-		[Embed(source="res.swf", symbol="Seven")]
-		public static var Seven:Class;
-		
-		[Embed(source="res.swf", symbol="Eight")]
-		public static var Eight:Class;
-		
-		[Embed(source="res.swf", symbol="Nine")]
-		public static var Nine:Class;
-		
-		[Embed(source="res.swf", symbol="Ten")]
-		public static var Ten:Class;
+		[Embed(source="res.swf", symbol="Counter")]
+		public static var Counter:Class;
 		
 		//对话泡泡
 		[Embed(source="res.swf", symbol="NeedPlant")]
