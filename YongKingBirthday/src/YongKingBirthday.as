@@ -11,6 +11,7 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.events.TimerEvent;
 	import flash.geom.Point;
 	import flash.utils.Timer;
 	
@@ -23,9 +24,10 @@ package
 		private var startButton:Sprite;
 		private var gameDes:MovieClip = new (Resources.GameDescription)();
 		private var itemList:Array = [];
+		private var itemPoint:Array = [];
 		private var propertyContainer:Sprite;
 		private var curIndexs:Array = [];
-		private var numPerRound:int = 22;
+		private var numPerRound:int = 20;
 		private var curType:int = -1;
 		
 		private var roundList:Array;
@@ -47,6 +49,22 @@ package
 		
 		private var timer:Timer = new Timer(1000);
 		
+		private var needMoney:MovieClip = new (Resources.NeedMoney)();
+		private var needLivingGoods:MovieClip = new (Resources.NeedLivingGoods)();
+		private var needBook:MovieClip = new (Resources.NeedBook)();
+		private var needWeapon:MovieClip = new (Resources.NeedWeapon)();
+		private var needPlant:MovieClip = new (Resources.NeedPlant)();
+		private var needFood:MovieClip = new (Resources.NeedFood)();
+		private var thanks:MovieClip = new (Resources.Success)();
+		private var failed:MovieClip = new (Resources.Failed)();
+		private var threeSeconds:MovieClip = new (Resources.ThreeSeconds)();
+		
+		private var dialogPosX:int = 790;
+		private var dialogPosY:int = 600;
+		private var curDialog:MovieClip;
+		
+		private var totalSuccess:int = 0;
+		
 		public function YongKingBirthday()
 		{
 			TweenPlugin.activate([TransformAroundCenterPlugin]);
@@ -62,6 +80,10 @@ package
 			showStartGameButton();
 			
 			initItems();
+			
+//			initPropertyContainer();
+//			showPropeties();
+//			return;
 			
 			initTopics();
 			
@@ -91,39 +113,69 @@ package
 				masker.graphics.drawRect(0, 0, stage.stageWidth, stage.stageHeight);
 				masker.graphics.endFill();
 			}
+			masker.alpha = 1;
 			addChild(masker);
 		}
 		
 		private function initPropertyContainer():void
 		{
-			propertyContainer = new Sprite();
-			propertyContainer.graphics.beginFill(0xFF0000, 0);
-			propertyContainer.graphics.drawRect(0, 0, 446, 380);
-			propertyContainer.graphics.endFill();
-			addChild(propertyContainer);
-			propertyContainer.x = 270;
-			propertyContainer.y = 233;
+			if(!propertyContainer){
+				propertyContainer = new Sprite();
+				propertyContainer.graphics.beginFill(0xFF0000, 0);
+				propertyContainer.graphics.drawRect(0, 0, 446, 380);
+				propertyContainer.graphics.endFill();
+				addChild(propertyContainer);
+				propertyContainer.x = 270;
+				propertyContainer.y = 233;
+			}
 		}
 		
 		private function initItems():void
 		{
 			var dollar:Item = new Item(new (Resources.Dollar)(), ItemTypes.MONEY);
+			var dollarPoint:Point = new Point(33, 37);
+			
 			var rmb:Item = new Item(new (Resources.RMB)(), ItemTypes.MONEY);
+			var rmbPoint:Point = new Point(90, 203);
+			
 			var tongQian:Item = new Item(new (Resources.TongQian)(), ItemTypes.MONEY);
+			var tongQianPoint:Point = new Point(192, 7);
+			
 			var yuanBao:Item = new Item(new (Resources.YuanBao)(), ItemTypes.MONEY);
+			var yuanBaoPoint:Point = new Point(350, 38);
+			
 			var moneyTree:Item = new Item(new (Resources.MoneyTree)(), ItemTypes.MONEY | ItemTypes.PLANT);
+			var moneyTreePoint:Point = new Point(310, 193);
 			
 			var trousers:Item = new Item(new (Resources.Trousers)(), ItemTypes.LIVING_GOODS);
+			var trousersPoint:Point = new Point(95, 104);
+			
 			var hat:Item = new Item(new (Resources.Hat)(), ItemTypes.LIVING_GOODS);
+			var hatPoint:Point = new Point(38, 203);
+			
 			var comb:Item = new Item(new (Resources.Comb)(), ItemTypes.LIVING_GOODS);
+			var combPoint:Point = new Point(239, 66);
+			
 			var shoe:Item = new Item(new (Resources.Shoe)(), ItemTypes.LIVING_GOODS);
+			var shoePoint:Point = new Point(226, 232);
+			
 			var clothes:Item = new Item(new (Resources.Clothes)(), ItemTypes.LIVING_GOODS);
+			var clothesPoint:Point = new Point(170, 155);
 			
 			var renshen:Item = new Item(new (Resources.RenShen)(), ItemTypes.FOOD);
+			var renshenPoint:Point = new Point(381, 288);
+			
 			var cake:Item = new Item(new (Resources.Cake)(), ItemTypes.FOOD);
+			var cakePoint:Point = new Point(85, 8);
+			
 			var noodle:Item = new Item(new (Resources.Noodle)(), ItemTypes.FOOD);
+			var noodlePoint:Point = new Point(17, 288);
+			
 			var taozi:Item = new Item(new (Resources.TaoZi)(), ItemTypes.FOOD);
+			var taoziPoint:Point = new Point(266, 8);
+			
 			var fish:Item = new Item(new (Resources.Fish)(), ItemTypes.FOOD);
+			var fishPoint:Point = new Point(121, 251);
 			
 			var bixuejian:Item = new Item(new (Resources.BiXueJian)(), ItemTypes.BOOK, true);
 			var juedaishuangjiao:Item = new Item(new (Resources.JueDaiShuangJiao)(), ItemTypes.BOOK, false);
@@ -135,48 +187,75 @@ package
 			var xiaoaojianghu:Item = new Item(new (Resources.XiaoAoJiangHu)(), ItemTypes.BOOK, true);
 			
 			var dogStick:Item = new Item(new (Resources.DogStick)(), ItemTypes.WEAPON);
+			var dogStickPoint:Point = new Point(284, 250);
+			
 			var feiBiao:Item = new Item(new (Resources.FeiBiao)(), ItemTypes.WEAPON);
+			var feiBiaoPoint:Point = new Point(300, 99);
+			
 			var shuangDao:Item = new Item(new (Resources.ShuangDao)(), ItemTypes.WEAPON);
+			var shuangDaoPoint:Point = new Point(20, 91);
+			
 			var tulongdao:Item = new Item(new (Resources.TuLongDao)(), ItemTypes.WEAPON);
+			var tulongdaoPoint:Point = new Point(133, 288);
+			
 			var yitianjian:Item = new Item(new (Resources.YiTianJian)(), ItemTypes.WEAPON);
+			var yitianjianPoint:Point = new Point(356, 82);
 			
 			var fengye:Item = new Item(new (Resources.FengYe)(), ItemTypes.PLANT);
-			var hulu:Item = new Item(new (Resources.HuLu)(), ItemTypes.PLANT);
-			var mudan:Item = new Item(new (Resources.MuDan)(), ItemTypes.PLANT);
-			var xiaohua:Item = new Item(new (Resources.XiaoHua)(), ItemTypes.PLANT);
+			var fengyePoint:Point = new Point(260, 317);
 			
-			var tempList:Array = [];
-			tempList.push(dollar, rmb, tongQian, yuanBao, moneyTree, trousers, hat, comb, shoe, clothes,
-				renshen, cake, noodle, taozi, fish, dogStick, feiBiao, shuangDao,
-				tulongdao, yitianjian, fengye, hulu, mudan, xiaohua);
+			var hulu:Item = new Item(new (Resources.HuLu)(), ItemTypes.PLANT);
+			var huluPoint:Point = new Point(170, 64);
+			
+			var mudan:Item = new Item(new (Resources.MuDan)(), ItemTypes.PLANT);
+			var mudanPoint:Point = new Point(272, 142);
+			
+			var xiaohua:Item = new Item(new (Resources.XiaoHua)(), ItemTypes.PLANT);
+			var xiaohuaPoint:Point = new Point(401, 158);
+			
+			itemList.push(yitianjian, tulongdao, dogStick, hulu, dollar, rmb, tongQian, yuanBao,
+				moneyTree, trousers, hat, comb, shoe, clothes, renshen, cake, noodle, taozi, fish,
+				feiBiao, shuangDao, fengye, mudan, xiaohua);
+			
+			itemPoint.push(yitianjianPoint, tulongdaoPoint, dogStickPoint, huluPoint,
+				dollarPoint, rmbPoint, tongQianPoint, yuanBaoPoint,
+				moneyTreePoint, trousersPoint, hatPoint, combPoint,
+				shoePoint, clothesPoint, renshenPoint, cakePoint, noodlePoint,
+				taoziPoint, fishPoint, feiBiaoPoint, shuangDaoPoint, fengyePoint,
+				mudanPoint, xiaohuaPoint);
+			
+//			var tempList:Array = [];
+//			tempList.push(dollar, rmb, tongQian, yuanBao, moneyTree, trousers, hat, comb, shoe, clothes,
+//				renshen, cake, noodle, taozi, fish, dogStick, feiBiao, shuangDao,
+//				tulongdao, yitianjian, fengye, hulu, mudan, xiaohua);
 			
 			var bookList:Array = [];
 			bookList.push(bixuejian, juedaishuangjiao, ludingji, shendiaoxialv,
 				tianlongbabu, xiaoshiyilang, xiaolifeidao, xiaoaojianghu);
-			var moneyList:Array = [];
-			moneyList.push(dollar, rmb, tongQian, yuanBao, moneyTree);
-			var livingGoodsList:Array = [];
-			livingGoodsList.push(trousers, hat, comb, shoe, clothes);
-			var foodList:Array = [];
-			foodList.push(renshen, cake, noodle, taozi, fish);
-			var weaponList:Array = [];
-			weaponList.push(dogStick, feiBiao, shuangDao,
-				tulongdao, yitianjian);
-			var plantList:Array = [];
-			plantList.push(fengye, hulu, mudan, xiaohua, moneyTree);
+//			var moneyList:Array = [];
+//			moneyList.push(dollar, rmb, tongQian, yuanBao, moneyTree);
+//			var livingGoodsList:Array = [];
+//			livingGoodsList.push(trousers, hat, comb, shoe, clothes);
+//			var foodList:Array = [];
+//			foodList.push(renshen, cake, noodle, taozi, fish);
+//			var weaponList:Array = [];
+//			weaponList.push(dogStick, feiBiao, shuangDao,
+//				tulongdao, yitianjian);
+//			var plantList:Array = [];
+//			plantList.push(fengye, hulu, mudan, xiaohua, moneyTree);
 			singleList[ItemTypes.BOOK] = bookList;
-			singleList[ItemTypes.FOOD] = foodList;
-			singleList[ItemTypes.LIVING_GOODS] = livingGoodsList;
-			singleList[ItemTypes.MONEY] = moneyList;
-			singleList[ItemTypes.PLANT] = plantList;
-			singleList[ItemTypes.WEAPON] = weaponList;
-			
-			while(tempList.length){
-				var index:int = Math.round(Math.random() * (tempList.length - 1));
-				itemList.push(tempList[index]);
-				tempList.splice(index, 1);
-			}
-			setRoundList();
+//			singleList[ItemTypes.FOOD] = foodList;
+//			singleList[ItemTypes.LIVING_GOODS] = livingGoodsList;
+//			singleList[ItemTypes.MONEY] = moneyList;
+//			singleList[ItemTypes.PLANT] = plantList;
+//			singleList[ItemTypes.WEAPON] = weaponList;
+//			
+//			while(tempList.length){
+//				var index:int = Math.round(Math.random() * (tempList.length - 1));
+//				itemList.push(tempList[index]);
+//				tempList.splice(index, 1);
+//			}
+			//setRoundList();
 		}
 		
 		private function setRoundList():void
@@ -219,7 +298,77 @@ package
 				TweenLite.to(masker, 0.2, {alpha:0});
 				
 				showTopic();
+				
+				startTimer();
 			}
+		}
+		
+		private function startTimer():void
+		{
+			timer.addEventListener(TimerEvent.TIMER, onTimer);
+			timer.start();
+		}
+		
+		private function onTimer(event:TimerEvent):void
+		{
+			if(counter.currentFrame != counter.totalFrames){
+				counter.nextFrame();
+				if(counter.currentFrame == counter.totalFrames){
+					if(totalSuccess != 5){
+						showFailed();
+					}else{
+						showThanks();
+					}
+					return;
+				}
+				if(counter.totalFrames - counter.currentFrame == 3){
+					showThreeDialog();
+				}
+			}
+		}
+		
+		private function finish():void
+		{
+			this.mouseChildren = true;
+			showStartGameButton();
+			if(propertyContainer){
+				while(propertyContainer.numChildren){
+					propertyContainer.removeChildAt(0);
+				}
+			}
+			isLastThree = false;
+			endX = endY = 0;
+			timer.removeEventListener(TimerEvent.TIMER, onTimer);
+			timer.reset();
+			timer.stop();
+			if(curDialog){
+				curDialog.gotoAndStop(1);
+				removeChild(curDialog);
+				removeEventListener(Event.ENTER_FRAME, watchDialogFrame);
+				curDialog = null;
+			}
+			totalSuccess = 0;
+			if(curTopic){
+				removeChild(curTopic);
+				curTopic = null;
+			}
+			counter.gotoAndStop(1);
+		}
+		
+		private function showThreeDialog():void
+		{
+			if(curDialog){
+				curDialog.gotoAndStop(1);
+				removeChild(curDialog);
+				curDialog = null;
+			}
+			isLastThree = true;
+			curDialog = threeSeconds;
+			addChild(curDialog);
+			curDialog.gotoAndPlay(1);
+			curDialog.x = dialogPosX;
+			curDialog.y = dialogPosY;
+			addWatchDialog();
 		}
 		
 		private function startChooseProperty():void
@@ -230,7 +379,16 @@ package
 		
 		private function showTopic():void
 		{
-			var index:int = Math.round(Math.random() * topicList.length);
+			if(propertyContainer){
+				while(propertyContainer.numChildren){
+					propertyContainer.removeChildAt(0);
+				}
+			}
+			endX = endY = 0;
+			if(counter.currentFrame == counter.totalFrames){
+				return;
+			}
+			var index:int = Math.round(Math.random() * (topicList.length - 1));
 			if(curTopic){
 				removeChild(curTopic);
 			}
@@ -247,6 +405,62 @@ package
 			addChild(curTopic);
 			curTopic.x = 400;
 			curTopic.y = 655;
+			
+			showDialog();
+		}
+		
+		private function showDialog():void
+		{
+//			if(curDialog){
+//				removeChild(curDialog);
+//				removeEventListener(Event.ENTER_FRAME, watchDialogFrame);
+//				curDialog = null;
+//			}
+//			switch(curTopic.itemType){
+//				case ItemTypes.BOOK:
+//					curDialog = needBook;
+//					break;
+//				case ItemTypes.FOOD:
+//					curDialog = needFood;
+//					break;
+//				case ItemTypes.LIVING_GOODS:
+//					curDialog = needLivingGoods;
+//					break;
+//				case ItemTypes.MONEY:
+//					curDialog = needMoney;
+//					break;
+//				case ItemTypes.PLANT:
+//					curDialog = needPlant;
+//					break;
+//				case ItemTypes.WEAPON:
+//					curDialog = needWeapon;
+//					break;
+//			}
+//			addChild(curDialog);
+//			curDialog.x = dialogPosX;
+//			curDialog.y = dialogPosY;
+//			
+//			addWatchDialog();
+		}
+		
+		private function addWatchDialog():void
+		{
+			addEventListener(Event.ENTER_FRAME, watchDialogFrame);
+		}
+		
+		private var isLastThree:Boolean = false;
+		
+		protected function watchDialogFrame(event:Event):void
+		{
+			if(curDialog.currentFrame == curDialog.totalFrames){
+				curDialog.gotoAndStop(1);
+				removeChild(curDialog);
+				curDialog = null;
+				removeEventListener(Event.ENTER_FRAME, watchDialogFrame);
+				if(!isLastThree){
+					finish();
+				}
+			}
 		}
 		
 		private function showBooks():void
@@ -274,62 +488,68 @@ package
 		
 		private function showPropeties():void
 		{
-			while(propertyContainer.numChildren){
-				propertyContainer.removeChildAt(0);
-			}
-			var randomI:int = Math.round(Math.random() * (numPerRound - 1));
-			for(var i:int = 0; i < numPerRound; i++){
-				var index:int = Math.round(Math.random() * (roundList.length - 1));
-				var item:Item = roundList[index];
-				roundList.splice(index, 1);
-				if(i == randomI){
-					var arr:Array = singleList[curTopic.itemType];
-					var randomIndex:int = Math.round(Math.random() * (arr.length - 1));
-					item = arr[randomIndex];
-				}
-				if(endX > 0 || endY > 0){
-					var preItem:Item = propertyContainer.getChildAt(propertyContainer.numChildren - 1) as Item;
-					if(endY + item.height > propertyContainer.height){
-						var p:Point = new Point();
-						p.x = preItem.x;
-						p.y = preItem.y + preItem.height;
-						leftSpacePerCol.push(p);
-						if(endX >= propertyContainer.width - 100){
-							item.y = 50;
-						}else{
-							item.y = 0;
-						}
-						item.x = endX;
-						endY = item.y + item.height;
-						endX = item.x + item.width + 5;
-					}else{
-						var tempP:Point = getSpaceByHeight(item.height);
-						if(tempP){
-							item.x = tempP.x;
-							item.y = tempP.y + 5;
-							addItemEvent(item);
-							propertyContainer.addChildAt(item, 0);
-							tempP.y += item.height + 5;
-							continue;
-						}else{
-							item.y = endY + 5;
-							item.x = preItem.x;
-							endY = item.y + item.height;
-							if(item.x + item.width > endX){
-								endX = preItem.x + item.width + 5;
-							}
-						}
-					}
-				}else{
-					item.x = 0;
-					item.y = 50;
-					endX = item.width + 5;
-					endY = item.height + item.y;
-				}
-				addItemEvent(item);
+			var len:int = itemList.length;
+			for(var i:int = 0; i<len; i++){
+				var item:Item = itemList[i];
+				var point:Point = itemPoint[i];
+				item.x = point.x;
+				item.y = point.y;
 				propertyContainer.addChild(item);
+				addItemEvent(item);
 			}
-			setRoundList();
+//			var randomI:int = Math.round(Math.random() * (numPerRound - 1));
+//			for(var i:int = 0; i < numPerRound; i++){
+//				var index:int = Math.round(Math.random() * (roundList.length - 1));
+//				var item:Item = roundList[index];
+//				roundList.splice(index, 1);
+//				if(i == randomI){
+//					var arr:Array = singleList[curTopic.itemType];
+//					var randomIndex:int = Math.round(Math.random() * (arr.length - 1));
+//					item = arr[randomIndex];
+//				}
+//				if(endX > 0 || endY > 0){
+//					var preItem:Item = propertyContainer.getChildAt(propertyContainer.numChildren - 1) as Item;
+//					if(endY + item.height > propertyContainer.height){
+//						var p:Point = new Point();
+//						p.x = preItem.x;
+//						p.y = preItem.y + preItem.height;
+//						leftSpacePerCol.push(p);
+//						if(endX >= propertyContainer.width - 100){
+//							item.y = 50;
+//						}else{
+//							item.y = 0;
+//						}
+//						item.x = endX;
+//						endY = item.y + item.height;
+//						endX = item.x + item.width + 5;
+//					}else{
+//						var tempP:Point = getSpaceByHeight(item.height);
+//						if(tempP){
+//							item.x = tempP.x;
+//							item.y = tempP.y + 5;
+//							addItemEvent(item);
+//							propertyContainer.addChildAt(item, 0);
+//							tempP.y += item.height + 5;
+//							continue;
+//						}else{
+//							item.y = endY + 5;
+//							item.x = preItem.x;
+//							endY = item.y + item.height;
+//							if(item.x + item.width > endX){
+//								endX = preItem.x + item.width + 5;
+//							}
+//						}
+//					}
+//				}else{
+//					item.x = 0;
+//					item.y = 50;
+//					endX = item.width + 5;
+//					endY = item.height + item.y;
+//				}
+//				addItemEvent(item);
+//				propertyContainer.addChild(item);
+//			}
+//			setRoundList();
 		}
 		
 		private function addItemEvent(item:Item):void
@@ -357,12 +577,76 @@ package
 		protected function item_mouseOutHandler(event:MouseEvent):void
 		{
 			var item:Item = event.target as Item;
-			TweenLite.to(item, 0.3, {transformAroundCenter:{scaleX:1, scaleY:1}, ease:Elastic.easeOut});
+			if(contains(item)){
+				TweenLite.to(item, 0.3, {transformAroundCenter:{scaleX:1, scaleY:1}, ease:Elastic.easeOut});
+			}else{
+				item.scaleX = item.scaleY = 1.0;
+			}
 		}
 		
 		protected function item_clickHandler(event:MouseEvent):void
 		{
 			var item:Item = event.target as Item;
+			if(curTopic.itemType == ItemTypes.BOOK){
+				if(item.isJY){
+					//showThanks();
+					totalSuccess++;
+				}else{
+					//showFailed();
+				}
+			}else if(item.itemType == curTopic.itemType || ((curTopic.itemType == ItemTypes.PLANT || curTopic.itemType == ItemTypes.MONEY) && item.itemType == (ItemTypes.PLANT | ItemTypes.MONEY))){
+				//showThanks();
+				totalSuccess++;
+			}else{
+				//showFailed();
+			}
+			if(propertyContainer.contains(item)) propertyContainer.removeChild(item);
+			if(totalSuccess == 5){
+				showThanks();
+			}
+			//showTopic();
+		}
+		
+		private function showThanks():void
+		{
+			timer.removeEventListener(TimerEvent.TIMER, onTimer);
+			timer.reset();
+			timer.stop();
+			isLastThree = false;
+			this.mouseChildren = false;
+			if(curDialog){
+				curDialog.gotoAndStop(1);
+				removeChild(curDialog);
+				curDialog = null;
+				removeEventListener(Event.ENTER_FRAME, watchDialogFrame);
+			}
+			curDialog = thanks;
+			addChild(thanks);
+			thanks.gotoAndPlay(1);
+			thanks.x = dialogPosX;
+			thanks.y = dialogPosY;
+			addWatchDialog();
+		}
+		
+		private function showFailed():void
+		{
+			timer.removeEventListener(TimerEvent.TIMER, onTimer);
+			timer.reset();
+			timer.stop();
+			isLastThree = false;
+			this.mouseChildren = false;
+			if(curDialog){
+				curDialog.gotoAndStop(1);
+				removeChild(curDialog);
+				curDialog = null;
+				removeEventListener(Event.ENTER_FRAME, watchDialogFrame);
+			}
+			curDialog = failed;
+			addChild(failed);
+			failed.gotoAndPlay(1);
+			failed.x = dialogPosX;
+			failed.y = dialogPosY;
+			addWatchDialog();
 		}
 		
 		protected function item_mouseOverHandler(event:MouseEvent):void
