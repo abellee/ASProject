@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.data.forms.enum"><apiName>org.igniterealtime.xiff.data.forms.enum</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.data.forms.enum:FormType"><apiName>FormType</apiName><shortdesc>
+	 Four different types of form that can exist according to XEP-0004.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Four different types of form that can exist according to XEP-0004.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0004.html#protocol-formtypes"><linktext>http://xmpp.org/extensions/xep-0004.html#protocol-formtypes</linktext></link></related-links><apiValue id="org.igniterealtime.xiff.data.forms.enum:FormType:CANCEL"><apiName>CANCEL</apiName><shortdesc>
+		 The form-submitting entity has cancelled submission of data
+		 to the form-processing entity.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>cancel</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The form-submitting entity has cancelled submission of data
+		 to the form-processing entity.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms.enum:FormType:FORM"><apiName>FORM</apiName><shortdesc>
+		 The form-processing entity is asking the form-submitting entity to complete a form.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>form</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The form-processing entity is asking the form-submitting entity to complete a form.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms.enum:FormType:RESULT"><apiName>RESULT</apiName><shortdesc>
+		 The form-processing entity is returning data (e.g., search results) to
+		 the form-submitting entity, or the data is a generic data set.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>result</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The form-processing entity is returning data (e.g., search results) to
+		 the form-submitting entity, or the data is a generic data set.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms.enum:FormType:SUBMIT"><apiName>SUBMIT</apiName><shortdesc>
+		 The form-submitting entity is submitting data to the form-processing entity.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>submit</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The form-submitting entity is submitting data to the form-processing entity.
+		 The submission MAY include fields that were not provided in the empty form,
+		 but the form-processing entity MUST ignore any fields that it does not understand.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.forms.enum:FormFieldType"><apiName>FormFieldType</apiName><shortdesc>
+	 Different field types of form that can exist according to XEP-0004.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Different field types of form that can exist according to XEP-0004.
+	 	 <p>The following field types represent data "types" that are commonly exchanged between
+	 Jabber/XMPP entities. These field types are not intended to be as comprehensive as
+	 the datatypes defined in, for example, XML Schema Part 2, nor do they define
+	 user interface elements.</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0004.html#protocol-fieldtypes"><linktext>http://xmpp.org/extensions/xep-0004.html#protocol-fieldtypes</linktext></link><link href="http://www.w3.org/TR/xmlschema-2/"><linktext>http://www.w3.org/TR/xmlschema-2/</linktext></link></related-links><apiValue id="org.igniterealtime.xiff.data.forms.enum:FormFieldType:BOOLEAN"><apiName>BOOLEAN</apiName><shortdesc>
+		 The field enables an entity to gather or provide an either-or choice between two options.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>boolean</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The field enables an entity to gather or provide an either-or choice between two options.
+		 The default value is "false".
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms.enum:FormFieldType:FIXED"><apiName>FIXED</apiName><shortdesc>
+		 The field is intended for data description (e.g., human-readable text such as "section"
+		 headers) rather than data gathering or provision.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>fixed</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The field is intended for data description (e.g., human-readable text such as "section"
+		 headers) rather than data gathering or provision. The <codeph>value</codeph> child SHOULD NOT contain
+		 newlines (the \\n and \\r characters); instead an application SHOULD generate multiple
+		 fixed fields, each with one <codeph>value</codeph> child.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms.enum:FormFieldType:HIDDEN"><apiName>HIDDEN</apiName><shortdesc>
+		 The field is not shown to the form-submitting entity, but instead is returned with
+		 the form.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>hidden</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The field is not shown to the form-submitting entity, but instead is returned with
+		 the form. The form-submitting entity SHOULD NOT modify the value of a hidden field,
+		 but MAY do so if such behavior is defined for the "using protocol".
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms.enum:FormFieldType:JID_MULTI"><apiName>JID_MULTI</apiName><shortdesc>
+		 The field enables an entity to gather or provide multiple Jabber IDs.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>jid-multi</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The field enables an entity to gather or provide multiple Jabber IDs. Each provided JID
+		 SHOULD be unique (as determined by comparison that includes application of the Nodeprep,
+		 Nameprep, and Resourceprep profiles of Stringprep as specified in XMPP Core), and
+		 duplicate JIDs MUST be ignored.
+		 		 <p>Note: Data provided for fields of type "jid-single" or "jid-multi" MUST contain one
+		 or more valid Jabber IDs, where validity is determined by the addressing rules
+		 defined in XMPP Core.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms.enum:FormFieldType:JID_SINGLE"><apiName>JID_SINGLE</apiName><shortdesc>
+		 The field enables an entity to gather or provide a single Jabber ID.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>jid-single</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The field enables an entity to gather or provide a single Jabber ID.
+		 		 <p>Note: Data provided for fields of type "jid-single" or "jid-multi" MUST contain
+		 one or more valid Jabber IDs, where validity is determined by the addressing
+		 rules defined in XMPP Core.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms.enum:FormFieldType:LIST_MULTI"><apiName>LIST_MULTI</apiName><shortdesc>
+		 The field enables an entity to gather or provide one or more options from among many.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>list-multi</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The field enables an entity to gather or provide one or more options from among many.
+		 A form-submitting entity chooses one or more items from among the options presented
+		 by the form-processing entity and MUST NOT insert new options. The form-submitting
+		 entity MUST NOT modify the order of items as received from the form-processing entity,
+		 since the order of items MAY be significant.
+		 		 <p>Note: The <codeph>option</codeph> elements in list-multi and list-single fields MUST
+		 be unique, where uniqueness is determined by the value of the 'label' attribute and
+		 the XML character data of the <codeph>value</codeph> element (i.e., both must be unique).</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms.enum:FormFieldType:LIST_SINGLE"><apiName>LIST_SINGLE</apiName><shortdesc>
+		 The field enables an entity to gather or provide one option from among many.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>list-single</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The field enables an entity to gather or provide one option from among many.
+		 A form-submitting entity chooses one item from among the options presented by the
+		 form-processing entity and MUST NOT insert new options.
+		 		 <p>Note: The <codeph>option</codeph> elements in list-multi and list-single fields MUST
+		 be unique, where uniqueness is determined by the value of the 'label' attribute and
+		 the XML character data of the <codeph>value</codeph> element (i.e., both must be unique).</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms.enum:FormFieldType:TEXT_MULTI"><apiName>TEXT_MULTI</apiName><shortdesc>
+		 The field enables an entity to gather or provide multiple lines of text.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>text-multi</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The field enables an entity to gather or provide multiple lines of text.
+		 		 <p>Note: Data provided for fields of type "text-multi" SHOULD NOT contain any newlines
+		 (the \\n and \\r characters). Instead, the application SHOULD split the data into
+		 multiple strings (based on the newlines inserted by the platform), then specify
+		 each string as the XML character data of a distinct <codeph>value</codeph> element. Similarly,
+		 an application that receives multiple <codeph>value</codeph> elements for a field of
+		 type "text-multi" SHOULD merge the XML character data of the value elements into
+		 one text block for presentation to a user, with each string separated by a
+		 newline character as appropriate for that platform.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms.enum:FormFieldType:TEXT_PRIVATE"><apiName>TEXT_PRIVATE</apiName><shortdesc>
+		 The field enables an entity to gather or provide a single line or word of text,
+		 which shall be obscured in an interface (e.g., with multiple instances of the
+		 asterisk character).</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>text-private</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The field enables an entity to gather or provide a single line or word of text,
+		 which shall be obscured in an interface (e.g., with multiple instances of the
+		 asterisk character).
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms.enum:FormFieldType:TEXT_SINGLE"><apiName>TEXT_SINGLE</apiName><shortdesc>
+		 The field enables an entity to gather or provide a single line or word of text,
+		 which may be shown in an interface.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>text-single</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The field enables an entity to gather or provide a single line or word of text,
+		 which may be shown in an interface. This field type is the default and MUST be
+		 assumed if a form-submitting entity receives a field type it does not understand.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier></apiPackage>

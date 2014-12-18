@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.conference"><apiName>org.igniterealtime.xiff.conference</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.conference:Room"><apiName>Room</apiName><shortdesc>
+	 Manages incoming and outgoing data from a conference room as part of multi-user conferencing (XEP-0045).</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.conference:IRoom</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.collections:ArrayCollection</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Manages incoming and outgoing data from a conference room as part of multi-user conferencing (XEP-0045).
+	 You will need an instance of this class for each room that the user joins.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0045.html"><linktext>http://xmpp.org/extensions/xep-0045.html</linktext></link></related-links><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.USER_PRESENCE_CHANGE_userPresenceChange"><apiName>userPresenceChange</apiName><shortdesc>
+	 Dispatched when a user's presence changes.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.USER_PRESENCE_CHANGE</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when a user's presence changes.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.USER_KICKED_userKicked"><apiName>userKicked</apiName><shortdesc>
+	 Dispatched when a user is kicked from the room.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.USER_KICKED</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when a user is kicked from the room.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.USER_JOIN_userJoin"><apiName>userJoin</apiName><shortdesc>
+	 Dispatched whenever an occupant joins the room.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.USER_JOIN</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched whenever an occupant joins the room. The <codeph>RoomEvent</codeph> instance will
+	 contain an attribute <codeph>nickname</codeph> with the nickname of the occupant who joined.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.USER_DEPARTURE_userDeparture"><apiName>userDeparture</apiName><shortdesc>
+	 Dispatched whenever an occpant leaves the room.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.USER_DEPARTURE</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched whenever an occpant leaves the room. The <codeph>RoomEvent</codeph> instance will
+	 contain an attribute <codeph>nickname</codeph> with the nickname of the occupant who left.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.USER_BANNED_userBanned"><apiName>userBanned</apiName><shortdesc>
+	 Dispatched when a user is banned from the room.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.USER_BANNED</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when a user is banned from the room.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.SUBJECT_CHANGE_subjectChange"><apiName>subjectChange</apiName><shortdesc>
+	 Dispatched when the room subject changes.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.SUBJECT_CHANGE</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when the room subject changes.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.ROOM_LEAVE_roomLeave"><apiName>roomLeave</apiName><shortdesc>
+	 Dispatched when the server acknoledges that you have the left the room.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.ROOM_LEAVE</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when the server acknoledges that you have the left the room.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.ROOM_JOIN_roomJoin"><apiName>roomJoin</apiName><shortdesc>
+	 Dispatched when you have entered the room and messages that are sent
+	 will be displayed to other users.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.ROOM_JOIN</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when you have entered the room and messages that are sent
+	 will be displayed to other users. The room's role and affiliation will
+	 be visible from this point forward.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.ROOM_DESTROYED_roomDestroyed"><apiName>roomDestroyed</apiName><shortdesc>
+	 Dispatched when the room is removed.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.ROOM_DESTROYED</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when the room is removed.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.REGISTRATION_REQ_ERROR_registrationReqError"><apiName>registrationReqError</apiName><shortdesc>
+	 Dispatched when the room is members-only and the user is not on the member list.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.REGISTRATION_REQ_ERROR</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when the room is members-only and the user is not on the member list.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.PRIVATE_MESSAGE_privateMessage"><apiName>privateMessage</apiName><shortdesc>
+	 Dispatched whenever a new private message is received.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.PRIVATE_MESSAGE</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched whenever a new private message is received. The <codeph>RoomEvent</codeph> class
+	 contains an attribute <codeph>data</codeph> with the private message as an instance of the
+	 <codeph>Message</codeph> class.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.PASSWORD_ERROR_passwordError"><apiName>passwordError</apiName><shortdesc>
+	 Dispatched when the room requires a password and the user did not supply one (or
+	 the password provided is incorrect).</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.PASSWORD_ERROR</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when the room requires a password and the user did not supply one (or
+	 the password provided is incorrect).
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.NICK_CONFLICT_nickConflict"><apiName>nickConflict</apiName><shortdesc>
+	 Dispatched when the user's preferred nickname already exists in the room.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.NICK_CONFLICT</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when the user's preferred nickname already exists in the room.	The
+	 <codeph>RoomEvent</codeph> will contain an attribute <codeph>nickname</codeph> with the nickname
+	 already existing in the room.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.MAX_USERS_ERROR_maxUsersError"><apiName>maxUsersError</apiName><shortdesc>
+	 Dispatched if the room has reached its maximum number of occupants.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.MAX_USERS_ERROR</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched if the room has reached its maximum number of occupants.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.LOCKED_ERROR_lockedError"><apiName>lockedError</apiName><shortdesc>
+	 Dispatched if a user attempts to enter a room while it is "locked" (i.e., before the room
+	 creator provides an initial configuration and therefore before the room officially exists).</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.LOCKED_ERROR</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched if a user attempts to enter a room while it is "locked" (i.e., before the room
+	 creator provides an initial configuration and therefore before the room officially exists).
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.GROUP_MESSAGE_groupMessage"><apiName>groupMessage</apiName><shortdesc>
+	 Dispatched whenever a new message intented for all room occupants is received.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.GROUP_MESSAGE</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched whenever a new message intented for all room occupants is received. The
+	 <codeph>RoomEvent</codeph> class will contain an attribute <codeph>data</codeph> with the
+	 group message as an instance of the <codeph>Message</codeph> class.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.DECLINED_declined"><apiName>declined</apiName><shortdesc>
+	 Dispatched when an invite to this room has been declined by the invitee.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.DECLINED</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when an invite to this room has been declined by the invitee. The <codeph>RoomEvent</codeph>
+	 <codeph>data</codeph> property that has the following attributes:
+	 	 <p><codeph>from</codeph>: The JID of the user initiating the invite
+	 <codeph>reason</codeph>: A string containing the reason to join the room
+	 <codeph>data</codeph>: The original message containing the decline</p>
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.CONFIGURE_ROOM_COMPLETE_configureRoomComplete"><apiName>configureRoomComplete</apiName><shortdesc>
+	 Dispatched when a room configuration form is complete.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.CONFIGURE_ROOM_COMPLETE</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when a room configuration form is complete.
+	 	 </apiDesc></adobeApiEventDetail><related-links><link href="org.igniterealtime.xiff.conference.xml#Room/configure"><linktext>configure</linktext></link></related-links></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.CONFIGURE_ROOM_configureRoom"><apiName>configureRoom</apiName><shortdesc>
+	 Dispatched when a room configuration form is required.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.CONFIGURE_ROOM</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when a room configuration form is required.	This can occur during the
+	 creation of a room, or if a room configuration is requested.	The <codeph>RoomEvent</codeph>
+	 instance will contain an attribute <codeph>data</codeph> that is an instance of an object
+	 with the following attributes:
+	 	 <p><codeph>instructions</codeph>: Instructions for the use of form
+	 <codeph>title</codeph>: Title of the configuration form
+	 <codeph>label</codeph>: A friendly name for the field
+	 <codeph>name</codeph>: A computer readable identifier for the field used to identify
+	 this field in the result passed to <codeph>configure()</codeph>
+	 <codeph>type</codeph>: The type of the field to be displayed. Type will be a constant
+	 from the <codeph>FormField</codeph> class.</p>
+	 	 </apiDesc></adobeApiEventDetail><related-links><link href="org.igniterealtime.xiff.data.forms.xml#FormExtension"><linktext>org.igniterealtime.xiff.data.forms.FormExtension</linktext></link><link href="org.igniterealtime.xiff.data.forms.xml#FormField"><linktext>org.igniterealtime.xiff.data.forms.FormField</linktext></link><link href="org.igniterealtime.xiff.conference.xml#Room/configure"><linktext>configure</linktext></link></related-links></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.BANNED_ERROR_bannedError"><apiName>bannedError</apiName><shortdesc>
+	 Dispatched if the user attempted to join the room but was not allowed to do so because
+	 they are banned (i.e., has an affiliation of "outcast").</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.BANNED_ERROR</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched if the user attempted to join the room but was not allowed to do so because
+	 they are banned (i.e., has an affiliation of "outcast").
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.AFFILIATIONS_affiliations"><apiName>affiliations</apiName><shortdesc>
+	 Dispatched when an affiliation list has been requested.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.AFFILIATIONS</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when an affiliation list has been requested. The event object contains an
+	 array of <codeph>MUCItems</codeph> containing the JID and affiliation properties.
+	 	 <p>To grant or revoke permissions based on this list, only send the changes you wish to
+	 make, calling grant/revoke with the new affiliation and existing JID.</p>
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.AFFILIATION_CHANGE_COMPLETE_affiliationChangeComplete"><apiName>affiliationChangeComplete</apiName><shortdesc>
+	 Dispatched when an affiliation change has completed.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.AFFILIATION_CHANGE_COMPLETE</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when an affiliation change has completed.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.ADMIN_ERROR_adminError"><apiName>adminError</apiName><shortdesc>
+	 Dispatched when an administration action failed.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RoomEvent.ADMIN_ERROR</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when an administration action failed.
+	 	 </apiDesc></adobeApiEventDetail><related-links><link href="" invalidHref="org.igniterealtime.xiff.core.XMPPConnection.error.xml"><linktext>org.igniterealtime.xiff.core.XMPPConnection.error</linktext></link></related-links></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.PropertyChangeEvent.CHANGE_change"><apiName>change</apiName><shortdesc>
+	 Dispatched when the active, affiliation, or role property changes.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.PropertyChangeEvent.CHANGE</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.PropertyChangeEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when the active, affiliation, or role property changes.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><apiConstructor id="org.igniterealtime.xiff.conference:Room:Room"><apiName>Room</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>aConnection</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiOperationClassifier><apiData>null</apiData><apiDesc> A XMPPConnection instance that is providing the primary server connection
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.conference:Room:allow"><apiName>allow</apiName><shortdesc>
+		 Allow a previously banned JIDs to enter this room.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>jids</apiItemName><apiType value="Array"/><apiDesc>An array of unescaped JIDs to allow
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Allow a previously banned JIDs to enter this room.	This is the same as:
+		 <codeph>Room.grant(AFFILIATION_NONE, jid)</codeph>
+		 		 <p>If the process could not be completed, the room will dispatch the event
+		 <codeph>RoomEvent.ADMIN_ERROR</codeph></p>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="org.igniterealtime.xiff.conference.xml#Room/grant"><linktext>grant</linktext></link><link href="org.igniterealtime.xiff.conference.xml#Room/revoke"><linktext>revoke</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:ban"><apiName>ban</apiName><shortdesc>
+		 Bans an array of JIDs from entering the room.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>jids</apiItemName><apiType value="Array"/><apiDesc>An arry of unescaped JIDs to ban
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Bans an array of JIDs from entering the room.
+		 		 <p>If the process could not be completed, the room will dispatch the event
+		 <codeph>RoomEvent.ADMIN_ERROR</codeph>.</p>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:cancelConfiguration"><apiName>cancelConfiguration</apiName><shortdesc>
+		 Cancels the configuration process.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Cancels the configuration process.	The room may still be locked if
+		 you cancel the configuration process when attempting to join a
+		 reserved room.
+		 		 <p>You must have joined the room and have the owner affiliation to
+		 configure the room.</p>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="org.igniterealtime.xiff.conference.xml#Room/configureRoom"><linktext>configureRoom</linktext></link><link href="org.igniterealtime.xiff.conference.xml#Room/configure"><linktext>configure</linktext></link><link href="org.igniterealtime.xiff.conference.xml#Room/join"><linktext>join</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:changeSubject"><apiName>changeSubject</apiName><shortdesc>
+		 Changes the subject in the conference room.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>newSubject</apiItemName><apiType value="String"/><apiDesc>The new subject
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Changes the subject in the conference room. You must have already joined the
+		 room before you can change the subject.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:configure"><apiName>configure</apiName><shortdesc>
+		 Sends a configuration form to the room.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>fieldmap</apiItemName><apiType value="Object"/><apiDesc>FormExtension, or a hash that is an object with keys being the room configuration
+		 form variables and the values being arrays. For single value fields, use a single
+		 element array.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sends a configuration form to the room.
+		 		 You must be joined and have owner affiliation to configure the room
+		 		 </apiDesc></apiOperationDetail><related-links><link href="org.igniterealtime.xiff.conference.xml#Room/configureRoom"><linktext>configureRoom</linktext></link><link href="http://xmpp.org/extensions/xep-0045.html#registrar-formtype-owner"><linktext>http://xmpp.org/extensions/xep-0045.html#registrar-formtype-owner</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:decline"><apiName>decline</apiName><shortdesc>
+		 Actively decline an invitation.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>jid</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiOperationClassifier><apiDesc>An unescaped JID of the user to invite.
+		 </apiDesc></apiParam><apiParam><apiItemName>reason</apiItemName><apiType value="String"/><apiDesc>A string describing why the invitiation was declined
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Actively decline an invitation.	You can optionally ignore invitations
+		 but if you choose to decline an invitation, you call this method on
+		 a room instance that represents the room the invite originated from.
+		 		 <p>You do not need to have joined this room to decline an invitation</p>
+		 		 <p>Note: mu-conference-0.6 does not allow users to send decline
+		 messages without joining first.	If using this version of conferencing
+		 software, it is best to ignore invites.</p>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:destroy"><apiName>destroy</apiName><shortdesc>
+		 Destroys a reserved room.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>reason</apiItemName><apiType value="String"/><apiDesc>A short description of why the room is being destroyed
+		 </apiDesc></apiParam><apiParam><apiItemName>alternateJID</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiOperationClassifier><apiData>null</apiData><apiDesc>A JID for current members to use as an alternate room to join
+		 after the room has been destroyed. Like a postal forwarding address.
+		 </apiDesc></apiParam><apiParam><apiItemName>callback</apiItemName><apiType value="Function"/><apiData>null</apiData></apiParam></apiOperationDef><apiDesc>
+		 Destroys a reserved room.	If the room has been configured to be persistent,
+		 then it is optional that the server will permanently remove the room.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:getMessage"><apiName>getMessage</apiName><shortdesc>
+		 Gets an instance of the Message class that has been pre-configured to be
+		 sent from this room.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>A <codeph>Message</codeph> class instance
+		 </apiDesc><apiOperationClassifier>org.igniterealtime.xiff.data:IMessage</apiOperationClassifier></apiReturn><apiParam><apiItemName>body</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The message body
+		 </apiDesc></apiParam><apiParam><apiItemName>htmlBody</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The message body with HTML formatting
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Gets an instance of the <codeph>Message</codeph> class that has been pre-configured to be
+		 sent from this room. Use this method to get a <codeph>Message</codeph> in order to add extensions
+		 to outgoing room messages.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:getOccupantNamed"><apiName>getOccupantNamed</apiName><shortdesc>
+		 Gets the RoomOccupant whose nickname matches the name passed in.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc></apiDesc><apiOperationClassifier>org.igniterealtime.xiff.conference:IRoomOccupant</apiOperationClassifier></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Gets the <codeph>RoomOccupant</codeph> whose nickname matches the name passed in.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:grant"><apiName>grant</apiName><shortdesc>
+		 Grants permissions on a room to one or more JIDs by setting the
+		 affiliation of a user based on their JID.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>affiliation</apiItemName><apiType value="String"/><apiDesc>Use one of the
+		 following affiliations: <codeph>Room.AFFILIATION_MEMBER</codeph>,
+		 <codeph>Room.AFFILIATION_ADMIN</codeph>,
+		 <codeph>Room.AFFILIATION_OWNER</codeph>
+		 </apiDesc></apiParam><apiParam><apiItemName>jids</apiItemName><apiType value="Array"/><apiDesc>An array of UnescapedJIDs to grant these permissions to
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Grants permissions on a room to one or more JIDs by setting the
+		 affiliation of a user based on their JID.
+		 		 <p>If the JID currently has an existing affiliation, then the existing
+		 affiliation will be replaced with the one passed. If the process could not be
+		 completed, the room will dispatch the event <codeph>RoomEvent.ADMIN_ERROR</codeph>.</p>
+		 		 <p>XMPP spec states that the #admin schema should be used for affiliation changes.
+		 Unfortunately to this date, Openfire does not match spec and requires the #owner schema.
+		 Because of this, if granting privileges fails on the first attempt using the #admin schema,
+		 we try again using the #owner schema.</p>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="org.igniterealtime.xiff.conference.xml#Room/revoke"><linktext>revoke</linktext></link><link href="org.igniterealtime.xiff.conference.xml#Room/allow"><linktext>allow</linktext></link><link href="http://xmpp.org/extensions/xep-0045.html#schemas-admin"><linktext>http://xmpp.org/extensions/xep-0045.html#schemas-admin</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:invite"><apiName>invite</apiName><shortdesc>
+		 Invites a user that is not currently a member of this room to this room.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>jid</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiOperationClassifier><apiDesc>An unescaped JID of the user to invite.
+		 </apiDesc></apiParam><apiParam><apiItemName>reason</apiItemName><apiType value="String"/><apiDesc>A string describing why you would like to invite the user.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Invites a user that is not currently a member of this room to this room.
+		 		 <p>You must have joined the room and have appropriate permissions to invite
+		 other memebers, because the server will format and send the invite message to
+		 as if it came from the room rather that you sending the invite directly from you.</p>
+		 		 <p>To listen to invite events, add an event listener on your XMPPConnection to the
+		 <codeph>InviteEvent.INVITED</codeph> event.</p>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:isThisRoom"><apiName>isThisRoom</apiName><shortdesc>
+		 Determines if the sender parameter is the same
+		 as the room's JID.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>true if the passed JID matches the getRoomJID
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>sender</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiOperationClassifier><apiDesc>room JID to test
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Determines if the <codeph>sender</codeph> parameter is the same
+		 as the room's JID.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:isThisUser"><apiName>isThisUser</apiName><shortdesc>
+		 Determines if the sender param is the
+		 same as the user's JID.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>true if the passed JID matches the userJID
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>sender</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiOperationClassifier><apiDesc>the room JID to test
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Determines if the <codeph>sender</codeph> param is the
+		 same as the user's JID.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:joinWithExplicitMUCExtension"><apiName>joinWithExplicitMUCExtension</apiName><shortdesc>
+		 Joins a conference room based on the parameters specified by the room
+		 properties.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>A boolean indicating whether the join attempt was successfully sent.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>createReserved</apiItemName><apiType value="Boolean"/><apiDesc>Set to true if you wish to create and configure a reserved room
+		 </apiDesc></apiParam><apiParam><apiItemName>mucExtension</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.data.muc:IMUCExtension</apiOperationClassifier><apiDesc>The customized MUC extension to send with initial presence to the room.
+		 </apiDesc></apiParam><apiParam><apiItemName>joinPresenceExtensions</apiItemName><apiType value="Array"/><apiData>null</apiData><apiDesc>An array of additional extensions to send with the initial presence to the room.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Joins a conference room based on the parameters specified by the room
+		 properties.	This call will create an instant room based on a default
+		 server configuration if the room doesn't exist.
+		 		 <p>To create and begin the configuration process of a reserved room, pass
+		 <codeph>true</codeph> to this method to begin the configuration process.	When
+		 The configuration is complete, the room will be unlocked for others to join.
+		 Listen for the <codeph>RoomEvent.CONFIGURE_ROOM</codeph> event to handle and
+		 either return or cancel the configuration of the room.</p>
+		 		 <p>This function adds an additional parameter to allow the caller to completely customize the MUC extension that
+		 gets sent to the room.  For example, you can add a history element that specifies how much discussion
+		 history you want sent when you join the room (http://xmpp.org/extensions/xep-0045.html#enter-managehistory):
+		 <codeph>
+		 var muc:MUCExtension = new MUCExtension();
+		 muc.history = true;
+		 muc.maxchars = 0;
+		 _room.joinWithExplicitMUCExtension(false, mucExt);
+		 </codeph>
+		 </p>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:join"><apiName>join</apiName><shortdesc>
+		 Joins a conference room based on the parameters specified by the room
+		 properties.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>A boolean indicating whether the join attempt was successfully sent.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>createReserved</apiItemName><apiType value="Boolean"/><apiData>false</apiData><apiDesc>Set to true if you wish to create and configure a reserved room
+		 </apiDesc></apiParam><apiParam><apiItemName>joinPresenceExtensions</apiItemName><apiType value="Array"/><apiData>null</apiData><apiDesc>An array of additional extensions to send with the initial presence to the room.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Joins a conference room based on the parameters specified by the room
+		 properties.	This call will create an instant room based on a default
+		 server configuration if the room doesn't exist.
+		 		 <p>To create and begin the configuration process of a reserved room, pass
+		 <codeph>true</codeph> to this method to begin the configuration process.	When
+		 The configuration is complete, the room will be unlocked for others to join.
+		 Listen for the <codeph>RoomEvent.CONFIGURE_ROOM</codeph> event to handle and
+		 either return or cancel the configuration of the room.</p>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:kickOccupant"><apiName>kickOccupant</apiName><shortdesc>
+		 Kicks an occupant out of the room, assuming that the user has necessary
+		 permissions in order to do so.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>occupantNick</apiItemName><apiType value="String"/><apiDesc>The nickname of the room occupant to kick
+		 </apiDesc></apiParam><apiParam><apiItemName>reason</apiItemName><apiType value="String"/><apiDesc>The reason for the kick
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Kicks an occupant out of the room, assuming that the user has necessary
+		 permissions in order to do so. If the user does not, the server will return an error.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:leave"><apiName>leave</apiName><shortdesc>
+		 Leaves the current conference room, assuming that the user has joined one.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Leaves the current conference room, assuming that the user has joined one.
+		 If the user is not currently in a room, this method does nothing.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:requestAffiliations"><apiName>requestAffiliations</apiName><shortdesc>
+		 Requests an affiliation list for a given affiliation with with room.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>affiliation</apiItemName><apiType value="String"/><apiDesc>Use one of the following affiliations: <codeph>Room.AFFILIATION_NONE</codeph>,
+		 <codeph>Room.AFFILIATION_OUTCAST</codeph>,
+		 <codeph>Room.AFFILIATION_MEMBER</codeph>,
+		 <codeph>Room.AFFILIATION_ADMIN</codeph>,
+		 <codeph>Room.AFFILIATION_OWNER</codeph>
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Requests an affiliation list for a given affiliation with with room.
+		 This will either dispatch the event <codeph>RoomEvent.AFFILIATIONS</codeph> or
+		 <codeph>RoomEvent.ADMIN_ERROR</codeph> depending on the result of the request.
+		 		 </apiDesc></apiOperationDetail><related-links><link href="org.igniterealtime.xiff.conference.xml#Room/revoke"><linktext>revoke</linktext></link><link href="org.igniterealtime.xiff.conference.xml#Room/grant"><linktext>grant</linktext></link><link href="org.igniterealtime.xiff.conference.xml#Room/affiliations"><linktext>affiliations</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:requestConfiguration"><apiName>requestConfiguration</apiName><shortdesc>
+		 Requests a configuration form from the room.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Requests a configuration form from the room.	Listen to <codeph>configureRoom</codeph>
+		 event to fill out the form then call either <codeph>configure</codeph> or
+		 <codeph>cancelConfiguration</codeph> to complete the configuration process
+		 		 You must be joined to the room and have the owner affiliation to request
+		 a configuration form
+		 		 </apiDesc></apiOperationDetail><related-links><link href="org.igniterealtime.xiff.conference.xml#Room/configureRoom"><linktext>configureRoom</linktext></link><link href="org.igniterealtime.xiff.conference.xml#Room/configure"><linktext>configure</linktext></link><link href="org.igniterealtime.xiff.conference.xml#Room/cancelConfiguration"><linktext>cancelConfiguration</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:revoke"><apiName>revoke</apiName><shortdesc>
+		 Revokes all affiliations from the JIDs.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>jids</apiItemName><apiType value="Array"/><apiDesc>An array of UnescapedJIDs to revoke affiliations from
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Revokes all affiliations from the JIDs. This is the same as:
+		 <codeph>grant( Room.AFFILIATION_NONE, jids )</codeph>
+		 		 <p>If the process could not be completed, the room will dispatch the event
+		 <codeph>RoomEvent.ADMIN_ERROR</codeph>. Note: if the JID is banned from this room,
+		 then this will also revoke the banned status.</p>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="org.igniterealtime.xiff.conference.xml#Room/grant"><linktext>grant</linktext></link><link href="org.igniterealtime.xiff.conference.xml#Room/allow"><linktext>allow</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:sendMessageWithExtension"><apiName>sendMessageWithExtension</apiName><shortdesc>
+		 Sends a message to the conference room with an extension attached.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>message</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.data:IMessage</apiOperationClassifier><apiDesc>The message to send
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sends a message to the conference room with an extension attached.
+		 Use this method in conjunction with the <codeph>getMessage</codeph> method.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:sendMessage"><apiName>sendMessage</apiName><shortdesc>
+		 Sends a message to the conference room.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>body</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The message body
+		 </apiDesc></apiParam><apiParam><apiItemName>htmlBody</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The message body with HTML formatting
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sends a message to the conference room.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:sendPrivateMessage"><apiName>sendPrivateMessage</apiName><shortdesc>
+		 Sends a private message to a specific participant in the conference room.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>recipientNickname</apiItemName><apiType value="String"/><apiDesc>The conference room nickname of the recipient who should
+		 receive the private message
+		 </apiDesc></apiParam><apiParam><apiItemName>body</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The message body
+		 </apiDesc></apiParam><apiParam><apiItemName>htmlBody</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The message body with HTML formatting
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sends a private message to a specific participant in the conference room.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:Room:setOccupantVoice"><apiName>setOccupantVoice</apiName><shortdesc>
+		 In a moderated room, sets voice status to a particular occupant, assuming the user
+		 has the necessary permissions to do so.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>occupantNick</apiItemName><apiType value="String"/><apiDesc>The nickname of the occupant to give voice
+		 </apiDesc></apiParam><apiParam><apiItemName>voice</apiItemName><apiType value="Boolean"/><apiDesc>Whether to add voice (true) or remove voice (false). Having voice means
+		 that the user is actually able to talk. Without voice the user is effectively muted.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 In a moderated room, sets voice status to a particular occupant, assuming the user
+		 has the necessary permissions to do so.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.conference:Room:AFFILIATION_ADMIN"><apiName>AFFILIATION_ADMIN</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>admin</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:AFFILIATION_MEMBER"><apiName>AFFILIATION_MEMBER</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>member</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:AFFILIATION_NONE"><apiName>AFFILIATION_NONE</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>none</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:AFFILIATION_OUTCAST"><apiName>AFFILIATION_OUTCAST</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>outcast</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:AFFILIATION_OWNER"><apiName>AFFILIATION_OWNER</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>owner</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:ROLE_MODERATOR"><apiName>ROLE_MODERATOR</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>moderator</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:ROLE_NONE"><apiName>ROLE_NONE</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>none</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:ROLE_PARTICIPANT"><apiName>ROLE_PARTICIPANT</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>participant</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:ROLE_VISITOR"><apiName>ROLE_VISITOR</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>visitor</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:active:get"><apiName>active</apiName><shortdesc>
+		 Determines whether the connection to the room is active - that is, the user
+		 is connected and has joined the room.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 Determines whether the connection to the room is active - that is, the user
+		 is connected and has joined the room.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:affiliation:get"><apiName>affiliation</apiName><shortdesc>
+		 Gets the user's affiliation for this room.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Gets the user's affiliation for this room.
+		 Possible affiliations are "owner", "admin", "member", and "outcast".
+		 It is also possible to have no defined affiliation.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:anonymous:get"><apiName>anonymous</apiName><shortdesc>
+		 Whether the room shows full JIDs or not.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 Whether the room shows full JIDs or not.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:conferenceServer:get"><apiName>conferenceServer</apiName><shortdesc>
+		 The conference server to use for this room.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The conference server to use for this room. Usually, this is a subdomain of
+		 the primary XMPP server, like conference.myserver.com.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:connection:get"><apiName>connection</apiName><shortdesc>
+		 A reference to the XMPPConnection being used for incoming/outgoing XMPP data.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiValueClassifier></apiValueDef><apiDesc>
+		 A reference to the XMPPConnection being used for incoming/outgoing XMPP data.
+		 		 </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.core.xml#XMPPConnection"><linktext>org.igniterealtime.xiff.core.XMPPConnection</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:nickname:get"><apiName>nickname</apiName><shortdesc>
+		 The nickname to use when joining.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The nickname to use when joining.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:password:get"><apiName>password</apiName><shortdesc>
+		 The password.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The password.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:role:get"><apiName>role</apiName><shortdesc>
+		 Gets the user's role in the conference room.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Gets the user's role in the conference room.
+		 		 <p>Possible roles are "visitor", "participant", "moderator" or no defined role.</p>
+		 <ul>
+		 <li>ROLE_MODERATOR</li>
+		 <li>ROLE_NONE</li>
+		 <li>ROLE_PARTICIPANT</li>
+		 <li>ROLE_VISITOR</li>
+		 </ul>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:roomJID:get"><apiName>roomJID</apiName><shortdesc>
+		 The unescaped JID of the room.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiValueClassifier></apiValueDef><apiDesc>
+		 The unescaped JID of the room. <codeph>room@conference.server</codeph>
+		 Set this after initiating a new Room.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:roomName:get"><apiName>roomName</apiName><shortdesc>
+		 The room name that should be used when joining.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The room name that should be used when joining.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:subject:get"><apiName>subject</apiName><shortdesc>
+		 The subject.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The subject.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:Room:userJID:get"><apiName>userJID</apiName><shortdesc>
+		 Get the JID of the conference room user.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiValueClassifier></apiValueDef><apiDesc>
+		 Get the JID of the conference room user.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.conference:InviteListener"><apiName>InviteListener</apiName><shortdesc>
+	 Manages the dispatching of events during invitations.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.core:IListener</apiBaseInterface><apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Manages the dispatching of events during invitations. Add event
+	 listeners to an instance of this class to monitor invite and decline
+	 events.
+	 	 <p>You only need a single instance of this class to listen for all invite
+	 or decline events.</p>
+	 </apiDesc></apiClassifierDetail><adobeApiEvent id="org.igniterealtime.xiff.conference:InviteListener_org.igniterealtime.xiff.InviteEvent.INVITED_invited"><apiName>invited</apiName><shortdesc>
+	 Dispatched when an invitations has been received.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.InviteEvent.INVITED</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.InviteEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when an invitations has been received.
+	 	 </apiDesc></adobeApiEventDetail><related-links><link href="org.igniterealtime.xiff.conference.xml#Room"><linktext>org.igniterealtime.xiff.conference.Room</linktext></link><link href="" invalidHref="org.igniterealtime.xiff.conference.Room.xml#/invite"><linktext>org.igniterealtime.xiff.conference.Room..invite</linktext></link></related-links></adobeApiEvent><apiConstructor id="org.igniterealtime.xiff.conference:InviteListener:InviteListener"><apiName>InviteListener</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>aConnection</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiOperationClassifier><apiData>null</apiData><apiDesc>An XMPPConnection instance that is providing the primary server
+		 connection.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiValue id="org.igniterealtime.xiff.conference:InviteListener:connection:get"><apiName>connection</apiName><shortdesc>
+		 A reference to the XMPPConnection being used for incoming/outgoing XMPP data.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiValueClassifier></apiValueDef><apiDesc>
+		 A reference to the XMPPConnection being used for incoming/outgoing XMPP data.
+		 		 </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.core.xml#XMPPConnection"><linktext>org.igniterealtime.xiff.core.XMPPConnection</linktext></link></related-links></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.conference:RoomFile"><apiName>RoomFile</apiName><shortdesc>
+	 ?
+	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 ?
+	 </apiDesc></apiClassifierDetail><apiConstructor id="org.igniterealtime.xiff.conference:RoomFile:RoomFile"><apiName>RoomFile</apiName><shortdesc/><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/></apiConstructorDef></apiConstructorDetail></apiConstructor></apiClassifier><apiClassifier id="org.igniterealtime.xiff.conference:RoomFileRepository"><apiName>RoomFileRepository</apiName><shortdesc>
+	 	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 	 </apiDesc></apiClassifierDetail></apiClassifier><apiClassifier id="org.igniterealtime.xiff.conference:IRoomOccupant"><apiName>IRoomOccupant</apiName><shortdesc/><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data.im:IContact</apiBaseInterface><apiBaseClassifier/></apiClassifierDef></apiClassifierDetail><apiValue id="org.igniterealtime.xiff.conference:IRoomOccupant:org.igniterealtime.xiff.conference:IRoomOccupant:affiliation:get"><apiName>affiliation</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:IRoomOccupant:org.igniterealtime.xiff.conference:IRoomOccupant:role:get"><apiName>role</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:IRoomOccupant:org.igniterealtime.xiff.conference:IRoomOccupant:room:get"><apiName>room</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.conference:IRoom</apiValueClassifier></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:IRoomOccupant:org.igniterealtime.xiff.conference:IRoomOccupant:rosterItem:get"><apiName>rosterItem</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>org.igniterealtime.xiff.data.im:IRosterItemVO</apiValueClassifier></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.conference:IRoom"><apiName>IRoom</apiName><shortdesc/><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.collections:ICollection</apiBaseInterface><apiBaseClassifier/></apiClassifierDef></apiClassifierDetail><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:allow"><apiName>allow</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>jids</apiItemName><apiType value="Array"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:ban"><apiName>ban</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>jids</apiItemName><apiType value="Array"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:cancelConfiguration"><apiName>cancelConfiguration</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:changeSubject"><apiName>changeSubject</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>newSubject</apiItemName><apiType value="String"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:configure"><apiName>configure</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>fieldmap</apiItemName><apiType value="Object"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:decline"><apiName>decline</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>jid</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiOperationClassifier></apiParam><apiParam><apiItemName>reason</apiItemName><apiType value="String"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:destroy"><apiName>destroy</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>reason</apiItemName><apiType value="String"/></apiParam><apiParam><apiItemName>alternateJID</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiOperationClassifier><apiData>null</apiData></apiParam><apiParam><apiItemName>callback</apiItemName><apiType value="Function"/><apiData>null</apiData></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:getMessage"><apiName>getMessage</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiOperationClassifier>org.igniterealtime.xiff.data:IMessage</apiOperationClassifier></apiReturn><apiParam><apiItemName>body</apiItemName><apiType value="String"/><apiData>null</apiData></apiParam><apiParam><apiItemName>htmlBody</apiItemName><apiType value="String"/><apiData>null</apiData></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:getOccupantNamed"><apiName>getOccupantNamed</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiOperationClassifier>org.igniterealtime.xiff.conference:IRoomOccupant</apiOperationClassifier></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:grant"><apiName>grant</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>affiliation</apiItemName><apiType value="String"/></apiParam><apiParam><apiItemName>jids</apiItemName><apiType value="Array"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:invite"><apiName>invite</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>jid</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiOperationClassifier></apiParam><apiParam><apiItemName>reason</apiItemName><apiType value="String"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:isThisRoom"><apiName>isThisRoom</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>sender</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiOperationClassifier></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:isThisUser"><apiName>isThisUser</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>sender</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiOperationClassifier></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:joinWithExplicitMUCExtension"><apiName>joinWithExplicitMUCExtension</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>createReserved</apiItemName><apiType value="Boolean"/></apiParam><apiParam><apiItemName>mucExtension</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.data.muc:IMUCExtension</apiOperationClassifier></apiParam><apiParam><apiItemName>joinPresenceExtensions</apiItemName><apiType value="Array"/><apiData>null</apiData></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:join"><apiName>join</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>createReserved</apiItemName><apiType value="Boolean"/><apiData>false</apiData></apiParam><apiParam><apiItemName>joinPresenceExtensions</apiItemName><apiType value="Array"/><apiData>null</apiData></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:kickOccupant"><apiName>kickOccupant</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>occupantNick</apiItemName><apiType value="String"/></apiParam><apiParam><apiItemName>reason</apiItemName><apiType value="String"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:leave"><apiName>leave</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:requestAffiliations"><apiName>requestAffiliations</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>affiliation</apiItemName><apiType value="String"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:requestConfiguration"><apiName>requestConfiguration</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:revoke"><apiName>revoke</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>jids</apiItemName><apiType value="Array"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:sendMessageWithExtension"><apiName>sendMessageWithExtension</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>message</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.data:IMessage</apiOperationClassifier></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:sendMessage"><apiName>sendMessage</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>body</apiItemName><apiType value="String"/><apiData>null</apiData></apiParam><apiParam><apiItemName>htmlBody</apiItemName><apiType value="String"/><apiData>null</apiData></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:sendPrivateMessage"><apiName>sendPrivateMessage</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>recipientNickname</apiItemName><apiType value="String"/></apiParam><apiParam><apiItemName>body</apiItemName><apiType value="String"/><apiData>null</apiData></apiParam><apiParam><apiItemName>htmlBody</apiItemName><apiType value="String"/><apiData>null</apiData></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:setOccupantVoice"><apiName>setOccupantVoice</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>occupantNick</apiItemName><apiType value="String"/></apiParam><apiParam><apiItemName>voice</apiItemName><apiType value="Boolean"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:active:get"><apiName>active</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Boolean"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:affiliation:get"><apiName>affiliation</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:anonymous:get"><apiName>anonymous</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Boolean"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:conferenceServer:get"><apiName>conferenceServer</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:connection:get"><apiName>connection</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiValueClassifier></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:nickname:get"><apiName>nickname</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:password:get"><apiName>password</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:role:get"><apiName>role</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:roomJID:get"><apiName>roomJID</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiValueClassifier></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:roomName:get"><apiName>roomName</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:subject:get"><apiName>subject</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:IRoom:org.igniterealtime.xiff.conference:IRoom:userJID:get"><apiName>userJID</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiValueClassifier></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.conference:RoomOccupant"><apiName>RoomOccupant</apiName><shortdesc>
+	 A person in a room
+	 	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.conference:IRoomOccupant</apiBaseInterface><apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A person in a room
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0045.html#user"><linktext>http://xmpp.org/extensions/xep-0045.html#user</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.conference:RoomOccupant:RoomOccupant"><apiName>RoomOccupant</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>nickname</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>show</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>affiliation</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>role</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>jid</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>room</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.conference:IRoom</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiValue id="org.igniterealtime.xiff.conference:RoomOccupant:affiliation:get"><apiName>affiliation</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:RoomOccupant:jid:get"><apiName>jid</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiValueClassifier></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:RoomOccupant:nickname:get"><apiName>nickname</apiName><shortdesc>
+		 Used to be 'displayName' before XML migration
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Used to be 'displayName' before XML migration
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:RoomOccupant:online:get"><apiName>online</apiName><shortdesc>
+		 RoomOccupants can't exist unless they're online
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 RoomOccupants can't exist unless they're online
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:RoomOccupant:role:get"><apiName>role</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:RoomOccupant:room:get"><apiName>room</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.conference:IRoom</apiValueClassifier></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:RoomOccupant:rosterItem:get"><apiName>rosterItem</apiName><shortdesc>
+		 If there isn't a roster item associated with this room occupant
+		 (for example, if the room is anonymous), this will return null
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>org.igniterealtime.xiff.data.im:IRosterItemVO</apiValueClassifier></apiValueDef><apiDesc>
+		 If there isn't a roster item associated with this room occupant
+		 (for example, if the room is anonymous), this will return null
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:RoomOccupant:show:get"><apiName>show</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.conference:RoomOccupant:uid:get"><apiName>uid</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue></apiClassifier></apiPackage>

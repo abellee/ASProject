@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.data.whiteboard"><apiName>org.igniterealtime.xiff.data.whiteboard</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.data.whiteboard:Stroke"><apiName>Stroke</apiName><shortdesc>
+	 A helper class that abstracts the serialization of strokes and
+	 provides an interface to access the properties
+	 	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A helper class that abstracts the serialization of strokes and
+	 provides an interface to access the properties
+	 	 </apiDesc></apiClassifierDetail><apiConstructor id="org.igniterealtime.xiff.data.whiteboard:Stroke:Stroke"><apiName>Stroke</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>color</apiItemName><apiType value="uint"/><apiData>0</apiData></apiParam><apiParam><apiItemName>opacity</apiItemName><apiType value="Number"/><apiData>100</apiData></apiParam><apiParam><apiItemName>thickness</apiItemName><apiType value="Number"/><apiData>unknown</apiData></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiValue id="org.igniterealtime.xiff.data.whiteboard:Stroke:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>stroke</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.whiteboard:Stroke:color:get"><apiName>color</apiName><shortdesc>
+		 The value of the RGB color.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 The value of the RGB color.  This is the same color format used by
+		 Graphics.lineStyle
+		 		 <p>XML attribute "stroke"</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/Graphics.html"><linktext>http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/Graphics.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.whiteboard:Stroke:opacity:get"><apiName>opacity</apiName><shortdesc>
+		 The opacity of the stroke, in percent.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Number"/></apiValueDef><apiDesc>
+		 The opacity of the stroke, in percent. 100 is solid, 0 is transparent.
+		 This property can be used as the alpha parameter of Graphics.lineStyle
+		 		 <p>XML attribute "stroke-opacity"</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/Graphics.html"><linktext>http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/Graphics.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.whiteboard:Stroke:thickness:get"><apiName>thickness</apiName><shortdesc>
+		 The thickness of the stroke in pixels.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Number"/></apiValueDef><apiDesc>
+		 The thickness of the stroke in pixels.  This is in a format used by
+		 Graphics.lineStyle
+		 		 <p>XML attribute "stroke-width"</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/Graphics.html"><linktext>http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/Graphics.html</linktext></link></related-links></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.whiteboard:Fill"><apiName>Fill</apiName><shortdesc>
+	 A helper class that abstracts the serialization of fills and
+	 provides an interface to access the properties providing defaults
+	 if no properties were defined in the XML.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A helper class that abstracts the serialization of fills and
+	 provides an interface to access the properties providing defaults
+	 if no properties were defined in the XML.
+	 	 </apiDesc></apiClassifierDetail><apiConstructor id="org.igniterealtime.xiff.data.whiteboard:Fill:Fill"><apiName>Fill</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>color</apiItemName><apiType value="uint"/><apiData>0</apiData><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>opacity</apiItemName><apiType value="Number"/><apiData>100</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiValue id="org.igniterealtime.xiff.data.whiteboard:Fill:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>fill</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.whiteboard:Fill:color:get"><apiName>color</apiName><shortdesc>
+		 The value of the RGB color.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 The value of the RGB color.  This is the same color format used by
+		 MovieClip.lineStyle
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/Graphics.html"><linktext>http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/Graphics.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.whiteboard:Fill:opacity:get"><apiName>opacity</apiName><shortdesc>
+		 The opacity of the fill, in percent.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Number"/></apiValueDef><apiDesc>
+		 The opacity of the fill, in percent. 100 is solid, 0 is transparent.
+		 This property can be used as the alpha parameter of MovieClip.lineStyle
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/Graphics.html"><linktext>http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/Graphics.html</linktext></link></related-links></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.whiteboard:WhiteboardExtension"><apiName>WhiteboardExtension</apiName><shortdesc>
+	 A message extension for whitboard exchange.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A message extension for whitboard exchange. This class is the base class
+	 for other extension classes such as Path.
+	 	 All child whiteboard objects are contained and serialized by this class
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0113.html"><linktext>http://xmpp.org/extensions/xep-0113.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.whiteboard:WhiteboardExtension:WhiteboardExtension"><apiName>WhiteboardExtension</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.whiteboard:WhiteboardExtension:getElementName"><apiName>getElementName</apiName><shortdesc>
+		 Gets the element name associated with this extension.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>The element name
+		 </apiDesc><apiType value="String"/></apiReturn></apiOperationDef><apiDesc>
+		 Gets the element name associated with this extension.
+		 The element for this extension is "x".
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.whiteboard:WhiteboardExtension:getNS"><apiName>getNS</apiName><shortdesc>
+		 Gets the namespace associated with this extension.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>The namespace
+		 </apiDesc><apiType value="String"/></apiReturn></apiOperationDef><apiDesc>
+		 Gets the namespace associated with this extension.
+		 The namespace for the WhiteboardExtension is "xiff:wb".
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.whiteboard:WhiteboardExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>x</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.whiteboard:WhiteboardExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>xiff:wb</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.whiteboard:WhiteboardExtension:paths:get"><apiName>paths</apiName><shortdesc>
+	     The paths available in this whiteboard message
+	     </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Array"/></apiValueDef><apiDesc>
+	     The paths available in this whiteboard message
+	     </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.whiteboard:Path"><apiName>Path</apiName><shortdesc>
+	 A message extension for whiteboard exchange.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A message extension for whiteboard exchange. This class is the base class
+	 for other extension classes such as Path
+	 </apiDesc></apiClassifierDetail><apiConstructor id="org.igniterealtime.xiff.data.whiteboard:Path:Path"><apiName>Path</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.whiteboard:Path:addPoints"><apiName>addPoints</apiName><shortdesc>
+	     Another interface to add segments to this extension.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the segment object created from the parameters with the rounded values
+	     from being modified in addSegment
+	     </apiDesc><apiType value="Object"/></apiReturn><apiParam><apiItemName>from_x</apiItemName><apiType value="Number"/><apiDesc>the start x coordinate
+	     </apiDesc></apiParam><apiParam><apiItemName>from_y</apiItemName><apiType value="Number"/><apiDesc>the start y coordinate
+	     </apiDesc></apiParam><apiParam><apiItemName>to_x</apiItemName><apiType value="Number"/><apiDesc>the destination x coordinate
+	     </apiDesc></apiParam><apiParam><apiItemName>to_y</apiItemName><apiType value="Number"/><apiDesc>the destination y coordinate
+	     </apiDesc></apiParam></apiOperationDef><apiDesc>
+	     Another interface to add segments to this extension.  Instead of passing
+	     an object, you can pass parameters that will be converted into a segment
+	     and passed to addSegment
+	     	     </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.whiteboard:Path:addSegment"><apiName>addSegment</apiName><shortdesc>
+	     Adds a start point and end point to this path.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the segment parameter with the rounded values
+	     </apiDesc><apiType value="Object"/></apiReturn><apiParam><apiItemName>seg</apiItemName><apiType value="Object"/><apiDesc>An object containing the properties "from" and "to" which
+	     are objects with the properties "x" and "y".  An example would
+	     be { from: { x: 100, y: 200 }, to: { x: 200, y: 300 } }
+	     </apiDesc></apiParam></apiOperationDef><apiDesc>
+	     Adds a start point and end point to this path.  The points will be rounded
+	     to the nearest integer to save serialization space.  10.0000001 takes
+	     4 times as much spaces as 10
+	     	     </apiDesc></apiOperationDetail><related-links><link href="org.igniterealtime.xiff.data.whiteboard.xml#Path/addPoints"><linktext>addPoints</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.data.whiteboard:Path:serializeSegments"><apiName>serializeSegments</apiName><shortdesc>
+		 Creates the compact form of the segments
+		 in the fomrmat defined by SVG
+		 Example: M100 200L14 -15 L 125 100L150 200 300 400M10 20L30 40 50 60 z
+	     		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>String containging the compact version
+		 </apiDesc><apiType value="String"/></apiReturn></apiOperationDef><apiDesc>
+		 Creates the compact form of the segments
+		 in the fomrmat defined by SVG
+		 Example: M100 200L14 -15 L 125 100L150 200 300 400M10 20L30 40 50 60 z
+	     		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.whiteboard:Path:serialize"><apiName>serialize</apiName><shortdesc>
+		 TODO: make as set xml
+		 		 Serializes the Path data to XML for sending.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>An indicator as to whether serialization was successful
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiDesc>The parent node that this extension should be serialized into
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 TODO: make as set xml
+		 		 Serializes the Path data to XML for sending.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.whiteboard:Path:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>path</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.whiteboard:Path:fill:get"><apiName>fill</apiName><shortdesc>
+	     The Fill object that contains the properties describing the fill of this
+	     path
+	     	     </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>org.igniterealtime.xiff.data.whiteboard:Fill</apiValueClassifier></apiValueDef><apiDesc>
+	     The Fill object that contains the properties describing the fill of this
+	     path
+	     	     </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.data.whiteboard.xml#Fill"><linktext>org.igniterealtime.xiff.data.whiteboard.Fill</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.whiteboard:Path:segments:get"><apiName>segments</apiName><shortdesc>
+	     The read-only list of start and end points encoded as an array of objects with the
+	     format { from: { x: ###, y: ### }, to: { x: ###, y: ### } }
+	     	     You should not modify this list.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Array"/></apiValueDef><apiDesc>
+	     The read-only list of start and end points encoded as an array of objects with the
+	     format { from: { x: ###, y: ### }, to: { x: ###, y: ### } }
+	     	     You should not modify this list.  Segments should be added with addSegment
+	     	     </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.data.whiteboard.xml#Path/addSegment"><linktext>addSegment</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.whiteboard:Path:stroke:get"><apiName>stroke</apiName><shortdesc>
+	     The Stroke object that contains the properties describing the stroke of this
+	     path
+	     	     </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>org.igniterealtime.xiff.data.whiteboard:Stroke</apiValueClassifier></apiValueDef><apiDesc>
+	     The Stroke object that contains the properties describing the stroke of this
+	     path
+	     	     </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.data.whiteboard.xml#Stroke"><linktext>org.igniterealtime.xiff.data.whiteboard.Stroke</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.whiteboard:Path:xml:set"><apiName>xml</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiIsOverride/><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="XML"/></apiValueDef></apiValueDetail></apiValue></apiClassifier></apiPackage>

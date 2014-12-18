@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.data.stream"><apiName>org.igniterealtime.xiff.data.stream</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.data.stream:IBBCloseExtension"><apiName>IBBCloseExtension</apiName><shortdesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 Close the communication once transfer is complete.
+	 	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data.stream:IBBExtension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 <p>Close the communication once transfer is complete.</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0047.html"><linktext>http://xmpp.org/extensions/xep-0047.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.stream:IBBCloseExtension:IBBCloseExtension"><apiName>IBBCloseExtension</apiName><shortdesc>
+		 		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.stream:IBBCloseExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.stream:IBBCloseExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>close</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.stream:IBBOpenExtension"><apiName>IBBOpenExtension</apiName><shortdesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 Open the communication
+	 	 It is RECOMMENDED to send IBB data using IQ stanzas
+	 instead of message stanzas because IQ stanzas provide
+	 feedback to the sender regarding delivery to the recipient).
+	 	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data.stream:IBBExtension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 <p>Open the communication</p>
+	 	 <p>It is RECOMMENDED to send IBB data using IQ stanzas
+	 instead of message stanzas because IQ stanzas provide
+	 feedback to the sender regarding delivery to the recipient).</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0047.html"><linktext>http://xmpp.org/extensions/xep-0047.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.stream:IBBOpenExtension:IBBOpenExtension"><apiName>IBBOpenExtension</apiName><shortdesc>
+		 The recommended values for blockSize (4096) and
+		 stanza ("iq") are set by default.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 The recommended values for <codeph>blockSize</codeph> (4096) and
+		 <codeph>stanza</codeph> ("iq") are set by default.
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.stream:IBBOpenExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.stream:IBBOpenExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>open</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.stream:IBBOpenExtension:blockSize:get"><apiName>blockSize</apiName><shortdesc>
+		 The REQUIRED 'block-size' attribute defines the maximum
+		 size in bytes of each data chunk (which MUST NOT be
+		 greater than 65535).</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/><apiDefaultValue>4096
+		 </apiDefaultValue></apiValueDef><apiDesc>
+		 The REQUIRED 'block-size' attribute defines the maximum
+		 size in bytes of each data chunk (which MUST NOT be
+		 greater than 65535).
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.stream:IBBOpenExtension:stanza:get"><apiName>stanza</apiName><shortdesc>
+		 The OPTIONAL 'stanza' attribute defines whether the
+		 data will be sent using IQ stanzas or
+		 Message stanzas.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/><apiDefaultValue>iq
+		 </apiDefaultValue></apiValueDef><apiDesc>
+		 The OPTIONAL 'stanza' attribute defines whether the
+		 data will be sent using <codeph>IQ</codeph> stanzas or
+		 <codeph>Message</codeph> stanzas.
+		 		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.stream:IBBDataExtension"><apiName>IBBDataExtension</apiName><shortdesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 Each chunk of data is contained in a data
+	 element qualified by the 'http://jabber.org/protocol/ibb'
+	 namespace.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data.stream:IBBExtension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 <p>Each chunk of data is contained in a <b>data</b>
+	 element qualified by the 'http://jabber.org/protocol/ibb'
+	 namespace. The data element SHOULD be sent in an IQ stanza
+	 to enable proper tracking and throttling, but instead MAY be
+	 sent in a message stanza. The data to be sent, prior to
+	 base64-encoding and prior to any wrapping in XML, MUST NOT
+	 be larger than the 'block-size' determined in the bytestream
+	 negotiation.</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0047.html"><linktext>http://xmpp.org/extensions/xep-0047.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.stream:IBBDataExtension:IBBDataExtension"><apiName>IBBDataExtension</apiName><shortdesc>
+		 		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.stream:IBBDataExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.stream:IBBDataExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>data</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.stream:IBBDataExtension:data:get"><apiName>data</apiName><shortdesc>
+		 Base64 encoded data
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Base64 encoded data
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.stream:IBBDataExtension:seq:get"><apiName>seq</apiName><shortdesc>
+		 Required property 'seq'.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 Required property 'seq'.
+		 		 <p>This is a 16-bit unsigned
+		 integer that acts as a counter for data chunks sent
+		 in a particular direction within this session.
+		 The 'seq' value starts at 0 (zero) for each sender
+		 and MUST be incremented for each packet sent by that
+		 entity. Thus, the second chunk sent has a 'seq' value
+		 of 1, the third chunk has a 'seq' value of 2, and so
+		 on. The counter loops at maximum, so that after value
+		 65535 (215 - 1) the 'seq' MUST start again at 0.</p>
+		 		 <p>This value can be safely incremented, limit checking
+		 and resetting is imlemented within the setter.</p>
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.stream:IBBExtension"><apiName>IBBExtension</apiName><shortdesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 Base class of all IBB classes that are using same namespace.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 <p>Base class of all IBB classes that are using same namespace.
+	 Do not use this directly.</p>
+	 	 <p>Generally, in-band bytestreams SHOULD be used only as a
+	 last resort. SOCKS5 Bytestreams will almost always be preferable,
+	 but are not implemented in XIFF...</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0047.html"><linktext>http://xmpp.org/extensions/xep-0047.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.stream:IBBExtension:IBBExtension"><apiName>IBBExtension</apiName><shortdesc>
+		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.stream:IBBExtension:getNS"><apiName>getNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.stream:IBBExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>http://jabber.org/protocol/ibb</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.stream:IBBExtension:sid:get"><apiName>sid</apiName><shortdesc>
+		 The REQUIRED 'sid' attribute defines a unique session
+		 ID for this IBB session (which MUST match the NMTOKEN
+		 datatype).</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The REQUIRED 'sid' attribute defines a unique session
+		 ID for this IBB session (which MUST match the NMTOKEN
+		 datatype).
+		 		 <p>All of the extending classes require this property
+		 to be set.</p>
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier></apiPackage>

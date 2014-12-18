@@ -1,0 +1,2383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<allClasses>
+   <apiPackage id="org.igniterealtime.xiff.auth">
+      <apiName>org.igniterealtime.xiff.auth</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.auth:ISASLAuth">
+         <apiName>ISASLAuth</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.auth:SASLAuth">
+         <apiName>SASLAuth</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.auth:DigestMD5">
+         <apiName>DigestMD5</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.auth:Anonymous">
+         <apiName>Anonymous</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.auth:XFacebookPlatform">
+         <apiName>XFacebookPlatform</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.auth:Plain">
+         <apiName>Plain</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.auth:XOAuth2">
+         <apiName>XOAuth2</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.auth:External">
+         <apiName>External</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.bookmark">
+      <apiName>org.igniterealtime.xiff.bookmark</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.bookmark:GroupChatBookmark">
+         <apiName>GroupChatBookmark</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.bookmark:UrlBookmark">
+         <apiName>UrlBookmark</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.bookmark:BookmarkManager">
+         <apiName>BookmarkManager</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.bookmark:BookmarkPrivatePayload">
+         <apiName>BookmarkPrivatePayload</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.privatedata:IPrivatePayload</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.collections.events">
+      <apiName>org.igniterealtime.xiff.collections.events</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.collections.events:CollectionEventKind">
+         <apiName>CollectionEventKind</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.collections.events:CollectionEvent">
+         <apiName>CollectionEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.collections">
+      <apiName>org.igniterealtime.xiff.collections</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.collections:ICollection">
+         <apiName>ICollection</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>flash.events:IEventDispatcher</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.collections:ArrayCollection">
+         <apiName>ArrayCollection</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.collections:ICollection</apiBaseInterface>
+               <apiBaseClassifier>flash.utils:Proxy</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.conference">
+      <apiName>org.igniterealtime.xiff.conference</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.conference:Room">
+         <apiName>Room</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.conference:IRoom</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.collections:ArrayCollection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.conference:InviteListener">
+         <apiName>InviteListener</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.core:IListener</apiBaseInterface>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.conference:RoomFile">
+         <apiName>RoomFile</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.conference:RoomFileRepository">
+         <apiName>RoomFileRepository</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.conference:IRoomOccupant">
+         <apiName>IRoomOccupant</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.im:IContact</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.conference:IRoom">
+         <apiName>IRoom</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.collections:ICollection</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.conference:RoomOccupant">
+         <apiName>RoomOccupant</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.conference:IRoomOccupant</apiBaseInterface>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.core">
+      <apiName>org.igniterealtime.xiff.core</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.core:XMPPConnection">
+         <apiName>XMPPConnection</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.core:IXMPPConnection</apiBaseInterface>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:XMPPRTMPConnection">
+         <apiName>XMPPRTMPConnection</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.core:IXMPPConnection</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.core:XMPPConnection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:Browser">
+         <apiName>Browser</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.core:IBrowser</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:XMPPBOSHConnection">
+         <apiName>XMPPBOSHConnection</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.core:IXMPPConnection</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.core:XMPPConnection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:UnescapedJID">
+         <apiName>UnescapedJID</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.igniterealtime.xiff.core:AbstractJID</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:EscapedJID">
+         <apiName>EscapedJID</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.igniterealtime.xiff.core:AbstractJID</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:XMPPTLSConnection">
+         <apiName>XMPPTLSConnection</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.core:IXMPPConnection</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.core:XMPPConnection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:IListener">
+         <apiName>IListener</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>flash.events:IEventDispatcher</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:InBandRegistrator">
+         <apiName>InBandRegistrator</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:AbstractJID">
+         <apiName>AbstractJID</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:IXMPPConnection">
+         <apiName>IXMPPConnection</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>flash.events:IEventDispatcher</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:IBrowser">
+         <apiName>IBrowser</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.auth">
+      <apiName>org.igniterealtime.xiff.data.auth</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.auth:AuthExtension">
+         <apiName>AuthExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.bind">
+      <apiName>org.igniterealtime.xiff.data.bind</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.bind:BindExtension">
+         <apiName>BindExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.browse">
+      <apiName>org.igniterealtime.xiff.data.browse</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.browse:BrowseExtension">
+         <apiName>BrowseExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.browse:BrowseItem</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.browse:BrowseItem">
+         <apiName>BrowseItem</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.disco">
+      <apiName>org.igniterealtime.xiff.data.disco</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.disco:DiscoItem">
+         <apiName>DiscoItem</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.disco:LastActivityExtension">
+         <apiName>LastActivityExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.disco:InfoDiscoExtension">
+         <apiName>InfoDiscoExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.disco:DiscoExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.disco:DiscoExtension">
+         <apiName>DiscoExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.disco:ItemDiscoExtension">
+         <apiName>ItemDiscoExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.disco:DiscoExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.disco:DiscoFeature">
+         <apiName>DiscoFeature</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.disco:DiscoIdentity">
+         <apiName>DiscoIdentity</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.feature">
+      <apiName>org.igniterealtime.xiff.data.feature</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.feature:FeatureNegotiationExtension">
+         <apiName>FeatureNegotiationExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.forms.enum">
+      <apiName>org.igniterealtime.xiff.data.forms.enum</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.forms.enum:FormType">
+         <apiName>FormType</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.forms.enum:FormFieldType">
+         <apiName>FormFieldType</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.forms">
+      <apiName>org.igniterealtime.xiff.data.forms</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.forms:FormExtension">
+         <apiName>FormExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.forms:FormReported">
+         <apiName>FormReported</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.forms:FormItem">
+         <apiName>FormItem</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.forms:FormField">
+         <apiName>FormField</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.id">
+      <apiName>org.igniterealtime.xiff.data.id</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.id:UUIDGenerator">
+         <apiName>UUIDGenerator</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.id:IIDGenerator</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.id:SOIncrementalGenerator">
+         <apiName>SOIncrementalGenerator</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.id:IIDGenerator</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.id:IncrementalGenerator</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.id:IncrementalGenerator">
+         <apiName>IncrementalGenerator</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.id:IIDGenerator</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.id:IIDGenerator">
+         <apiName>IIDGenerator</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.im">
+      <apiName>org.igniterealtime.xiff.data.im</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.im:RosterItem">
+         <apiName>RosterItem</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.im:RosterItemVO">
+         <apiName>RosterItemVO</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.im:IRosterItemVO</apiBaseInterface>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.im:IRosterGroup">
+         <apiName>IRosterGroup</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.im:RosterGroup">
+         <apiName>RosterGroup</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.im:IRosterGroup</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.im:IRosterItemVO">
+         <apiName>IRosterItemVO</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.im:IContact</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.im:IContact">
+         <apiName>IContact</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.im:RosterExtension">
+         <apiName>RosterExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.muc">
+      <apiName>org.igniterealtime.xiff.data.muc</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUCItem">
+         <apiName>MUCItem</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUCBaseExtension">
+         <apiName>MUCBaseExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtendable</apiBaseInterface>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUCExtension">
+         <apiName>MUCExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.muc:IMUCExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUC">
+         <apiName>MUC</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUCStatus">
+         <apiName>MUCStatus</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUCAdminExtension">
+         <apiName>MUCAdminExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.muc:MUCBaseExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUCUserExtension">
+         <apiName>MUCUserExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.muc:MUCBaseExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUCOwnerExtension">
+         <apiName>MUCOwnerExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.muc:MUCBaseExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:IMUCExtension">
+         <apiName>IMUCExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.ping">
+      <apiName>org.igniterealtime.xiff.data.ping</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.ping:PingExtension">
+         <apiName>PingExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.privatedata">
+      <apiName>org.igniterealtime.xiff.data.privatedata</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.privatedata:PrivateDataExtension">
+         <apiName>PrivateDataExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.register">
+      <apiName>org.igniterealtime.xiff.data.register</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.register:RegisterExtension">
+         <apiName>RegisterExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.rpc">
+      <apiName>org.igniterealtime.xiff.data.rpc</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.rpc:XMLRPC">
+         <apiName>XMLRPC</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.rpc:RPCExtension">
+         <apiName>RPCExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.search">
+      <apiName>org.igniterealtime.xiff.data.search</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.search:SearchItem">
+         <apiName>SearchItem</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.search:SearchExtension">
+         <apiName>SearchExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.session">
+      <apiName>org.igniterealtime.xiff.data.session</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.session:SessionExtension">
+         <apiName>SessionExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.sharedgroups">
+      <apiName>org.igniterealtime.xiff.data.sharedgroups</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.sharedgroups:SharedGroupsExtension">
+         <apiName>SharedGroupsExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.si">
+      <apiName>org.igniterealtime.xiff.data.si</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.si:FileTransferExtension">
+         <apiName>FileTransferExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.si:StreamInitiationExtension">
+         <apiName>StreamInitiationExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.stream">
+      <apiName>org.igniterealtime.xiff.data.stream</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.stream:IBBCloseExtension">
+         <apiName>IBBCloseExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.stream:IBBExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.stream:IBBOpenExtension">
+         <apiName>IBBOpenExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.stream:IBBExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.stream:IBBDataExtension">
+         <apiName>IBBDataExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.stream:IBBExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.stream:IBBExtension">
+         <apiName>IBBExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.vcard">
+      <apiName>org.igniterealtime.xiff.data.vcard</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.vcard:VCardExtension">
+         <apiName>VCardExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.version">
+      <apiName>org.igniterealtime.xiff.data.version</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.version:SoftwareVersionExtension">
+         <apiName>SoftwareVersionExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.whiteboard">
+      <apiName>org.igniterealtime.xiff.data.whiteboard</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.whiteboard:Stroke">
+         <apiName>Stroke</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.whiteboard:Fill">
+         <apiName>Fill</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.whiteboard:WhiteboardExtension">
+         <apiName>WhiteboardExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.whiteboard:Path">
+         <apiName>Path</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.xhtml">
+      <apiName>org.igniterealtime.xiff.data.xhtml</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.xhtml:XHTMLExtension">
+         <apiName>XHTMLExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data">
+      <apiName>org.igniterealtime.xiff.data</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data:IMessage">
+         <apiName>IMessage</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IXMPPStanza</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:IIQ">
+         <apiName>IIQ</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IXMPPStanza</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:ExtensionClassRegistry">
+         <apiName>ExtensionClassRegistry</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:Message">
+         <apiName>Message</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IMessage</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMPPStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:IQ">
+         <apiName>IQ</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IIQ</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMPPStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:XMPPStanza">
+         <apiName>XMPPStanza</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiDynamic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IXMPPStanza</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:AbstractExtension">
+         <apiName>AbstractExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:XMLStanza">
+         <apiName>XMLStanza</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IXMLStanza</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:ExtensionContainer</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:Presence">
+         <apiName>Presence</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IPresence</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMPPStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:IPresence">
+         <apiName>IPresence</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IXMPPStanza</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:Extension">
+         <apiName>Extension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:ExtensionContainer">
+         <apiName>ExtensionContainer</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtendable</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:IExtension">
+         <apiName>IExtension</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:IXMPPStanza">
+         <apiName>IXMPPStanza</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IXMLStanza</apiBaseInterface>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtendable</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:INodeProxy">
+         <apiName>INodeProxy</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:IXMLStanza">
+         <apiName>IXMLStanza</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtendable</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:IExtendable">
+         <apiName>IExtendable</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.events">
+      <apiName>org.igniterealtime.xiff.events</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.events:RegistrationFieldsEvent">
+         <apiName>RegistrationFieldsEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:IncomingDataEvent">
+         <apiName>IncomingDataEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:ConnectionSuccessEvent">
+         <apiName>ConnectionSuccessEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:IQEvent">
+         <apiName>IQEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:InviteEvent">
+         <apiName>InviteEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:ChangePasswordSuccessEvent">
+         <apiName>ChangePasswordSuccessEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:ModelChangedEvent">
+         <apiName>ModelChangedEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:PresenceEvent">
+         <apiName>PresenceEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:MessageEvent">
+         <apiName>MessageEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:RosterEvent">
+         <apiName>RosterEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:BookmarkRetrievedEvent">
+         <apiName>BookmarkRetrievedEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:VCardEvent">
+         <apiName>VCardEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:RoomEvent">
+         <apiName>RoomEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:FileTransferEvent">
+         <apiName>FileTransferEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:SearchPrepEvent">
+         <apiName>SearchPrepEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:LoginEvent">
+         <apiName>LoginEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:RegistrationSuccessEvent">
+         <apiName>RegistrationSuccessEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:BookmarkChangedEvent">
+         <apiName>BookmarkChangedEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:DisconnectionEvent">
+         <apiName>DisconnectionEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:XIFFErrorEvent">
+         <apiName>XIFFErrorEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:PropertyChangeEvent">
+         <apiName>PropertyChangeEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:OutgoingDataEvent">
+         <apiName>OutgoingDataEvent</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.exception">
+      <apiName>org.igniterealtime.xiff.exception</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.exception:SerializationException">
+         <apiName>SerializationException</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Error</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.filter">
+      <apiName>org.igniterealtime.xiff.filter</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.filter:IPacketFilter">
+         <apiName>IPacketFilter</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.filter:CallbackPacketFilter">
+         <apiName>CallbackPacketFilter</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.filter:IPacketFilter</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.im">
+      <apiName>org.igniterealtime.xiff.im</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.im:Roster">
+         <apiName>Roster</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.im:IRoster</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.collections:ArrayCollection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.im:IRoster">
+         <apiName>IRoster</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.collections:ICollection</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.privatedata">
+      <apiName>org.igniterealtime.xiff.privatedata</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.privatedata:IPrivatePayload">
+         <apiName>IPrivatePayload</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.privatedata:PrivateDataManager">
+         <apiName>PrivateDataManager</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.util">
+      <apiName>org.igniterealtime.xiff.util</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.util:Hex">
+         <apiName>Hex</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.util:ICompressor">
+         <apiName>ICompressor</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.util:Zlib">
+         <apiName>Zlib</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.util:ICompressor</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.util:SHA1">
+         <apiName>SHA1</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.util:Callback">
+         <apiName>Callback</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.util:DateTimeParser">
+         <apiName>DateTimeParser</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.util:ZlibNative">
+         <apiName>ZlibNative</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.util:ICompressor</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.vcard">
+      <apiName>org.igniterealtime.xiff.vcard</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCardPhoto">
+         <apiName>VCardPhoto</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCardPhoto</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCardAddress">
+         <apiName>VCardAddress</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCardAddress</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCardName">
+         <apiName>IVCardName</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCardOrganization">
+         <apiName>VCardOrganization</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCardOrganization</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCard">
+         <apiName>IVCard</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>flash.events:IEventDispatcher</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCardTelephone">
+         <apiName>IVCardTelephone</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCardSound">
+         <apiName>IVCardSound</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCardSound">
+         <apiName>VCardSound</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCardSound</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCardName">
+         <apiName>VCardName</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCardName</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCard">
+         <apiName>VCard</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCard</apiBaseInterface>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCardAddress">
+         <apiName>IVCardAddress</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCardOrganization">
+         <apiName>IVCardOrganization</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCardGeographicalPosition">
+         <apiName>IVCardGeographicalPosition</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCardPhoto">
+         <apiName>IVCardPhoto</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCardTelephone">
+         <apiName>VCardTelephone</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCardTelephone</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCardGeographicalPosition">
+         <apiName>VCardGeographicalPosition</apiName>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCardGeographicalPosition</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <prolog>
+            <asMetadata/>
+         </prolog>
+      </apiClassifier>
+   </apiPackage>
+</allClasses>

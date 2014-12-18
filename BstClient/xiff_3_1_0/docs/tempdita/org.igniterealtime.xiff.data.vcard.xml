@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.data.vcard"><apiName>org.igniterealtime.xiff.data.vcard</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.data.vcard:VCardExtension"><apiName>VCardExtension</apiName><shortdesc>
+	 XEP-0054: vcard-temp
+	 	 The basic functionality is for a user to store and retrieve an XML
+	 representation of his or her vCard using the data storage capabilities
+	 native to all existing Jabber server implementations.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0054: vcard-temp
+	 	 <p>The basic functionality is for a user to store and retrieve an XML
+	 representation of his or her vCard using the data storage capabilities
+	 native to all existing Jabber server implementations. This is done
+	 by by sending an <b>iq</b> of type "set" (storage) or "get"
+	 (retrieval) to one's Jabber server containing a <b>vCard</b>
+	 child scoped by the 'vcard-temp' namespace, with the <b>vCard</b>
+	 element containing the actual vCard-XML elements as defined by the
+	 vCard-XML DTD. Other users may then view one's vCard information.</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0054.html"><linktext>http://xmpp.org/extensions/xep-0054.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.vcard:VCardExtension:VCardExtension"><apiName>VCardExtension</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>(Optional) The containing XML for this extension
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.vcard:VCardExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.vcard:VCardExtension:getNS"><apiName>getNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.vcard:VCardExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>vCard</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.vcard:VCardExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>vcard-temp</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier></apiPackage>

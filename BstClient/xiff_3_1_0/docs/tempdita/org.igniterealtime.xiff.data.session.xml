@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.data.session"><apiName>org.igniterealtime.xiff.data.session</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.data.session:SessionExtension"><apiName>SessionExtension</apiName><shortdesc>
+	 Session Establishment
+	 	 Most instant messaging and presence applications based on XMPP are
+	 implemented via a client-server architecture that requires a client
+	 to establish a session on a server in order to engage in the expected
+	 instant messaging and presence activities.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Session Establishment
+	 	 <p>Most instant messaging and presence applications based on XMPP are
+	 implemented via a client-server architecture that requires a client
+	 to establish a session on a server in order to engage in the expected
+	 instant messaging and presence activities.  However, there are
+	 several pre-conditions that MUST be met before a client can establish
+     an instant messaging and presence session.</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://tools.ietf.org/html/rfc3921#section-3"><linktext>http://tools.ietf.org/html/rfc3921#section-3</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.session:SessionExtension:SessionExtension"><apiName>SessionExtension</apiName><shortdesc>
+		 Session Establishment as defined in RFC 3921
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Session Establishment as defined in RFC 3921
+		 		 </apiDesc></apiConstructorDetail><related-links><link href="org.igniterealtime.xiff.core.xml#XMPPConnection/establishSession"><linktext>org.igniterealtime.xiff.core.XMPPConnection.establishSession</linktext></link></related-links></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.session:SessionExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.session:SessionExtension:getNS"><apiName>getNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.session:SessionExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>session</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.session:SessionExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>urn:ietf:params:xml:ns:xmpp-session</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier></apiPackage>

@@ -1,0 +1,3938 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<allClasses>
+   <apiPackage id="org.igniterealtime.xiff.auth">
+      <apiName>org.igniterealtime.xiff.auth</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.auth:ISASLAuth">
+         <apiName>ISASLAuth</apiName>
+         <shortdesc>
+	 This is a base class for use with Simple Authentication and Security Layer
+	 (SASL) mechanisms.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This is a base class for use with Simple Authentication and Security Layer
+	 (SASL) mechanisms. Implement this class when creating new SASL mechanisms.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.auth:SASLAuth">
+         <apiName>SASLAuth</apiName>
+         <shortdesc>
+	 This is a base class for use with Simple Authentication and Security Layer
+	 (SASL) mechanisms.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This is a base class for use with Simple Authentication and Security Layer
+	 (SASL) mechanisms. Sub-class this class when creating new SASL mechanisms.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.auth:DigestMD5">
+         <apiName>DigestMD5</apiName>
+         <shortdesc>
+	 This class provides SASL authentication using the DIGEST-MD5 mechanism, a HTTP Digest
+	 compatible challenge-response scheme based upon MD5.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class provides SASL authentication using the DIGEST-MD5 mechanism, a HTTP Digest
+	 compatible challenge-response scheme based upon MD5. DIGEST-MD5 offers a data security layer.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.auth:Anonymous">
+         <apiName>Anonymous</apiName>
+         <shortdesc>
+	 This class provides SASL authentication using the ANONYMOUS mechanism.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class provides SASL authentication using the ANONYMOUS mechanism.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.auth:XFacebookPlatform">
+         <apiName>XFacebookPlatform</apiName>
+         <shortdesc>
+	 This class provides SASL authentication using the X-FACEBOOK-PLATFORM mechanism.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class provides SASL authentication using the X-FACEBOOK-PLATFORM mechanism.
+	 	 <p>Facebook Chat currently supports the following features, related to authentication:</p>
+	           <ul>
+	              <li>Facebook Platform authentication using the X-FACEBOOK-PLATFORM SASL authentication mechanism</li>
+	              <li>Username/password authentication using the DIGEST-MD5 authentication mechanism</li>
+	           </ul>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.auth:Plain">
+         <apiName>Plain</apiName>
+         <shortdesc>
+	 This class provides SASL authentication using the PLAIN mechanism.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class provides SASL authentication using the PLAIN mechanism.
+	 This is used for plain text (base64 encoded) password authentication with an XMPP
+	 server.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.auth:XOAuth2">
+         <apiName>XOAuth2</apiName>
+         <shortdesc>
+	 This class provides SASL authentication using the X-OAUTH2 mechanism.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class provides SASL authentication using the X-OAUTH2 mechanism.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.auth:External">
+         <apiName>External</apiName>
+         <shortdesc>
+	 This class provides SASL authentication using the EXTERNAL mechanism.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class provides SASL authentication using the EXTERNAL mechanism.
+	 This is particularly useful when TLS authentication is required.
+	 	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.bookmark">
+      <apiName>org.igniterealtime.xiff.bookmark</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.bookmark:GroupChatBookmark">
+         <apiName>GroupChatBookmark</apiName>
+         <shortdesc>
+	 XEP-0048: Bookmarks
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0048: Bookmarks
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.bookmark:UrlBookmark">
+         <apiName>UrlBookmark</apiName>
+         <shortdesc>
+	 The url element is designed for bookmarking web pages,
+	 i.e., HTTP or HTTPS URLs.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 The <b>url</b> element is designed for bookmarking web pages,
+	 i.e., HTTP or HTTPS URLs.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.bookmark:BookmarkManager">
+         <apiName>BookmarkManager</apiName>
+         <shortdesc>
+	 XEP-0048: Bookmarks
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0048: Bookmarks
+	 	 </apiDesc>
+         <adobeApiEvent id="org.igniterealtime.xiff.bookmark:BookmarkManager_org.igniterealtime.xiff.events.BookmarkRetrievedEvent.BOOKMARK_RETRIEVED_bookmarkRetrieved">
+            <apiName>bookmarkRetrieved</apiName>
+            <shortdesc>
+	 </shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.BookmarkRetrievedEvent.BOOKMARK_RETRIEVED</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.BookmarkRetrievedEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.bookmark:BookmarkManager_org.igniterealtime.xiff.events.BookmarkChangedEvent.GROUPCHAT_BOOKMARK_REMOVED_groupchatBookmarkRemoved">
+            <apiName>groupchatBookmarkRemoved</apiName>
+            <shortdesc>
+	 </shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.BookmarkChangedEvent.GROUPCHAT_BOOKMARK_REMOVED</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.BookmarkChangedEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.bookmark:BookmarkManager_org.igniterealtime.xiff.events.BookmarkChangedEvent.GROUPCHAT_BOOKMARK_ADDED_groupchatBookmarkAdded">
+            <apiName>groupchatBookmarkAdded</apiName>
+            <shortdesc>
+	 </shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.BookmarkChangedEvent.GROUPCHAT_BOOKMARK_ADDED</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.BookmarkChangedEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.bookmark:BookmarkPrivatePayload">
+         <apiName>BookmarkPrivatePayload</apiName>
+         <shortdesc>
+	 XEP-0048: Bookmarks
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.privatedata:IPrivatePayload</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0048: Bookmarks
+	 	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.collections.events">
+      <apiName>org.igniterealtime.xiff.collections.events</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.collections.events:CollectionEventKind">
+         <apiName>CollectionEventKind</apiName>
+         <shortdesc>
+	  The CollectionEventKind class contains constants for the valid values
+	  of the CollectionEvent class kind property.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiFinal/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	  The CollectionEventKind class contains constants for the valid values
+	  of the CollectionEvent class kind property.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.collections.events:CollectionEvent">
+         <apiName>CollectionEvent</apiName>
+         <shortdesc>
+	  The CollectionEvent class represents an event that is
+	  dispatched when the associated collection changes.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	  The CollectionEvent class represents an event that is
+	  dispatched when the associated collection changes.
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.collections">
+      <apiName>org.igniterealtime.xiff.collections</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.collections:ICollection">
+         <apiName>ICollection</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>flash.events:IEventDispatcher</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.collections:ArrayCollection">
+         <apiName>ArrayCollection</apiName>
+         <shortdesc>
+	 The ArrayCollection class is a wrapper class that exposes an Array as a
+	 collection that can be accessed and manipulated using collection methods.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.collections:ICollection</apiBaseInterface>
+               <apiBaseClassifier>flash.utils:Proxy</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 The ArrayCollection class is a wrapper class that exposes an Array as a
+	 collection that can be accessed and manipulated using collection methods.
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.conference">
+      <apiName>org.igniterealtime.xiff.conference</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.conference:Room">
+         <apiName>Room</apiName>
+         <shortdesc>
+	 Manages incoming and outgoing data from a conference room as part of multi-user conferencing (XEP-0045).</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.conference:IRoom</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.collections:ArrayCollection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Manages incoming and outgoing data from a conference room as part of multi-user conferencing (XEP-0045).
+	 You will need an instance of this class for each room that the user joins.
+	 	 </apiDesc>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.USER_PRESENCE_CHANGE_userPresenceChange">
+            <apiName>userPresenceChange</apiName>
+            <shortdesc>
+	 Dispatched when a user's presence changes.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.USER_PRESENCE_CHANGE</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when a user's presence changes.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.USER_KICKED_userKicked">
+            <apiName>userKicked</apiName>
+            <shortdesc>
+	 Dispatched when a user is kicked from the room.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.USER_KICKED</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when a user is kicked from the room.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.USER_JOIN_userJoin">
+            <apiName>userJoin</apiName>
+            <shortdesc>
+	 Dispatched whenever an occupant joins the room.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.USER_JOIN</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched whenever an occupant joins the room. The <codeph>RoomEvent</codeph> instance will
+	 contain an attribute <codeph>nickname</codeph> with the nickname of the occupant who joined.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.USER_DEPARTURE_userDeparture">
+            <apiName>userDeparture</apiName>
+            <shortdesc>
+	 Dispatched whenever an occpant leaves the room.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.USER_DEPARTURE</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched whenever an occpant leaves the room. The <codeph>RoomEvent</codeph> instance will
+	 contain an attribute <codeph>nickname</codeph> with the nickname of the occupant who left.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.USER_BANNED_userBanned">
+            <apiName>userBanned</apiName>
+            <shortdesc>
+	 Dispatched when a user is banned from the room.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.USER_BANNED</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when a user is banned from the room.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.SUBJECT_CHANGE_subjectChange">
+            <apiName>subjectChange</apiName>
+            <shortdesc>
+	 Dispatched when the room subject changes.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.SUBJECT_CHANGE</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when the room subject changes.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.ROOM_LEAVE_roomLeave">
+            <apiName>roomLeave</apiName>
+            <shortdesc>
+	 Dispatched when the server acknoledges that you have the left the room.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.ROOM_LEAVE</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when the server acknoledges that you have the left the room.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.ROOM_JOIN_roomJoin">
+            <apiName>roomJoin</apiName>
+            <shortdesc>
+	 Dispatched when you have entered the room and messages that are sent
+	 will be displayed to other users.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.ROOM_JOIN</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when you have entered the room and messages that are sent
+	 will be displayed to other users. The room's role and affiliation will
+	 be visible from this point forward.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.ROOM_DESTROYED_roomDestroyed">
+            <apiName>roomDestroyed</apiName>
+            <shortdesc>
+	 Dispatched when the room is removed.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.ROOM_DESTROYED</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when the room is removed.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.REGISTRATION_REQ_ERROR_registrationReqError">
+            <apiName>registrationReqError</apiName>
+            <shortdesc>
+	 Dispatched when the room is members-only and the user is not on the member list.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.REGISTRATION_REQ_ERROR</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when the room is members-only and the user is not on the member list.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.PRIVATE_MESSAGE_privateMessage">
+            <apiName>privateMessage</apiName>
+            <shortdesc>
+	 Dispatched whenever a new private message is received.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.PRIVATE_MESSAGE</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched whenever a new private message is received. The <codeph>RoomEvent</codeph> class
+	 contains an attribute <codeph>data</codeph> with the private message as an instance of the
+	 <codeph>Message</codeph> class.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.PASSWORD_ERROR_passwordError">
+            <apiName>passwordError</apiName>
+            <shortdesc>
+	 Dispatched when the room requires a password and the user did not supply one (or
+	 the password provided is incorrect).</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.PASSWORD_ERROR</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when the room requires a password and the user did not supply one (or
+	 the password provided is incorrect).
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.NICK_CONFLICT_nickConflict">
+            <apiName>nickConflict</apiName>
+            <shortdesc>
+	 Dispatched when the user's preferred nickname already exists in the room.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.NICK_CONFLICT</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when the user's preferred nickname already exists in the room.	The
+	 <codeph>RoomEvent</codeph> will contain an attribute <codeph>nickname</codeph> with the nickname
+	 already existing in the room.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.MAX_USERS_ERROR_maxUsersError">
+            <apiName>maxUsersError</apiName>
+            <shortdesc>
+	 Dispatched if the room has reached its maximum number of occupants.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.MAX_USERS_ERROR</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched if the room has reached its maximum number of occupants.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.LOCKED_ERROR_lockedError">
+            <apiName>lockedError</apiName>
+            <shortdesc>
+	 Dispatched if a user attempts to enter a room while it is "locked" (i.e., before the room
+	 creator provides an initial configuration and therefore before the room officially exists).</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.LOCKED_ERROR</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched if a user attempts to enter a room while it is "locked" (i.e., before the room
+	 creator provides an initial configuration and therefore before the room officially exists).
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.GROUP_MESSAGE_groupMessage">
+            <apiName>groupMessage</apiName>
+            <shortdesc>
+	 Dispatched whenever a new message intented for all room occupants is received.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.GROUP_MESSAGE</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched whenever a new message intented for all room occupants is received. The
+	 <codeph>RoomEvent</codeph> class will contain an attribute <codeph>data</codeph> with the
+	 group message as an instance of the <codeph>Message</codeph> class.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.DECLINED_declined">
+            <apiName>declined</apiName>
+            <shortdesc>
+	 Dispatched when an invite to this room has been declined by the invitee.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.DECLINED</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when an invite to this room has been declined by the invitee. The <codeph>RoomEvent</codeph>
+	                 <codeph>data</codeph> property that has the following attributes:
+	 	 <p>
+                     <codeph>from</codeph>: The JID of the user initiating the invite
+	 <codeph>reason</codeph>: A string containing the reason to join the room
+	 <codeph>data</codeph>: The original message containing the decline</p>
+	 	            </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.CONFIGURE_ROOM_COMPLETE_configureRoomComplete">
+            <apiName>configureRoomComplete</apiName>
+            <shortdesc>
+	 Dispatched when a room configuration form is complete.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.CONFIGURE_ROOM_COMPLETE</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when a room configuration form is complete.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+            <related-links>
+               <link href="org.igniterealtime.xiff.conference.xml#Room/configure">
+                  <linktext>configure</linktext>
+               </link>
+            </related-links>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.CONFIGURE_ROOM_configureRoom">
+            <apiName>configureRoom</apiName>
+            <shortdesc>
+	 Dispatched when a room configuration form is required.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.CONFIGURE_ROOM</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when a room configuration form is required.	This can occur during the
+	 creation of a room, or if a room configuration is requested.	The <codeph>RoomEvent</codeph>
+	 instance will contain an attribute <codeph>data</codeph> that is an instance of an object
+	 with the following attributes:
+	 	 <p>
+                     <codeph>instructions</codeph>: Instructions for the use of form
+	 <codeph>title</codeph>: Title of the configuration form
+	 <codeph>label</codeph>: A friendly name for the field
+	 <codeph>name</codeph>: A computer readable identifier for the field used to identify
+	 this field in the result passed to <codeph>configure()</codeph>
+	                    <codeph>type</codeph>: The type of the field to be displayed. Type will be a constant
+	 from the <codeph>FormField</codeph> class.</p>
+	 	            </apiDesc>
+            </adobeApiEventDetail>
+            <related-links>
+               <link href="org.igniterealtime.xiff.data.forms.xml#FormExtension">
+                  <linktext>org.igniterealtime.xiff.data.forms.FormExtension</linktext>
+               </link>
+               <link href="org.igniterealtime.xiff.data.forms.xml#FormField">
+                  <linktext>org.igniterealtime.xiff.data.forms.FormField</linktext>
+               </link>
+               <link href="org.igniterealtime.xiff.conference.xml#Room/configure">
+                  <linktext>configure</linktext>
+               </link>
+            </related-links>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.BANNED_ERROR_bannedError">
+            <apiName>bannedError</apiName>
+            <shortdesc>
+	 Dispatched if the user attempted to join the room but was not allowed to do so because
+	 they are banned (i.e., has an affiliation of "outcast").</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.BANNED_ERROR</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched if the user attempted to join the room but was not allowed to do so because
+	 they are banned (i.e., has an affiliation of "outcast").
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.AFFILIATIONS_affiliations">
+            <apiName>affiliations</apiName>
+            <shortdesc>
+	 Dispatched when an affiliation list has been requested.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.AFFILIATIONS</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when an affiliation list has been requested. The event object contains an
+	 array of <codeph>MUCItems</codeph> containing the JID and affiliation properties.
+	 	 <p>To grant or revoke permissions based on this list, only send the changes you wish to
+	 make, calling grant/revoke with the new affiliation and existing JID.</p>
+	 	            </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.AFFILIATION_CHANGE_COMPLETE_affiliationChangeComplete">
+            <apiName>affiliationChangeComplete</apiName>
+            <shortdesc>
+	 Dispatched when an affiliation change has completed.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.AFFILIATION_CHANGE_COMPLETE</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when an affiliation change has completed.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.RoomEvent.ADMIN_ERROR_adminError">
+            <apiName>adminError</apiName>
+            <shortdesc>
+	 Dispatched when an administration action failed.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RoomEvent.ADMIN_ERROR</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RoomEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when an administration action failed.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+            <related-links>
+               <link href="" invalidHref="org.igniterealtime.xiff.core.XMPPConnection.error.xml">
+                  <linktext>org.igniterealtime.xiff.core.XMPPConnection.error</linktext>
+               </link>
+            </related-links>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:Room_org.igniterealtime.xiff.events.PropertyChangeEvent.CHANGE_change">
+            <apiName>change</apiName>
+            <shortdesc>
+	 Dispatched when the active, affiliation, or role property changes.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.PropertyChangeEvent.CHANGE</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.PropertyChangeEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when the active, affiliation, or role property changes.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.conference:InviteListener">
+         <apiName>InviteListener</apiName>
+         <shortdesc>
+	 Manages the dispatching of events during invitations.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.core:IListener</apiBaseInterface>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Manages the dispatching of events during invitations. Add event
+	 listeners to an instance of this class to monitor invite and decline
+	 events.
+	 	 <p>You only need a single instance of this class to listen for all invite
+	 or decline events.</p>
+	        </apiDesc>
+         <adobeApiEvent id="org.igniterealtime.xiff.conference:InviteListener_org.igniterealtime.xiff.InviteEvent.INVITED_invited">
+            <apiName>invited</apiName>
+            <shortdesc>
+	 Dispatched when an invitations has been received.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.InviteEvent.INVITED</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.InviteEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when an invitations has been received.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+            <related-links>
+               <link href="org.igniterealtime.xiff.conference.xml#Room">
+                  <linktext>org.igniterealtime.xiff.conference.Room</linktext>
+               </link>
+               <link href="" invalidHref="org.igniterealtime.xiff.conference.Room.xml#/invite">
+                  <linktext>org.igniterealtime.xiff.conference.Room..invite</linktext>
+               </link>
+            </related-links>
+         </adobeApiEvent>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.conference:RoomFile">
+         <apiName>RoomFile</apiName>
+         <shortdesc>
+	 ?
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 ?
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.conference:RoomFileRepository">
+         <apiName>RoomFileRepository</apiName>
+         <shortdesc>
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.conference:IRoomOccupant">
+         <apiName>IRoomOccupant</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.im:IContact</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.conference:IRoom">
+         <apiName>IRoom</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.collections:ICollection</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.conference:RoomOccupant">
+         <apiName>RoomOccupant</apiName>
+         <shortdesc>
+	 A person in a room
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.conference:IRoomOccupant</apiBaseInterface>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A person in a room
+	 	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.core">
+      <apiName>org.igniterealtime.xiff.core</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.core:XMPPConnection">
+         <apiName>XMPPConnection</apiName>
+         <shortdesc>
+	 This class is used to connect to and manage data coming from an XMPP server.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.core:IXMPPConnection</apiBaseInterface>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class is used to connect to and manage data coming from an XMPP server.
+	 Use one instance of this class per connection.
+	 </apiDesc>
+         <adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.IQEvent_">
+            <apiName/>
+            <shortdesc>
+	 Dispatched on incoming IQ data that has an enabled extension.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.IQEvent</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.IQEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched on incoming IQ data that has an enabled extension.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.PresenceEvent.PRESENCE_presence">
+            <apiName>presence</apiName>
+            <shortdesc>
+	 Dispatched on incoming presence data.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.PresenceEvent.PRESENCE</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.PresenceEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched on incoming presence data.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.OutgoingDataEvent.OUTGOING_DATA_outgoingData">
+            <apiName>outgoingData</apiName>
+            <shortdesc>
+	 Dispatched whenever data is sent to the server.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.OutgoingDataEvent.OUTGOING_DATA</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.OutgoingDataEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched whenever data is sent to the server.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.MessageEvent.MESSAGE_message">
+            <apiName>message</apiName>
+            <shortdesc>
+	 Dispatched on incoming messages.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.MessageEvent.MESSAGE</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.MessageEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched on incoming messages.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.LoginEvent.LOGIN_login">
+            <apiName>login</apiName>
+            <shortdesc>
+	 Dispatched on successful authentication (login) with the server.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.LoginEvent.LOGIN</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.LoginEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched on successful authentication (login) with the server.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.IncomingDataEvent.INCOMING_DATA_incomingData">
+            <apiName>incomingData</apiName>
+            <shortdesc>
+	 Dispatched whenever there is incoming XML data.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.IncomingDataEvent.INCOMING_DATA</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.IncomingDataEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched whenever there is incoming XML data.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.XIFFErrorEvent.XIFF_ERROR_error">
+            <apiName>error</apiName>
+            <shortdesc>
+	 Dispatched when there is some type of XMPP error.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.XIFFErrorEvent.XIFF_ERROR</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.XIFFErrorEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when there is some type of XMPP error.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.DisconnectionEvent.DISCONNECT_disconnection">
+            <apiName>disconnection</apiName>
+            <shortdesc>
+	 Dispatched when there is a disconnection from the server.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.DisconnectionEvent.DISCONNECT</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.DisconnectionEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when there is a disconnection from the server.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.ConnectionSuccessEvent.CONNECT_SUCCESS_connection">
+            <apiName>connection</apiName>
+            <shortdesc>
+	 Dispatched when the connection is successfully made to the server.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.ConnectionSuccessEvent.CONNECT_SUCCESS</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.ConnectionSuccessEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when the connection is successfully made to the server.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:XMPPRTMPConnection">
+         <apiName>XMPPRTMPConnection</apiName>
+         <shortdesc>
+	 A child of XMPPConnection, this class makes use of the
+	 Flash RTMP connection instead of the Socket.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.core:IXMPPConnection</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.core:XMPPConnection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A child of <codeph>XMPPConnection</codeph>, this class makes use of the
+	 Flash RTMP connection instead of the <codeph>Socket</codeph>.
+	 
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:Browser">
+         <apiName>Browser</apiName>
+         <shortdesc>
+	 XEP-0030: Service Discovery
+	 	 This class provides a means of querying for available services on an XMPP
+	 server using the Disco protocol extension.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.core:IBrowser</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0030: Service Discovery
+	 	 <p>This class provides a means of querying for available services on an XMPP
+	 server using the Disco protocol extension. For more information on Disco,
+	 take a look at
+	 <xref href="http://xmpp.org/extensions/xep-0030.html">XEP-0030</xref> and
+	 <xref href="http://xmpp.org/extensions/xep-0011.html">XEP-0011 (obsolete)</xref> for the
+	 protocol enhancement specifications.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:XMPPBOSHConnection">
+         <apiName>XMPPBOSHConnection</apiName>
+         <shortdesc>
+	 XEP-0124: Bidirectional-streams Over Synchronous HTTP (BOSH) and
+	 XEP-0206: XMPP Over BOSH.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.core:IXMPPConnection</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.core:XMPPConnection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0124: Bidirectional-streams Over Synchronous HTTP (BOSH) and
+	 XEP-0206: XMPP Over BOSH.
+	 	 <p>Using BOSH does not prevent your application from respecting
+	 Adobe Flash Player policy file issues. HTTP requests to your
+	 server must be authorized with a <codeph>crossdomain.xml</codeph> file
+	 in your webserver root.</p>
+	 	         <p>Warning: if you are using BOSH through HTTPS, your crossdomain
+	 policy file must also be served through HTTPS. Your application
+	 (if online) must also be served through HTTPS else you will
+	 have a crossdomain policy issue. This issue can be solved by
+	 using the secure property of the allow-access-from node in the
+	 crossdomain.xml file. But this is not recommended by Adobe.</p>
+	 	         <p>If your crossdomain policy file cannot
+	 be served by your server, this issue could be solved with an
+	 Apache proxy redirect so that any automatic Flash/Flex calls
+	 to an URL like <codeph>http://xmppserver:5280/crossdomain.xml</codeph> will be
+	 redirected as an URL of your choice such as
+	 <codeph>http://webserver/crossdomain.xml</codeph>.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:UnescapedJID">
+         <apiName>UnescapedJID</apiName>
+         <shortdesc>
+	 This class provides access to a JID (Jabber ID) in unescaped form.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.igniterealtime.xiff.core:AbstractJID</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class provides access to a JID (Jabber ID) in unescaped form.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:EscapedJID">
+         <apiName>EscapedJID</apiName>
+         <shortdesc>
+	 This class provides access to a JID (Jabber ID) in escaped form.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.igniterealtime.xiff.core:AbstractJID</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class provides access to a JID (Jabber ID) in escaped form.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:XMPPTLSConnection">
+         <apiName>XMPPTLSConnection</apiName>
+         <shortdesc>
+	 This class is used to connect to and manage data coming from an XMPP server that supports TLS.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.core:IXMPPConnection</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.core:XMPPConnection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class is used to connect to and manage data coming from an XMPP server that supports TLS.
+	 Use one instance of this class per connection.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:IListener">
+         <apiName>IListener</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>flash.events:IEventDispatcher</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:InBandRegistrator">
+         <apiName>InBandRegistrator</apiName>
+         <shortdesc>
+	 Manager for XEP-0077: In-Band Registration
+	 	 Once the connection has been established and the server has provided feature
+	 information, check XMPPConnection.registrationSupported before trying to use
+	 the registration.
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Manager for XEP-0077: In-Band Registration
+	 	 <p>Once the connection has been established and the server has provided feature
+	 information, check <codeph>XMPPConnection.registrationSupported</codeph> before trying to use
+	 the registration.</p>
+	 	      </apiDesc>
+         <adobeApiEvent id="org.igniterealtime.xiff.core:InBandRegistrator_org.igniterealtime.xiff.events.RegistrationFieldsEvent.REG_FIELDS_registrationFields">
+            <apiName>registrationFields</apiName>
+            <shortdesc>
+	 Dispatched on when new user account registration is successful.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RegistrationFieldsEvent.REG_FIELDS</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RegistrationFieldsEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched on when new user account registration is successful.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.core:InBandRegistrator_org.igniterealtime.xiff.events.RegistrationSuccessEvent.REGISTRATION_SUCCESS_registrationSuccess">
+            <apiName>registrationSuccess</apiName>
+            <shortdesc>
+	 Dispatched on when new user account registration is successful.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RegistrationSuccessEvent.REGISTRATION_SUCCESS</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RegistrationSuccessEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched on when new user account registration is successful.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.core:InBandRegistrator_org.igniterealtime.xiff.events.ChangePasswordSuccessEvent.PASSWORD_SUCCESS_changePasswordSuccess">
+            <apiName>changePasswordSuccess</apiName>
+            <shortdesc>
+	 Dispatched when a password change is successful.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.ChangePasswordSuccessEvent.PASSWORD_SUCCESS</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.ChangePasswordSuccessEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when a password change is successful.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:AbstractJID">
+         <apiName>AbstractJID</apiName>
+         <shortdesc>
+	 This is a base class for the JID (Jabber Identifier) classes.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This is a base class for the JID (Jabber Identifier) classes.
+	 	 <p>This class should not be instantiated directly, but should be subclassed
+	 instead.</p>
+	 	         <p>It provides functionality to determine if a JID is valid, as well as extract the
+	 node, domain and resource from the JID.</p>
+	 	         <p>The structure of JID is defined in RFC3920:</p>
+	           <ul>
+	              <li>
+                  <codeph>jid = [ node "@" ] domain [ "/" resource ]</codeph>
+               </li>
+	              <li>
+                  <codeph>domain = fqdn / address-literal</codeph>
+               </li>
+	              <li>
+                  <codeph>fqdn = (sub-domain 1"." sub-domain))</codeph>
+               </li>
+	              <li>
+                  <codeph>sub-domain = (internationalized domain label)</codeph>
+               </li>
+	              <li>
+                  <codeph>address-literal = IPv4address / IPv6address</codeph>
+               </li>
+	           </ul>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:IXMPPConnection">
+         <apiName>IXMPPConnection</apiName>
+         <shortdesc>
+	 Interface for the XMPP Connection classes
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>flash.events:IEventDispatcher</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Interface for the XMPP Connection classes
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.core:IBrowser">
+         <apiName>IBrowser</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.auth">
+      <apiName>org.igniterealtime.xiff.data.auth</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.auth:AuthExtension">
+         <apiName>AuthExtension</apiName>
+         <shortdesc>
+         XEP-0078: Non-SASL Authentication
+                  OBSOLETE
+         	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+         XEP-0078: Non-SASL Authentication
+                  <p>
+               <b>OBSOLETE</b>
+            </p>
+         	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.bind">
+      <apiName>org.igniterealtime.xiff.data.bind</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.bind:BindExtension">
+         <apiName>BindExtension</apiName>
+         <shortdesc>
+	 Resource Binding as defined in RFC 6120: Section 7.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Resource Binding as defined in RFC 6120: Section 7.
+	 	 <p>After a client authenticates with a server, it MUST bind a specific
+	 resource to the stream so that the server can properly address the
+	 client.</p>
+	           <p>That is, there MUST be an XMPP resource associated with the
+	 bare JID (<b>localpart@domainpart</b>) of the client, so that the address
+	 for use over that stream is a full JID of the form
+	 <b>localpart@domainpart/resource</b> (including the resourcepart).  This
+	 ensures that the server can deliver XML stanzas to and receive XML
+	 stanzas from the client in relation to entities other than the server
+	 itself or the client's account.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.browse">
+      <apiName>org.igniterealtime.xiff.data.browse</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.browse:BrowseExtension">
+         <apiName>BrowseExtension</apiName>
+         <shortdesc>
+	 XEP-0011: Jabber Browsing
+	 	 Implements jabber:iq:browse namespace.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.browse:BrowseItem</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0011: Jabber Browsing
+	 	 <p>Implements jabber:iq:browse namespace.  Use this extension to request the items
+	 of an agent or service such as the rooms of a conference server or the members of
+	 a room.</p>
+	 	         <p>
+               <b>OBSOLETE</b>
+            </p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.browse:BrowseItem">
+         <apiName>BrowseItem</apiName>
+         <shortdesc>
+	 XEP-0011: Jabber Browsing
+	 	 Class that representes a child resource of a browsed resource.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0011: Jabber Browsing
+	 	 Class that representes a child resource of a browsed resource.
+	 	 <p>
+               <b>OBSOLETE</b>
+            </p>
+	 	      </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.disco">
+      <apiName>org.igniterealtime.xiff.data.disco</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.disco:DiscoItem">
+         <apiName>DiscoItem</apiName>
+         <shortdesc>
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.disco:LastActivityExtension">
+         <apiName>LastActivityExtension</apiName>
+         <shortdesc>
+	 XEP-0012: Last Activity
+	 	 It is often helpful to know the time of the last
+	 activity associated with a entity.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0012: Last Activity
+	 	 <p>It is often helpful to know the time of the last
+	 activity associated with a entity. The canonical
+	 usage is to discover when a disconnected user last
+	 accessed its server. The 'jabber:iq:last' namespace
+	 provides a method for retrieving that information.
+	 The 'jabber:iq:last' namespace can also be used to
+	 discover or publicize when a connected user was
+	 last active on the server (i.e., the user's idle
+	 time) or to query servers and components about
+	 their current uptime.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.disco:InfoDiscoExtension">
+         <apiName>InfoDiscoExtension</apiName>
+         <shortdesc>
+	 Implements XEP-0030: Service Discovery
+	 for service info discovery.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.disco:DiscoExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Implements <xref href="http://xmpp.org/extensions/xep-0030.html">XEP-0030: Service Discovery</xref>
+	 for service info discovery.
+	 Also, take a look at <xref href="http://xmpp.org/extensions/xep-0020.html">XEP-0020</xref> and
+	 <xref href="http://xmpp.org/extensions/xep-0060.html">XEP-0060</xref>.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.disco:DiscoExtension">
+         <apiName>DiscoExtension</apiName>
+         <shortdesc>
+	 XEP-0030: Service Discovery
+	 	 Base class for service discovery extensions.
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0030: Service Discovery
+	 	 <p>Base class for service discovery extensions.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.disco:ItemDiscoExtension">
+         <apiName>ItemDiscoExtension</apiName>
+         <shortdesc>
+	 Implements XEP-0030
+	 for service item discovery.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.disco:DiscoExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Implements <xref href="http://xmpp.org/extensions/xep-0030.html">XEP-0030</xref>
+	 for service item discovery.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.disco:DiscoFeature">
+         <apiName>DiscoFeature</apiName>
+         <shortdesc>
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.disco:DiscoIdentity">
+         <apiName>DiscoIdentity</apiName>
+         <shortdesc>
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.feature">
+      <apiName>org.igniterealtime.xiff.data.feature</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.feature:FeatureNegotiationExtension">
+         <apiName>FeatureNegotiationExtension</apiName>
+         <shortdesc>
+	 XEP-0020: Feature Negotiation
+	 	 Features are negotiated through the exchange of
+	 iq or message stanzas
+	 containing feature child elements qualified
+	 by the 'http://jabber.org/protocol/feature-neg' namespace.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0020: Feature Negotiation
+	 	 <p>Features are negotiated through the exchange of
+	 <b>iq</b> or <b>message</b> stanzas
+	 containing <b>feature</b> child elements qualified
+	 by the 'http://jabber.org/protocol/feature-neg' namespace.
+	 However, this <b>feature</b> element is simply a
+	 wrapper for structured data encapsulated in the
+	 Data Forms (<codeph>FormExtension</codeph>) protocol.</p>
+	           <p>In order to begin a negotation, the initiator sends an
+	 <b>iq</b> stanza of type "get" (or a
+	 <b>message</b> stanza type "normal" - see Stanza
+	 Session Negotiation for examples) to the recipient with a
+	 single <b>feature</b> element containing a data form
+	 of type "form" which defines the available options for one or
+	 more features. Each feature is represented as an x-data "field".</p>
+	           <p>The recipient SHOULD examine each feature and the values of
+	 the options provided. In order to indicate preferred values,
+	 the recipient then SHOULD specify one value for each feature
+	 and return a data form of type "submit" to the initiator in an
+	 <b>iq</b> stanza of type "result" (or a
+	 <b>message</b> stanza type "normal").</p>
+	           <p>The following examples show some likely scenarios for feature
+	 negotiation between entities. Further examples can be found in
+	 "using protocols", such as File Transfer
+	 (<codeph>FileTransferExtension</codeph>).</p>
+	 	         <p>Peter Millard, the primary author of this specification from version 0.1
+	 through version 1.4, died on April 26, 2006. The remaining authors are
+	 thankful for Peter's work on this specification.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.forms.enum">
+      <apiName>org.igniterealtime.xiff.data.forms.enum</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.forms.enum:FormType">
+         <apiName>FormType</apiName>
+         <shortdesc>
+	 Four different types of form that can exist according to XEP-0004.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Four different types of form that can exist according to XEP-0004.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.forms.enum:FormFieldType">
+         <apiName>FormFieldType</apiName>
+         <shortdesc>
+	 Different field types of form that can exist according to XEP-0004.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Different field types of form that can exist according to XEP-0004.
+	 	 <p>The following field types represent data "types" that are commonly exchanged between
+	 Jabber/XMPP entities. These field types are not intended to be as comprehensive as
+	 the datatypes defined in, for example, XML Schema Part 2, nor do they define
+	 user interface elements.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.forms">
+      <apiName>org.igniterealtime.xiff.data.forms</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.forms:FormExtension">
+         <apiName>FormExtension</apiName>
+         <shortdesc>
+	 XEP-0004: Data Forms
+	 	 Implements the base functionality of XEP-0004: Data Forms,
+	 shared by all MUC extensions.
+	 	 Also used by XEP-0128: Service Discovery Extensions
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0004: Data Forms
+	 	 <p>Implements the base functionality of XEP-0004: Data Forms,
+	 shared by all MUC extensions.</p>
+	 	         <p>Also used by XEP-0128: Service Discovery Extensions</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.forms:FormReported">
+         <apiName>FormReported</apiName>
+         <shortdesc>
+	 In some contexts (e.g., the results of a search request), it may be
+	 necessary to communicate multiple items.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 In some contexts (e.g., the results of a search request), it may be
+	 necessary to communicate multiple items. Therefore, a data form of
+	 type "result" MAY contain two child elements not described in the basic syntax:
+	 <ol>
+	              <li>One and only <b>reported</b> element, which can be understood as a "table header"
+	 describing the data to follow.</li>
+	              <li>Zero or more <b>item</b> elements, which can be understood as "table cells"
+	 containing data (if any) that matches the request.</li>
+	           </ol>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.forms:FormItem">
+         <apiName>FormItem</apiName>
+         <shortdesc>
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.forms:FormField">
+         <apiName>FormField</apiName>
+         <shortdesc>
+	 This class is used by the FormExtension class for managing fields
+	 as fields have multiple behaviors depending on the type of the form
+	 while containing different kinds of data, some optional some not.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class is used by the FormExtension class for managing fields
+	 as fields have multiple behaviors depending on the type of the form
+	 while containing different kinds of data, some optional some not.
+	 	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.id">
+      <apiName>org.igniterealtime.xiff.data.id</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.id:UUIDGenerator">
+         <apiName>UUIDGenerator</apiName>
+         <shortdesc>
+	 Generates a universally unique identifier.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.id:IIDGenerator</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Generates a universally unique identifier.
+	 RFC4122 Version 4.
+	 http://tools.ietf.org/html/rfc4122#section-4.4
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.id:SOIncrementalGenerator">
+         <apiName>SOIncrementalGenerator</apiName>
+         <shortdesc>
+	 Generates an incrementing ID and saves the last value in a local shared object.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.id:IIDGenerator</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.id:IncrementalGenerator</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Generates an incrementing ID and saves the last value in a local shared object.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.id:IncrementalGenerator">
+         <apiName>IncrementalGenerator</apiName>
+         <shortdesc>
+	 Uses a simple incrementation of a variable to generate new IDs.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.id:IIDGenerator</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Uses a simple incrementation of a variable to generate new IDs.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.id:IIDGenerator">
+         <apiName>IIDGenerator</apiName>
+         <shortdesc>
+	 To use custom ID generators call the static function on the
+	 XMPPStanza class with an instance that implements IIDGenerator.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 To use custom ID generators call the static function on the
+	 XMPPStanza class with an instance that implements IIDGenerator.
+	 	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.im">
+      <apiName>org.igniterealtime.xiff.data.im</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.im:RosterItem">
+         <apiName>RosterItem</apiName>
+         <shortdesc>
+	 This class is used internally by the RosterExtension class for managing items
+	 received and sent as roster data.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class is used internally by the RosterExtension class for managing items
+	 received and sent as roster data. Usually, each item in the roster represents a single
+	 contact, and this class is used to represent, abstract, and serialize/deserialize
+	 this data.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.im:RosterItemVO">
+         <apiName>RosterItemVO</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.im:IRosterItemVO</apiBaseInterface>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <adobeApiEvent id="org.igniterealtime.xiff.data.im:RosterItemVO_org.igniterealtime.xiff.events.PropertyChangeEvent.CHANGE_change">
+            <apiName>change</apiName>
+            <shortdesc>
+	 </shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.PropertyChangeEvent.CHANGE</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.PropertyChangeEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.im:IRosterGroup">
+         <apiName>IRosterGroup</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.im:RosterGroup">
+         <apiName>RosterGroup</apiName>
+         <shortdesc>
+	 Represents the groups in users roster.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.im:IRosterGroup</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Represents the groups in users roster.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.im:IRosterItemVO">
+         <apiName>IRosterItemVO</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.im:IContact</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.im:IContact">
+         <apiName>IContact</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.im:RosterExtension">
+         <apiName>RosterExtension</apiName>
+         <shortdesc>
+	 An IQ extension for roster data.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An IQ extension for roster data. Roster data is typically any data
+	 that is sent or received with the "jabber:iq:roster" namespace.
+	 	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.muc">
+      <apiName>org.igniterealtime.xiff.data.muc</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUCItem">
+         <apiName>MUCItem</apiName>
+         <shortdesc>
+	 This class is used by the MUCExtension for internal representation of
+	 information pertaining to occupants in a multi-user conference room.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class is used by the MUCExtension for internal representation of
+	 information pertaining to occupants in a multi-user conference room.
+	 	 <p>The information given inside Precense of a given room user</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUCBaseExtension">
+         <apiName>MUCBaseExtension</apiName>
+         <shortdesc>
+	 Implements the base functionality shared by all MUC extensions
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtendable</apiBaseInterface>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Implements the base functionality shared by all MUC extensions
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUCExtension">
+         <apiName>MUCExtension</apiName>
+         <shortdesc>
+	 Implements the base MUC protocol schema from XEP-0045 for multi-user chat.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data.muc:IMUCExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Implements the base MUC protocol schema from <xref href="http://www.xmpp.org/extensions/xep-0045.html">XEP-0045</xref> for multi-user chat.
+	 	 This extension is typically used to test for the presence of MUC enabled conferencing
+	 service, or a MUC related error condition.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUC">
+         <apiName>MUC</apiName>
+         <shortdesc>
+	 This class contains a series of static constants that are used throughout the
+	 multi-user conferencing extensions.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class contains a series of static constants that are used throughout the
+	 multi-user conferencing extensions.
+	 	 <p>The constants include the following for
+	 conference room affiliations:</p>
+	           <ul>
+	              <li>AFFILIATION_ADMIN</li>
+	              <li>AFFILIATION_MEMBER</li>
+	              <li>AFFILIATION_NONE</li>
+	              <li>AFFILIATION_OUTCAST</li>
+	              <li>AFFILIATION_OWNER</li>
+	           </ul>
+	 	         <p>And the following constants for room roles:</p>
+	           <ul>
+	              <li>ROLE_MODERATOR</li>
+	              <li>ROLE_NONE</li>
+	              <li>ROLE_PARTICIPANT</li>
+	              <li>ROLE_VISITOR</li>
+	           </ul>
+	 	         <p>Support for the owner affiliation is REQUIRED. Support for the admin, member,
+	 and outcast affiliations is RECOMMENDED. (The "None" affiliation is
+	 the absence of an affiliation.)</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUCStatus">
+         <apiName>MUCStatus</apiName>
+         <shortdesc>
+	 XEP-0306: Extensible Status Conditions for Multi-User Chat
+	 	 Traditionally, Multi-User Chat [1] has used numerical status codes similar to
+	 those used in HTTP and SMTP.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0306: Extensible Status Conditions for Multi-User Chat
+	 	 <p>Traditionally, Multi-User Chat [1] has used numerical status codes similar to
+	 those used in HTTP and SMTP. Numerical codes were deprecated in the core of
+	 XMPP by RFC 3920 [2] and are no longer even defined in the core schemas provided in
+	 RFC 6120 [3] (see also Error Condition Mappings [4]). In an effort to modernize
+	 the Multi-User Chat (MUC) protocol, this document defines an extensible
+	 format for status conditions in MUC.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUCAdminExtension">
+         <apiName>MUCAdminExtension</apiName>
+         <shortdesc>
+	 Implements the administration command data model in XEP-0045 for multi-user chat.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.muc:MUCBaseExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Implements the administration command data model in <xref href="http://xmpp.org/extensions/xep-0045.html">XEP-0045</xref> for multi-user chat.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUCUserExtension">
+         <apiName>MUCUserExtension</apiName>
+         <shortdesc>
+	 Implements the base MUC user protocol schema from
+	 XEP-0045 for multi-user chat.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.muc:MUCBaseExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Implements the base MUC user protocol schema from
+	 <xref href="http://www.xmpp.org/extensions/xep-0045.html">XEP-0045</xref> for multi-user chat.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:MUCOwnerExtension">
+         <apiName>MUCOwnerExtension</apiName>
+         <shortdesc>
+	 Implements the administration command data model in XEP-0045 for multi-user chat.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.muc:MUCBaseExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Implements the administration command data model in <xref href="http://xmpp.org/extensions/xep-0045.html">XEP-0045</xref> for multi-user chat.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.muc:IMUCExtension">
+         <apiName>IMUCExtension</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.ping">
+      <apiName>org.igniterealtime.xiff.data.ping</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.ping:PingExtension">
+         <apiName>PingExtension</apiName>
+         <shortdesc>
+	 XEP-0199: XMPP Ping
+	 	 extension for sending application-level pings over XML streams.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0199: XMPP Ping
+	 	 <p>extension for sending application-level pings over XML streams.
+	 Such pings can be sent from a client to a server, from one
+	 server to another, or end-to-end.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.privatedata">
+      <apiName>org.igniterealtime.xiff.data.privatedata</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.privatedata:PrivateDataExtension">
+         <apiName>PrivateDataExtension</apiName>
+         <shortdesc>
+	 XEP-0049: Private XML Storage
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0049: Private XML Storage
+	 	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.register">
+      <apiName>org.igniterealtime.xiff.data.register</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.register:RegisterExtension">
+         <apiName>RegisterExtension</apiName>
+         <shortdesc>
+	 XEP-0077: In-Band Registration
+	 	 Implements jabber:iq:register namespace.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0077: In-Band Registration
+	 	 <p>Implements jabber:iq:register namespace.  Use this to create new accounts on the jabber server.
+	 Send an empty IQ.TYPE_GET packet with this extension and the return will either be a conflict,
+	 or the fields you will need to fill out.</p>
+	 	         <p>Send a IQ.TYPE_SET packet to the server and with the fields that are listed in
+	 'getRequiredFieldNames()' set on this extension.
+	 Check the result and re-establish the connection with the new account.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.rpc">
+      <apiName>org.igniterealtime.xiff.data.rpc</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.rpc:XMLRPC">
+         <apiName>XMLRPC</apiName>
+         <shortdesc>
+	 Implements client side XML marshalling of methods and parameters into XMLRPC.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Implements client side XML marshalling of methods and parameters into XMLRPC.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.rpc:RPCExtension">
+         <apiName>RPCExtension</apiName>
+         <shortdesc>
+	 Implements XEP-0009 for XML-RPC over XMPP.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Implements XEP-0009 for XML-RPC over XMPP.
+	 	 <p>The protocol supports all syntax and semantics of XML-RPC except
+	 that it uses XMPP instead of HTTP as the underlying transport.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.search">
+      <apiName>org.igniterealtime.xiff.data.search</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.search:SearchItem">
+         <apiName>SearchItem</apiName>
+         <shortdesc>
+	 This class is used by the SearchExtension for internal representation of
+	 information pertaining to items matching the search query.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class is used by the SearchExtension for internal representation of
+	 information pertaining to items matching the search query.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.search:SearchExtension">
+         <apiName>SearchExtension</apiName>
+         <shortdesc>
+	 XEP-0055: Jabber Search
+	 	 Implements jabber:iq:search namespace.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0055: Jabber Search
+	 	 <p>Implements jabber:iq:search namespace. Use this to perform user searches.</p>
+	 	         <p>Send an empty IQ.TYPE_GET packet with this extension and the return will either be
+	 a conflict, or the fields you will need to fill out.</p>
+	 	         <p>Send a IQ.TYPE_SET packet to the server and with the fields that are listed in
+	 getRequiredFieldNames set on this extension.</p>
+	 	         <p>Check the result and re-establish the connection with the new account.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.session">
+      <apiName>org.igniterealtime.xiff.data.session</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.session:SessionExtension">
+         <apiName>SessionExtension</apiName>
+         <shortdesc>
+	 Session Establishment
+	 	 Most instant messaging and presence applications based on XMPP are
+	 implemented via a client-server architecture that requires a client
+	 to establish a session on a server in order to engage in the expected
+	 instant messaging and presence activities.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Session Establishment
+	 	 <p>Most instant messaging and presence applications based on XMPP are
+	 implemented via a client-server architecture that requires a client
+	 to establish a session on a server in order to engage in the expected
+	 instant messaging and presence activities.  However, there are
+	 several pre-conditions that MUST be met before a client can establish
+     an instant messaging and presence session.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.sharedgroups">
+      <apiName>org.igniterealtime.xiff.data.sharedgroups</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.sharedgroups:SharedGroupsExtension">
+         <apiName>SharedGroupsExtension</apiName>
+         <shortdesc>
+	 Similar idea to XEP-0140 (http://xmpp.org/extensions/xep-0140.html) which was
+	 retracted in favor of XEP-0144 (http://xmpp.org/extensions/xep-0144.html).</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Similar idea to XEP-0140 (http://xmpp.org/extensions/xep-0140.html) which was
+	 retracted in favor of XEP-0144 (http://xmpp.org/extensions/xep-0144.html).
+	 	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.si">
+      <apiName>org.igniterealtime.xiff.data.si</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.si:FileTransferExtension">
+         <apiName>FileTransferExtension</apiName>
+         <shortdesc>
+	 XEP-0096: SI File Transfer.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0096: SI File Transfer.
+	 	 <p>To be used within XEP-0095: Stream Initiation</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.si:StreamInitiationExtension">
+         <apiName>StreamInitiationExtension</apiName>
+         <shortdesc>
+	 XEP-0095: Stream Initiation
+	 	 To be used with XEP-0096: SI File Transfer
+	 	 The si element is the root element for this
+	 protocol.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0095: Stream Initiation
+	 	 <p>To be used with XEP-0096: SI File Transfer</p>
+	 	         <p>The <b>si</b> element is the root element for this
+	 protocol. It is an identifiable container for all the information
+	 necessary for negotiation and signalling. It contains attributes
+	 for the identifier, intended MIME-type, and profile. The contents
+	 convey stream-negotation and profile information.</p>
+	 	         <p>When the Sender first negotiates a Stream Initiation, all of the
+	 attributes SHOULD be present, and the id" and "profile" MUST be
+	 present. The contents MUST contain one profile, in the namespace
+	 declared in the "profile" attribute, and the feature negotiation
+	 for the stream. The feature negotiation MUST contain at least one
+	 option and use the field var "stream-method".</p>
+	 	         <p>When the Receiver accepts a Stream Initiation, the
+	 <b>si</b> element SHOULD NOT possess any attributes.
+	 The selected stream MUST be in the feature negotiation for the
+	 stream. There MUST only be one selected stream.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.stream">
+      <apiName>org.igniterealtime.xiff.data.stream</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.stream:IBBCloseExtension">
+         <apiName>IBBCloseExtension</apiName>
+         <shortdesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 Close the communication once transfer is complete.
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.stream:IBBExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 <p>Close the communication once transfer is complete.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.stream:IBBOpenExtension">
+         <apiName>IBBOpenExtension</apiName>
+         <shortdesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 Open the communication
+	 	 It is RECOMMENDED to send IBB data using IQ stanzas
+	 instead of message stanzas because IQ stanzas provide
+	 feedback to the sender regarding delivery to the recipient).
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.stream:IBBExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 <p>Open the communication</p>
+	 	         <p>It is RECOMMENDED to send IBB data using IQ stanzas
+	 instead of message stanzas because IQ stanzas provide
+	 feedback to the sender regarding delivery to the recipient).</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.stream:IBBDataExtension">
+         <apiName>IBBDataExtension</apiName>
+         <shortdesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 Each chunk of data is contained in a data
+	 element qualified by the 'http://jabber.org/protocol/ibb'
+	 namespace.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data.stream:IBBExtension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 <p>Each chunk of data is contained in a <b>data</b>
+	 element qualified by the 'http://jabber.org/protocol/ibb'
+	 namespace. The data element SHOULD be sent in an IQ stanza
+	 to enable proper tracking and throttling, but instead MAY be
+	 sent in a message stanza. The data to be sent, prior to
+	 base64-encoding and prior to any wrapping in XML, MUST NOT
+	 be larger than the 'block-size' determined in the bytestream
+	 negotiation.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.stream:IBBExtension">
+         <apiName>IBBExtension</apiName>
+         <shortdesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 Base class of all IBB classes that are using same namespace.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0047: In-Band Bytestreams, Version 2.0 (2012-06-22)
+	 	 <p>Base class of all IBB classes that are using same namespace.
+	 Do not use this directly.</p>
+	 	         <p>Generally, in-band bytestreams SHOULD be used only as a
+	 last resort. SOCKS5 Bytestreams will almost always be preferable,
+	 but are not implemented in XIFF...</p>
+	 	      </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.vcard">
+      <apiName>org.igniterealtime.xiff.data.vcard</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.vcard:VCardExtension">
+         <apiName>VCardExtension</apiName>
+         <shortdesc>
+	 XEP-0054: vcard-temp
+	 	 The basic functionality is for a user to store and retrieve an XML
+	 representation of his or her vCard using the data storage capabilities
+	 native to all existing Jabber server implementations.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0054: vcard-temp
+	 	 <p>The basic functionality is for a user to store and retrieve an XML
+	 representation of his or her vCard using the data storage capabilities
+	 native to all existing Jabber server implementations. This is done
+	 by by sending an <b>iq</b> of type "set" (storage) or "get"
+	 (retrieval) to one's Jabber server containing a <b>vCard</b>
+	 child scoped by the 'vcard-temp' namespace, with the <b>vCard</b>
+	 element containing the actual vCard-XML elements as defined by the
+	 vCard-XML DTD. Other users may then view one's vCard information.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.version">
+      <apiName>org.igniterealtime.xiff.data.version</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.version:SoftwareVersionExtension">
+         <apiName>SoftwareVersionExtension</apiName>
+         <shortdesc>
+	 XEP-0092: Software Version
+	 	 The 'jabber:iq:version' namespace provides a standard way for Jabber entities
+	 to exchange information about the software version used by the entities.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0092: Software Version
+	 	 <p>The 'jabber:iq:version' namespace provides a standard way for Jabber entities
+	 to exchange information about the software version used by the entities.
+	 The information is communicated in a request/response pair using an <codeph>iq</codeph>
+	 element that contains a <codeph>query</codeph> scoped by the 'jabber:iq:version' namespace.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.whiteboard">
+      <apiName>org.igniterealtime.xiff.data.whiteboard</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.whiteboard:Stroke">
+         <apiName>Stroke</apiName>
+         <shortdesc>
+	 A helper class that abstracts the serialization of strokes and
+	 provides an interface to access the properties
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A helper class that abstracts the serialization of strokes and
+	 provides an interface to access the properties
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.whiteboard:Fill">
+         <apiName>Fill</apiName>
+         <shortdesc>
+	 A helper class that abstracts the serialization of fills and
+	 provides an interface to access the properties providing defaults
+	 if no properties were defined in the XML.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A helper class that abstracts the serialization of fills and
+	 provides an interface to access the properties providing defaults
+	 if no properties were defined in the XML.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.whiteboard:WhiteboardExtension">
+         <apiName>WhiteboardExtension</apiName>
+         <shortdesc>
+	 A message extension for whitboard exchange.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A message extension for whitboard exchange. This class is the base class
+	 for other extension classes such as Path.
+	 	 All child whiteboard objects are contained and serialized by this class
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data.whiteboard:Path">
+         <apiName>Path</apiName>
+         <shortdesc>
+	 A message extension for whiteboard exchange.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A message extension for whiteboard exchange. This class is the base class
+	 for other extension classes such as Path
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data.xhtml">
+      <apiName>org.igniterealtime.xiff.data.xhtml</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data.xhtml:XHTMLExtension">
+         <apiName>XHTMLExtension</apiName>
+         <shortdesc>
+         XEP-0071: XHTML-IM
+                  This class provides an extension for XHTML body text in messages.
+	 html --&gt; http://jabber.org/protocol/xhtml-im
+	 body --&gt; http://www.w3.org/1999/xhtml
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+         XEP-0071: XHTML-IM
+                  <p>This class provides an extension for XHTML body text in messages.</p>
+	           <p>html --&gt; http://jabber.org/protocol/xhtml-im</p>
+	           <p>body --&gt; http://www.w3.org/1999/xhtml</p>
+	 	      </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.data">
+      <apiName>org.igniterealtime.xiff.data</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.data:IMessage">
+         <apiName>IMessage</apiName>
+         <shortdesc>
+	 Interface for Message
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IXMPPStanza</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Interface for Message
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:IIQ">
+         <apiName>IIQ</apiName>
+         <shortdesc>
+	 Interface for IQ
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IXMPPStanza</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Interface for IQ
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:ExtensionClassRegistry">
+         <apiName>ExtensionClassRegistry</apiName>
+         <shortdesc>
+	 This is a static class that contains class constructors for all
+	 extensions that could come from the network.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This is a static class that contains class constructors for all
+	 extensions that could come from the network.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:Message">
+         <apiName>Message</apiName>
+         <shortdesc>
+	 Message, nuff said.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IMessage</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMPPStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Message, nuff said.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:IQ">
+         <apiName>IQ</apiName>
+         <shortdesc>
+	 A class for abstraction and encapsulation of IQ (info-query) data.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IIQ</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMPPStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A class for abstraction and encapsulation of IQ (info-query) data.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:XMPPStanza">
+         <apiName>XMPPStanza</apiName>
+         <shortdesc>
+	 The base class for all XMPP stanza data classes.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiDynamic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IXMPPStanza</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 The base class for all XMPP stanza data classes.
+	 	 <p>Three types can exist:</p>
+	           <ul>
+	              <li>message</li>
+	              <li>presence</li>
+	              <li>iq</li>
+	           </ul>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:AbstractExtension">
+         <apiName>AbstractExtension</apiName>
+         <shortdesc>
+	 What is this?
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 What is this?
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:XMLStanza">
+         <apiName>XMLStanza</apiName>
+         <shortdesc>
+	 This is a base class for all classes that encapsulate XML stanza data.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IXMLStanza</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:ExtensionContainer</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This is a base class for all classes that encapsulate XML stanza data. It provides
+	 a set of methods that faciliate easy manipulation of XML data.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:Presence">
+         <apiName>Presence</apiName>
+         <shortdesc>
+	 This class provides encapsulation for manipulation of presence data for sending and receiving.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IPresence</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMPPStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This class provides encapsulation for manipulation of presence data for sending and receiving.
+	 	 <p>2.2.1.  Types of Presence</p>
+	 	         <p>The 'type' attribute of a presence stanza is OPTIONAL.  A presence
+	 stanza that does not possess a 'type' attribute is used to signal to
+	 the server that the sender is online and available for communication.
+	 If included, the 'type' attribute specifies a lack of availability, a
+	 request to manage a subscription to another entity's presence, a
+	 request for another entity's current presence, or an error related to
+	 a previously-sent presence stanza.  If included, the 'type' attribute
+	 MUST have one of the following values:</p>
+	           <p>
+	 o  unavailable -- Signals that the entity is no longer available for communication.
+	 o  subscribe -- The sender wishes to subscribe to the recipient's presence.
+	 o  subscribed -- The sender has allowed the recipient to receive their presence.
+	 o  unsubscribe -- The sender is unsubscribing from another entity's presence.
+	 o  unsubscribed -- The subscription request has been denied or a previously-granted subscription has been cancelled.
+	 o  probe -- A request for an entity's current presence; SHOULD be generated only by a server on behalf of a user.
+	 o  error -- An error has occurred regarding processing or delivery of a previously-sent presence stanza.</p>
+	 	         <p>For detailed information regarding presence semantics and the
+	 subscription model used in the context of XMPP-based instant
+	 messaging and presence applications, refer to Exchanging Presence
+	 Information (Section 5) and Managing Subscriptions (Section 6).</p>
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:IPresence">
+         <apiName>IPresence</apiName>
+         <shortdesc>
+	 Interface for Presence
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IXMPPStanza</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Interface for Presence
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:Extension">
+         <apiName>Extension</apiName>
+         <shortdesc>
+	 This is a base class for all data extensions.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This is a base class for all data extensions.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:ExtensionContainer">
+         <apiName>ExtensionContainer</apiName>
+         <shortdesc>
+	 Contains the implementation for a generic extension container.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtendable</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Contains the implementation for a generic extension container.
+	 Use the static method "decorate" to implement the IExtendable interface on a class.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:IExtension">
+         <apiName>IExtension</apiName>
+         <shortdesc>
+	 The interface describing an extension.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 The interface describing an extension.
+	 All extensions must implement this interface.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:IXMPPStanza">
+         <apiName>IXMPPStanza</apiName>
+         <shortdesc>
+	 Interface for base XMPP stanza
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IXMLStanza</apiBaseInterface>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtendable</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Interface for base XMPP stanza
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:INodeProxy">
+         <apiName>INodeProxy</apiName>
+         <shortdesc>
+	 An interface for objects that abstract XML data by providing accessors
+	 to the original XML data stored within.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 An interface for objects that abstract XML data by providing accessors
+	 to the original XML data stored within.
+	 	 <p>Most XMPP stanzas that will interact with the library should implement this interface.</p>
+	        </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:IXMLStanza">
+         <apiName>IXMLStanza</apiName>
+         <shortdesc>
+	 Since XML migration, the only job for this interace is to bring together two other
+	 interfaces that it extends.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtendable</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Since XML migration, the only job for this interace is to bring together two other
+	 interfaces that it extends.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.data:IExtendable">
+         <apiName>IExtendable</apiName>
+         <shortdesc>
+	 This interface provides access to contained extensions and methods to modify the contained extensions.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This interface provides access to contained extensions and methods to modify the contained extensions.
+	 All XMPP stanzas that can be extended should implement this interface.
+	 	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.events">
+      <apiName>org.igniterealtime.xiff.events</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.events:RegistrationFieldsEvent">
+         <apiName>RegistrationFieldsEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:IncomingDataEvent">
+         <apiName>IncomingDataEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:ConnectionSuccessEvent">
+         <apiName>ConnectionSuccessEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:IQEvent">
+         <apiName>IQEvent</apiName>
+         <shortdesc>
+	 Event that occurs when an IQ has been received from the server.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Event that occurs when an IQ has been received from the server.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:InviteEvent">
+         <apiName>InviteEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:ChangePasswordSuccessEvent">
+         <apiName>ChangePasswordSuccessEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:ModelChangedEvent">
+         <apiName>ModelChangedEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:PresenceEvent">
+         <apiName>PresenceEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:MessageEvent">
+         <apiName>MessageEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:RosterEvent">
+         <apiName>RosterEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:BookmarkRetrievedEvent">
+         <apiName>BookmarkRetrievedEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:VCardEvent">
+         <apiName>VCardEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:RoomEvent">
+         <apiName>RoomEvent</apiName>
+         <shortdesc>
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:FileTransferEvent">
+         <apiName>FileTransferEvent</apiName>
+         <shortdesc>
+	 Events from the FileTransferManager
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Events from the FileTransferManager
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:SearchPrepEvent">
+         <apiName>SearchPrepEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:LoginEvent">
+         <apiName>LoginEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:RegistrationSuccessEvent">
+         <apiName>RegistrationSuccessEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:BookmarkChangedEvent">
+         <apiName>BookmarkChangedEvent</apiName>
+         <shortdesc>
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:DisconnectionEvent">
+         <apiName>DisconnectionEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:XIFFErrorEvent">
+         <apiName>XIFFErrorEvent</apiName>
+         <shortdesc>
+	 RFC 3920 (XMPP Core, published October 2004),
+	 in chapters 4.7.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 RFC 3920 (XMPP Core, published October 2004),
+	 in chapters 4.7. defines Stream Errors.
+	 	 <p>The following rules apply to stream-level errors:</p>
+	 	         <p>It is assumed that all stream-level errors are unrecoverable;
+	 therefore, if an error occurs at the level of the stream, the
+	 entity that detects the error MUST send a stream error to the
+	 other entity, send a closing <b>stream</b> tag, and terminate the
+	 underlying TCP connection.</p>
+	 	         <p>If the error occurs while the stream is being set up, the
+	 receiving entity MUST still send the opening <b>stream</b> tag, include
+	 the <b>error</b> element as a child of the stream element, send the
+	 closing <b>stream</b> tag, and terminate the underlying TCP
+	 connection.  In this case, if the initiating entity provides an
+	 unknown host in the 'to' attribute (or provides no 'to' attribute
+	 at all), the server SHOULD provide the server's authoritative
+	 hostname in the 'from' attribute of the stream header sent before
+	 termination.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:PropertyChangeEvent">
+         <apiName>PropertyChangeEvent</apiName>
+         <shortdesc>
+	 When a property is changed somewhere, someone might be interested to listen its
+	 current and previous values.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 When a property is changed somewhere, someone might be interested to listen its
+	 current and previous values. Currently this is only used in RosterItemVO
+	 in order to replace the Flex counterpart.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.events:OutgoingDataEvent">
+         <apiName>OutgoingDataEvent</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:Event</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.exception">
+      <apiName>org.igniterealtime.xiff.exception</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.exception:SerializationException">
+         <apiName>SerializationException</apiName>
+         <shortdesc>
+	 This exception is thrown whenever there is a problem serializing or
+	 deserializing data for sending to the server.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Error</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 This exception is thrown whenever there is a problem serializing or
+	 deserializing data for sending to the server.
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.filter">
+      <apiName>org.igniterealtime.xiff.filter</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.filter:IPacketFilter">
+         <apiName>IPacketFilter</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.filter:CallbackPacketFilter">
+         <apiName>CallbackPacketFilter</apiName>
+         <shortdesc>
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.filter:IPacketFilter</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.im">
+      <apiName>org.igniterealtime.xiff.im</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.im:Roster">
+         <apiName>Roster</apiName>
+         <shortdesc>
+	 Manages a user's server-side instant messaging roster (or "buddy list").</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.im:IRoster</apiBaseInterface>
+               <apiBaseClassifier>org.igniterealtime.xiff.collections:ArrayCollection</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Manages a user's server-side instant messaging roster (or "buddy list"). By default,
+	 this class uses an internal data provider to keep track of roster data locally and
+	 provides a "read-only" form of the Data Provider API for external use. Non-read operations
+	 are performed using alternative, roster-specific methods.
+	 	 </apiDesc>
+         <adobeApiEvent id="org.igniterealtime.xiff.im:Roster_org.igniterealtime.xiff.events.RosterEvent.USER_SUBSCRIPTION_UPDATED_userSubscriptionUpdated">
+            <apiName>userSubscriptionUpdated</apiName>
+            <shortdesc>
+	 </shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RosterEvent.USER_SUBSCRIPTION_UPDATED</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RosterEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.im:Roster_org.igniterealtime.xiff.events.RosterEvent.USER_PRESENCE_UPDATED_userPresenceUpdated">
+            <apiName>userPresenceUpdated</apiName>
+            <shortdesc>
+	 </shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RosterEvent.USER_PRESENCE_UPDATED</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RosterEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.im:Roster_org.igniterealtime.xiff.events.RosterEvent.USER_REMOVED_userRemoved">
+            <apiName>userRemoved</apiName>
+            <shortdesc>
+	 </shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RosterEvent.USER_REMOVED</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RosterEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.im:Roster_org.igniterealtime.xiff.events.RosterEvent.ROSTER_LOADED_rosterLoaded">
+            <apiName>rosterLoaded</apiName>
+            <shortdesc>
+	 </shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RosterEvent.ROSTER_LOADED</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RosterEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.im:Roster_org.igniterealtime.xiff.events.RosterEvent.USER_AVAILABLE_userAvailable">
+            <apiName>userAvailable</apiName>
+            <shortdesc>
+	 Broadcast whenever a contact in the roster becomes available.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RosterEvent.USER_AVAILABLE</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RosterEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Broadcast whenever a contact in the roster becomes available. (Goes from offline to online.)
+	 The event object contains an attribute <codeph>jid</codeph> with the JID of the user who
+	 became available.
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.im:Roster_org.igniterealtime.xiff.events.RosterEvent.USER_UNAVAILABLE_userAvailable">
+            <apiName>userAvailable</apiName>
+            <shortdesc>
+	 Broadcast whenever a contact in the roster becomes unavailable.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RosterEvent.USER_UNAVAILABLE</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RosterEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Broadcast whenever a contact in the roster becomes unavailable. (Goes from online to offline.)
+	 The event object contains an attribute <codeph>jid</codeph> with the JID of the user who
+	 became unavailable.
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.im:Roster_org.igniterealtime.xiff.events.RosterEvent.SUBSCRIPTION_DENIAL_subscriptionDenial">
+            <apiName>subscriptionDenial</apiName>
+            <shortdesc>
+	 Broadcast whenever a subscription request that you make (via the addContact()
+	 or requestSubscription() methods) is denied.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RosterEvent.SUBSCRIPTION_DENIAL</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RosterEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Broadcast whenever a subscription request that you make (via the <codeph>addContact()</codeph>
+	 or <codeph>requestSubscription()</codeph> methods) is denied.
+	 	 The event object contains an attribute <codeph>jid</codeph> with the JID of the user who
+	 denied the request.
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.im:Roster_org.igniterealtime.xiff.events.RosterEvent.SUBSCRIPTION_REQUEST_subscriptionRequest">
+            <apiName>subscriptionRequest</apiName>
+            <shortdesc>
+	 Broadcast whenever someone requests to subscribe to your presence.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RosterEvent.SUBSCRIPTION_REQUEST</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RosterEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Broadcast whenever someone requests to subscribe to your presence. The event object
+	 contains an attribute <codeph>jid</codeph> with the JID of the user who is requesting
+	 a presence subscription.
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.im:Roster_org.igniterealtime.xiff.events.RosterEvent.SUBSCRIPTION_REVOCATION_subscriptionRevocation">
+            <apiName>subscriptionRevocation</apiName>
+            <shortdesc>
+	 Broadcast whenever someone revokes your presence subscription.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.RosterEvent.SUBSCRIPTION_REVOCATION</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.RosterEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Broadcast whenever someone revokes your presence subscription. This is not
+	 an event that is fired when you revoke a subscription, but rather when one of your
+	 contacts decides that he/she/it no longer wants you to know about their presence
+	 status.
+	 	 The event object contains an attribute <codeph>jid</codeph> with the JID of
+	 the user who revoked your subscription.
+	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.im:IRoster">
+         <apiName>IRoster</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.collections:ICollection</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.privatedata">
+      <apiName>org.igniterealtime.xiff.privatedata</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.privatedata:IPrivatePayload">
+         <apiName>IPrivatePayload</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.privatedata:PrivateDataManager">
+         <apiName>PrivateDataManager</apiName>
+         <shortdesc>
+	 XEP-0049: Private XML Storage
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 XEP-0049: Private XML Storage
+	 	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.util">
+      <apiName>org.igniterealtime.xiff.util</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.util:Hex">
+         <apiName>Hex</apiName>
+         <shortdesc>
+	 Utility for reading and writing Hex formatted data to/from ByteArray.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Utility for reading and writing Hex formatted data to/from ByteArray.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.util:ICompressor">
+         <apiName>ICompressor</apiName>
+         <shortdesc>
+	 Interface for implementing Stream Compression
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Interface for implementing Stream Compression
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.util:Zlib">
+         <apiName>Zlib</apiName>
+         <shortdesc>
+	 Compress the given ByteArrays by using the as3zlib library.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.util:ICompressor</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Compress the given ByteArrays by using the as3zlib library.
+	 	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.util:SHA1">
+         <apiName>SHA1</apiName>
+         <shortdesc>
+	 A static class for SHA1 hash creation.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A static class for SHA1 hash creation. Original ActionScript 1.0 version
+	 by Branden Hall. Original ActionScript 2.0 translation by Ron Haberle.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.util:Callback">
+         <apiName>Callback</apiName>
+         <shortdesc>
+	 Sets an callback function
+	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Sets an callback function
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.util:DateTimeParser">
+         <apiName>DateTimeParser</apiName>
+         <shortdesc>
+	 A set of static functions to parse the time and date values.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 A set of static functions to parse the time and date values.
+	 All date related methods are the UTC versions.
+	 	 <p>Also methods for handling legacy format are available</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.util:ZlibNative">
+         <apiName>ZlibNative</apiName>
+         <shortdesc>
+	 Compress the given ByteArrays by using the Flash
+	 Player 10 native CompressionAlgorithm.ZLIB.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.util:ICompressor</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Compress the given ByteArrays by using the Flash
+	 Player 10 native CompressionAlgorithm.ZLIB.
+	 	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+   <apiPackage id="org.igniterealtime.xiff.vcard">
+      <apiName>org.igniterealtime.xiff.vcard</apiName>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCardPhoto">
+         <apiName>VCardPhoto</apiName>
+         <shortdesc>
+	 Photograph.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCardPhoto</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Photograph.
+	 	 <p>The image height and width SHOULD be between thirty-two (32) and ninety-six (96) pixels;
+	 the recommended size is sixty-four (64) pixels high and sixty-four (64) pixels wide.</p>
+	 	         <p>The image SHOULD be square.</p>
+	 	      </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCardAddress">
+         <apiName>VCardAddress</apiName>
+         <shortdesc>
+	 Structured address.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCardAddress</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Structured address.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCardName">
+         <apiName>IVCardName</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCardOrganization">
+         <apiName>VCardOrganization</apiName>
+         <shortdesc>
+	 Organizational name and unit.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCardOrganization</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Organizational name and unit.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCard">
+         <apiName>IVCard</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>flash.events:IEventDispatcher</apiBaseInterface>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCardTelephone">
+         <apiName>IVCardTelephone</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCardSound">
+         <apiName>IVCardSound</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCardSound">
+         <apiName>VCardSound</apiName>
+         <shortdesc>
+	 Formatted name pronunciation property.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCardSound</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Formatted name pronunciation property.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCardName">
+         <apiName>VCardName</apiName>
+         <shortdesc>
+	 Structured name.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCardName</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Structured name.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCard">
+         <apiName>VCard</apiName>
+         <shortdesc>
+	 VCard updates in 2010:
+	 	 New vCard data classes to encompass similar properties:
+	 
+	 VCardAddress (country, extendedAddress, locality, poBox, postalCode, region, street)
+	 VCardGeographicalPosition (latitude, longitude)
+	 VCardName (family, given, middle, prefix, suffix)
+	 VCardOrganization (name, unit)
+	 VCardPhoto (binaryValue, bytes, externalValue, type)
+	 VCardSound (binaryValue, bytes, externalValue, phonetic)
+	 VCardTelephone (cell, fax, msg, pager, video, voice)
+	 
+	 	 TODO: The only properties not yet implemented from the spec: agent, categories, key
+	 	 </shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCard</apiBaseInterface>
+               <apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 VCard updates in 2010:
+	 	 <p>New vCard data classes to encompass similar properties:</p>
+	           <ul>
+	              <li>VCardAddress (country, extendedAddress, locality, poBox, postalCode, region, street)</li>
+	              <li>VCardGeographicalPosition (latitude, longitude)</li>
+	              <li>VCardName (family, given, middle, prefix, suffix)</li>
+	              <li>VCardOrganization (name, unit)</li>
+	              <li>VCardPhoto (binaryValue, bytes, externalValue, type)</li>
+	              <li>VCardSound (binaryValue, bytes, externalValue, phonetic)</li>
+	              <li>VCardTelephone (cell, fax, msg, pager, video, voice)</li>
+	           </ul>
+	 	         <p>TODO: The only properties not yet implemented from the spec: agent, categories, key</p>
+	 	      </apiDesc>
+         <adobeApiEvent id="org.igniterealtime.xiff.vcard:VCard_org.igniterealtime.xiff.events.VCardEvent.SAVE_ERROR_saveError">
+            <apiName>saveError</apiName>
+            <shortdesc>
+	 Dispatched when saving the vCard fails.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.VCardEvent.SAVE_ERROR</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.VCardEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when saving the vCard fails.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.vcard:VCard_org.igniterealtime.xiff.events.VCardEvent.SAVED_saved">
+            <apiName>saved</apiName>
+            <shortdesc>
+	 Dispatched when the vCard has been saved.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.VCardEvent.SAVED</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.VCardEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when the vCard has been saved.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+         <adobeApiEvent id="org.igniterealtime.xiff.vcard:VCard_org.igniterealtime.xiff.events.VCardEvent.LOADED_loaded">
+            <apiName>loaded</apiName>
+            <shortdesc>
+	 Dispatched when the vCard has loaded.</shortdesc>
+            <prolog/>
+            <adobeApiEventDetail>
+               <adobeApiEventDef>
+                  <apiEventType>org.igniterealtime.xiff.events.VCardEvent.LOADED</apiEventType>
+                  <adobeApiEventClassifier>org.igniterealtime.xiff.events.VCardEvent</adobeApiEventClassifier>
+                  <apiGeneratedEvent/>
+               </adobeApiEventDef>
+               <apiDesc>
+	 Dispatched when the vCard has loaded.
+	 	 </apiDesc>
+            </adobeApiEventDetail>
+         </adobeApiEvent>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCardAddress">
+         <apiName>IVCardAddress</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCardOrganization">
+         <apiName>IVCardOrganization</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCardGeographicalPosition">
+         <apiName>IVCardGeographicalPosition</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:IVCardPhoto">
+         <apiName>IVCardPhoto</apiName>
+         <shortdesc/>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiInterface/>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseClassifier/>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCardTelephone">
+         <apiName>VCardTelephone</apiName>
+         <shortdesc>
+	 Telephone number.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCardTelephone</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Telephone number.
+	 </apiDesc>
+      </apiClassifier>
+      <apiClassifier id="org.igniterealtime.xiff.vcard:VCardGeographicalPosition">
+         <apiName>VCardGeographicalPosition</apiName>
+         <shortdesc>
+	 Geographical position.</shortdesc>
+         <apiClassifierDetail>
+            <apiClassifierDef>
+               <apiAccess value="public"/>
+               <apiStatic/>
+               <apiBaseInterface>org.igniterealtime.xiff.vcard:IVCardGeographicalPosition</apiBaseInterface>
+               <apiBaseClassifier>Object</apiBaseClassifier>
+            </apiClassifierDef>
+         </apiClassifierDetail>
+         <apiDesc>
+	 Geographical position.
+	 </apiDesc>
+      </apiClassifier>
+   </apiPackage>
+</allClasses>

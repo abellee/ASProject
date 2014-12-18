@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.data.browse"><apiName>org.igniterealtime.xiff.data.browse</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.data.browse:BrowseExtension"><apiName>BrowseExtension</apiName><shortdesc>
+	 XEP-0011: Jabber Browsing
+	 	 Implements jabber:iq:browse namespace.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data.browse:BrowseItem</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0011: Jabber Browsing
+	 	 <p>Implements jabber:iq:browse namespace.  Use this extension to request the items
+	 of an agent or service such as the rooms of a conference server or the members of
+	 a room.</p>
+	 	 <p><b>OBSOLETE</b></p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0011.html"><linktext>http://xmpp.org/extensions/xep-0011.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.browse:BrowseExtension:BrowseExtension"><apiName>BrowseExtension</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.browse:BrowseExtension:addItem"><apiName>addItem</apiName><shortdesc>
+		 If you are generating a browse response to a browse request, then
+		 fill out the items list with this method.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>the item added
+		 </apiDesc><apiOperationClassifier>org.igniterealtime.xiff.data.browse:BrowseItem</apiOperationClassifier></apiReturn><apiParam><apiItemName>item</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.data.browse:BrowseItem</apiOperationClassifier><apiDesc>BrowseItem which contains the info related to the browsed resource
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 If you are generating a browse response to a browse request, then
+		 fill out the items list with this method.
+		 		 </apiDesc></apiOperationDetail><related-links><link href="org.igniterealtime.xiff.data.browse.xml#BrowseItem"><linktext>org.igniterealtime.xiff.data.browse.BrowseItem</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.data.browse:BrowseExtension:getElementName"><apiName>getElementName</apiName><shortdesc>
+		 Gets the element name associated with this extension.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef><apiDesc>
+		 Gets the element name associated with this extension.
+		 The element for this extension is "query".
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.browse:BrowseExtension:getNS"><apiName>getNS</apiName><shortdesc>
+		 Gets the namespace associated with this extension.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>The namespace
+		 </apiDesc><apiType value="String"/></apiReturn></apiOperationDef><apiDesc>
+		 Gets the namespace associated with this extension.
+		 The namespace for the BrowseExtension is "jabber:iq:browse".
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.browse:BrowseExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>query</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.browse:BrowseExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>jabber:iq:browse</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.browse:BrowseExtension:items:get"><apiName>items</apiName><shortdesc>
+		 An array of BrowseItems containing information about the browsed resource
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Array"/></apiValueDef><apiDesc>
+		 An array of BrowseItems containing information about the browsed resource
+		 		 </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.data.browse.xml#BrowseItem"><linktext>org.igniterealtime.xiff.data.browse.BrowseItem</linktext></link></related-links></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.browse:BrowseItem"><apiName>BrowseItem</apiName><shortdesc>
+	 XEP-0011: Jabber Browsing
+	 	 Class that representes a child resource of a browsed resource.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0011: Jabber Browsing
+	 	 Class that representes a child resource of a browsed resource.
+	 	 <p><b>OBSOLETE</b></p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0011.html"><linktext>http://xmpp.org/extensions/xep-0011.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.browse:BrowseItem:BrowseItem"><apiName>BrowseItem</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.browse:BrowseItem:addNamespace"><apiName>addNamespace</apiName><shortdesc>
+		 Add new features that are supported if you are responding to a
+		 browse request
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="XML"/></apiReturn><apiParam><apiItemName>value</apiItemName><apiType value="String"/></apiParam></apiOperationDef><apiDesc>
+		 Add new features that are supported if you are responding to a
+		 browse request
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.browse:BrowseItem:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>item</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.browse:BrowseItem:category:get"><apiName>category</apiName><shortdesc>
+		 One of the categories from the list above, or a
+		 non-standard category prefixed with the string "x-".</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 One of the categories from the list above, or a
+		 non-standard category prefixed with the string "x-".
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0011.html#sect-id2594870"><linktext>http://xmpp.org/extensions/xep-0011.html#sect-id2594870</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.browse:BrowseItem:jid:get"><apiName>jid</apiName><shortdesc>
+		 The full JabberID of the entity described
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The full JabberID of the entity described
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.browse:BrowseItem:name:get"><apiName>name</apiName><shortdesc>
+		 A friendly name that may be used in a user interface
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 A friendly name that may be used in a user interface
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.browse:BrowseItem:namespaces:get"><apiName>namespaces</apiName><shortdesc>
+		 On top of the browsing framework, a simple form of "feature
+		 advertisement" can be built.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Array"/></apiValueDef><apiDesc>
+		 On top of the browsing framework, a simple form of "feature
+		 advertisement" can be built. This enables any entity to advertise
+		 whichfeatures it supports, based on the namespaces associated with
+		 those features. The <b>ns</b> element is allowed as a subelement of the
+		 item. This element contains a single namespace that the entity
+		 		 supports, and multiple <b>ns</b> elements can be included in any item.
+		 <p>For a connected client this might be &gt;ns&lt;jabber:iq:oob&lt;/ns&gt;, or for a
+		 service &gt;ns&lt;jabber:iq:search&lt;/ns&gt;. This list of namespaces should be
+		 used to present available options for a user or to automatically
+		 locate functionality for an application.</p>
+		 		 <p>The children of a browse result may proactively contain a few
+		 <b>ns</b> elements (such as the result of the service request to the home
+		 server), which advertises the features that the particular service
+		 supports. This list may not be complete (it is only for first-pass
+		 filtering by simpler clients), and the JID should be browsed if a
+		 complete list is required.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.browse:BrowseItem:type:get"><apiName>type</apiName><shortdesc>
+		 One of the official types from the specified category,
+		 or a non-standard type prefixed with the string "x-".</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 One of the official types from the specified category,
+		 or a non-standard type prefixed with the string "x-".
+		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0011.html#sect-id2594870"><linktext>http://xmpp.org/extensions/xep-0011.html#sect-id2594870</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.browse:BrowseItem:version:get"><apiName>version</apiName><shortdesc>
+		 A string containing the version of the node, equivalent
+		 to the response provided to a query in the 'jabber:iq:version'
+		 namespace.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 A string containing the version of the node, equivalent
+		 to the response provided to a query in the 'jabber:iq:version'
+		 namespace. This is useful for servers, especially for lists of
+		 services (see the 'service/serverlist' category/type above).
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier></apiPackage>

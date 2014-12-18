@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.auth"><apiName>org.igniterealtime.xiff.auth</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.auth:ISASLAuth"><apiName>ISASLAuth</apiName><shortdesc>
+	 This is a base class for use with Simple Authentication and Security Layer
+	 (SASL) mechanisms.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseClassifier/></apiClassifierDef><apiDesc>
+	 This is a base class for use with Simple Authentication and Security Layer
+	 (SASL) mechanisms. Implement this class when creating new SASL mechanisms.
+	 </apiDesc></apiClassifierDetail><apiOperation id="org.igniterealtime.xiff.auth:ISASLAuth:org.igniterealtime.xiff.auth:ISASLAuth:handleChallenge"><apiName>handleChallenge</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="XML"/></apiReturn><apiParam><apiItemName>stage</apiItemName><apiType value="int"/></apiParam><apiParam><apiItemName>challenge</apiItemName><apiType value="XML"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.auth:ISASLAuth:org.igniterealtime.xiff.auth:ISASLAuth:handleResponse"><apiName>handleResponse</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="Object"/></apiReturn><apiParam><apiItemName>stage</apiItemName><apiType value="int"/></apiParam><apiParam><apiItemName>response</apiItemName><apiType value="XML"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.auth:ISASLAuth:org.igniterealtime.xiff.auth:ISASLAuth:request:get"><apiName>request</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="XML"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.auth:SASLAuth"><apiName>SASLAuth</apiName><shortdesc>
+	 This is a base class for use with Simple Authentication and Security Layer
+	 (SASL) mechanisms.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This is a base class for use with Simple Authentication and Security Layer
+	 (SASL) mechanisms. Sub-class this class when creating new SASL mechanisms.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://tools.ietf.org/html/rfc4422"><linktext>http://tools.ietf.org/html/rfc4422</linktext></link><link href="http://tools.ietf.org/html/rfc3920#section-6"><linktext>http://tools.ietf.org/html/rfc3920#section-6</linktext></link><link href="http://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer"><linktext>http://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.auth:SASLAuth:SASLAuth"><apiName>SASLAuth</apiName><shortdesc/><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/></apiConstructorDef></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.auth:SASLAuth:handleChallenge"><apiName>handleChallenge</apiName><shortdesc>
+		 Called when a challenge to this authentication is received.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>The XML response to the challenge.
+		 </apiDesc><apiType value="XML"/></apiReturn><apiParam><apiItemName>stage</apiItemName><apiType value="int"/><apiDesc>The current stage in the authentication process.
+		 </apiDesc></apiParam><apiParam><apiItemName>challenge</apiItemName><apiType value="XML"/><apiDesc>The XML of the actual authentication challenge.
+		 		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Called when a challenge to this authentication is received.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.auth:SASLAuth:handleResponse"><apiName>handleResponse</apiName><shortdesc>
+		 Called when a response to this authentication is received.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>An object specifying the current state of the authentication.
+		 </apiDesc><apiType value="Object"/></apiReturn><apiParam><apiItemName>stage</apiItemName><apiType value="int"/><apiDesc>The current stage in the authentication process.
+		 </apiDesc></apiParam><apiParam><apiItemName>response</apiItemName><apiType value="XML"/><apiDesc>The XML of the actual authentication response.
+		 		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Called when a response to this authentication is received.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.auth:SASLAuth:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>urn:ietf:params:xml:ns:xmpp-sasl</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.auth:SASLAuth:RESPONSE_SUCCESS"><apiName>RESPONSE_SUCCESS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>success</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.auth:SASLAuth:protected:connection"><apiName>connection</apiName><shortdesc>
+		 Connection that is used to authenticate, if any
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiValueClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiValueClassifier></apiValueDef><apiDesc>
+		 Connection that is used to authenticate, if any
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.auth:SASLAuth:protected:req"><apiName>req</apiName><shortdesc>
+		 The XML of the authentication request.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiData>unknown</apiData><apiType value="XML"/></apiValueDef><apiDesc>
+		 The XML of the authentication request.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.auth:SASLAuth:protected:response"><apiName>response</apiName><shortdesc>
+		 The XML of the challenge response.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiData>unknown</apiData><apiType value="XML"/></apiValueDef><apiDesc>
+		 The XML of the challenge response.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.auth:SASLAuth:protected:stage"><apiName>stage</apiName><shortdesc>
+		 The current response stage.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiType value="int"/></apiValueDef><apiDesc>
+		 The current response stage.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.auth:SASLAuth:request:get"><apiName>request</apiName><shortdesc>
+		 The XML for the authentication request.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="XML"/></apiValueDef><apiDesc>
+		 The XML for the authentication request.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.auth:DigestMD5"><apiName>DigestMD5</apiName><shortdesc>
+	 This class provides SASL authentication using the DIGEST-MD5 mechanism, a HTTP Digest
+	 compatible challenge-response scheme based upon MD5.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class provides SASL authentication using the DIGEST-MD5 mechanism, a HTTP Digest
+	 compatible challenge-response scheme based upon MD5. DIGEST-MD5 offers a data security layer.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://en.wikipedia.org/wiki/Digest_access_authentication"><linktext>http://en.wikipedia.org/wiki/Digest_access_authentication</linktext></link><link href="http://tools.ietf.org/html/rfc1321"><linktext>http://tools.ietf.org/html/rfc1321</linktext></link><link href="http://www.ietf.org/rfc/rfc2831.txt"><linktext>http://www.ietf.org/rfc/rfc2831.txt</linktext></link><link href="http://tools.ietf.org/html/rfc3920#section-6"><linktext>http://tools.ietf.org/html/rfc3920#section-6</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.auth:DigestMD5:DigestMD5"><apiName>DigestMD5</apiName><shortdesc>
+		Creates a new External authentication object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>connection</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiOperationClassifier><apiDesc>A reference to the XMPPConnection instance in use.
+		</apiDesc></apiParam></apiConstructorDef><apiDesc>
+		Creates a new External authentication object.
+				</apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.auth:DigestMD5:handleChallenge"><apiName>handleChallenge</apiName><shortdesc>
+		 Called when a challenge to this authentication is received.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>The XML response to the challenge.
+		 </apiDesc><apiType value="XML"/></apiReturn><apiParam><apiItemName>stage</apiItemName><apiType value="int"/><apiDesc>The current stage in the authentication process.
+		 </apiDesc></apiParam><apiParam><apiItemName>challenge</apiItemName><apiType value="XML"/><apiDesc>The XML of the actual authentication challenge.
+		 		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Called when a challenge to this authentication is received.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.auth:DigestMD5:handleResponse"><apiName>handleResponse</apiName><shortdesc>
+		Called when a response to this authentication is received.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>An object specifying the current state of the authentication.
+		</apiDesc><apiType value="Object"/></apiReturn><apiParam><apiItemName>stage</apiItemName><apiType value="int"/><apiDesc>The current stage in the authentication process.
+		</apiDesc></apiParam><apiParam><apiItemName>response</apiItemName><apiType value="XML"/><apiDesc>The XML of the actual authentication response.
+				</apiDesc></apiParam></apiOperationDef><apiDesc>
+		Called when a response to this authentication is received.
+				</apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.auth:DigestMD5:MECHANISM"><apiName>MECHANISM</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>DIGEST-MD5</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.auth:Anonymous"><apiName>Anonymous</apiName><shortdesc>
+	 This class provides SASL authentication using the ANONYMOUS mechanism.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class provides SASL authentication using the ANONYMOUS mechanism.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0175.html"><linktext>http://xmpp.org/extensions/xep-0175.html</linktext></link><link href="http://tools.ietf.org/html/rfc4505"><linktext>http://tools.ietf.org/html/rfc4505</linktext></link><link href="http://tools.ietf.org/html/rfc3920#section-6"><linktext>http://tools.ietf.org/html/rfc3920#section-6</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.auth:Anonymous:Anonymous"><apiName>Anonymous</apiName><shortdesc>
+		 Creates a new Anonymous authentication object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>connection</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiOperationClassifier><apiDesc>A reference to the XMPPConnection instance to use.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Creates a new Anonymous authentication object.
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.auth:Anonymous:handleResponse"><apiName>handleResponse</apiName><shortdesc>
+		 Called when a response to this authentication is received.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>An object specifying the current state of the authentication.
+		 </apiDesc><apiType value="Object"/></apiReturn><apiParam><apiItemName>stage</apiItemName><apiType value="int"/><apiDesc>The current stage in the authentication process.
+		 </apiDesc></apiParam><apiParam><apiItemName>response</apiItemName><apiType value="XML"/><apiDesc>The XML of the actual authentication response.
+		 		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Called when a response to this authentication is received.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.auth:Anonymous:MECHANISM"><apiName>MECHANISM</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>ANONYMOUS</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.auth:XFacebookPlatform"><apiName>XFacebookPlatform</apiName><shortdesc>
+	 This class provides SASL authentication using the X-FACEBOOK-PLATFORM mechanism.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class provides SASL authentication using the X-FACEBOOK-PLATFORM mechanism.
+	 	 <p>Facebook Chat currently supports the following features, related to authentication:</p>
+	 <ul>
+	 <li>Facebook Platform authentication using the X-FACEBOOK-PLATFORM SASL authentication mechanism</li>
+	 <li>Username/password authentication using the DIGEST-MD5 authentication mechanism</li>
+	 </ul>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://tools.ietf.org/html/rfc3920#section-6"><linktext>http://tools.ietf.org/html/rfc3920#section-6</linktext></link><link href="" invalidHref="https.//developers.facebook.com/docs/chat/.xml"><linktext>https://developers.facebook.com/docs/chat/</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.auth:XFacebookPlatform:XFacebookPlatform"><apiName>XFacebookPlatform</apiName><shortdesc>
+		 Creates a new XFacebookPlatform authentication object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>connection</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiOperationClassifier><apiDesc>A reference to the XMPPConnection instance in use.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Creates a new XFacebookPlatform authentication object.
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.auth:XFacebookPlatform:handleChallenge"><apiName>handleChallenge</apiName><shortdesc>
+		 Called when a challenge to this authentication is received.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>The XML response to the challenge.
+		 </apiDesc><apiType value="XML"/></apiReturn><apiParam><apiItemName>stage</apiItemName><apiType value="int"/><apiDesc>The current stage in the authentication process.
+		 </apiDesc></apiParam><apiParam><apiItemName>challenge</apiItemName><apiType value="XML"/><apiDesc>The XML of the actual authentication challenge.
+		 		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Called when a challenge to this authentication is received.
+		 		 <p>The mechanism starts with a server challenge, in the form of a common HTTP query string:
+		 an ampersand-separated sequence of equals-sign-delimited key/value pairs.
+		 The keys and values are UTF-8-encoded and URL-encoded.
+		 The query string contains two items: method and nonce.</p>
+		 		 <p>The client's reply should be a similarly-encoded query string prepared as if it were
+		 going to call a method against the Facebook API. The call should contain the
+		 following parameters:</p>
+		 <ul>
+		 <li>string method: Should be the same as the method specified by the server.</li>
+		 <li>string api_key: The application key associated with the calling application.</li>
+		 <li>string access_token: The access_token obtained in the above step.</li>
+		 <li>float call_id: The request's sequence number.</li>
+		 <li>string v: This must be set to 1.0 to use this version of the API.</li>
+		 <li>string format: Optional - Ignored.</li>
+		 <li>string cnonce: Optional - Client-selected nonce. Ignored.</li>
+		 <li>string nonce: Should be the same as the nonce specified by the server.</li>
+		 </ul>
+		 		 <p>The server will then respond with a success or failure message.
+		 Note that this needs to be over TLS or you'll get an error.</p>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.auth:XFacebookPlatform:handleResponse"><apiName>handleResponse</apiName><shortdesc>
+		 Called when a response to this authentication is received.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>An object specifying the current state of the authentication.
+		 </apiDesc><apiType value="Object"/></apiReturn><apiParam><apiItemName>stage</apiItemName><apiType value="int"/><apiDesc>The current stage in the authentication process.
+		 </apiDesc></apiParam><apiParam><apiItemName>response</apiItemName><apiType value="XML"/><apiDesc>The XML of the actual authentication response.
+		 		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Called when a response to this authentication is received.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.auth:XFacebookPlatform:MECHANISM"><apiName>MECHANISM</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>X-FACEBOOK-PLATFORM</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.auth:XFacebookPlatform:fb_access_token"><apiName>fb_access_token</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiStatic/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.auth:XFacebookPlatform:fb_app_id"><apiName>fb_app_id</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiStatic/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.auth:Plain"><apiName>Plain</apiName><shortdesc>
+	 This class provides SASL authentication using the PLAIN mechanism.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class provides SASL authentication using the PLAIN mechanism.
+	 This is used for plain text (base64 encoded) password authentication with an XMPP
+	 server.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://tools.ietf.org/html/rfc4616"><linktext>http://tools.ietf.org/html/rfc4616</linktext></link><link href="http://tools.ietf.org/html/rfc3920#section-6"><linktext>http://tools.ietf.org/html/rfc3920#section-6</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.auth:Plain:Plain"><apiName>Plain</apiName><shortdesc>
+		 Creates a new Plain authentication object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>connection</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiOperationClassifier></apiParam></apiConstructorDef><apiDesc>
+		 Creates a new Plain authentication object.
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.auth:Plain:handleResponse"><apiName>handleResponse</apiName><shortdesc>
+		 Called when a response to this authentication is received.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>An object specifying the current state of the authentication.
+		 </apiDesc><apiType value="Object"/></apiReturn><apiParam><apiItemName>stage</apiItemName><apiType value="int"/><apiDesc>The current stage in the authentication process.
+		 </apiDesc></apiParam><apiParam><apiItemName>response</apiItemName><apiType value="XML"/><apiDesc>The XML of the actual authentication response.
+		 		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Called when a response to this authentication is received.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.auth:Plain:MECHANISM"><apiName>MECHANISM</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>PLAIN</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.auth:XOAuth2"><apiName>XOAuth2</apiName><shortdesc>
+	 This class provides SASL authentication using the X-OAUTH2 mechanism.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class provides SASL authentication using the X-OAUTH2 mechanism.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://tools.ietf.org/html/rfc3920#section-6"><linktext>http://tools.ietf.org/html/rfc3920#section-6</linktext></link><link href="" invalidHref="https.//developers.google.com/accounts/docs/OAuth2.xml"><linktext>https://developers.google.com/accounts/docs/OAuth2</linktext></link><link href="" invalidHref="https.//developers.google.com/cloud-print/docs/rawxmpp.xml"><linktext>https://developers.google.com/cloud-print/docs/rawxmpp</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.auth:XOAuth2:XOAuth2"><apiName>XOAuth2</apiName><shortdesc>
+		 Creates a OAuth v2 authentication object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>connection</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiOperationClassifier><apiDesc>A reference to the XMPPConnection instance in use.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Creates a OAuth v2 authentication object.
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.auth:XOAuth2:handleChallenge"><apiName>handleChallenge</apiName><shortdesc>
+		 Called when a challenge to this authentication is received.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>The XML response to the challenge.
+		 </apiDesc><apiType value="XML"/></apiReturn><apiParam><apiItemName>stage</apiItemName><apiType value="int"/><apiDesc>The current stage in the authentication process.
+		 </apiDesc></apiParam><apiParam><apiItemName>challenge</apiItemName><apiType value="XML"/><apiDesc>The XML of the actual authentication challenge.
+		 		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Called when a challenge to this authentication is received.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.auth:XOAuth2:handleResponse"><apiName>handleResponse</apiName><shortdesc>
+		 Called when a response to this authentication is received.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>An object specifying the current state of the authentication.
+		 </apiDesc><apiType value="Object"/></apiReturn><apiParam><apiItemName>stage</apiItemName><apiType value="int"/><apiDesc>The current stage in the authentication process.
+		 </apiDesc></apiParam><apiParam><apiItemName>response</apiItemName><apiType value="XML"/><apiDesc>The XML of the actual authentication response.
+		 		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Called when a response to this authentication is received.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.auth:XOAuth2:MECHANISM"><apiName>MECHANISM</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>X-OAUTH2</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.auth:XOAuth2:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>urn:ietf:params:xml:ns:xmpp-sasl</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.auth:External"><apiName>External</apiName><shortdesc>
+	 This class provides SASL authentication using the EXTERNAL mechanism.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.auth:ISASLAuth</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.auth:SASLAuth</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class provides SASL authentication using the EXTERNAL mechanism.
+	 This is particularly useful when TLS authentication is required.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0178.html"><linktext>http://xmpp.org/extensions/xep-0178.html</linktext></link><link href="http://tools.ietf.org/html/rfc3920#section-6"><linktext>http://tools.ietf.org/html/rfc3920#section-6</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.auth:External:External"><apiName>External</apiName><shortdesc>
+		 Creates a new External authentication object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>connection</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiOperationClassifier></apiParam></apiConstructorDef><apiDesc>
+		 Creates a new External authentication object.
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.auth:External:handleResponse"><apiName>handleResponse</apiName><shortdesc>
+		 Called when a response to this authentication is received.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiDesc>An object specifying the current state of the authentication.
+		 </apiDesc><apiType value="Object"/></apiReturn><apiParam><apiItemName>stage</apiItemName><apiType value="int"/><apiDesc>The current stage in the authentication process.
+		 </apiDesc></apiParam><apiParam><apiItemName>response</apiItemName><apiType value="XML"/><apiDesc>The XML of the actual authentication response.
+		 		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Called when a response to this authentication is received.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.auth:External:MECHANISM"><apiName>MECHANISM</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>EXTERNAL</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier></apiPackage>

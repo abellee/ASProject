@@ -1,0 +1,446 @@
+
+<overviews>
+	
+<packages>
+		
+<package name="org.igniterealtime.xiff">
+			
+<shortDescription>
+			    XMPP Instant Messaging Library written in Actionscript 3 (Flash Player 9+) 
+			</shortDescription>
+			
+<description>
+				  
+			</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.auth">
+			
+<shortDescription>
+				 Authentication 
+			</shortDescription>
+			
+<description>
+				  
+			</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.bookmark">
+			
+<shortDescription>
+				 Bookmark management for URLs and Group Chats 
+			</shortDescription>
+			
+<description>
+				  
+			</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.collections">
+				
+<shortDescription>
+				 Lightweight implementation of ArrayCollection 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.collections.events">
+				
+<shortDescription>
+				 XIFF Events 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.conference">
+				
+<shortDescription>
+				 Multi User Chat related 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.core">
+				
+<shortDescription>
+				 Connections 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data">
+				
+<shortDescription>
+				 XML things, such as XMPP Stanzas, Extensions, etc.. 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.auth">
+				
+<shortDescription>
+				 SASL Authentication types 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.bind">
+				
+<shortDescription>
+				 Binding Resource identifier for the connection 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.browse">
+				
+<shortDescription>
+				 OBSOLETE Jabber Browsing 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.disco">
+				
+<shortDescription>
+				 Service Discovery 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.feature">
+				
+<shortDescription>
+				 XEP-0020: Feature Negotiation 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.forms">
+				
+<shortDescription>
+				 Forms 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.forms.enum">
+				
+<shortDescription>
+				 Static constants related to Forms 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.id">
+				
+<shortDescription>
+				 Unique Identifier generation 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.im">
+				
+<shortDescription>
+				 Instant Messaging 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.message">
+				
+<shortDescription>
+				 Message related XEP extensions 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.muc">
+				
+<shortDescription>
+				 Multi User Chat 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.ping">
+				
+<shortDescription>
+				 Keeping the connection alive with ping 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.privatedata">
+				
+<shortDescription>
+				  
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.register">
+				
+<shortDescription>
+				 User registration 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.rpc">
+				
+<shortDescription>
+				 XML-RPC 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.search">
+				
+<shortDescription>
+				  
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.session">
+				
+<shortDescription>
+				  
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.sharedgroups">
+				
+<shortDescription>
+				  
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.si">
+				
+<shortDescription>
+				 Stream Initiation (XEP-0095) and SI File Transfer 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.vcard">
+				
+<shortDescription>
+				 vCard 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.version">
+				
+<shortDescription>
+				 Software Version of the Client 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.whiteboard">
+				
+<shortDescription>
+				 XIFF Whiteboard 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.data.xhtml">
+				
+<shortDescription>
+				 XHTML in Message. TODO: Move to 'message' group since only used for ... 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.events">
+				
+<shortDescription>
+				 XIFF Events 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.exception">
+				
+<shortDescription>
+				  
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.filter">
+				
+<shortDescription>
+				  
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.im">
+				
+<shortDescription>
+				  
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.message">
+				
+<shortDescription>
+				 Message related XEP tools 
+				</shortDescription>
+				
+<description>
+				 Message Archiving 
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.namespaces">
+				
+<shortDescription>
+				  
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.privatedata">
+				
+<shortDescription>
+				  
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.util">
+				
+<shortDescription>
+				 Utilities that are not available natively, such as Base64 and Zlib 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+		
+<package name="org.igniterealtime.xiff.vcard">
+				
+<shortDescription>
+				 vCard data structure 
+				</shortDescription>
+				
+<description>
+				  
+				</description>
+		</package>
+	</packages>
+</overviews>

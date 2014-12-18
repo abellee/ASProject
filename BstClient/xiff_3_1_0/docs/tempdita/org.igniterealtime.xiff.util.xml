@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.util"><apiName>org.igniterealtime.xiff.util</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.util:Hex"><apiName>Hex</apiName><shortdesc>
+	 Utility for reading and writing Hex formatted data to/from ByteArray.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Utility for reading and writing Hex formatted data to/from ByteArray.
+	 </apiDesc></apiClassifierDetail><apiOperation id="org.igniterealtime.xiff.util:Hex:readBytes"><apiName>readBytes</apiName><shortdesc>
+		 Read the bytes of the given bytearray and convert to a hex string
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>String in hex format
+		 </apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>ba</apiItemName><apiType value="flash.utils:ByteArray"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Read the bytes of the given bytearray and convert to a hex string
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.util:Hex:writeBytes"><apiName>writeBytes</apiName><shortdesc>
+		 Write the given hex string to the bytearray
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>ByteArray that has the hex written in it
+		 </apiDesc><apiType value="flash.utils:ByteArray"/></apiReturn><apiParam><apiItemName>ba</apiItemName><apiType value="flash.utils:ByteArray"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>hex</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Write the given hex string to the bytearray
+		 		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.igniterealtime.xiff.util:ICompressor"><apiName>ICompressor</apiName><shortdesc>
+	 Interface for implementing Stream Compression
+	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseClassifier/></apiClassifierDef><apiDesc>
+	 Interface for implementing Stream Compression
+	 </apiDesc></apiClassifierDetail><apiOperation id="org.igniterealtime.xiff.util:ICompressor:org.igniterealtime.xiff.util:ICompressor:clear"><apiName>clear</apiName><shortdesc>
+		 Finish compressing in this session.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Finish compressing in this session.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.util:ICompressor:org.igniterealtime.xiff.util:ICompressor:compress"><apiName>compress</apiName><shortdesc>
+		 Compress the given ByteArray.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="flash.utils:ByteArray"/></apiReturn><apiParam><apiItemName>data</apiItemName><apiType value="flash.utils:ByteArray"/></apiParam></apiOperationDef><apiDesc>
+		 Compress the given ByteArray.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.util:ICompressor:org.igniterealtime.xiff.util:ICompressor:uncompress"><apiName>uncompress</apiName><shortdesc>
+		 Uncompress the given ByteArray.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="flash.utils:ByteArray"/></apiReturn><apiParam><apiItemName>data</apiItemName><apiType value="flash.utils:ByteArray"/></apiParam></apiOperationDef><apiDesc>
+		 Uncompress the given ByteArray.
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.igniterealtime.xiff.util:Zlib"><apiName>Zlib</apiName><shortdesc>
+	 Compress the given ByteArrays by using the as3zlib library.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.util:ICompressor</apiBaseInterface><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Compress the given ByteArrays by using the as3zlib library.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://code.google.com/p/as3zlib/"><linktext>http://code.google.com/p/as3zlib/</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.util:Zlib:Zlib"><apiName>Zlib</apiName><shortdesc>
+		 Stream Compression - Zlib
+		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/></apiConstructorDef><apiDesc>
+		 Stream Compression - Zlib
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.util:Zlib:clear"><apiName>clear</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.util:Zlib:compress"><apiName>compress</apiName><shortdesc>
+		 Compress (deflate) the given ByteArray.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>Compressed data
+		 </apiDesc><apiType value="flash.utils:ByteArray"/></apiReturn><apiParam><apiItemName>data</apiItemName><apiType value="flash.utils:ByteArray"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Compress (deflate) the given ByteArray.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.util:Zlib:uncompress"><apiName>uncompress</apiName><shortdesc>
+		 Uncompress (inflate) the given ByteArray.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>Uncompressed data
+		 </apiDesc><apiType value="flash.utils:ByteArray"/></apiReturn><apiParam><apiItemName>data</apiItemName><apiType value="flash.utils:ByteArray"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Uncompress (inflate) the given ByteArray.
+		 		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.igniterealtime.xiff.util:SHA1"><apiName>SHA1</apiName><shortdesc>
+	 A static class for SHA1 hash creation.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A static class for SHA1 hash creation. Original ActionScript 1.0 version
+	 by Branden Hall. Original ActionScript 2.0 translation by Ron Haberle.
+	 </apiDesc></apiClassifierDetail><related-links><link href="http://csrc.nist.gov/groups/ST/hash/statement.html"><linktext>http://csrc.nist.gov/groups/ST/hash/statement.html</linktext></link><link href="http://tools.ietf.org/html/rfc3174"><linktext>http://tools.ietf.org/html/rfc3174</linktext></link></related-links><apiOperation id="org.igniterealtime.xiff.util:SHA1:calcSHA1"><apiName>calcSHA1</apiName><shortdesc>
+		 Takes a string and returns the hex representation of its SHA1 hash.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>The SHA1 hash of the string passed to the function
+		 </apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>str</apiItemName><apiType value="String"/><apiDesc>The string to use for calculating the hash
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Takes a string and returns the hex representation of its SHA1 hash.
+		 		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.igniterealtime.xiff.util:Callback"><apiName>Callback</apiName><shortdesc>
+	 Sets an callback function
+	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Sets an callback function
+	 </apiDesc></apiClassifierDetail><apiConstructor id="org.igniterealtime.xiff.util:Callback:Callback"><apiName>Callback</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>scope</apiItemName><apiType value="Object"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>callback</apiItemName><apiType value="Function"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>args</apiItemName><apiType value="restParam"/><apiDesc>args
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.util:Callback:call"><apiName>call</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc></apiDesc><apiType value="Object"/></apiReturn><apiParam><apiItemName>args</apiItemName><apiType value="restParam"/><apiDesc>args
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.igniterealtime.xiff.util:DateTimeParser"><apiName>DateTimeParser</apiName><shortdesc>
+	 A set of static functions to parse the time and date values.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A set of static functions to parse the time and date values.
+	 All date related methods are the UTC versions.
+	 	 <p>Also methods for handling legacy format are available</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0082.html"><linktext>http://xmpp.org/extensions/xep-0082.html</linktext></link><link href="http://xmpp.org/extensions/xep-0090.html"><linktext>http://xmpp.org/extensions/xep-0090.html</linktext></link></related-links><apiOperation id="org.igniterealtime.xiff.util:DateTimeParser:date2legacyString"><apiName>date2legacyString</apiName><shortdesc>
+		 Convert a Date object to a string, CCYYMMDD, using UTC timezone.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc><codeph>CCYYMMDD</codeph>
+		 </apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>date</apiItemName><apiType value="Date"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convert a Date object to a string, <codeph>CCYYMMDD</codeph>, using UTC timezone.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.util:DateTimeParser:date2string"><apiName>date2string</apiName><shortdesc>
+		 Convert a Date object to a string, CCYY-MM-DD
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc><codeph>CCYY-MM-DD</codeph>
+		 </apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>date</apiItemName><apiType value="Date"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convert a Date object to a string, <codeph>CCYY-MM-DD</codeph>
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.util:DateTimeParser:dateTime2string"><apiName>dateTime2string</apiName><shortdesc>
+		 Convert a Date object to a string CCYY-MM-DDThh:mm:ss[.sss]TZD
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc><codeph>CCYY-MM-DDThh:mm:ss[.sss]TZD</codeph>
+		 </apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>dateTime</apiItemName><apiType value="Date"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>ms</apiItemName><apiType value="Boolean"/><apiData>false</apiData><apiDesc>Include milliseconds in the resulting string
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convert a Date object to a string <codeph>CCYY-MM-DDThh:mm:ss[.sss]TZD</codeph>
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.util:DateTimeParser:legacyString2dateTime"><apiName>legacyString2dateTime</apiName><shortdesc>
+		 Convert a legacy string CCYYMMDDThh:mm:ss to a Date object
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>Date object
+		 </apiDesc><apiType value="Date"/></apiReturn><apiParam><apiItemName>stamp</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convert a legacy string <codeph>CCYYMMDDThh:mm:ss</codeph> to a Date object
+		 </apiDesc></apiOperationDetail><related-links><link href="http://xmpp.org/extensions/xep-0090.html"><linktext>http://xmpp.org/extensions/xep-0090.html</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.util:DateTimeParser:legacyString2date"><apiName>legacyString2date</apiName><shortdesc>
+		 Convert a lecagy string CCYYMMDD to a Date object.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>Date object
+		 </apiDesc><apiType value="Date"/></apiReturn><apiParam><apiItemName>stamp</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convert a lecagy string <codeph>CCYYMMDD</codeph> to a Date object.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.util:DateTimeParser:string2dateTime"><apiName>string2dateTime</apiName><shortdesc>
+		 Convert a string CCYY-MM-DDThh:mm:ss[.sss]TZD to a Date object
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>Date object
+		 </apiDesc><apiType value="Date"/></apiReturn><apiParam><apiItemName>stamp</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convert a string <codeph>CCYY-MM-DDThh:mm:ss[.sss]TZD</codeph> to a Date object
+		 </apiDesc></apiOperationDetail><related-links><link href="http://xmpp.org/extensions/xep-0082.html"><linktext>http://xmpp.org/extensions/xep-0082.html</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.util:DateTimeParser:string2date"><apiName>string2date</apiName><shortdesc>
+		 Convert a string CCYY-MM-DD to a date object
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>Date object
+		 </apiDesc><apiType value="Date"/></apiReturn><apiParam><apiItemName>stamp</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convert a string <codeph>CCYY-MM-DD</codeph> to a date object
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.util:DateTimeParser:string2time"><apiName>string2time</apiName><shortdesc>
+		 Convert a string hh:mm:ss[.sss][TZD] to a Date object
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>Date object
+		 </apiDesc><apiType value="Date"/></apiReturn><apiParam><apiItemName>stamp</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convert a string <codeph>hh:mm:ss[.sss][TZD]</codeph> to a Date object
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.util:DateTimeParser:time2string"><apiName>time2string</apiName><shortdesc>
+		 Convert a Date object to a string hh:mm:ss[.sss][TZD]
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc><codeph>hh:mm:ss[.sss][TZD]</codeph>
+		 </apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>time</apiItemName><apiType value="Date"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>ms</apiItemName><apiType value="Boolean"/><apiData>false</apiData><apiDesc>Include milliseconds in the resulting string
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convert a Date object to a string <codeph>hh:mm:ss[.sss][TZD]</codeph>
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.igniterealtime.xiff.util:ZlibNative"><apiName>ZlibNative</apiName><shortdesc>
+	 Compress the given ByteArrays by using the Flash
+	 Player 10 native CompressionAlgorithm.ZLIB.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.util:ICompressor</apiBaseInterface><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Compress the given ByteArrays by using the Flash
+	 Player 10 native CompressionAlgorithm.ZLIB.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/utils/CompressionAlgorithm.html"><linktext>http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/utils/CompressionAlgorithm.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.util:ZlibNative:ZlibNative"><apiName>ZlibNative</apiName><shortdesc>
+		 Stream Compression - Native DEFLATE
+		 		 All multi-byte numbers in the format described in RFC 1950 are stored with
+		 the MOST-significant byte first (at the lower memory address).
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/></apiConstructorDef><apiDesc>
+		 Stream Compression - Native DEFLATE
+		 		 <p>All multi-byte numbers in the format described in RFC 1950 are stored with
+		 the MOST-significant byte first (at the lower memory address).</p>
+		 		 </apiDesc></apiConstructorDetail><related-links><link href="http://tools.ietf.org/html/rfc1950"><linktext>http://tools.ietf.org/html/rfc1950</linktext></link></related-links></apiConstructor><apiOperation id="org.igniterealtime.xiff.util:ZlibNative:clear"><apiName>clear</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.util:ZlibNative:compress"><apiName>compress</apiName><shortdesc>
+		 Compress (deflate) the given ByteArray.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>Compressed data
+		 </apiDesc><apiType value="flash.utils:ByteArray"/></apiReturn><apiParam><apiItemName>data</apiItemName><apiType value="flash.utils:ByteArray"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Compress (deflate) the given ByteArray.
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/utils/ByteArray.html#deflate%28%29"><linktext>http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/utils/ByteArray.html#deflate%28%29</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.util:ZlibNative:uncompress"><apiName>uncompress</apiName><shortdesc>
+		 Uncompress (inflate) the given ByteArray.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>Uncompressed data
+		 </apiDesc><apiType value="flash.utils:ByteArray"/></apiReturn><apiParam><apiItemName>data</apiItemName><apiType value="flash.utils:ByteArray"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Uncompress (inflate) the given ByteArray.
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/utils/ByteArray.html#inflate%28%29"><linktext>http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/utils/ByteArray.html#inflate%28%29</linktext></link></related-links></apiOperation></apiClassifier></apiPackage>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.data.forms"><apiName>org.igniterealtime.xiff.data.forms</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.data.forms:FormExtension"><apiName>FormExtension</apiName><shortdesc>
+	 XEP-0004: Data Forms
+	 	 Implements the base functionality of XEP-0004: Data Forms,
+	 shared by all MUC extensions.
+	 	 Also used by XEP-0128: Service Discovery Extensions
+	 	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0004: Data Forms
+	 	 <p>Implements the base functionality of XEP-0004: Data Forms,
+	 shared by all MUC extensions.</p>
+	 	 <p>Also used by XEP-0128: Service Discovery Extensions</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0004.html"><linktext>http://xmpp.org/extensions/xep-0004.html</linktext></link><link href="http://xmpp.org/extensions/xep-0128.html"><linktext>http://xmpp.org/extensions/xep-0128.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.forms:FormExtension:FormExtension"><apiName>FormExtension</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.forms:FormExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.forms:FormExtension:getFormField"><apiName>getFormField</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>FormField the matching form field
+		 </apiDesc><apiOperationClassifier>org.igniterealtime.xiff.data.forms:FormField</apiOperationClassifier></apiReturn><apiParam><apiItemName>varName</apiItemName><apiType value="String"/><apiDesc>The varName of the form field to retrieve
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.forms:FormExtension:getNS"><apiName>getNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.forms:FormExtension:setFieldMap"><apiName>setFieldMap</apiName><shortdesc>
+		 Sets the fields given a fieldMap object containing keys of field vars
+		 and values of value arrays.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>fieldMap</apiItemName><apiType value="Object"/><apiDesc>Object
+		 Format:
+		 { "varName": [ value1, value2, ... ] }
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sets the fields given a fieldMap object containing keys of field vars
+		 and values of value arrays.
+		 		 <p>Shorthand for setting <codeph>fields</codeph> property.</p>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.forms:FormExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>x</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>jabber:x:data</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormExtension:fields:get"><apiName>fields</apiName><shortdesc>
+		 Interface to array of fields.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Array"/></apiValueDef><apiDesc>
+		 Interface to array of fields.
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormExtension:formType:get"><apiName>formType</apiName><shortdesc>
+		 This is an accessor to the hidden field type FORM_TYPE
+		 easily check what kind of form this is.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef><apiDesc>
+		 This is an accessor to the hidden field type <codeph>FORM_TYPE</codeph>
+		 easily check what kind of form this is.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0068.html"><linktext>http://xmpp.org/extensions/xep-0068.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormExtension:instructions:get"><apiName>instructions</apiName><shortdesc>
+		 Natural-language instructions to be followed by the form-submitting entity.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Array"/></apiValueDef><apiDesc>
+		 Natural-language instructions to be followed by the form-submitting entity.
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormExtension:items:get"><apiName>items</apiName><shortdesc>
+		 Interface to array of items.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Array"/></apiValueDef><apiDesc>
+		 Interface to array of items.
+		 		 </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.data.forms.xml#FormItem"><linktext>org.igniterealtime.xiff.data.forms.FormItem</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormExtension:reported:get"><apiName>reported</apiName><shortdesc>
+		 An element defining the data format for the result items.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.data.forms:FormReported</apiValueClassifier></apiValueDef><apiDesc>
+		 An element defining the data format for the result items.
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormExtension:title:get"><apiName>title</apiName><shortdesc>
+		 The title of this form
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The title of this form
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormExtension:type:get"><apiName>type</apiName><shortdesc>
+		 The type of form.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The type of form.
+		 May be one of the following:
+		 		 <codeph>FormType.FORM</codeph>
+		 <codeph>FormType.SUBMIT</codeph>
+		 <codeph>FormType.CANCEL</codeph>
+		 <codeph>FormType.RESULT</codeph>
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.forms:FormReported"><apiName>FormReported</apiName><shortdesc>
+	 In some contexts (e.g., the results of a search request), it may be
+	 necessary to communicate multiple items.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 In some contexts (e.g., the results of a search request), it may be
+	 necessary to communicate multiple items. Therefore, a data form of
+	 type "result" MAY contain two child elements not described in the basic syntax:
+	 <ol>
+	 <li>One and only <b>reported</b> element, which can be understood as a "table header"
+	 describing the data to follow.</li>
+	 <li>Zero or more <b>item</b> elements, which can be understood as "table cells"
+	 containing data (if any) that matches the request.</li>
+	 </ol>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0004.html#protocol-results"><linktext>http://xmpp.org/extensions/xep-0004.html#protocol-results</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.forms:FormReported:FormReported"><apiName>FormReported</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiValue id="org.igniterealtime.xiff.data.forms:FormReported:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>reported</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormReported:fields:get"><apiName>fields</apiName><shortdesc>
+		 Item interface to array of fields if they are contained in a "field" element
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Array"/></apiValueDef><apiDesc>
+		 Item interface to array of fields if they are contained in a "field" element
+		 		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.forms:FormItem"><apiName>FormItem</apiName><shortdesc>
+	 	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0004.html"><linktext>http://xmpp.org/extensions/xep-0004.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.forms:FormItem:FormItem"><apiName>FormItem</apiName><shortdesc/><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData></apiParam></apiConstructorDef></apiConstructorDetail></apiConstructor><apiValue id="org.igniterealtime.xiff.data.forms:FormItem:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>item</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormItem:fields:get"><apiName>fields</apiName><shortdesc>
+		 Item interface to array of fields if they are contained in a "field" element
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Array"/></apiValueDef><apiDesc>
+		 Item interface to array of fields if they are contained in a "field" element
+		 		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.forms:FormField"><apiName>FormField</apiName><shortdesc>
+	 This class is used by the FormExtension class for managing fields
+	 as fields have multiple behaviors depending on the type of the form
+	 while containing different kinds of data, some optional some not.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class is used by the FormExtension class for managing fields
+	 as fields have multiple behaviors depending on the type of the form
+	 while containing different kinds of data, some optional some not.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="org.igniterealtime.xiff.data.forms.xml#FormExtension"><linktext>org.igniterealtime.xiff.data.forms.FormExtension</linktext></link><link href="http://xmpp.org/extensions/xep-0004.html"><linktext>http://xmpp.org/extensions/xep-0004.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.forms:FormField:FormField"><apiName>FormField</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>type</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>varName</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>values</apiItemName><apiType value="Array"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>options</apiItemName><apiType value="Array"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>label</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>desc</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>required</apiItemName><apiType value="Boolean"/><apiData>false</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiValue id="org.igniterealtime.xiff.data.forms:FormField:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>field</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormField:desc:get"><apiName>desc</apiName><shortdesc>
+		 A natural-language description of the field, intended for presentation in a user-agent
+		 (e.g., as a "tool-tip", help button, or explanatory text provided near the field).</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 A natural-language description of the field, intended for presentation in a user-agent
+		 (e.g., as a "tool-tip", help button, or explanatory text provided near the field).
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormField:label:get"><apiName>label</apiName><shortdesc>
+		 A human-readable name for the field.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 A human-readable name for the field.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormField:options:get"><apiName>options</apiName><shortdesc>
+		 If options are provided for possible selections of the value they are listed here.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Array"/></apiValueDef><apiDesc>
+		 If options are provided for possible selections of the value they are listed here.
+		 		 <p>Applies to the following field types:</p>
+		 		 <codeph>FormFieldType.LIST_MULTI</codeph>
+		 <codeph>FormFieldType.LIST_SINGLE</codeph>
+		 		 <p>Array of objects with the properties <codeph>label</codeph> and <codeph>value</codeph>, {label, value}.</p>
+		 		 <p>The <b>option</b> element MUST contain one and only one
+		 <b>value</b> child. If the field is not of type "list-single"
+		 or "list-multi", it MUST NOT contain an <b>option</b> element.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormField:required:get"><apiName>required</apiName><shortdesc>
+		 If true, flags the field as required in order for the form to be considered valid.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 If true, flags the field as required in order for the form to be considered valid.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormField:type:get"><apiName>type</apiName><shortdesc>
+		 The type of this field used by user interfaces to render an approprite
+		 control to represent this field.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The type of this field used by user interfaces to render an approprite
+		 control to represent this field.
+		 		 May be one of the following:
+		 		 <codeph>FormFieldType.BOOLEAN</codeph>
+		 <codeph>FormFieldType.FIXED</codeph>
+		 <codeph>FormFieldType.HIDDEN</codeph>
+		 <codeph>FormFieldType.JID_MULTI</codeph>
+		 <codeph>FormFieldType.JID_SINGLE</codeph>
+		 <codeph>FormFieldType.LIST_MULTI</codeph>
+		 <codeph>FormFieldType.LIST_SINGLE</codeph>
+		 <codeph>FormFieldType.TEXT_MULTI</codeph>
+		 <codeph>FormFieldType.TEXT_PRIVATE</codeph>
+		 <codeph>FormFieldType.TEXT_SINGLE</codeph>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0004.html#protocol-fieldtypes"><linktext>http://xmpp.org/extensions/xep-0004.html#protocol-fieldtypes</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormField:value:get"><apiName>value</apiName><shortdesc>
+		 The chosen value for this field.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The chosen value for this field. In forms with a type
+		 <codeph>FormType.FORM</codeph> this is typically the default
+		 value of the field.
+		 		 Applies to the following field types:
+		 		 <codeph>FormFieldType.BOOLEAN</codeph>
+		 <codeph>FormFieldType.FIXED</codeph>
+		 <codeph>FormFieldType.HIDDEN</codeph>
+		 <codeph>FormFieldType.JID_SINGLE</codeph>
+		 <codeph>FormFieldType.LIST_SINGLE</codeph>
+		 <codeph>FormFieldType.LIST_MULTI</codeph>
+		 <codeph>FormFieldType.TEXT_PRIVATE</codeph>
+		 <codeph>FormFieldType.TEXT_SINGLE</codeph>
+		 		 <p>Suggested values can typically be retrieved in <codeph>getAllOptions</codeph></p>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormField:values:get"><apiName>values</apiName><shortdesc>
+		 The values for this multiple field.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Array"/></apiValueDef><apiDesc>
+		 The values for this multiple field.  In forms with a type
+		 <codeph>FormType.FORM</codeph> these are typically the existing
+		 values of the field.
+		 		 Applies to the following field types:
+		 		 <codeph>FormFieldType.JID_MULTI</codeph>
+		 <codeph>FormFieldType.LIST_MULTI</codeph>
+		 <codeph>FormFieldType.TEXT_MULTI</codeph>
+		 		 Array containing strings representing the values of this field
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.forms:FormField:varName:get"><apiName>varName</apiName><shortdesc>
+		 The var of this field used to uniquely identify the field in the context of the form.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The var of this field used to uniquely identify the field in the context of the form.
+		 		 Note: this serializes to the <codeph>var</codeph> attribute on the field node.
+		 Since <codeph>var</codeph> is a reserved word in ActionScript
+		 this field uses <codeph>varName</codeph> to describe the var of this field.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier></apiPackage>

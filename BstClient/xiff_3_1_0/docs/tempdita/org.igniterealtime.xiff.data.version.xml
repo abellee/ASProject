@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.data.version"><apiName>org.igniterealtime.xiff.data.version</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.data.version:SoftwareVersionExtension"><apiName>SoftwareVersionExtension</apiName><shortdesc>
+	 XEP-0092: Software Version
+	 	 The 'jabber:iq:version' namespace provides a standard way for Jabber entities
+	 to exchange information about the software version used by the entities.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0092: Software Version
+	 	 <p>The 'jabber:iq:version' namespace provides a standard way for Jabber entities
+	 to exchange information about the software version used by the entities.
+	 The information is communicated in a request/response pair using an <codeph>iq</codeph>
+	 element that contains a <codeph>query</codeph> scoped by the 'jabber:iq:version' namespace.</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0092.html"><linktext>http://xmpp.org/extensions/xep-0092.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.version:SoftwareVersionExtension:SoftwareVersionExtension"><apiName>SoftwareVersionExtension</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.version:SoftwareVersionExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.version:SoftwareVersionExtension:getNS"><apiName>getNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.version:SoftwareVersionExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>query</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.version:SoftwareVersionExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>jabber:iq:version</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.version:SoftwareVersionExtension:name:get"><apiName>name</apiName><shortdesc>
+		 The natural-language name of the software.</shortdesc><prolog><asCustoms><exampleText>XIFF
+		 </exampleText></asCustoms></prolog><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The natural-language name of the software.
+		 This element is REQUIRED in a result.
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.version:SoftwareVersionExtension:os:get"><apiName>os</apiName><shortdesc>
+		 The operating system of the queried entity.</shortdesc><prolog><asCustoms><exampleText>Windows OS 3.11
+		 </exampleText></asCustoms></prolog><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The operating system of the queried entity.
+		 This element is OPTIONAL in a result, mind the
+		 Security Considerations.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0092.html#security"><linktext>http://xmpp.org/extensions/xep-0092.html#security</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.version:SoftwareVersionExtension:version:get"><apiName>version</apiName><shortdesc>
+		 The specific version of the software.</shortdesc><prolog><asCustoms><exampleText>3.1.0
+		 </exampleText></asCustoms></prolog><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The specific version of the software.
+		 This element is REQUIRED in a result.
+		 		 </apiDesc></apiValueDetail></apiValue></apiClassifier></apiPackage>

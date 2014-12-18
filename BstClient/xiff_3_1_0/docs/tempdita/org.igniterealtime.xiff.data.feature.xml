@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.data.feature"><apiName>org.igniterealtime.xiff.data.feature</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.data.feature:FeatureNegotiationExtension"><apiName>FeatureNegotiationExtension</apiName><shortdesc>
+	 XEP-0020: Feature Negotiation
+	 	 Features are negotiated through the exchange of
+	 iq or message stanzas
+	 containing feature child elements qualified
+	 by the 'http://jabber.org/protocol/feature-neg' namespace.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0020: Feature Negotiation
+	 	 <p>Features are negotiated through the exchange of
+	 <b>iq</b> or <b>message</b> stanzas
+	 containing <b>feature</b> child elements qualified
+	 by the 'http://jabber.org/protocol/feature-neg' namespace.
+	 However, this <b>feature</b> element is simply a
+	 wrapper for structured data encapsulated in the
+	 Data Forms (<codeph>FormExtension</codeph>) protocol.</p>
+	 <p>In order to begin a negotation, the initiator sends an
+	 <b>iq</b> stanza of type "get" (or a
+	 <b>message</b> stanza type "normal" - see Stanza
+	 Session Negotiation for examples) to the recipient with a
+	 single <b>feature</b> element containing a data form
+	 of type "form" which defines the available options for one or
+	 more features. Each feature is represented as an x-data "field".</p>
+	 <p>The recipient SHOULD examine each feature and the values of
+	 the options provided. In order to indicate preferred values,
+	 the recipient then SHOULD specify one value for each feature
+	 and return a data form of type "submit" to the initiator in an
+	 <b>iq</b> stanza of type "result" (or a
+	 <b>message</b> stanza type "normal").</p>
+	 <p>The following examples show some likely scenarios for feature
+	 negotiation between entities. Further examples can be found in
+	 "using protocols", such as File Transfer
+	 (<codeph>FileTransferExtension</codeph>).</p>
+	 	 <p>Peter Millard, the primary author of this specification from version 0.1
+	 through version 1.4, died on April 26, 2006. The remaining authors are
+	 thankful for Peter's work on this specification.</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0020.html"><linktext>http://xmpp.org/extensions/xep-0020.html</linktext></link><link href="org.igniterealtime.xiff.data.forms.xml#FormExtension"><linktext>org.igniterealtime.xiff.data.forms.FormExtension</linktext></link><link href="org.igniterealtime.xiff.data.si.xml#FileTransferExtension"><linktext>org.igniterealtime.xiff.data.si.FileTransferExtension</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.feature:FeatureNegotiationExtension:FeatureNegotiationExtension"><apiName>FeatureNegotiationExtension</apiName><shortdesc>
+		 Use FormExtension as a child extension.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Use <codeph>FormExtension</codeph> as a child extension.
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.feature:FeatureNegotiationExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.feature:FeatureNegotiationExtension:getNS"><apiName>getNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.feature:FeatureNegotiationExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>feature</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.feature:FeatureNegotiationExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>http://jabber.org/protocol/feature-neg</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier></apiPackage>

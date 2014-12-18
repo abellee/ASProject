@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.data.bind"><apiName>org.igniterealtime.xiff.data.bind</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.data.bind:BindExtension"><apiName>BindExtension</apiName><shortdesc>
+	 Resource Binding as defined in RFC 6120: Section 7.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Resource Binding as defined in RFC 6120: Section 7.
+	 	 <p>After a client authenticates with a server, it MUST bind a specific
+	 resource to the stream so that the server can properly address the
+	 client.</p>
+	 <p>That is, there MUST be an XMPP resource associated with the
+	 bare JID (<b>localpart@domainpart</b>) of the client, so that the address
+	 for use over that stream is a full JID of the form
+	 <b>localpart@domainpart/resource</b> (including the resourcepart).  This
+	 ensures that the server can deliver XML stanzas to and receive XML
+	 stanzas from the client in relation to entities other than the server
+	 itself or the client's account.</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://tools.ietf.org/html/rfc6120#section-7"><linktext>http://tools.ietf.org/html/rfc6120#section-7</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.bind:BindExtension:BindExtension"><apiName>BindExtension</apiName><shortdesc>
+		 Support for resource binding is REQUIRED in XMPP client and server
+		 implementations.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Support for resource binding is REQUIRED in XMPP client and server
+		 implementations.
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.bind:BindExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.bind:BindExtension:getNS"><apiName>getNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.bind:BindExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>bind</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.bind:BindExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>urn:ietf:params:xml:ns:xmpp-bind</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.bind:BindExtension:jid:get"><apiName>jid</apiName><shortdesc>
+		 JID that the server has accepted.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>org.igniterealtime.xiff.core:EscapedJID</apiValueClassifier></apiValueDef><apiDesc>
+		 JID that the server has accepted. Read-only.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.bind:BindExtension:resource:get"><apiName>resource</apiName><shortdesc>
+		 Resource.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Resource.
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 		 <p>Instead of asking the server to generate a resourcepart on its behalf,
+		 a client MAY attempt to submit a resourcepart that it has generated or
+		 that the controlling user has provided.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://tools.ietf.org/html/rfc6120#section-7.7"><linktext>http://tools.ietf.org/html/rfc6120#section-7.7</linktext></link></related-links></apiValue></apiClassifier></apiPackage>

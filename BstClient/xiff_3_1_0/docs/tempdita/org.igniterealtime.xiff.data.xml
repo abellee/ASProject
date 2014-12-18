@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.data"><apiName>org.igniterealtime.xiff.data</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.data:IMessage"><apiName>IMessage</apiName><shortdesc>
+	 Interface for Message
+	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IXMPPStanza</apiBaseInterface><apiBaseClassifier/></apiClassifierDef><apiDesc>
+	 Interface for Message
+	 </apiDesc></apiClassifierDetail><apiValue id="org.igniterealtime.xiff.data:IMessage:org.igniterealtime.xiff.data:IMessage:body:get"><apiName>body</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IMessage:org.igniterealtime.xiff.data:IMessage:htmlBody:get"><apiName>htmlBody</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IMessage:org.igniterealtime.xiff.data:IMessage:state:get"><apiName>state</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IMessage:org.igniterealtime.xiff.data:IMessage:subject:get"><apiName>subject</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IMessage:org.igniterealtime.xiff.data:IMessage:thread:get"><apiName>thread</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IMessage:org.igniterealtime.xiff.data:IMessage:time:get"><apiName>time</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Date"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:IIQ"><apiName>IIQ</apiName><shortdesc>
+	 Interface for IQ
+	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IXMPPStanza</apiBaseInterface><apiBaseClassifier/></apiClassifierDef><apiDesc>
+	 Interface for IQ
+	 </apiDesc></apiClassifierDetail><apiValue id="org.igniterealtime.xiff.data:IIQ:org.igniterealtime.xiff.data:IIQ:callback:get"><apiName>callback</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Function"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IIQ:org.igniterealtime.xiff.data:IIQ:errorCallback:get"><apiName>errorCallback</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Function"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:ExtensionClassRegistry"><apiName>ExtensionClassRegistry</apiName><shortdesc>
+	 This is a static class that contains class constructors for all
+	 extensions that could come from the network.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This is a static class that contains class constructors for all
+	 extensions that could come from the network.
+	 </apiDesc></apiClassifierDetail><apiOperation id="org.igniterealtime.xiff.data:ExtensionClassRegistry:getNamespaces"><apiName>getNamespaces</apiName><shortdesc>
+		 Get a list of namespaces of the currently enabled extensions.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiType value="Array"/></apiReturn></apiOperationDef><apiDesc>
+		 Get a list of namespaces of the currently enabled extensions.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:ExtensionClassRegistry:lookup"><apiName>lookup</apiName><shortdesc>
+		 Find the extension with the given NS and ELEMENT_NAME if availale in the registery.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc></apiDesc><apiType value="Class"/></apiReturn><apiParam><apiItemName>ns</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>elementName</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>Optional ELEMENT_NAME, used if there are several extensions with the same NS
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Find the extension with the given NS and ELEMENT_NAME if availale in the registery.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:ExtensionClassRegistry:register"><apiName>register</apiName><shortdesc>
+		 Registers the given extension with the extension registry for it to be used,
+		 in case incoming data matches its ELEMENT_NAME and NS.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>In case the Extension was already added or it was not proper type, returns false.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>extensionClass</apiItemName><apiType value="Class"/></apiParam></apiOperationDef><apiDesc>
+		 Registers the given extension with the extension registry for it to be used,
+		 in case incoming data matches its ELEMENT_NAME and NS.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:ExtensionClassRegistry:remove"><apiName>remove</apiName><shortdesc>
+		 Remove the given extension from the registery.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>extensionClass</apiItemName><apiType value="Class"/></apiParam></apiOperationDef><apiDesc>
+		 Remove the given extension from the registery.
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:Message"><apiName>Message</apiName><shortdesc>
+	 Message, nuff said.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IMessage</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:XMPPStanza</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Message, nuff said.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://tools.ietf.org/html/rfc3921#section-2.1.1"><linktext>http://tools.ietf.org/html/rfc3921#section-2.1.1</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data:Message:Message"><apiName>Message</apiName><shortdesc>
+		 A class for abstraction and encapsulation of message data.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>recipient</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier><apiData>null</apiData><apiDesc>The JID of the message recipient
+		 </apiDesc></apiParam><apiParam><apiItemName>msgID</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The JID of the message sender - the server should report an error if this is falsified
+		 </apiDesc></apiParam><apiParam><apiItemName>msgBody</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The message ID
+		 </apiDesc></apiParam><apiParam><apiItemName>msgHTMLBody</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The message body in plain-text format
+		 </apiDesc></apiParam><apiParam><apiItemName>msgType</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The message body in XHTML format
+		 </apiDesc></apiParam><apiParam><apiItemName>msgSubject</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The message type
+		 </apiDesc></apiParam><apiParam><apiItemName>chatState</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>(Optional) The message subject
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 A class for abstraction and encapsulation of message data.
+		 		 <p>The <b>message</b> stanza kind can be seen as a "push" mechanism whereby
+		 one entity pushes information to another entity, similar to the
+		 communications that occur in a system such as email.  All message
+		 stanzas SHOULD possess a 'to' attribute that specifies the intended
+		 recipient of the message; upon receiving such a stanza, a server
+		 SHOULD route or deliver it to the intended recipient (see Server
+		 Rules for Handling XML Stanzas (Section 10) for general routing and
+		 delivery rules related to XML stanzas).</p>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data:Message:generateID"><apiName>generateID</apiName><shortdesc>
+		 Generates a unique ID for the stanza.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>The generated ID
+		 </apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>prefix</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The prefix for the ID to be generated
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Generates a unique ID for the stanza. ID generation is handled using
+		 a variety of mechanisms, but the default for the library uses the IncrementalGenerator.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data:Message:NS_ATTENTION"><apiName>NS_ATTENTION</apiName><shortdesc>
+		 The namespace used in the message delivery node.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>urn:xmpp:attention:0</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The namespace used in the message delivery node.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0224.html"><linktext>http://xmpp.org/extensions/xep-0224.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:NS_CORRECTION"><apiName>NS_CORRECTION</apiName><shortdesc>
+		 The namespace used in the XEP-0308: Last Message Correction.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>urn:xmpp:message-correct:0</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The namespace used in the XEP-0308: Last Message Correction.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0308.html"><linktext>http://xmpp.org/extensions/xep-0308.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:NS_RECEIPT"><apiName>NS_RECEIPT</apiName><shortdesc>
+		 The namespace used in the message delivery node.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>urn:xmpp:receipts</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The namespace used in the message delivery node.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0184.html"><linktext>http://xmpp.org/extensions/xep-0184.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:NS_STATE"><apiName>NS_STATE</apiName><shortdesc>
+		 The name space used in the Chat state node.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>http://jabber.org/protocol/chatstates</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The name space used in the Chat state node.
+		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0085.html"><linktext>http://xmpp.org/extensions/xep-0085.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:RECEIPT_RECEIVED"><apiName>RECEIPT_RECEIVED</apiName><shortdesc>
+		 Included by a receiving entity that wishes to inform the
+		 sending entity that the message has been received.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>received</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 Included by a receiving entity that wishes to inform the
+		 sending entity that the message has been received.
+		 		 <p>The <b>received</b> element SHOULD be the only child of
+		 the <b>message</b> stanza and MUST mirror the 'id' of the sent message.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0184.html"><linktext>http://xmpp.org/extensions/xep-0184.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:RECEIPT_REQUEST"><apiName>RECEIPT_REQUEST</apiName><shortdesc>
+		 Included by a sending entity that wishes to know if
+		 the message has been received.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>request</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 Included by a sending entity that wishes to know if
+		 the message has been received.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0184.html"><linktext>http://xmpp.org/extensions/xep-0184.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:STATE_ACTIVE"><apiName>STATE_ACTIVE</apiName><shortdesc>
+		 User is actively participating in the chat session.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>active</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 User is actively participating in the chat session.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:STATE_COMPOSING"><apiName>STATE_COMPOSING</apiName><shortdesc>
+		 User is composing a message.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>composing</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 User is composing a message.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:STATE_GONE"><apiName>STATE_GONE</apiName><shortdesc>
+		 User has effectively ended their participation in the chat session.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>gone</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 User has effectively ended their participation in the chat session.
+		 Suggested delay after last activity some 10 minutes.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:STATE_INACTIVE"><apiName>STATE_INACTIVE</apiName><shortdesc>
+		 User has not been actively participating in the chat session.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>inactive</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 User has not been actively participating in the chat session.
+		 Suggested delay after last activity some 2 minutes.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:STATE_PAUSED"><apiName>STATE_PAUSED</apiName><shortdesc>
+		 User had been composing but now has stopped.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>paused</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 User had been composing but now has stopped.
+		 Suggested delay after last activity some 30 seconds.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:TYPE_CHAT"><apiName>TYPE_CHAT</apiName><shortdesc>
+		 The message is sent in the context of a one-to-one chat
+		 session.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>chat</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The message is sent in the context of a one-to-one chat
+		 session. Typically a receiving client will present message of
+		 type "chat" in an interface that enables one-to-one chat between
+		 the two parties, including an appropriate conversation history.
+		 Detailed recommendations regarding one-to-one chat sessions are
+		 provided under Section 5.1. of RFC 3921 (draft version).
+		 </apiDesc></apiValueDetail><related-links><link href="http://tools.ietf.org/html/draft-ietf-xmpp-3921bis-00#section-5.1"><linktext>http://tools.ietf.org/html/draft-ietf-xmpp-3921bis-00#section-5.1</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:TYPE_ERROR"><apiName>TYPE_ERROR</apiName><shortdesc>
+		 The message is generated by an entity that experiences an
+		 error in processing a message received from another entity (for
+		 details regarding stanza error syntax, refer to [xmpp-core]).</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>error</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The message is generated by an entity that experiences an
+		 error in processing a message received from another entity (for
+		 details regarding stanza error syntax, refer to [xmpp-core]).
+		 A client that receives a message of type "error" SHOULD present an
+		 appropriate interface informing the sender of the nature of the error.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:TYPE_GROUPCHAT"><apiName>TYPE_GROUPCHAT</apiName><shortdesc>
+		 The message is sent in the context of a multi-user
+		 chat environment (similar to that of [IRC]).</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>groupchat</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The message is sent in the context of a multi-user
+		 chat environment (similar to that of [IRC]). Typically a
+		 receiving client will present a message of type "groupchat" in an
+		 interface that enables many-to-many chat between the parties,
+		 including a roster of parties in the chatroom and an appropriate
+		 conversation history. For detailed information about XMPP-based
+		 groupchat, refer to [XEP-0045].
+		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0045.html"><linktext>http://xmpp.org/extensions/xep-0045.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:TYPE_HEADLINE"><apiName>TYPE_HEADLINE</apiName><shortdesc>
+		 The message provides an alert, a notification, or
+		 other information to which no reply is expected (e.g., news
+		 headlines, sports updates, near-real-time market data, and
+		 syndicated content).</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>headline</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The message provides an alert, a notification, or
+		 other information to which no reply is expected (e.g., news
+		 headlines, sports updates, near-real-time market data, and
+		 syndicated content). Because no reply to the message is expected,
+		 typically a receiving client will present a message of type
+		 "headline" in an interface that appropriately differentiates the
+		 message from standalone messages, chat messages, or groupchat
+		 messages (e.g., by not providing the recipient with the ability to
+		 reply). The receiving server SHOULD deliver the message to all of
+		 the recipient’s available resources.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:TYPE_NORMAL"><apiName>TYPE_NORMAL</apiName><shortdesc>
+		 The message is a standalone message that is sent outside
+		 the context of a one-to-one conversation or groupchat, and to
+		 which it is expected that the recipient will reply.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>normal</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The message is a standalone message that is sent outside
+		 the context of a one-to-one conversation or groupchat, and to
+		 which it is expected that the recipient will reply. Typically a
+		 receiving client will present a message of type "normal" in an
+		 interface that enables the recipient to reply, but without a
+		 conversation history. The default value of the ’type’ attribute
+		 is "normal".
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:attention:get"><apiName>attention</apiName><shortdesc>
+		 Messages containing an attention extension SHOULD use the headline message
+		 type to avoid offline storage.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 Messages containing an attention extension SHOULD use the headline message
+		 type to avoid offline storage. In case the <codeph>attention</codeph> property is used,
+		 <codeph>type</codeph> is set to "headline" automatically.
+		 		 <p>However there is no check for the type when removing the attention, by setting it to false.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0224.html"><linktext>http://xmpp.org/extensions/xep-0224.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:body:get"><apiName>body</apiName><shortdesc>
+		 The message body in plain-text format.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The message body in plain-text format. If a client cannot render HTML-formatted
+		 text, this text is typically used instead.
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:correctionId:get"><apiName>correctionId</apiName><shortdesc>
+		 Message ID of the message that is to be corrected.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Message ID of the message that is to be corrected.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0308.html"><linktext>http://xmpp.org/extensions/xep-0308.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:correction:get"><apiName>correction</apiName><shortdesc>
+		 When sending a message, people often introduce typing errors and send a follow-up message to correct them.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 When sending a message, people often introduce typing errors and send a follow-up message to correct them.
+		 This property allows the sending client to flag the second message as correcting the first.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0308.html"><linktext>http://xmpp.org/extensions/xep-0308.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:htmlBody:get"><apiName>htmlBody</apiName><shortdesc>
+		 The message body in XHTML format.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The message body in XHTML format. Internally, this uses the XHTML data extension.
+		 		 TODO: Use extension registery to solve if the proper extension is enabled...
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0071.html"><linktext>http://xmpp.org/extensions/xep-0071.html</linktext></link><link href="org.igniterealtime.xiff.data.xhtml.xml#XHTMLExtension"><linktext>org.igniterealtime.xiff.data.xhtml.XHTMLExtension</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:idGenerator:get"><apiName>idGenerator</apiName><shortdesc>
+		 The ID generator for this stanza type.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiStatic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.data.id:IIDGenerator</apiValueClassifier></apiValueDef><apiDesc>
+		 The ID generator for this stanza type. ID generators must implement
+		 the IIDGenerator interface. The XIFF library comes with a few default
+		 ID generators that have already been implemented (see org.igniterealtime.xiff.data.id..
+		 		 Setting the ID generator by stanza type is useful if you'd like to use
+		 different ID generation schemes for each type. For instance, messages could
+		 use the incremental ID generation scheme provided by the IncrementalGenerator class, while
+		 IQs could use the shared object ID generation scheme provided by the SOIncrementalGenerator class.
+		 		 </apiDesc><example>The following sets the ID generator for the Message stanza type to an IncrementalGenerator
+		 found in org.igniterealtime.xiff.data.id.IncrementalGenerator:
+		 <pre>Message.idGenerator = new IncrementalGenerator();</pre>
+		 </example></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:receiptId:get"><apiName>receiptId</apiName><shortdesc>
+		 Message ID of the message that had receipt request.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Message ID of the message that had receipt request.
+		 Can be set only when the 'receipt' is Message.RECEIPT_RECEIVED.
+		 		 <p>While sending 'received', this property must be set to
+		 the message id that contained the 'request'.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0184.html"><linktext>http://xmpp.org/extensions/xep-0184.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:receipt:get"><apiName>receipt</apiName><shortdesc>
+		 XEP-0184: Message Delivery Receipts
+		 		 This XMPP protocol extension for message delivery receipts,
+		 whereby the sender of a message can request notification that the
+		 message has been delivered to a client controlled by the intended
+		 recipient.
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 XEP-0184: Message Delivery Receipts
+		 		 <p>This XMPP protocol extension for message delivery receipts,
+		 whereby the sender of a message can request notification that the
+		 message has been delivered to a client controlled by the intended
+		 recipient.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0184.html"><linktext>http://xmpp.org/extensions/xep-0184.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:state:get"><apiName>state</apiName><shortdesc>
+		 The chat state if any.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The chat state if any. Possible values are:
+		 <ul>
+		 <li>Message.STATE_ACTIVE</li>
+		 <li>Message.STATE_COMPOSING</li>
+		 <li>Message.STATE_PAUSED</li>
+		 <li>Message.STATE_INACTIVE</li>
+		 <li>Message.STATE_GONE</li>
+		 </ul>
+		 <p>Use <codeph>null</codeph> to remove.</p>
+		 		 <p>TODO: XEP states that this protocol SHOULD NOT be used
+		 with message types other than "chat" or "groupchat".</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0085.html"><linktext>http://xmpp.org/extensions/xep-0085.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:subject:get"><apiName>subject</apiName><shortdesc>
+		 The message subject.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The message subject. Typically chat and groupchat-type messages do not use
+		 subjects. Rather, this is reserved for normal and headline-type messages.
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:thread:get"><apiName>thread</apiName><shortdesc>
+		 The message thread ID.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The message thread ID. Threading is used to group messages of the same discussion together.
+		 The library does not perform message grouping, rather it is up to any client authors to
+		 properly perform this task.
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Message:time:get"><apiName>time</apiName><shortdesc>
+		 Time of the message in case of a delay.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Date"/></apiValueDef><apiDesc>
+		 Time of the message in case of a delay. Used only for messages
+		 which were sent while user was offline.
+		 		 <p>Can be set only via XML as the value should come from the server.</p>
+		 		 <p>There are two ways that might be possible coming from the server,
+		 XEP-0203 or XEP-0091, of which the latter is legacy.</p>
+		 		 <p>XEP-0203: <codeph>CCYY-MM-DDThh:mm:ss[.sss]TZD</codeph></p>
+		 <p>XEP-0091: <codeph>CCYYMMDDThh:mm:ss</codeph></p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0203.html"><linktext>http://xmpp.org/extensions/xep-0203.html</linktext></link><link href="http://xmpp.org/extensions/xep-0091.html"><linktext>http://xmpp.org/extensions/xep-0091.html</linktext></link></related-links></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:IQ"><apiName>IQ</apiName><shortdesc>
+	 A class for abstraction and encapsulation of IQ (info-query) data.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IIQ</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:XMPPStanza</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A class for abstraction and encapsulation of IQ (info-query) data.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://tools.ietf.org/html/rfc3920#section-9.2.3"><linktext>http://tools.ietf.org/html/rfc3920#section-9.2.3</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data:IQ:IQ"><apiName>IQ</apiName><shortdesc>
+		 A class for abstraction and encapsulation of IQ (info-query) data.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>recipient</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier><apiData>null</apiData><apiDesc>The JID of the IQ recipient
+		 </apiDesc></apiParam><apiParam><apiItemName>iqType</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The type of the IQ - there are static variables declared for each type
+		 </apiDesc></apiParam><apiParam><apiItemName>iqID</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The unique ID of the IQ, one of TYPE_constants
+		 </apiDesc></apiParam><apiParam><apiItemName>iqCallback</apiItemName><apiType value="Function"/><apiData>null</apiData><apiDesc>The function to be called when the server responds to the IQ
+		 </apiDesc></apiParam><apiParam><apiItemName>iqErrorCallback</apiItemName><apiType value="Function"/><apiData>null</apiData><apiDesc>The function to be called when there is an error
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 A class for abstraction and encapsulation of IQ (info-query) data.
+		 		 <p>Info/Query, or <b>IQ</b>, is a request-response mechanism, similar in some
+		 ways to [HTTP].  The semantics of IQ enable an entity to make a
+		 request of, and receive a response from, another entity.  The data
+		 content of the request and response is defined by the namespace
+		 declaration of a direct child element of the IQ element, and the
+		 interaction is tracked by the requesting entity through use of the
+		 'id' attribute.  Thus, IQ interactions follow a common pattern of
+		 structured data exchange such as get/result or set/result (although
+		 an error may be returned in reply to a request if appropriate):</p>
+		 <pre>
+		    Requesting                 Responding
+		      Entity                     Entity
+		    ----------                 ----------
+		        |                           |
+		        | &lt;iq type='get' id='1'&gt;    |
+		        | ------------------------&gt; |
+		        |                           |
+		        | &lt;iq type='result' id='1'&gt; |
+		        | &lt;------------------------ |
+		        |                           |
+		        | &lt;iq type='set' id='2'&gt;    |
+		        | ------------------------&gt; |
+		        |                           |
+		        | &lt;iq type='error' id='2'&gt;  |
+		        | &lt;------------------------ |
+		        |                           |
+	     </pre>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data:IQ:generateID"><apiName>generateID</apiName><shortdesc>
+		 Generates a unique ID for the stanza.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>The generated ID
+		 </apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>prefix</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The prefix for the ID to be generated
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Generates a unique ID for the stanza. ID generation is handled using
+		 a variety of mechanisms, but the default for the library uses the IncrementalGenerator.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data:IQ:TYPE_ERROR"><apiName>TYPE_ERROR</apiName><shortdesc>
+		 The stanza reports an error that has occurred
+		 regarding processing or delivery of a previously-sent get or
+		 set request.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>error</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The stanza reports an error that has occurred
+		 regarding processing or delivery of a previously-sent get or
+		 set request.
+		 </apiDesc></apiValueDetail><related-links><link href="http://tools.ietf.org/html/draft-ietf-xmpp-3920bis-00#section-9.3"><linktext>http://tools.ietf.org/html/draft-ietf-xmpp-3920bis-00#section-9.3</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:IQ:TYPE_GET"><apiName>TYPE_GET</apiName><shortdesc>
+		 The stanza requests information, inquires about what
+		 data is needed in order to complete further operations, etc.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>get</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The stanza requests information, inquires about what
+		 data is needed in order to complete further operations, etc.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IQ:TYPE_RESULT"><apiName>TYPE_RESULT</apiName><shortdesc>
+		 The stanza is a response to a successful get or set request.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>result</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The stanza is a response to a successful get or set request.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IQ:TYPE_SET"><apiName>TYPE_SET</apiName><shortdesc>
+		 The stanza provides data that is needed for an
+		 operation to be completed, sets new values, replaces existing
+		 values, etc.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>set</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The stanza provides data that is needed for an
+		 operation to be completed, sets new values, replaces existing
+		 values, etc.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IQ:callback:get"><apiName>callback</apiName><shortdesc>
+		 The function that will be called when an IQ result
+		 is received with the same ID as one you send.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Function"/></apiValueDef><apiDesc>
+		 The function that will be called when an IQ result
+		 is received with the same ID as one you send.
+		 		 <p>Callback functions take one parameter which will be the IQ instance
+		 received from the server.</p>
+		 		 <p>This isn't a required property, but is useful if you
+		 need to respond to server responses to an IQ.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IQ:errorCallback:get"><apiName>errorCallback</apiName><shortdesc>
+		 The function that will be called when an IQ error
+		 is received with the same ID as one you send.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Function"/></apiValueDef><apiDesc>
+		 The function that will be called when an IQ error
+		 is received with the same ID as one you send.
+		 		 <p>Callback functions take one parameter which will be the IQ instance
+		 received from the server.</p>
+		 		 <p>This isn't a required property, but is useful if you
+		 need to respond to server responses to an IQ.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IQ:idGenerator:get"><apiName>idGenerator</apiName><shortdesc>
+		 The ID generator for this stanza type.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiStatic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.data.id:IIDGenerator</apiValueClassifier></apiValueDef><apiDesc>
+		 The ID generator for this stanza type. ID generators must implement
+		 the IIDGenerator interface. The XIFF library comes with a few default
+		 ID generators that have already been implemented (see org.igniterealtime.xiff.data.id..
+		 		 Setting the ID generator by stanza type is useful if you'd like to use
+		 different ID generation schemes for each type. For instance, messages could
+		 use the incremental ID generation scheme provided by the IncrementalGenerator class, while
+		 IQs could use the shared object ID generation scheme provided by the SOIncrementalGenerator class.
+		 		 </apiDesc><example>The following sets the ID generator for the Message stanza type to an IncrementalGenerator
+		 found in org.igniterealtime.xiff.data.id.IncrementalGenerator:
+		 <pre>Message.idGenerator = new IncrementalGenerator();</pre>
+		 </example></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:XMPPStanza"><apiName>XMPPStanza</apiName><shortdesc>
+	 The base class for all XMPP stanza data classes.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiDynamic/><apiBaseInterface>org.igniterealtime.xiff.data:IXMPPStanza</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 The base class for all XMPP stanza data classes.
+	 	 <p>Three types can exist:</p>
+	 <ul>
+	 <li>message</li>
+	 <li>presence</li>
+	 <li>iq</li>
+	 </ul>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/rfcs/rfc3920.html#stanzas"><linktext>http://xmpp.org/rfcs/rfc3920.html#stanzas</linktext></link><link href="http://tools.ietf.org/html/rfc3920#section-9"><linktext>http://tools.ietf.org/html/rfc3920#section-9</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data:XMPPStanza:XMPPStanza"><apiName>XMPPStanza</apiName><shortdesc>
+		 The following four first attributes are common to message, presence, and IQ stanzas.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>recipient</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier><apiDesc>to
+		 </apiDesc></apiParam><apiParam><apiItemName>sender</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier><apiDesc>	from
+		 </apiDesc></apiParam><apiParam><apiItemName>theType</apiItemName><apiType value="String"/><apiDesc>	type
+		 </apiDesc></apiParam><apiParam><apiItemName>theID</apiItemName><apiType value="String"/><apiDesc>	id
+		 </apiDesc></apiParam><apiParam><apiItemName>nodeName</apiItemName><apiType value="String"/><apiDesc>One of the four ELEMENT_constants
+		 		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 The following four first attributes are common to message, presence, and IQ stanzas.
+		 The fifth, xml:lang, is not included here.
+		 		 <p>RFC 3920: 9.  XML Stanzas</p>
+		 		 <p>After TLS negotiation (Section 5) if desired, SASL negotiation
+		 (Section 6), and Resource Binding (Section 7) if necessary, XML
+		 stanzas can be sent over the streams.  Three kinds of XML stanza are
+		 defined for the 'jabber:client' and 'jabber:server' namespaces:
+		 &gt;message/&lt;, &gt;presence/&lt;, and &gt;iq/&lt;.  In addition, there are five
+		 common attributes for these kinds of stanza.  These common
+		 attributes, as well as the basic semantics of the three stanza kinds,
+		 are defined herein; more detailed information regarding the syntax of
+		 XML stanzas in relation to instant messaging and presence
+		 applications is provided in [XMPP-IM].</p>
+		 		 <pre>
+		           |  initiating to receiving  |  receiving to initiating
+		  ---------+---------------------------+-----------------------
+		  to       |  hostname of receiver     |  silently ignored
+		  from     |  silently ignored         |  hostname of receiver
+		  id       |  silently ignored         |  session key
+		  xml:lang |  default language         |  default language
+		  version  |  signals XMPP 1.0 support |  signals XMPP 1.0 support
+		 </pre>
+		 		 </apiDesc></apiConstructorDetail><related-links><link href="http://tools.ietf.org/html/rfc3920#section-9"><linktext>http://tools.ietf.org/html/rfc3920#section-9</linktext></link></related-links></apiConstructor><apiOperation id="org.igniterealtime.xiff.data:XMPPStanza:generateID"><apiName>generateID</apiName><shortdesc>
+		 Generates a unique ID for the stanza.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>The generated ID
+		 </apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>prefix</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The prefix for the ID to be generated
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Generates a unique ID for the stanza. ID generation is handled using
+		 a variety of mechanisms, but the default for the library uses the IncrementalGenerator.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:CLIENT_NAMESPACE"><apiName>CLIENT_NAMESPACE</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>jabber:client</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:CLIENT_VERSION"><apiName>CLIENT_VERSION</apiName><shortdesc>
+		 The version of XMPP specified in RFC 3920 is "1.0"; in particular, this
+		 encapsulates the stream-related protocols (Use of TLS (Section 5),
+		 Use of SASL (Section 6), and Stream Errors (Section 4.7)), as well as
+		 the semantics of the three defined XML stanza types (message,
+		 presence, and iq).</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>1.0</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The version of XMPP specified in RFC 3920 is "1.0"; in particular, this
+		 encapsulates the stream-related protocols (Use of TLS (Section 5),
+		 Use of SASL (Section 6), and Stream Errors (Section 4.7)), as well as
+		 the semantics of the three defined XML stanza types (<b>message</b>,
+		 <b>presence</b>, and <b>iq</b>).
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:ELEMENT_IQ"><apiName>ELEMENT_IQ</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>iq</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:ELEMENT_MESSAGE"><apiName>ELEMENT_MESSAGE</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>message</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:ELEMENT_PRESENCE"><apiName>ELEMENT_PRESENCE</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>presence</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:ELEMENT_TEMP"><apiName>ELEMENT_TEMP</apiName><shortdesc>
+		 Internal name in XIFF for incoming data.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>temp</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 Internal name in XIFF for incoming data.
+		 The proper element name should be available after setting the XML.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:ERROR_AUTH"><apiName>ERROR_AUTH</apiName><shortdesc>
+		 Retry after providing credentials
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>auth</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 Retry after providing credentials
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:ERROR_CANCEL"><apiName>ERROR_CANCEL</apiName><shortdesc>
+		 Do not retry (the error is unrecoverable)
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>cancel</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 Do not retry (the error is unrecoverable)
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:ERROR_CONTINUE"><apiName>ERROR_CONTINUE</apiName><shortdesc>
+		 Proceed (the condition was only a warning)
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>continue</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 Proceed (the condition was only a warning)
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:ERROR_MODIFY"><apiName>ERROR_MODIFY</apiName><shortdesc>
+		 Retry after changing the data sent
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>modify</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 Retry after changing the data sent
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:ERROR_WAIT"><apiName>ERROR_WAIT</apiName><shortdesc>
+		 Retry after waiting (the error is temporary)
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>wait</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 Retry after waiting (the error is temporary)
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:NAMESPACE_BOSH"><apiName>NAMESPACE_BOSH</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>urn:xmpp:xbosh</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:NAMESPACE_FLASH"><apiName>NAMESPACE_FLASH</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>http://www.jabber.com/streams/flash</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:NAMESPACE_STREAM"><apiName>NAMESPACE_STREAM</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>http://etherx.jabber.org/streams</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:XML_LANG"><apiName>XML_LANG</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>en</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:protected:delayedDelivery:get"><apiName>delayedDelivery</apiName><shortdesc>
+		 Time of the message/presence in case of a delay.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Date"/></apiValueDef><apiDesc>
+		 Time of the message/presence in case of a delay. Used only for messages
+		 which were sent while user was offline.
+		 		 <p>Can be set only via XML as the value should come from the server.</p>
+		 		 <p>There are two ways that might be possible coming from the server,
+		 XEP-0203 or XEP-0091, of which the latter is legacy.</p>
+		 		 <p>XEP-0203: <codeph>CCYY-MM-DDThh:mm:ss[.sss]TZD</codeph></p>
+		 <p>XEP-0091: <codeph>CCYYMMDDThh:mm:ss</codeph></p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0203.html"><linktext>http://xmpp.org/extensions/xep-0203.html</linktext></link><link href="http://xmpp.org/extensions/xep-0091.html"><linktext>http://xmpp.org/extensions/xep-0091.html</linktext></link><link href="http://xmpp.org/extensions/xep-0082.html"><linktext>http://xmpp.org/extensions/xep-0082.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:errorCode:get"><apiName>errorCode</apiName><shortdesc>
+		 The error code, assuming this stanza contains error information.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="int"/></apiValueDef><apiDesc>
+		 The error code, assuming this stanza contains error information. Error codes are
+		 deprecated in standard XMPP, but they are commonly used by older Jabber servers
+		 like Jabberd 1.4.
+		 		 <p>Use <codeph>NaN</codeph> to remove.</p>
+		 		 <p>See the link for XEP-0086: Error Condition Mappings</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0086.html"><linktext>http://xmpp.org/extensions/xep-0086.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:errorCondition:get"><apiName>errorCondition</apiName><shortdesc>
+		 The error condition, assuming this stanza contains error information.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The error condition, assuming this stanza contains error information.
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 		 <p>Error condition should be in lowercase and not contain any whitespace.</p>
+		 		 <p>Error element must be qualified by urn:ietf:params:xml:ns:xmpp-stanzas namespace.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://tools.ietf.org/html/rfc3920#section-9.3.3"><linktext>http://tools.ietf.org/html/rfc3920#section-9.3.3</linktext></link><link href="http://xmpp.org/extensions/xep-0182.html"><linktext>http://xmpp.org/extensions/xep-0182.html</linktext></link><link href="http://xmpp.org/extensions/xep-0086.html"><linktext>TODO: Conform spec... find examples</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:errorMessage:get"><apiName>errorMessage</apiName><shortdesc>
+		 The error message, assuming this stanza contains error information.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The error message, assuming this stanza contains error information.
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 		 <p>This is the <b>text</b> element that is a child
+		 of <b>error</b> element.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://tools.ietf.org/html/rfc3920#section-9.3"><linktext>http://tools.ietf.org/html/rfc3920#section-9.3</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:errorType:get"><apiName>errorType</apiName><shortdesc>
+		 The error type, assuming this stanza contains error information.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The error type, assuming this stanza contains error information.
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 		 <p>The value of the <b>error</b> element's 'type' attribute
+		 MUST be one of the following:</p>
+		 <ul>
+		 <li>cancel -- do not retry (the error is unrecoverable)</li>
+		 <li>continue -- proceed (the condition was only a warning)</li>
+		 <li>modify -- retry after changing the data sent</li>
+		 <li>auth -- retry after providing credentials</li>
+		 <li>wait -- retry after waiting (the error is temporary)</li>
+		 </ul>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://tools.ietf.org/html/rfc3920#section-9.3"><linktext>http://tools.ietf.org/html/rfc3920#section-9.3</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:from:get"><apiName>from</apiName><shortdesc>
+		 The JID of the sender.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:EscapedJID</apiValueClassifier></apiValueDef><apiDesc>
+		 The JID of the sender. Most, if not all, server implementations follow the specifications
+		 that prevent this from being falsified. Thus, under normal circumstances, you don't
+		 need to supply this information because the server will fill it in automatically.
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:idGenerator:get"><apiName>idGenerator</apiName><shortdesc>
+		 The ID generator for this stanza type.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiStatic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.data.id:IIDGenerator</apiValueClassifier></apiValueDef><apiDesc>
+		 The ID generator for this stanza type.
+		 		 <p>ID generators must implement
+		 the IIDGenerator interface. The XIFF library comes with a few default
+		 ID generators that have already been implemented (see org.igniterealtime.xiff.data.id..</p>
+		 		 <p>Setting the ID generator by stanza type is useful if you'd like to use
+		 different ID generation schemes for each type. For instance, messages could
+		 use the incremental ID generation scheme provided by the IncrementalGenerator class, while
+		 IQs could use the shared object ID generation scheme provided by the SOIncrementalGenerator class.</p>
+		 		 </apiDesc><example>The following sets the ID generator for the Message stanza type to an IncrementalGenerator
+		 found in org.igniterealtime.xiff.data.id.IncrementalGenerator:
+		 <pre>Message.idGenerator = new IncrementalGenerator();</pre>
+		 </example></apiValueDetail><related-links><link href="org.igniterealtime.xiff.data.id.xml#IIDGenerator"><linktext>org.igniterealtime.xiff.data.id.IIDGenerator</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:id:get"><apiName>id</apiName><shortdesc>
+		 The unique identifier of this stanza.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The unique identifier of this stanza. ID generation is accomplished using
+		 the static <codeph>generateID</codeph> method of the particular stanza type.
+		 		 <p>RFC: The optional 'id' attribute MAY be used by a sending entity for
+		 internal tracking of stanzas that it sends and receives (especially
+		 for tracking the request-response interaction inherent in the
+		 semantics of IQ stanzas).  It is OPTIONAL for the value of the 'id'
+		 attribute to be unique globally, within a domain, or within a stream.
+		 The semantics of IQ stanzas impose additional restrictions; see IQ
+		 Semantics (Section 9.2.3).</p>
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.data.xml#XMPPStanza/generateID"><linktext>generateID</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:to:get"><apiName>to</apiName><shortdesc>
+		 The JID of the recipient.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:EscapedJID</apiValueClassifier></apiValueDef><apiDesc>
+		 The JID of the recipient.
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:type:get"><apiName>type</apiName><shortdesc>
+		 The stanza type.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The stanza type. There are MANY types available, depending on what kind of stanza this is.
+		 		 <p>The XIFF Library defines the types for IQ, Presence, and Message in each respective class
+		 as static string variables. Below is a listing of each:</p>
+		 		 <b>IQ</b>
+		 <ul>
+		 <li>IQ.TYPE_ERROR</li>
+		 <li>IQ.TYPE_GET</li>
+		 <li>IQ.TYPE_RESULT</li>
+		 <li>IQ.TYPE_SET</li>
+		 </ul>
+		 		 <b>Presence</b>
+		 <ul>
+		 <li>Presence.TYPE_ERROR</li>
+		 <li>Presence.TYPE_PROBE</li>
+		 <li>Presence.TYPE_SUBSCRIBE</li>
+		 <li>Presence.TYPE_SUBSCRIBED</li>
+		 <li>Presence.TYPE_UNAVAILABLE</li>
+		 <li>Presence.TYPE_UNSUBSCRIBE</li>
+		 <li>Presence.TYPE_UNSUBSCRIBED</li>
+		 </ul>
+		 		 <b>Message</b>
+		 <ul>
+		 <li>Message.TYPE_CHAT</li>
+		 <li>Message.TYPE_ERROR</li>
+		 <li>Message.TYPE_GROUPCHAT</li>
+		 <li>Message.TYPE_HEADLINE</li>
+		 <li>Message.TYPE_NORMAL</li>
+		 </ul>
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 		 <p>RFC: The 'type' attribute specifies detailed information about the purpose
+		 or context of the message, presence, or IQ stanza.  The particular
+		 allowable values for the 'type' attribute vary depending on whether
+		 the stanza is a message, presence, or IQ; the values for message and
+		 presence stanzas are specific to instant messaging and presence
+		 applications and therefore are defined in [XMPP-IM], whereas the
+		 values for IQ stanzas specify the role of an IQ stanza in a
+		 structured request-response "conversation" and thus are defined under
+		 IQ Semantics (Section 9.2.3) below.  The only 'type' value common to
+		 all three stanzas is "error"; see Stanza Errors (Section 9.3).</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://tools.ietf.org/html/rfc3920#section-9.2.3"><linktext>http://tools.ietf.org/html/rfc3920#section-9.2.3</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:XMPPStanza:xml:set"><apiName>xml</apiName><shortdesc>
+		 In addition to saving the XML, check for possible Extensions that are registered for listening this XML data.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiIsOverride/><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="XML"/></apiValueDef><apiDesc>
+		 In addition to saving the XML, check for possible Extensions that are registered for listening this XML data.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:AbstractExtension"><apiName>AbstractExtension</apiName><shortdesc>
+	 What is this?
+	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 What is this?
+	 </apiDesc></apiClassifierDetail><apiConstructor id="org.igniterealtime.xiff.data:AbstractExtension:AbstractExtension"><apiName>AbstractExtension</apiName><shortdesc/><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData></apiParam></apiConstructorDef></apiConstructorDetail></apiConstructor><apiValue id="org.igniterealtime.xiff.data:AbstractExtension:xml:set"><apiName>xml</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiIsOverride/><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="XML"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:XMLStanza"><apiName>XMLStanza</apiName><shortdesc>
+	 This is a base class for all classes that encapsulate XML stanza data.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IXMLStanza</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:ExtensionContainer</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This is a base class for all classes that encapsulate XML stanza data. It provides
+	 a set of methods that faciliate easy manipulation of XML data.
+	 </apiDesc></apiClassifierDetail><apiConstructor id="org.igniterealtime.xiff.data:XMLStanza:XMLStanza"><apiName>XMLStanza</apiName><shortdesc>
+		 XMPP is based on communication with XML stanzas
+		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/></apiConstructorDef><apiDesc>
+		 XMPP is based on communication with XML stanzas
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data:XMLStanza:getAttribute"><apiName>getAttribute</apiName><shortdesc>
+		 Convinience method for getting element value from the XML.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc></apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convinience method for getting element value from the XML.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:XMLStanza:getChildAttribute"><apiName>getChildAttribute</apiName><shortdesc>
+		 Convinience method for getting child element attribute value from the XML.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc></apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>elem</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>name</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convinience method for getting child element attribute value from the XML.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:XMLStanza:getChildField"><apiName>getChildField</apiName><shortdesc>
+		 Convinience method for getting child element value from the XML.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc></apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>elem</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>name</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convinience method for getting child element value from the XML.
+		 		 <p>Might seem over complex, but AS3 seems to handle different kind of
+		 XML differently, thus shorthands and even methods such as <codeph>localName()</codeph>
+		 do not work as expected.</p>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:XMLStanza:getField"><apiName>getField</apiName><shortdesc>
+		 Convinience method for getting element value from the XML.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc></apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convinience method for getting element value from the XML.
+		 		 <p>Might seem over complex, but AS3 seems to handle different kind of
+		 XML differently, thus shorthands and even methods such as <codeph>localName()</codeph>
+		 do not work as expected.</p>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:XMLStanza:removeFields"><apiName>removeFields</apiName><shortdesc>
+		 Helper method for removing all child elements that have the given name.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/></apiParam></apiOperationDef><apiDesc>
+		 Helper method for removing all child elements that have the given name.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:XMLStanza:setAttribute"><apiName>setAttribute</apiName><shortdesc>
+		 Convinience method for setting a value to a element in the XML.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convinience method for setting a value to a element in the XML.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:XMLStanza:setChildAttribute"><apiName>setChildAttribute</apiName><shortdesc>
+		 Convinience method for setting an attribute for a child element of the XML.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>elem</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>name</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convinience method for setting an attribute for a child element of the XML.
+		 		 <p>In case the child element does not exist, it will be created.</p>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:XMLStanza:setChildField"><apiName>setChildField</apiName><shortdesc>
+		 Convinience method for setting a value for a child element of the XML.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>elem</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>name</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convinience method for setting a value for a child element of the XML.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:XMLStanza:setField"><apiName>setField</apiName><shortdesc>
+		 Convinience method for setting a value to a element in the XML.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Convinience method for setting a value to a element in the XML.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:XMLStanza:toString"><apiName>toString</apiName><shortdesc>
+		 Converts the base stanza XML to a string.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>The base XML in string form, as in <codeph>toXMLString()</codeph>
+		 </apiDesc><apiType value="String"/></apiReturn></apiOperationDef><apiDesc>
+		 Converts the base stanza XML to a string.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data:XMLStanza:DEFAULT_NS"><apiName>DEFAULT_NS</apiName><shortdesc>
+		 Default XML namespace.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>unknown</apiData><apiType value="Namespace"/></apiValueDef><apiDesc>
+		 Default XML namespace. Must define in AS3.
+		 </apiDesc></apiValueDetail><related-links><link href="http://www.w3.org/XML/1998/namespace"><linktext>http://www.w3.org/XML/1998/namespace</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:XMLStanza:FLASH_NS"><apiName>FLASH_NS</apiName><shortdesc>
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>unknown</apiData><apiType value="Namespace"/></apiValueDef><apiDesc>
+		 </apiDesc></apiValueDetail><related-links><link href="http://www.jabber.com/streams/flash"><linktext>http://www.jabber.com/streams/flash</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data:XMLStanza:STREAM_NS"><apiName>STREAM_NS</apiName><shortdesc>
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>unknown</apiData><apiType value="Namespace"/></apiValueDef><apiDesc>
+		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/protocols/streams/"><linktext>http://xmpp.org/protocols/streams/</linktext></link></related-links></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:Presence"><apiName>Presence</apiName><shortdesc>
+	 This class provides encapsulation for manipulation of presence data for sending and receiving.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IPresence</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:XMPPStanza</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class provides encapsulation for manipulation of presence data for sending and receiving.
+	 	 <p>2.2.1.  Types of Presence</p>
+	 	 <p>The 'type' attribute of a presence stanza is OPTIONAL.  A presence
+	 stanza that does not possess a 'type' attribute is used to signal to
+	 the server that the sender is online and available for communication.
+	 If included, the 'type' attribute specifies a lack of availability, a
+	 request to manage a subscription to another entity's presence, a
+	 request for another entity's current presence, or an error related to
+	 a previously-sent presence stanza.  If included, the 'type' attribute
+	 MUST have one of the following values:</p>
+	 <p>
+	 o  unavailable -- Signals that the entity is no longer available for communication.
+	 o  subscribe -- The sender wishes to subscribe to the recipient's presence.
+	 o  subscribed -- The sender has allowed the recipient to receive their presence.
+	 o  unsubscribe -- The sender is unsubscribing from another entity's presence.
+	 o  unsubscribed -- The subscription request has been denied or a previously-granted subscription has been cancelled.
+	 o  probe -- A request for an entity's current presence; SHOULD be generated only by a server on behalf of a user.
+	 o  error -- An error has occurred regarding processing or delivery of a previously-sent presence stanza.</p>
+	 	 <p>For detailed information regarding presence semantics and the
+	 subscription model used in the context of XMPP-based instant
+	 messaging and presence applications, refer to Exchanging Presence
+	 Information (Section 5) and Managing Subscriptions (Section 6).</p>
+	 </apiDesc></apiClassifierDetail><related-links><link href="http://tools.ietf.org/html/rfc3921"><linktext>http://tools.ietf.org/html/rfc3921</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data:Presence:Presence"><apiName>Presence</apiName><shortdesc>
+		 According to Google Talk developers via their presentation [somewhere few years ago],
+		 most of the XMPP related traffic in their service is made by Presence.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>recipient</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier><apiData>null</apiData><apiDesc>The recipient of the presence, usually in the form of a JID.
+		 </apiDesc></apiParam><apiParam><apiItemName>sender</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier><apiData>null</apiData><apiDesc>The sender of the presence, usually in the form of a JID.
+		 </apiDesc></apiParam><apiParam><apiItemName>presenceType</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The type of presence as a string. There are predefined static variables for
+		 </apiDesc></apiParam><apiParam><apiItemName>showVal</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>What to show for this presence (away, online, etc.) There are predefined static variables for
+		 </apiDesc></apiParam><apiParam><apiItemName>statusVal</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The status; usually used for the "away message."
+		 </apiDesc></apiParam><apiParam><apiItemName>priorityVal</apiItemName><apiType value="int"/><apiData>0</apiData><apiDesc>The priority of this presence; usually on a scale of 1-5.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 According to Google Talk developers via their presentation [somewhere few years ago],
+		 most of the XMPP related traffic in their service is made by Presence.
+		 		 <p>The <b>presence</b> element can be seen as a basic broadcast or
+		 "publish-subscribe" mechanism, whereby multiple entities receive
+		 information about an entity to which they have subscribed (in this
+		 case, network availability information).  In general, a publishing
+		 entity SHOULD send a presence stanza with no 'to' attribute, in which
+		 case the server to which the entity is connected SHOULD broadcast or
+		 multiplex that stanza to all subscribing entities.  However, a
+		 publishing entity MAY also send a presence stanza with a 'to'
+		 attribute, in which case the server SHOULD route or deliver that
+		 stanza to the intended recipient.  See Server Rules for Handling XML
+		 Stanzas (Section 10) for general routing and delivery rules related
+		 to XML stanzas, and [XMPP-IM] for presence-specific rules in the
+		 context of an instant messaging and presence application.</p>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiValue id="org.igniterealtime.xiff.data:Presence:SHOW_AWAY"><apiName>SHOW_AWAY</apiName><shortdesc>
+		 The entity or resource is temporarily away.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>away</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The entity or resource is temporarily away.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Presence:SHOW_CHAT"><apiName>SHOW_CHAT</apiName><shortdesc>
+		 The entity or resource is actively interested in chatting.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>chat</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The entity or resource is actively interested in chatting.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Presence:SHOW_DND"><apiName>SHOW_DND</apiName><shortdesc>
+		 The entity or resource is busy (dnd = "Do Not Disturb").</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>dnd</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The entity or resource is busy (dnd = "Do Not Disturb").
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Presence:SHOW_XA"><apiName>SHOW_XA</apiName><shortdesc>
+		 The entity or resource is away for an extended period (xa = "eXtended Away").</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>xa</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The entity or resource is away for an extended period (xa = "eXtended Away").
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Presence:TYPE_ERROR"><apiName>TYPE_ERROR</apiName><shortdesc>
+		 An error has occurred regarding processing of a
+		 previously-sent presence stanza; if the presence stanza is of type
+		 "error", it MUST include an error child element.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>error</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 An error has occurred regarding processing of a
+		 previously-sent presence stanza; if the presence stanza is of type
+		 "error", it MUST include an error child element.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Presence:TYPE_PROBE"><apiName>TYPE_PROBE</apiName><shortdesc>
+		 A request for an entity's current presence; SHOULD be
+		 generated only by a server on behalf of a user.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>probe</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 A request for an entity's current presence; SHOULD be
+		 generated only by a server on behalf of a user.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Presence:TYPE_SUBSCRIBED"><apiName>TYPE_SUBSCRIBED</apiName><shortdesc>
+		 The sender has allowed the recipient to receive their presence.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>subscribed</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The sender has allowed the recipient to receive their presence.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Presence:TYPE_SUBSCRIBE"><apiName>TYPE_SUBSCRIBE</apiName><shortdesc>
+		 The sender wishes to subscribe to the recipient's
+		 presence.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>subscribe</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The sender wishes to subscribe to the recipient's
+		 presence.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Presence:TYPE_UNAVAILABLE"><apiName>TYPE_UNAVAILABLE</apiName><shortdesc>
+		 Signals that the entity is no longer available for communication.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>unavailable</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 Signals that the entity is no longer available for communication.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Presence:TYPE_UNSUBSCRIBED"><apiName>TYPE_UNSUBSCRIBED</apiName><shortdesc>
+		 The subscription request has been denied or a
+		 previously-granted subscription has been cancelled.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>unsubscribed</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The subscription request has been denied or a
+		 previously-granted subscription has been cancelled.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Presence:TYPE_UNSUBSCRIBE"><apiName>TYPE_UNSUBSCRIBE</apiName><shortdesc>
+		  The sender is unsubscribing from the receiver's presence.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>unsubscribe</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		  The sender is unsubscribing from the receiver's presence.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Presence:priority:get"><apiName>priority</apiName><shortdesc>
+		 The priority of the presence, usually on a scale of 1-5.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="int"/></apiValueDef><apiDesc>
+		 The priority of the presence, usually on a scale of 1-5.
+		 		 <p>RFC: "The value MUST be an integer between -128 and +127".</p>
+		 <p>If no priority is provided,
+		 a server SHOULD consider the priority to be zero.</p>
+		 		 <p>Use <codeph>NaN</codeph> or <codeph>0</codeph> to remove.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Presence:show:get"><apiName>show</apiName><shortdesc>
+		 The show value; away, online, etc.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The show value; away, online, etc. There are predefined static variables in the Presence
+		 class for this:
+		 <ul>
+		 <li>Presence.SHOW_AWAY</li>
+		 <li>Presence.SHOW_CHAT</li>
+		 <li>Presence.SHOW_DND</li>
+		 <li>Presence.SHOW_XA</li>
+		 </ul>
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Presence:status:get"><apiName>status</apiName><shortdesc>
+		 The status; usually used for "away messages."
+		 		 The OPTIONAL status element contains XML character data specifying
+		 a natural-language description of availability status.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The status; usually used for "away messages."
+		 		 <p>The OPTIONAL status element contains XML character data specifying
+		 a natural-language description of availability status.  It is
+		 normally used in conjunction with the show element to provide a
+		 detailed description of an availability state (e.g., "In a meeting").
+		 The <b>status</b> element MUST NOT possess any attributes, with the
+		 exception of the 'xml:lang' attribute.  Multiple instances of the
+		 <b>status</b> element MAY be included but only if each instance possesses
+		 an 'xml:lang' attribute with a distinct language value.</p>
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:Presence:time:get"><apiName>time</apiName><shortdesc>
+		 Time of the presence in case of a delay.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Date"/></apiValueDef><apiDesc>
+		 Time of the presence in case of a delay. Used only for messages
+		 which were sent while user was offline.
+		 		 <p>Can be set only via XML as the value should come from the server.</p>
+		 		 <p>There are two ways that might be possible coming from the server,
+		 XEP-0203 or XEP-0091, of which the latter is legacy.</p>
+		 		 <p>XEP-0203: <codeph>CCYY-MM-DDThh:mm:ss[.sss]TZD</codeph></p>
+		 <p>XEP-0091: <codeph>CCYYMMDDThh:mm:ss</codeph></p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0203.html"><linktext>http://xmpp.org/extensions/xep-0203.html</linktext></link><link href="http://xmpp.org/extensions/xep-0091.html"><linktext>http://xmpp.org/extensions/xep-0091.html</linktext></link></related-links></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:IPresence"><apiName>IPresence</apiName><shortdesc>
+	 Interface for Presence
+	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IXMPPStanza</apiBaseInterface><apiBaseClassifier/></apiClassifierDef><apiDesc>
+	 Interface for Presence
+	 </apiDesc></apiClassifierDetail><apiValue id="org.igniterealtime.xiff.data:IPresence:org.igniterealtime.xiff.data:IPresence:priority:get"><apiName>priority</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="int"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IPresence:org.igniterealtime.xiff.data:IPresence:show:get"><apiName>show</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IPresence:org.igniterealtime.xiff.data:IPresence:status:get"><apiName>status</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IPresence:org.igniterealtime.xiff.data:IPresence:time:get"><apiName>time</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Date"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:Extension"><apiName>Extension</apiName><shortdesc>
+	 This is a base class for all data extensions.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This is a base class for all data extensions.
+	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/registrar/namespaces.html"><linktext>http://xmpp.org/registrar/namespaces.html</linktext></link><link href="http://xmpp.org/extensions/"><linktext>http://xmpp.org/extensions/</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data:Extension:Extension"><apiName>Extension</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>The parent node that this extension should be appended to
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data:Extension:remove"><apiName>remove</apiName><shortdesc>
+		 Removes the extension from its parent.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Removes the extension from its parent.
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data:Extension:xml:set"><apiName>xml</apiName><shortdesc>
+		 Override in order to take care of setting the Namespace and
+		 checking for containing extensions.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiIsOverride/><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="XML"/></apiValueDef><apiDesc>
+		 Override in order to take care of setting the Namespace and
+		 checking for containing extensions.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:ExtensionContainer"><apiName>ExtensionContainer</apiName><shortdesc>
+	 Contains the implementation for a generic extension container.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtendable</apiBaseInterface><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Contains the implementation for a generic extension container.
+	 Use the static method "decorate" to implement the IExtendable interface on a class.
+	 </apiDesc></apiClassifierDetail><apiConstructor id="org.igniterealtime.xiff.data:ExtensionContainer:ExtensionContainer"><apiName>ExtensionContainer</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data:ExtensionContainer:addExtension"><apiName>addExtension</apiName><shortdesc>
+		 Add extension to the list of the given namespace and insert to the XML element as a child.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>The same IExtension that was passed via the parameter
+		 </apiDesc><apiOperationClassifier>org.igniterealtime.xiff.data:IExtension</apiOperationClassifier></apiReturn><apiParam><apiItemName>extension</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.data:IExtension</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Add extension to the list of the given namespace and insert to the XML element as a child.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:ExtensionContainer:getAllExtensionsByNS"><apiName>getAllExtensionsByNS</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc></apiDesc><apiType value="Array"/></apiReturn><apiParam><apiItemName>nameSpace</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:ExtensionContainer:getAllExtensions"><apiName>getAllExtensions</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc></apiDesc><apiType value="Array"/></apiReturn></apiOperationDef><apiDesc>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:ExtensionContainer:getExtension"><apiName>getExtension</apiName><shortdesc>
+		 Get the extension having the given element name.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc></apiDesc><apiOperationClassifier>org.igniterealtime.xiff.data:IExtension</apiOperationClassifier></apiReturn><apiParam><apiItemName>elementName</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Get the extension having the given element name.
+		 Unfortunetly only takes the oldest of the list...
+		 </apiDesc></apiOperationDetail><related-links><link href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/Array.html#filter%28%29"><linktext>http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/Array.html#filter%28%29</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.data:ExtensionContainer:removeAllExtensions"><apiName>removeAllExtensions</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>nameSpace</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:ExtensionContainer:removeExtension"><apiName>removeExtension</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc></apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>extension</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.data:IExtension</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data:ExtensionContainer:xml:get"><apiName>xml</apiName><shortdesc>
+		 The XML node that should be used for this stanza's internal XML representation,
+		 base of the XMLStanza, XML element.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="XML"/></apiValueDef><apiDesc>
+		 The XML node that should be used for this stanza's internal XML representation,
+		 base of the XMLStanza, XML element.
+		 		 <p>Simply by setting this will take care of the required parsing and deserialisation.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/XML.html"><linktext>http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/XML.html</linktext></link><link href="http://www.w3.org/TR/xml/"><linktext>http://www.w3.org/TR/xml/</linktext></link></related-links></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:IExtension"><apiName>IExtension</apiName><shortdesc>
+	 The interface describing an extension.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface><apiBaseClassifier/></apiClassifierDef><apiDesc>
+	 The interface describing an extension.
+	 All extensions must implement this interface.
+	 </apiDesc></apiClassifierDetail><apiOperation id="org.igniterealtime.xiff.data:IExtension:org.igniterealtime.xiff.data:IExtension:getElementName"><apiName>getElementName</apiName><shortdesc>
+		 Element name of the extension
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef><apiDesc>
+		 Element name of the extension
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:IExtension:org.igniterealtime.xiff.data:IExtension:getNS"><apiName>getNS</apiName><shortdesc>
+		 Namespace of the element
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef><apiDesc>
+		 Namespace of the element
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:IXMPPStanza"><apiName>IXMPPStanza</apiName><shortdesc>
+	 Interface for base XMPP stanza
+	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IXMLStanza</apiBaseInterface><apiBaseInterface>org.igniterealtime.xiff.data:IExtendable</apiBaseInterface><apiBaseClassifier/></apiClassifierDef><apiDesc>
+	 Interface for base XMPP stanza
+	 </apiDesc></apiClassifierDetail><apiValue id="org.igniterealtime.xiff.data:IXMPPStanza:org.igniterealtime.xiff.data:IXMPPStanza:errorCode:get"><apiName>errorCode</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="int"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IXMPPStanza:org.igniterealtime.xiff.data:IXMPPStanza:errorCondition:get"><apiName>errorCondition</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IXMPPStanza:org.igniterealtime.xiff.data:IXMPPStanza:errorMessage:get"><apiName>errorMessage</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IXMPPStanza:org.igniterealtime.xiff.data:IXMPPStanza:errorType:get"><apiName>errorType</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IXMPPStanza:org.igniterealtime.xiff.data:IXMPPStanza:from:get"><apiName>from</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:EscapedJID</apiValueClassifier></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IXMPPStanza:org.igniterealtime.xiff.data:IXMPPStanza:id:get"><apiName>id</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IXMPPStanza:org.igniterealtime.xiff.data:IXMPPStanza:to:get"><apiName>to</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:EscapedJID</apiValueClassifier></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data:IXMPPStanza:org.igniterealtime.xiff.data:IXMPPStanza:type:get"><apiName>type</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:INodeProxy"><apiName>INodeProxy</apiName><shortdesc>
+	 An interface for objects that abstract XML data by providing accessors
+	 to the original XML data stored within.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseClassifier/></apiClassifierDef><apiDesc>
+	 An interface for objects that abstract XML data by providing accessors
+	 to the original XML data stored within.
+	 	 <p>Most XMPP stanzas that will interact with the library should implement this interface.</p>
+	 </apiDesc></apiClassifierDetail><apiValue id="org.igniterealtime.xiff.data:INodeProxy:org.igniterealtime.xiff.data:INodeProxy:xml:get"><apiName>xml</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="XML"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:IXMLStanza"><apiName>IXMLStanza</apiName><shortdesc>
+	 Since XML migration, the only job for this interace is to bring together two other
+	 interfaces that it extends.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtendable</apiBaseInterface><apiBaseClassifier/></apiClassifierDef><apiDesc>
+	 Since XML migration, the only job for this interace is to bring together two other
+	 interfaces that it extends.
+	 </apiDesc></apiClassifierDetail><apiOperation id="org.igniterealtime.xiff.data:IXMLStanza:org.igniterealtime.xiff.data:IXMLStanza:getAttribute"><apiName>getAttribute</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:IXMLStanza:org.igniterealtime.xiff.data:IXMLStanza:getField"><apiName>getField</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:IXMLStanza:org.igniterealtime.xiff.data:IXMLStanza:setAttribute"><apiName>setAttribute</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="String"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:IXMLStanza:org.igniterealtime.xiff.data:IXMLStanza:setField"><apiName>setField</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/></apiParam><apiParam><apiItemName>value</apiItemName><apiType value="String"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:IXMLStanza:org.igniterealtime.xiff.data:IXMLStanza:toString"><apiName>toString</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data:IExtendable"><apiName>IExtendable</apiName><shortdesc>
+	 This interface provides access to contained extensions and methods to modify the contained extensions.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface><apiBaseClassifier/></apiClassifierDef><apiDesc>
+	 This interface provides access to contained extensions and methods to modify the contained extensions.
+	 All XMPP stanzas that can be extended should implement this interface.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="org.igniterealtime.xiff.data.xml#ExtensionContainer"><linktext>org.igniterealtime.xiff.data.ExtensionContainer</linktext></link><link href="org.igniterealtime.xiff.data.xml#IExtension"><linktext>org.igniterealtime.xiff.data.IExtension</linktext></link></related-links><apiOperation id="org.igniterealtime.xiff.data:IExtendable:org.igniterealtime.xiff.data:IExtendable:addExtension"><apiName>addExtension</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiOperationClassifier>org.igniterealtime.xiff.data:IExtension</apiOperationClassifier></apiReturn><apiParam><apiItemName>extension</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.data:IExtension</apiOperationClassifier></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:IExtendable:org.igniterealtime.xiff.data:IExtendable:getAllExtensionsByNS"><apiName>getAllExtensionsByNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="Array"/></apiReturn><apiParam><apiItemName>nameSpace</apiItemName><apiType value="String"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:IExtendable:org.igniterealtime.xiff.data:IExtendable:getAllExtensions"><apiName>getAllExtensions</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="Array"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:IExtendable:org.igniterealtime.xiff.data:IExtendable:removeAllExtensions"><apiName>removeAllExtensions</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>nameSpace</apiItemName><apiType value="String"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data:IExtendable:org.igniterealtime.xiff.data:IExtendable:removeExtension"><apiName>removeExtension</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>extension</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.data:IExtension</apiOperationClassifier></apiParam></apiOperationDef></apiOperationDetail></apiOperation></apiClassifier></apiPackage>

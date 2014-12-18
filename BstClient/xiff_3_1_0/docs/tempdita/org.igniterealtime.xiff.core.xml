@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.core"><apiName>org.igniterealtime.xiff.core</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.core:XMPPConnection"><apiName>XMPPConnection</apiName><shortdesc>
+	 This class is used to connect to and manage data coming from an XMPP server.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.core:IXMPPConnection</apiBaseInterface><apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class is used to connect to and manage data coming from an XMPP server.
+	 Use one instance of this class per connection.
+	 </apiDesc></apiClassifierDetail><adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.IQEvent_"><apiName/><shortdesc>
+	 Dispatched on incoming IQ data that has an enabled extension.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.IQEvent</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.IQEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched on incoming IQ data that has an enabled extension.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.PresenceEvent.PRESENCE_presence"><apiName>presence</apiName><shortdesc>
+	 Dispatched on incoming presence data.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.PresenceEvent.PRESENCE</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.PresenceEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched on incoming presence data.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.OutgoingDataEvent.OUTGOING_DATA_outgoingData"><apiName>outgoingData</apiName><shortdesc>
+	 Dispatched whenever data is sent to the server.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.OutgoingDataEvent.OUTGOING_DATA</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.OutgoingDataEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched whenever data is sent to the server.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.MessageEvent.MESSAGE_message"><apiName>message</apiName><shortdesc>
+	 Dispatched on incoming messages.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.MessageEvent.MESSAGE</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.MessageEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched on incoming messages.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.LoginEvent.LOGIN_login"><apiName>login</apiName><shortdesc>
+	 Dispatched on successful authentication (login) with the server.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.LoginEvent.LOGIN</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.LoginEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched on successful authentication (login) with the server.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.IncomingDataEvent.INCOMING_DATA_incomingData"><apiName>incomingData</apiName><shortdesc>
+	 Dispatched whenever there is incoming XML data.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.IncomingDataEvent.INCOMING_DATA</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.IncomingDataEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched whenever there is incoming XML data.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.XIFFErrorEvent.XIFF_ERROR_error"><apiName>error</apiName><shortdesc>
+	 Dispatched when there is some type of XMPP error.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.XIFFErrorEvent.XIFF_ERROR</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.XIFFErrorEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when there is some type of XMPP error.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.DisconnectionEvent.DISCONNECT_disconnection"><apiName>disconnection</apiName><shortdesc>
+	 Dispatched when there is a disconnection from the server.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.DisconnectionEvent.DISCONNECT</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.DisconnectionEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when there is a disconnection from the server.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.core:XMPPConnection_org.igniterealtime.xiff.events.ConnectionSuccessEvent.CONNECT_SUCCESS_connection"><apiName>connection</apiName><shortdesc>
+	 Dispatched when the connection is successfully made to the server.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.ConnectionSuccessEvent.CONNECT_SUCCESS</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.ConnectionSuccessEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when the connection is successfully made to the server.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><apiConstructor id="org.igniterealtime.xiff.core:XMPPConnection:XMPPConnection"><apiName>XMPPConnection</apiName><shortdesc>
+		 Constructor.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/></apiConstructorDef><apiDesc>
+		 Constructor. By default will enable the following extensions:
+		 		 <ul>
+		 <li>AuthExtension, any kind of authentication</li>
+		 <li>BindExtension, resource binding</li>
+		 <li>SessionExtension</li>
+		 <li>PingExtension, for keeping the connection alive</li>
+		 <li>InfoDiscoExtension, for outgoing Service Discovery</li>
+		 </ul>
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:beginAuthentication"><apiName>beginAuthentication</apiName><shortdesc>
+		 SASL Authentication should been set up, begin the authentication
+		 process by sending the initial request.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 SASL Authentication should been set up, begin the authentication
+		 process by sending the initial request.
+		 		 <p>Make sure that the username and password are set, or the connection is using
+		 anonymous authentication before calling this method.</p>
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:bindConnection"><apiName>bindConnection</apiName><shortdesc>
+		 Upon being so informed that resource binding is required, the client
+		 MUST bind a resource to the stream by sending to the server an IQ
+		 stanza of type "set" (see IQ Semantics (Section 9.2.3)) containing
+		 data qualified by the 'urn:ietf:params:xml:ns:xmpp-bind' namespace.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Upon being so informed that resource binding is required, the client
+		 MUST bind a resource to the stream by sending to the server an IQ
+		 stanza of type "set" (see IQ Semantics (Section 9.2.3)) containing
+		 data qualified by the 'urn:ietf:params:xml:ns:xmpp-bind' namespace.
+		 		 <p>If the client wishes to allow the server to generate the resource
+		 identifier on its behalf, it sends an IQ stanza of type "set" that
+		 contains an empty <b>bind</b> element.</p>
+		 		 <p>Client asks server to bind a resource:
+		 <pre>
+		 <iq id="bind_1" type="set">
+		  <bind xmlns="urn:ietf:params:xml:ns:xmpp-bind"/>
+		 </iq>
+		 </pre></p>
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:checkIncomingData"><apiName>checkIncomingData</apiName><shortdesc>
+		 Check if the incoming data is complete once added to any existing
+		 incoming data.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiDesc>XML that is complete, or just null in case it is not complete
+		 </apiDesc><apiType value="XML"/></apiReturn><apiParam><apiItemName>bytedata</apiItemName><apiType value="flash.utils:ByteArray"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Check if the incoming data is complete once added to any existing
+		 incoming data.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:chooseStreamTags"><apiName>chooseStreamTags</apiName><shortdesc>
+		 Choose the stream start and ending tags based on the given type.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>type</apiItemName><apiType value="uint"/><apiDesc>One of the <codeph>STREAM_TYPE_...</codeph> constants of this class.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Choose the stream start and ending tags based on the given type.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:configureAuthMechanisms"><apiName>configureAuthMechanisms</apiName><shortdesc>
+		 Use the authentication which is first in the list (saslMechanisms) if possible.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>mechanisms</apiItemName><apiType value="XML"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Use the authentication which is first in the list (<codeph>saslMechanisms</codeph>) if possible.
+		 		 </apiDesc></apiOperationDetail><related-links><link href="org.igniterealtime.xiff.core.xml#XMPPConnection/saslMechanisms"><linktext>saslMechanisms</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:configureStreamCompression"><apiName>configureStreamCompression</apiName><shortdesc>
+		 Zlib is the most common and the one which is required to be implemented in case
+		 Stream Compression is used.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>method</apiItemName><apiType value="String"/><apiData>zlib</apiData></apiParam></apiOperationDef><apiDesc>
+		 Zlib is the most common and the one which is required to be implemented in case
+		 Stream Compression is used.
+		 		 <p>Ask the server to enable Zlib compression of the stream.</p>
+		 <p>Supported types in XMPP are <codeph>zlib</codeph> and <codeph>lzw</codeph>.</p>
+		 <p>XIFF however only supports <codeph>zlib</codeph> and only after the Adler32 checksum is somehow implemented.</p>
+		 		 <p>Flash Player 11.4, code named "Dolores" (second half of 2012) will have LZMA ByteArray compression available...</p>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://www.adobe.com/devnet/flashplatform/whitepapers/roadmap.html"><linktext>http://www.adobe.com/devnet/flashplatform/whitepapers/roadmap.html</linktext></link><link href="http://xmpp.org/registrar/compress.html"><linktext>http://xmpp.org/registrar/compress.html</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:connect"><apiName>connect</apiName><shortdesc>
+		 Connects to the server.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>streamType</apiItemName><apiType value="uint"/><apiData>0</apiData><apiDesc>Any of the STREAM_TYPE_.. constants.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Connects to the server. Use one of the STREAM_TYPE_.. constants.
+		 Possible options are:
+		 <ul>
+		 <li>standard (default)</li>
+		 <li>standard terminated</li>
+		 <li>flash</li>
+		 <li>flash terminated</li>
+		 </ul>
+		 Some servers, like Jabber, Inc.'s XCP and Jabberd 1.4 expect &lt;flash:stream&gt; from
+		 a Flash client instead of the standard &lt;stream:stream&gt;.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:createConnection"><apiName>createConnection</apiName><shortdesc>
+		 Set up the connection and listeners related to this class.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Set up the connection and listeners related to this class.
+		 		 <p>This method should be overridden in any class that would extend this one
+		 and provide alternative way for connectiong, such as BOSH or TLSSocket.</p>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="" invalidHref="flash.net.Socket.xml"><linktext>flash.net.Socket</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:disableExtensions"><apiName>disableExtensions</apiName><shortdesc>
+		 Disable the given extensions from the registery.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>exts</apiItemName><apiType value="restParam"/></apiParam></apiOperationDef><apiDesc>
+		 Disable the given extensions from the registery.
+		 This is mainly useful only at runtime.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:disableSASLMechanism"><apiName>disableSASLMechanism</apiName><shortdesc>
+		 Remove a SASL mechanism from this connection
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Remove a SASL mechanism from this connection
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:disconnect"><apiName>disconnect</apiName><shortdesc>
+		 Disconnects from the server if currently connected.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Disconnects from the server if currently connected. After disconnect,
+		 a <codeph>DisconnectionEvent.DISCONNECT</codeph> event is broadcast.
+		 </apiDesc></apiOperationDetail><related-links><link href="org.igniterealtime.xiff.events.xml#DisconnectionEvent"><linktext>org.igniterealtime.xiff.events.DisconnectionEvent</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:dispatchError"><apiName>dispatchError</apiName><shortdesc>
+		 </shortdesc><prolog><asCustoms><exampleText>dispatchError("bind-failed", "BindExtension came without a JID");
+		 		 </exampleText></asCustoms></prolog><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>condition</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>message</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>type</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>code</apiItemName><apiType value="int"/><apiData>0</apiData><apiDesc>Legacy code, try not to use. Will be removed in XIFF 3.2.0
+		 </apiDesc></apiParam><apiParam><apiItemName>extension</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.data:Extension</apiOperationClassifier><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:enableExtensions"><apiName>enableExtensions</apiName><shortdesc>
+		 Enable the given extensions for interacting with the incoming data.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>exts</apiItemName><apiType value="restParam"/></apiParam></apiOperationDef><apiDesc>
+		 Enable the given extensions for interacting with the incoming data.
+		 Once an extension is enabled, it can be listened by adding an event
+		 listener to its namespace.
+		 		 <p>Some extensions might responce to an incoming request, such as
+		 SoftwareVersionExtension if enabled</p>
+		 		 <p>Notes about extension dependencies:</p>
+		 		 <ul>
+		 <li>If you will need <codeph>Message.htmlBody</codeph>, use <codeph>XHTMLExtension</codeph>.</li>
+		 <li><codeph>SearchExtension</codeph> will need <codeph>FormExtension</codeph> to be enabled.</li>
+		 <li>Plan to use <codeph>Roster</codeph>? Enable <codeph>RosterExtension</codeph></li>
+		 <li><codeph>BookmarkManager</codeph> needs <codeph>BookmarkPrivatePayload</codeph> to be enabled</li>
+		 <li><codeph>Browser</codeph> needs <codeph>ItemDiscoExtension</codeph>, <codeph>InfoDiscoExtension</codeph> and <codeph>BrowseExtension</codeph></li>
+		 <li><codeph>Room</codeph> will enable <codeph>MUC</codeph> and <codeph>FormExtension</codeph> by itself</li>
+		 </ul>
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:enableSASLMechanism"><apiName>enableSASLMechanism</apiName><shortdesc>
+		 Add a SASL mechanism available for this connection
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>name</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>authClass</apiItemName><apiType value="Class"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Add a SASL mechanism available for this connection
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:establishSession"><apiName>establishSession</apiName><shortdesc>
+		 Runs after binding
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Runs after binding
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://tools.ietf.org/html/rfc3921#section-3"><linktext>http://tools.ietf.org/html/rfc3921#section-3</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:flushPresenceQueue"><apiName>flushPresenceQueue</apiName><shortdesc>
+		 Dispatches a single PresenceEvent in case there are any in the
+		 queue.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>event</apiItemName><apiType value="flash.events:TimerEvent"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Dispatches a single PresenceEvent in case there are any in the
+		 queue. This event will contain all the presences available at this
+		 given moment.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:handleAuthentication"><apiName>handleAuthentication</apiName><shortdesc>
+		 Upon receiving a success indication within the SASL negotiation, the
+		 client MUST send a new stream header to the server, to which the
+		 server MUST respond with a stream header as well as a list of
+		 available stream features.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>response</apiItemName><apiType value="XML"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Upon receiving a success indication within the SASL negotiation, the
+		 client MUST send a new stream header to the server, to which the
+		 server MUST respond with a stream header as well as a list of
+		 available stream features.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:handleMessage"><apiName>handleMessage</apiName><shortdesc>
+		 TODO: Add similar extension handling as in IQ,
+		 after message specific extensions are separated from Message class, v3.2.0
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>node</apiItemName><apiType value="XML"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 TODO: Add similar extension handling as in IQ,
+		 after message specific extensions are separated from Message class, v3.2.0
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:handleNodeType"><apiName>handleNodeType</apiName><shortdesc>
+		 Calls a appropriate parser base on the nodeName.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>node</apiItemName><apiType value="XML"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Calls a appropriate parser base on the nodeName.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:handlePresence"><apiName>handlePresence</apiName><shortdesc>
+		 Handle the incoming Presence either with the queue timer or directly
+		 dispatching the PresenceEvent.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiOperationClassifier>org.igniterealtime.xiff.data:Presence</apiOperationClassifier></apiReturn><apiParam><apiItemName>node</apiItemName><apiType value="XML"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Handle the incoming <codeph>Presence</codeph> either with the queue timer or directly
+		 dispatching the <codeph>PresenceEvent</codeph>. In both cases the event occurs right after
+		 this method.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:handleStreamError"><apiName>handleStreamError</apiName><shortdesc>
+		 Handle stream error related element.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>node</apiItemName><apiType value="XML"/><apiDesc>Error node
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Handle stream error related element.
+		 		 <p>RFC 3920 (XMPP Core, published October 2004),
+		 in chapters 4.7. defines Stream Errors:</p>
+		 		 <p>MUST contain a child element corresponding to one of the defined
+		 stanza error conditions defined below; this element MUST be
+		 qualified by the 'urn:ietf:params:xml:ns:xmpp-streams' namespace.</p>
+		 		 <p>MAY contain a <b>text</b> child containing XML character data that
+		 describes the error in more detail; this element MUST be qualified
+		 by the 'urn:ietf:params:xml:ns:xmpp-streams' namespace and SHOULD
+		 possess an 'xml:lang' attribute specifying the natural language of
+		 the XML character data.</p>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://xmpp.org/protocols/urn_ietf_params_xml_ns_xmpp-streams/"><linktext>http://xmpp.org/protocols/urn_ietf_params_xml_ns_xmpp-streams/</linktext></link><link href="http://tools.ietf.org/html/rfc3920#section-4.7"><linktext>http://tools.ietf.org/html/rfc3920#section-4.7</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:handleStreamFeatures"><apiName>handleStreamFeatures</apiName><shortdesc>
+		 Handle features that are available in the connected server.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>node</apiItemName><apiType value="XML"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Handle features that are available in the connected server.
+		 		 <adobetable>
+		 
+		 <tgroup cols="10"><thead><row><row>
+		 <entry>Feature</entry>
+		 <entry>XML Element</entry>
+		 <entry>Description</entry>
+		 <entry>Documentation</entry>
+		 </row><row>
+		 <entry>amp</entry>
+		 <entry>&lt;amp xmlns='http://jabber.org/features/amp'&gt;</entry><entry>Support for Advanced Message Processing</entry>
+		 <entry><xref href="http://www.xmpp.org/extensions/xep-0079.html">XEP-0079: Advanced Message Processing</xref></entry>
+		 </row><row>
+		 <entry>compress</entry>
+		 <entry>&lt;compression xmlns='http://jabber.org/features/compress'&gt;</entry>
+		 <entry>Support for Stream Compression</entry>
+		 <entry><xref href="http://www.xmpp.org/extensions/xep-0138.html">XEP-0138: Stream Compression</xref></entry>
+		 </row><row>
+		 <entry>iq-auth</entry>
+		 <entry>&lt;auth xmlns='http://jabber.org/features/iq-auth'&gt;</entry>
+		 <entry>Support for Non-SASL Authentication</entry>
+		 <entry><xref href="http://www.xmpp.org/extensions/xep-0078.html">XEP-0078: Non-SASL Authentication</xref></entry>
+		 </row><row>
+		 <entry>iq-register</entry>
+		 <entry>&lt;register xmlns='http://jabber.org/features/iq-register'&gt;</entry>
+		 <entry>Support for In-Band Registration</entry>
+		 <entry><xref href="http://www.xmpp.org/extensions/xep-0077.html">XEP-0077: In-Band Registration</xref></entry>
+		 </row><row>
+		 <entry>bind</entry>
+		 <entry>&lt;bind xmlns='urn:ietf:params:xml:ns:xmpp-bind'&gt;</entry>
+		 <entry>Support for Resource Binding</entry>
+		 <entry><xref href="http://www.ietf.org/rfc/rfc6120.txt">RFC 6120: XMPP Core</xref></entry>
+		 </row><row>
+		 <entry>mechanisms</entry>
+		 <entry>&lt;mechanisms xmlns='urn:ietf:params:xml:ns:xmpp-sasl'&gt;</entry>
+		 <entry>Support for Simple Authentication and Security Layer (SASL)</entry>
+		 <entry><xref href="http://www.ietf.org/rfc/rfc6120.txt">RFC 6120: XMPP Core</xref></entry>
+		 </row><row>
+		 <entry>session</entry><entry>&lt;session xmlns='urn:ietf:params:xml:ns:xmpp-session'&gt;</entry>
+		 <entry>Support for IM Session Establishment</entry>
+		 <entry><xref href="http://www.ietf.org/rfc/rfc6121.txt">RFC 6121: XMPP IM</xref></entry>
+		 </row><row>
+		 <entry>starttls</entry>
+		 <entry>&lt;starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'&gt;</entry>
+		 <entry>Support for Transport Layer Security (TLS)</entry>
+		 <entry><xref href="http://www.ietf.org/rfc/rfc6120.txt">RFC 6120: XMPP Core</xref></entry>
+		 </row><row>
+		 <entry>sm</entry>
+		 <entry>&lt;sm xmlns='urn:xmpp:sm:3'&gt;</entry><entry>Support for Stream Management</entry>
+		 <entry><xref href="http://www.xmpp.org/extensions/xep-0198.html">XEP-0198: Stream Management</xref></entry>
+		 </row></row></thead><tbody/></tgroup></adobetable>
+		 		 <p>The XMPP RFCs define an ordering for the features defined therein, namely:</p>
+		 <ol>
+		   <li>TLS, requires the use of <codeph>XMPPTLSConnection</codeph></li>
+		   <li>In-band registration, if registration needed</li>
+		   <li>SASL</li>
+		   <li>Stream compression, if used</li>
+		   <li>Resource binding</li>
+		 </ol>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://xmpp.org/registrar/stream-features.html"><linktext>http://xmpp.org/registrar/stream-features.html</linktext></link><link href="http://xmpp.org/extensions/xep-0170.html"><linktext>http://xmpp.org/extensions/xep-0170.html</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:handleStreamTLS"><apiName>handleStreamTLS</apiName><shortdesc>
+		 Checks if the TLS feature available is required or not and dispatches
+		 an error in case it is.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>node</apiItemName><apiType value="XML"/><apiDesc>The feature containing starttls tag.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Checks if the TLS feature available is required or not and dispatches
+		 an error in case it is.
+		 		 <p>A connection class supporting TLS should override this handler.</p>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="org.igniterealtime.xiff.core.xml#XMPPRTMPConnection/handleStreamTLS"><linktext>org.igniterealtime.xiff.core.XMPPRTMPConnection.handleStreamTLS</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:handleStream"><apiName>handleStream</apiName><shortdesc>
+		 Initial stream element has been received once this method is called.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>node</apiItemName><apiType value="XML"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Initial stream element has been received once this method is called.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:onIOError"><apiName>onIOError</apiName><shortdesc>
+		 This fires the standard dispatchError method
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>event</apiItemName><apiType value="flash.events:IOErrorEvent"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 This fires the standard dispatchError method
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:parseDataReceived"><apiName>parseDataReceived</apiName><shortdesc>
+		 Parses the data which the socket just received.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>bytedata</apiItemName><apiType value="flash.utils:ByteArray"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Parses the data which the socket just received.
+		 Used to simplify the overrides from classes extending this one.
+		 		 <p>Dispatches the <codeph>IncomingDataEvent</codeph>. Also takes care
+		 of increasing the incoming bytes statistic.</p>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:removeSocketEventListeners"><apiName>removeSocketEventListeners</apiName><shortdesc>
+		 Remove those listeners that the createConnection method added.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Remove those listeners that the <codeph>createConnection</codeph> method added.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:sendDataToServer"><apiName>sendDataToServer</apiName><shortdesc>
+		 Overwrite this method to use other kind of socket,
+		 request or connection, if needed.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>data</apiItemName><apiType value="flash.utils:ByteArray"/></apiParam></apiOperationDef><apiDesc>
+		 Overwrite this method to use other kind of socket,
+		 request or connection, if needed.
+		 <p>Then use the sendXML method when sending XML.</p>
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:sendData"><apiName>sendData</apiName><shortdesc>
+		 Dispatches OutgoingDataEvent, handles possible Stream Compression and
+		 calls sendDataToServer.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>data</apiItemName><apiType value="String"/><apiDesc>XML that is not always complete for a reason, like sending the closing element
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Dispatches <codeph>OutgoingDataEvent</codeph>, handles possible Stream Compression and
+		 calls <codeph>sendDataToServer</codeph>.
+		 		 <p>Also takes care of increasing the outgoing bytes statistic.</p>
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:sendKeepAlive"><apiName>sendKeepAlive</apiName><shortdesc>
+		 Sends ping to server in order to keep the connection alive, in case the server
+		 has not indicated that it would not support it.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Sends ping to server in order to keep the connection alive, in case the server
+		 has not indicated that it would not support it.
+		 		 TODO: Whitespace keepalive if ping not supported...
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:sendXML"><apiName>sendXML</apiName><shortdesc>
+		 Pass through to sendData which takes care of the common
+		 data handling between all connection classes.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>data</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Pass through to <codeph>sendData</codeph> which takes care of the common
+		 data handling between all connection classes.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:send"><apiName>send</apiName><shortdesc>
+		 Sends data to the server.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>data</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.data:IXMPPStanza</apiOperationClassifier><apiDesc>The data to send. This must be an instance of a class that implements the INodeProxy interface.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Sends data to the server. If the data to send cannot be serialized properly,
+		 this method throws a <codeph>SerializeException</codeph>.
+		 		 </apiDesc><example>The following example sends a basic chat message to the user with the
+		 JID "sideshowbob@springfieldpenitentiary.gov".
+		 <codeph>var message:Message = new Message( "sideshowbob@springfieldpenitentiary.gov", null, "Hi Bob.",
+		 "<b>Hi Bob.</b>", Message.TYPE_CHAT );
+		 myXMPPConnection.send( message );</codeph>
+		 </example></apiOperationDetail><related-links><link href="org.igniterealtime.xiff.data.xml#INodeProxy"><linktext>org.igniterealtime.xiff.data.INodeProxy</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPConnection:protected:serviceDiscoveryResponce"><apiName>serviceDiscoveryResponce</apiName><shortdesc>
+		 Send a response to the Service Discovery query.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>to</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier></apiParam><apiParam><apiItemName>id</apiItemName><apiType value="String"/></apiParam></apiOperationDef><apiDesc>
+		 Send a response to the Service Discovery query.
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://xmpp.org/extensions/xep-0030.html"><linktext>http://xmpp.org/extensions/xep-0030.html</linktext></link></related-links></apiOperation><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:STREAM_TYPE_FLASH_TERMINATED"><apiName>STREAM_TYPE_FLASH_TERMINATED</apiName><shortdesc>
+		 Stream type lets user set opening/closing tag.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>3</apiData><apiType value="uint"/></apiValueDef><apiDesc>
+		 Stream type lets user set opening/closing tag.
+		 <codeph>&lt;flash:stream /&gt;</codeph>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:STREAM_TYPE_FLASH"><apiName>STREAM_TYPE_FLASH</apiName><shortdesc>
+		 Stream type lets user set opening/closing tag.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>2</apiData><apiType value="uint"/></apiValueDef><apiDesc>
+		 Stream type lets user set opening/closing tag.
+		 <codeph>&lt;flash:stream&gt;</codeph>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:STREAM_TYPE_STANDARD_TERMINATED"><apiName>STREAM_TYPE_STANDARD_TERMINATED</apiName><shortdesc>
+		 Stream type lets user set opening/closing tag.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>1</apiData><apiType value="uint"/></apiValueDef><apiDesc>
+		 Stream type lets user set opening/closing tag.
+		 <codeph>&lt;stream:stream /&gt;</codeph>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:STREAM_TYPE_STANDARD"><apiName>STREAM_TYPE_STANDARD</apiName><shortdesc>
+		 Stream type lets user set opening/closing tag.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>0</apiData><apiType value="uint"/></apiValueDef><apiDesc>
+		 Stream type lets user set opening/closing tag.
+		 <codeph>&lt;stream:stream&gt;</codeph>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:_compressor"><apiName>_compressor</apiName><shortdesc>
+		 Static class that is used to handle the compression
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiData>null</apiData><apiValueClassifier>org.igniterealtime.xiff.util:ICompressor</apiValueClassifier></apiValueDef><apiDesc>
+		 Static class that is used to handle the compression
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:_registrationSupported"><apiName>_registrationSupported</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiData>false</apiData><apiType value="Boolean"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:_server"><apiName>_server</apiName><shortdesc>
+		 Server to connect, could be different of the login domain.</shortdesc><prolog><asCustoms><exampleText>talk.google.com
+		 </exampleText></asCustoms></prolog><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiType value="String"/></apiValueDef><apiDesc>
+		 Server to connect, could be different of the login domain.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:closingStreamTag"><apiName>closingStreamTag</apiName><shortdesc>
+		 Depending of the STREAM_TYPE_used in the connect() method,
+		 this variable will contain a matching closing element for it.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiType value="String"/></apiValueDef><apiDesc>
+		 Depending of the STREAM_TYPE_used in the <codeph>connect()</codeph> method,
+		 this variable will contain a matching closing element for it.
+		 <codeph>parseDataReceived()</codeph> method will use this value.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:expireTagSearch"><apiName>expireTagSearch</apiName><shortdesc>
+		 Once received data from the socket, should the closing tag be seached?
+		 Initially this should be true as for the first incoming data
+		 there might be an error available.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiData>false</apiData><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 Once received data from the socket, should the closing tag be seached?
+		 Initially this should be <codeph>true</codeph> as for the first incoming data
+		 there might be an error available.
+		 		 TODO: Not used, not needed?
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:featuresAvailable"><apiName>featuresAvailable</apiName><shortdesc>
+		 Features as provided by the server, in their original XML form.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiData>unknown</apiData><apiType value="XML"/></apiValueDef><apiDesc>
+		 Features as provided by the server, in their original XML form.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:openingStreamTag"><apiName>openingStreamTag</apiName><shortdesc>
+		 Opening part of the stream tag, such as
+		 &amp;lt;stream:stream or &amp;lt;flash:stream
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiType value="String"/></apiValueDef><apiDesc>
+		 Opening part of the stream tag, such as
+		 <codeph>&lt;stream:stream</codeph> or <codeph>&lt;flash:stream</codeph>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:pendingIQs"><apiName>pendingIQs</apiName><shortdesc>
+		 Hash to hold callbacks for IQs
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiData>unknown</apiData><apiType value="Object"/></apiValueDef><apiDesc>
+		 Hash to hold callbacks for IQs
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:pingNotSupported"><apiName>pingNotSupported</apiName><shortdesc>
+		 Server supports keeping the connection alive with Ping extension
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 Server supports keeping the connection alive with Ping extension
+		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0199.html"><linktext>http://xmpp.org/extensions/xep-0199.html</linktext></link><link href="org.igniterealtime.xiff.data.ping.xml#PingExtension"><linktext>org.igniterealtime.xiff.data.ping.PingExtension</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:presenceQueue"><apiName>presenceQueue</apiName><shortdesc>
+		 List of incoming presences that are waiting to be dispatched
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiData>unknown</apiData><apiType value="Array"/></apiValueDef><apiDesc>
+		 List of incoming presences that are waiting to be dispatched
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:saslMechanisms"><apiName>saslMechanisms</apiName><shortdesc>
+		 The types of SASL mechanisms available.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="protected"/><apiDynamic/><apiData>unknown</apiData><apiType value="Object"/></apiValueDef><apiDesc>
+		 The types of SASL mechanisms available. Indexed by their MECHANISM constant.
+		 		 <p>By default, only <codeph>Anonymous</codeph> and <codeph>DigestMD5</codeph> are enabled.</p>
+		 </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.auth.xml#Anonymous"><linktext>org.igniterealtime.xiff.auth.Anonymous</linktext></link><link href="org.igniterealtime.xiff.auth.xml#DigestMD5"><linktext>org.igniterealtime.xiff.auth.DigestMD5</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:socket"><apiName>socket</apiName><shortdesc>
+		 Binary socket used to connect to the XMPP server.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiType value="flash.net:Socket"/></apiValueDef><apiDesc>
+		 Binary socket used to connect to the XMPP server.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:streamTagSearch"><apiName>streamTagSearch</apiName><shortdesc>
+		 Depending of the STREAM_TYPE_used in the connect() method,
+		 the name of the opening tag for stream is saved in this variable, such as
+		 stream:stream or flash:stream.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiData>stream:stream</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 Depending of the STREAM_TYPE_used in the <codeph>connect()</codeph> method,
+		 the name of the opening tag for stream is saved in this variable, such as
+		 <codeph>stream:stream</codeph> or <codeph>flash:stream</codeph>.
+		 		 <p>Default value matches the default value of <codeph>connect()</codeph> method,
+		 which is STREAM_TYPE_STANDARD.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:tlsEnabled"><apiName>tlsEnabled</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiData>false</apiData><apiType value="Boolean"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:protected:tlsRequired"><apiName>tlsRequired</apiName><shortdesc>
+		 Even if this class is not implementing TLS, it needs to be aware
+		 if it has been extended by XMPPTLSConnection that will
+		 set this value to true.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiData>false</apiData><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 Even if this class is not implementing TLS, it needs to be aware
+		 if it has been extended by <codeph>XMPPTLSConnection</codeph> that will
+		 set this value to <codeph>true</codeph>.
+		 		 <p>For example <codeph>handleStreamFeatures</codeph> uses this value.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.core.xml#XMPPConnection/handleStreamFeatures"><linktext>handleStreamFeatures</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:active:get"><apiName>active</apiName><shortdesc>
+		 Determines whether the connection with the server is currently active.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 Determines whether the connection with the server is currently active.
+		 		 <p>Not necessarily logged in. For login status, use the
+		 <codeph>loggedIn</codeph> method.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.core.xml#XMPPConnection/loggedIn"><linktext>org.igniterealtime.xiff.core.XMPPConnection.loggedIn</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:compress:get"><apiName>compress</apiName><shortdesc>
+		 Shall the Stream Compression be allowed if the server supports it.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/><apiDefaultValue>false
+		 </apiDefaultValue></apiValueDef><apiDesc>
+		 Shall the Stream Compression be allowed if the server supports it.
+		 		 <p><codeph>compressor</codeph> needs to be set too.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0138.html"><linktext>http://xmpp.org/extensions/xep-0138.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:compressor:get"><apiName>compressor</apiName><shortdesc>
+		 The class that is to be used for Stream Compression if enabled.</shortdesc><prolog><asCustoms><exampleText>_connection.compressor = new Zlib();
+		 </exampleText></asCustoms></prolog><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.util:ICompressor</apiValueClassifier><apiDefaultValue>null
+		 </apiDefaultValue></apiValueDef><apiDesc>
+		 The class that is to be used for Stream Compression if enabled.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0138.html"><linktext>http://xmpp.org/extensions/xep-0138.html</linktext></link><link href="org.igniterealtime.xiff.util.xml#Zlib"><linktext>org.igniterealtime.xiff.util.Zlib</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:domain:get"><apiName>domain</apiName><shortdesc>
+		 The XMPP domain to use with the server.</shortdesc><prolog><asCustoms><exampleText>gmail.com
+		 </exampleText></asCustoms></prolog><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The XMPP domain to use with the server.
+		 User domain. Used as the server unless <codeph>server</codeph> is specifically set to something different.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:incomingBytes:get"><apiName>incomingBytes</apiName><shortdesc>
+		 Get the total count of the received bytes in the current session.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 Get the total count of the received bytes in the current session.
+		 <p>Mainly useful for tracking network traffic.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:jid:get"><apiName>jid</apiName><shortdesc>
+		 Gets the fully qualified unescaped JID of the user.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiValueClassifier></apiValueDef><apiDesc>
+		 Gets the fully qualified unescaped JID of the user.
+		 <p>A fully-qualified JID includes the resource. A bare JID does not.
+		 To get the bare JID, use the <codeph>bareJID</codeph> property of the UnescapedJID.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.core.xml#UnescapedJID/bareJID"><linktext>org.igniterealtime.xiff.core.UnescapedJID.bareJID</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:loggedIn:get"><apiName>loggedIn</apiName><shortdesc>
+		 Determines whether the user is connected and logged into the server.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 Determines whether the user is connected and logged into the server.
+		 		 </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.core.xml#XMPPConnection/active"><linktext>org.igniterealtime.xiff.core.XMPPConnection.active</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:openConnections:get"><apiName>openConnections</apiName><shortdesc>
+		 Reference to all active connections.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiStatic/><apiValueAccess value="read"/><apiType value="Array"/></apiValueDef><apiDesc>
+		 Reference to all active connections.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:outgoingBytes:get"><apiName>outgoingBytes</apiName><shortdesc>
+		 Get the total count of the bytes sent in the current session.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 Get the total count of the bytes sent in the current session.
+		 Mainly useful for tracking network traffic.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:password:get"><apiName>password</apiName><shortdesc>
+		 The password to use when logging in.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The password to use when logging in.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:port:get"><apiName>port</apiName><shortdesc>
+		 The port to use when connecting.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/><apiDefaultValue>5222
+		 </apiDefaultValue></apiValueDef><apiDesc>
+		 The port to use when connecting.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:queuePresences:get"><apiName>queuePresences</apiName><shortdesc>
+		 Should the connection queue presence events for a small interval so that it can
+		 send multiple in a batch?
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/><apiDefaultValue>true To maintain original behavior -- has to be explicitly set to false to disable.
+		 </apiDefaultValue></apiValueDef><apiDesc>
+		 Should the connection queue presence events for a small interval so that it can
+		 send multiple in a batch?
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:registrationSupported:get"><apiName>registrationSupported</apiName><shortdesc>
+		 Does the connection support registration.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 Does the connection support registration.
+		 Find out after initial features have arrived.
+		 		 </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.core.xml#InBandRegistrator"><linktext>org.igniterealtime.xiff.core.InBandRegistrator</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:resource:get"><apiName>resource</apiName><shortdesc>
+		 The resource to use when logging in.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The resource to use when logging in. A resource is required (defaults to "XIFF") and
+		 allows a user to login using the same account simultaneously (most likely from multiple machines).
+		 Typical examples of the resource include "Home" or "Office" to indicate the user's current location.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:server:get"><apiName>server</apiName><shortdesc>
+		 The XMPP server to use for connection.</shortdesc><prolog><asCustoms><exampleText>talk.google.com
+		 </exampleText></asCustoms></prolog><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The XMPP server to use for connection.
+		 Server to connect, could be different of the login/user domain.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:useAnonymousLogin:get"><apiName>useAnonymousLogin</apiName><shortdesc>
+		 Whether to use anonymous login or not.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 Whether to use anonymous login or not.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPConnection:username:get"><apiName>username</apiName><shortdesc>
+		 The username to use for connection.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The username to use for connection. If this property is null when <codeph>connect()</codeph> is called,
+		 the class will fetch registration field data rather than attempt to login.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.core:XMPPRTMPConnection"><apiName>XMPPRTMPConnection</apiName><shortdesc>
+	 A child of XMPPConnection, this class makes use of the
+	 Flash RTMP connection instead of the Socket.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.core:IXMPPConnection</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.core:XMPPConnection</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 A child of <codeph>XMPPConnection</codeph>, this class makes use of the
+	 Flash RTMP connection instead of the <codeph>Socket</codeph>.
+	 
+	 </apiDesc></apiClassifierDetail><related-links><link href="org.igniterealtime.xiff.core.xml#XMPPConnection"><linktext>org.igniterealtime.xiff.core.XMPPConnection</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.core:XMPPRTMPConnection:XMPPRTMPConnection"><apiName>XMPPRTMPConnection</apiName><shortdesc>
+		 
+		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>url</apiItemName><apiType value="String"/><apiData>rtmp:/xmpp</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.core:XMPPRTMPConnection:connect"><apiName>connect</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>streamType</apiItemName><apiType value="uint"/><apiData>0</apiData></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPRTMPConnection:protected:createConnection"><apiName>createConnection</apiName><shortdesc>
+		 Called from XMPPConnection() constructor.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Called from <codeph>XMPPConnection()</codeph> constructor.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPRTMPConnection:disconnect"><apiName>disconnect</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPRTMPConnection:protected:restartStream"><apiName>restartStream</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPRTMPConnection:protected:sendDataToServer"><apiName>sendDataToServer</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>data</apiItemName><apiType value="flash.utils:ByteArray"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPRTMPConnection:sendKeepAlive"><apiName>sendKeepAlive</apiName><shortdesc>
+		 No need for keepalive
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 No need for keepalive
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPRTMPConnection:xmppRecieve"><apiName>xmppRecieve</apiName><shortdesc>
+		 Is the name of this method locked in the server side?
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>rawXML</apiItemName><apiType value="String"/></apiParam></apiOperationDef><apiDesc>
+		 Is the name of this method locked in the server side?
+		 </apiDesc></apiOperationDetail></apiOperation></apiClassifier><apiClassifier id="org.igniterealtime.xiff.core:Browser"><apiName>Browser</apiName><shortdesc>
+	 XEP-0030: Service Discovery
+	 	 This class provides a means of querying for available services on an XMPP
+	 server using the Disco protocol extension.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.core:IBrowser</apiBaseInterface><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0030: Service Discovery
+	 	 <p>This class provides a means of querying for available services on an XMPP
+	 server using the Disco protocol extension. For more information on Disco,
+	 take a look at
+	 <xref href="http://xmpp.org/extensions/xep-0030.html">XEP-0030</xref> and
+	 <xref href="http://xmpp.org/extensions/xep-0011.html">XEP-0011 (obsolete)</xref> for the
+	 protocol enhancement specifications.</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0030.html"><linktext>http://xmpp.org/extensions/xep-0030.html</linktext></link><link href="http://xmpp.org/extensions/xep-0011.html"><linktext>http://xmpp.org/extensions/xep-0011.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.core:Browser:Browser"><apiName>Browser</apiName><shortdesc>
+		 Creates a new Browser object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>aConnection</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiOperationClassifier><apiDesc>A reference to the <codeph>XMPPConnection</codeph> instance to use.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Creates a new Browser object.
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.core:Browser:browseItem"><apiName>browseItem</apiName><shortdesc>
+		 Use the OBSOLETE BrowseExtension (jabber:iq:browse namespace)
+		 to query a resource for supported features and children.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>org.igniterealtime.xiff.data.IQ
+		 </apiDesc><apiOperationClassifier>org.igniterealtime.xiff.data:IIQ</apiOperationClassifier></apiReturn><apiParam><apiItemName>id</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier><apiDesc>The full JabberID to query for service items
+		 </apiDesc></apiParam><apiParam><apiItemName>callback</apiItemName><apiType value="Function"/><apiDesc>The callback function to call when results are retrieved
+		 </apiDesc></apiParam><apiParam><apiItemName>errorCallback</apiItemName><apiType value="Function"/><apiData>null</apiData><apiDesc>The callback function to call when errors are received
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Use the <b>OBSOLETE</b> <codeph>BrowseExtension</codeph> (jabber:iq:browse namespace)
+		 to query a resource for supported features and children.
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://xmpp.org/extensions/xep-0011.html"><linktext>http://xmpp.org/extensions/xep-0011.html</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:Browser:getNodeInfo"><apiName>getNodeInfo</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>org.igniterealtime.xiff.data.IQ
+		 </apiDesc><apiOperationClassifier>org.igniterealtime.xiff.data:IIQ</apiOperationClassifier></apiReturn><apiParam><apiItemName>service</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>node</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>callback</apiItemName><apiType value="Function"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>errorCallback</apiItemName><apiType value="Function"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://xmpp.org/extensions/xep-0030.html#info-nodes"><linktext>http://xmpp.org/extensions/xep-0030.html#info-nodes</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:Browser:getNodeItems"><apiName>getNodeItems</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>org.igniterealtime.xiff.data.IQ
+		 </apiDesc><apiOperationClassifier>org.igniterealtime.xiff.data:IIQ</apiOperationClassifier></apiReturn><apiParam><apiItemName>service</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>node</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>callback</apiItemName><apiType value="Function"/><apiDesc>	 </apiDesc></apiParam><apiParam><apiItemName>errorCallback</apiItemName><apiType value="Function"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://xmpp.org/extensions/xep-0030.html#items-nodes"><linktext>http://xmpp.org/extensions/xep-0030.html#items-nodes</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:Browser:getServiceInfo"><apiName>getServiceInfo</apiName><shortdesc>
+		 Retrieves a list of available service information from the server specified.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>org.igniterealtime.xiff.data.IQ
+		 </apiDesc><apiOperationClassifier>org.igniterealtime.xiff.data:IIQ</apiOperationClassifier></apiReturn><apiParam><apiItemName>server</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier><apiDesc>The server to query for available service information
+		 </apiDesc></apiParam><apiParam><apiItemName>callback</apiItemName><apiType value="Function"/><apiDesc>The callback function to call when results are retrieved
+		 </apiDesc></apiParam><apiParam><apiItemName>errorCallback</apiItemName><apiType value="Function"/><apiData>null</apiData><apiDesc>The callback function to call when errors are received
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Retrieves a list of available service information from the server specified. On successful query,
+		 the callback specified will be called and passed a single parameter containing
+		 a reference to an <codeph>IQ</codeph> containing the query results.
+		 		 <pre>
+		 <iq id="iq_4" to="192.168.1.37" type="get">
+		  <query xmlns="http://jabber.org/protocol/disco#info"/>
+		 </iq>
+		 </pre>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://xmpp.org/extensions/xep-0030.html#info"><linktext>http://xmpp.org/extensions/xep-0030.html#info</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:Browser:getServiceItems"><apiName>getServiceItems</apiName><shortdesc>
+		 Retrieves a list of available services items from the server specified.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>org.igniterealtime.xiff.data.IQ
+		 </apiDesc><apiOperationClassifier>org.igniterealtime.xiff.data:IIQ</apiOperationClassifier></apiReturn><apiParam><apiItemName>server</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier><apiDesc>The server to query for service items
+		 </apiDesc></apiParam><apiParam><apiItemName>callback</apiItemName><apiType value="Function"/><apiDesc>The callback function to call when results are retrieved
+		 </apiDesc></apiParam><apiParam><apiItemName>errorCallback</apiItemName><apiType value="Function"/><apiData>null</apiData><apiDesc>The callback function to call when errors are received
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Retrieves a list of available services items from the server specified. Items include things such
+		 as available transports and user directories. On successful query, the callback specified in the will be
+		 called and passed a single parameter containing the query results.
+		 		 <pre>
+		 <iq id="iq_3" to="192.168.1.37" type="get">
+		 <query xmlns="http://jabber.org/protocol/disco#items"/>
+		 </iq>
+		 </pre>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://xmpp.org/extensions/xep-0030.html#items"><linktext>http://xmpp.org/extensions/xep-0030.html#items</linktext></link></related-links></apiOperation><apiValue id="org.igniterealtime.xiff.core:Browser:connection:get"><apiName>connection</apiName><shortdesc>
+		 The instance of the XMPPConnection class to use for sending and
+		 receiving data.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiValueClassifier></apiValueDef><apiDesc>
+		 The instance of the XMPPConnection class to use for sending and
+		 receiving data.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.core:XMPPBOSHConnection"><apiName>XMPPBOSHConnection</apiName><shortdesc>
+	 XEP-0124: Bidirectional-streams Over Synchronous HTTP (BOSH) and
+	 XEP-0206: XMPP Over BOSH.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.core:IXMPPConnection</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.core:XMPPConnection</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0124: Bidirectional-streams Over Synchronous HTTP (BOSH) and
+	 XEP-0206: XMPP Over BOSH.
+	 	 <p>Using BOSH does not prevent your application from respecting
+	 Adobe Flash Player policy file issues. HTTP requests to your
+	 server must be authorized with a <codeph>crossdomain.xml</codeph> file
+	 in your webserver root.</p>
+	 	 <p>Warning: if you are using BOSH through HTTPS, your crossdomain
+	 policy file must also be served through HTTPS. Your application
+	 (if online) must also be served through HTTPS else you will
+	 have a crossdomain policy issue. This issue can be solved by
+	 using the secure property of the allow-access-from node in the
+	 crossdomain.xml file. But this is not recommended by Adobe.</p>
+	 	 <p>If your crossdomain policy file cannot
+	 be served by your server, this issue could be solved with an
+	 Apache proxy redirect so that any automatic Flash/Flex calls
+	 to an URL like <codeph>http://xmppserver:5280/crossdomain.xml</codeph> will be
+	 redirected as an URL of your choice such as
+	 <codeph>http://webserver/crossdomain.xml</codeph>.</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0124.html"><linktext>http://xmpp.org/extensions/xep-0124.html</linktext></link><link href="http://xmpp.org/extensions/xep-0206.html"><linktext>http://xmpp.org/extensions/xep-0206.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.core:XMPPBOSHConnection:XMPPBOSHConnection"><apiName>XMPPBOSHConnection</apiName><shortdesc>
+		 TLS compression (as defined in RFC 3920) and Stream Compression (as defined
+		 in Stream Compression [XEP-0138]) are NOT RECOMMENDED in BOSH since compression
+		 SHOULD be negotiated at the HTTP layer using the 'accept' attribute
+		 of the BOSH session creation response.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>secure</apiItemName><apiType value="Boolean"/><apiData>false</apiData><apiDesc>Determines which port is used
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 TLS compression (as defined in RFC 3920) and Stream Compression (as defined
+		 in Stream Compression [XEP-0138]) are NOT RECOMMENDED in BOSH since compression
+		 SHOULD be negotiated at the HTTP layer using the 'accept' attribute
+		 of the BOSH session creation response.
+		 		 <p>TLS compression and Stream Compression SHOULD NOT be used at
+		 the same time as HTTP content encoding.</p>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.core:XMPPBOSHConnection:connect"><apiName>connect</apiName><shortdesc>
+		 The first request from the client to the connection manager requests a new session.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>streamType</apiItemName><apiType value="uint"/><apiData>0</apiData><apiDesc>Not used
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 The first request from the client to the connection manager requests a new session.
+		 		 <p>The <b>body</b> element of the first request SHOULD possess
+		 the following attributes (they SHOULD NOT be included in any other requests
+		 except as specified under Adding Streams To A Session):</p>
+		 		 <ul>
+		 <li>'to' -- This attribute specifies the target domain of the first stream.</li>
+		 <li>'xml:lang' -- This attribute (as defined in Section 2.12 of XML 1.0 [17])
+		   specifies the default language of any human-readable XML character data
+		   sent or received during the session.</li>
+		 <li>'ver' -- This attribute specifies the highest version of the BOSH protocol
+		   that the client supports. The numbering scheme is "major.minor" (where
+		   the minor number MAY be incremented higher than a single digit, so it
+		   MUST be treated as a separate integer). Note: The 'ver' attribute should
+		   not be confused with the version of any protocol being transported.</li>
+		 <li>'wait' -- This attribute specifies the longest time (in seconds) that
+		   the connection manager is allowed to wait before responding to any request
+		   during the session. This enables the client to limit the delay before it
+		   discovers any network failure, and to prevent its HTTP/TCP connection
+		   from expiring due to inactivity.</li>
+		 <li>'hold' -- This attribute specifies the maximum number of requests the
+		   connection manager is allowed to keep waiting at any one time during the
+		   session. If the client is not able to use HTTP Pipelining then this SHOULD
+		   be set to "1".</li>
+		 </ul>
+		 		 <p>Note: Clients that only support Polling Sessions MAY prevent the connection
+		 manager from waiting by setting 'wait' or 'hold' to "0". However, polling is
+		 NOT RECOMMENDED since the associated increase in bandwidth consumption and
+		 the decrease in responsiveness are both typically one or two orders of
+		 magnitude!</p>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://xmpp.org/extensions/xep-0206.html#initiate"><linktext>http://xmpp.org/extensions/xep-0206.html#initiate</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPBOSHConnection:disconnect"><apiName>disconnect</apiName><shortdesc>
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 </apiDesc></apiOperationDetail><related-links><link href="http://xmpp.org/extensions/xep-0124.html#terminate"><linktext>http://xmpp.org/extensions/xep-0124.html#terminate</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPBOSHConnection:protected:handleNodeType"><apiName>handleNodeType</apiName><shortdesc>
+		 TODO: Is this somthing that could be safely removed?
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>node</apiItemName><apiType value="XML"/></apiParam></apiOperationDef><apiDesc>
+		 TODO: Is this somthing that could be safely removed?
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPBOSHConnection:pauseSession"><apiName>pauseSession</apiName><shortdesc>
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>true if pause request is sent
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>seconds</apiItemName><apiType value="uint"/></apiParam></apiOperationDef><apiDesc>
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPBOSHConnection:processConnectionResponse"><apiName>processConnectionResponse</apiName><shortdesc>
+		 Session Creation Response
+		 		 After receiving a new session request, the connection manager MUST generate
+		 an opaque, unpredictable session identifier (or SID).</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>responseBody</apiItemName><apiType value="XML"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Session Creation Response
+		 		 <p>After receiving a new session request, the connection manager MUST generate
+		 an opaque, unpredictable session identifier (or SID). The SID MUST be unique
+		 within the context of the connection manager application. The <b>body</b>
+		 element of the connection manager's response to the client's session creation
+		 request MUST possess the following attributes (they SHOULD NOT be included in
+		 any other responses):</p>
+		 		 <ul>
+		 <li>'sid' -- This attribute specifies the SID</li>
+		 <li>'wait' -- This is the longest time (in seconds) that the connection manager
+		   will wait before responding to any request during the session. The time MUST be
+		   less than or equal to the value specified in the session request.</li>
+		 </ul>
+		 		 <p>The <b>body</b> element SHOULD also include the following attributes
+		 (they SHOULD NOT be included in any other responses):</p>
+		 		 <ul>
+		 <li>'ver' -- This attribute specifies the highest version of the BOSH protocol
+		   that the connection manager supports, or the version specified by the client in
+		   its request, whichever is lower.</li>
+		 <li>'polling' -- This attribute specifies the shortest allowable polling
+		   interval (in seconds). This enables the client to not send empty request
+		   elements more often than desired (see Polling Sessions and Overactivity).</li>
+		 <li>'inactivity' -- This attribute specifies the longest allowable inactivity
+		   period (in seconds). This enables the client to ensure that the periods with
+		   no requests pending are never too long (see Polling Sessions and Inactivity).</li>
+		 <li>'requests' -- This attribute enables the connection manager to limit the
+		   number of simultaneous requests the client makes (see Overactivity and
+		   Polling Sessions). The RECOMMENDED values are either "2" or one more than
+		   the value of the 'hold' attribute specified in the session request.</li>
+		 <li>'hold' -- This attribute informs the client about the maximum number
+		   of requests the connection manager will keep waiting at any one time during
+		   the session. This value MUST NOT be greater than the value specified by the
+		   client in the session request.</li>
+		 <li>'to' -- This attribute communicates the identity of the backend server
+		   to which the client is attempting to connect.</li>
+		 </ul>
+		 		 <p>The connection manager MAY include an 'accept' attribute in the session
+		 creation response element, to specify a space-separated list of the content
+		 encodings it can decompress. After receiving a session creation response
+		 with an 'accept' attribute, clients MAY include an HTTP Content-Encoding
+		 header in subsequent requests (indicating one of the encodings specified
+		 in the 'accept' attribute) and compress the bodies of the requests
+		 accordingly.</p>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://xmpp.org/extensions/xep-0124.html#session-response"><linktext>http://xmpp.org/extensions/xep-0124.html#session-response</linktext></link><link href="http://xmpp.org/extensions/xep-0206.html#create"><linktext>http://xmpp.org/extensions/xep-0206.html#create</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPBOSHConnection:protected:restartStream"><apiName>restartStream</apiName><shortdesc>
+		 Upon receiving the success element, the client
+		 MUST then ask the connection manager to restart the stream by
+		 sending a "restart request".</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Upon receiving the <b>success</b> element, the client
+		 MUST then ask the connection manager to restart the stream by
+		 sending a "restart request".
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPBOSHConnection:protected:sendDataToServer"><apiName>sendDataToServer</apiName><shortdesc>
+		 Connection to the server in BOSH is a simple URLRequest.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>data</apiItemName><apiType value="flash.utils:ByteArray"/><apiDesc>ByteArray that might be compressed if enabled
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Connection to the server in BOSH is a simple URLRequest.
+		 		 <p>All information is encoded in the body of standard HTTP POST
+		 requests and responses. Each HTTP body contains a single
+		 <b>body</b> wrapper which encapsulates the XML elements
+		 being transferred.</p>
+		 		 <p>BOSH requires all incoming and outgoing data to be wrapped in
+		 <codeph>body</codeph> element. That should be taken care of before possible
+		 Stream Compression.</p>
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://xmpp.org/extensions/xep-0124.html#overview"><linktext>http://xmpp.org/extensions/xep-0124.html#overview</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPBOSHConnection:sendKeepAlive"><apiName>sendKeepAlive</apiName><shortdesc>
+		 Does nothing, BOSH uses polling instead.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Does nothing, BOSH uses polling instead.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPBOSHConnection:protected:sendXML"><apiName>sendXML</apiName><shortdesc>
+		 Pass through to sendRequests method for having the
+		 body wrapper around the given data.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>data</apiItemName><apiType value="String"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Pass through to <codeph>sendRequests</codeph> method for having the
+		 <codeph>body</codeph> wrapper around the given data.
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.core:XMPPBOSHConnection:BOSH_NS"><apiName>BOSH_NS</apiName><shortdesc>
+		 Namespace used by BOSH body wrapper
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>http://jabber.org/protocol/httpbind</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 Namespace used by BOSH body wrapper
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPBOSHConnection:BOSH_VERSION"><apiName>BOSH_VERSION</apiName><shortdesc>
+		 Current version of the BOSH defined in the XEP and the
+		 version which this class implements.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>1.6</apiData><apiType value="String"/><apiDefaultValue>1.6
+		 </apiDefaultValue></apiValueDef><apiDesc>
+		 Current version of the BOSH defined in the XEP and the
+		 version which this class implements.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPBOSHConnection:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc>
+		 BOSH body wrapper element name
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>body</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 BOSH body wrapper element name
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPBOSHConnection:HTTPS_PORT"><apiName>HTTPS_PORT</apiName><shortdesc>
+		 The default secure port as per XMPP specification.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>7443</apiData><apiType value="uint"/><apiDefaultValue>7443
+		 </apiDefaultValue></apiValueDef><apiDesc>
+		 The default secure port as per XMPP specification.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPBOSHConnection:HTTP_PORT"><apiName>HTTP_PORT</apiName><shortdesc>
+		 The default port as per XMPP specification.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>7070</apiData><apiType value="uint"/><apiDefaultValue>7070
+		 </apiDefaultValue></apiValueDef><apiDesc>
+		 The default port as per XMPP specification.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPBOSHConnection:boshPath:get"><apiName>boshPath</apiName><shortdesc>
+		 Local part of the address in which the server responds.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/><apiDefaultValue>http-bind/
+		 </apiDefaultValue></apiValueDef><apiDesc>
+		 Local part of the address in which the server responds.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPBOSHConnection:hold:get"><apiName>hold</apiName><shortdesc>
+		 This attribute specifies the maximum number of requests the connection
+		 manager is allowed to keep waiting at any one time during the session.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 This attribute specifies the maximum number of requests the connection
+		 manager is allowed to keep waiting at any one time during the session.
+		 If the client is not able to use HTTP Pipelining then this SHOULD be set to "1".
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPBOSHConnection:httpServer:get"><apiName>httpServer</apiName><shortdesc>
+		 Server URI
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Server URI
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPBOSHConnection:maxConcurrentRequests:get"><apiName>maxConcurrentRequests</apiName><shortdesc>
+		 Defaults to 2.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 Defaults to 2. Value retrieved from the server once stream is initiating.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPBOSHConnection:secure:get"><apiName>secure</apiName><shortdesc>
+		 HTTP bind requests type.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 HTTP bind requests type. If secure, the requests will be sent
+		 through HTTPS. If not, through HTTP.
+		 		 <p>Please note that the <codeph>port</codeph> needs to be set separately.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPBOSHConnection:wait:get"><apiName>wait</apiName><shortdesc>
+		 This attribute specifies the longest time (in seconds) that the connection
+		 manager is allowed to wait before responding to any request during the session.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 This attribute specifies the longest time (in seconds) that the connection
+		 manager is allowed to wait before responding to any request during the session.
+		 This enables the client to limit the delay before it discovers any network
+		 failure, and to prevent its HTTP/TCP connection from expiring due to inactivity.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.core:UnescapedJID"><apiName>UnescapedJID</apiName><shortdesc>
+	 This class provides access to a JID (Jabber ID) in unescaped form.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.igniterealtime.xiff.core:AbstractJID</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class provides access to a JID (Jabber ID) in unescaped form.
+	 </apiDesc></apiClassifierDetail><related-links><link href="http://tools.ietf.org/html/rfc3920#section-3"><linktext>http://tools.ietf.org/html/rfc3920#section-3</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.core:UnescapedJID:UnescapedJID"><apiName>UnescapedJID</apiName><shortdesc>
+		 Creates a new UnescapedJID object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>inJID</apiItemName><apiType value="String"/><apiDesc>The JID in String form.
+		 </apiDesc></apiParam><apiParam><apiItemName>validate</apiItemName><apiType value="Boolean"/><apiData>false</apiData><apiDesc>Will validate the JID string if true. Invalid
+		 JIDs will throw an error.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Creates a new UnescapedJID object.
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.core:UnescapedJID:equals"><apiName>equals</apiName><shortdesc>
+		 Determines if two unescaped JIDs are equivalent.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>True if the JIDs are equivalent.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>testJID</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiOperationClassifier><apiDesc>The JID with which to test equivalency.
+		 		 </apiDesc></apiParam><apiParam><apiItemName>shouldTestBareJID</apiItemName><apiType value="Boolean"/></apiParam></apiOperationDef><apiDesc>
+		 Determines if two unescaped JIDs are equivalent.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.core:UnescapedJID:escaped:get"><apiName>escaped</apiName><shortdesc>
+		 The unescaped JID in escaped form.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>org.igniterealtime.xiff.core:EscapedJID</apiValueClassifier></apiValueDef><apiDesc>
+		 The unescaped JID in escaped form.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.core:EscapedJID"><apiName>EscapedJID</apiName><shortdesc>
+	 This class provides access to a JID (Jabber ID) in escaped form.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>org.igniterealtime.xiff.core:AbstractJID</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class provides access to a JID (Jabber ID) in escaped form.
+	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0106.html"><linktext>http://xmpp.org/extensions/xep-0106.html</linktext></link><link href="http://tools.ietf.org/html/rfc3920#section-3"><linktext>http://tools.ietf.org/html/rfc3920#section-3</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.core:EscapedJID:EscapedJID"><apiName>EscapedJID</apiName><shortdesc>
+		 Creates a new EscapedJID object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>inJID</apiItemName><apiType value="String"/><apiDesc>The JID in String form.
+		 </apiDesc></apiParam><apiParam><apiItemName>validate</apiItemName><apiType value="Boolean"/><apiData>false</apiData><apiDesc>Will validate the JID string if true. Invalid
+		 JIDs will throw an error.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Creates a new EscapedJID object.
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.core:EscapedJID:equals"><apiName>equals</apiName><shortdesc>
+		 Determines if two escaped JIDs are equivalent.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>True if the JIDs are equivalent.
+		 </apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>testJID</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier><apiDesc>The JID with which to test equivalency.
+		 		 </apiDesc></apiParam><apiParam><apiItemName>shouldTestBareJID</apiItemName><apiType value="Boolean"/></apiParam></apiOperationDef><apiDesc>
+		 Determines if two escaped JIDs are equivalent.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.core:EscapedJID:unescaped:get"><apiName>unescaped</apiName><shortdesc>
+		 The escaped JID in unescaped form.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiValueClassifier></apiValueDef><apiDesc>
+		 The escaped JID in unescaped form.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.core:XMPPTLSConnection"><apiName>XMPPTLSConnection</apiName><shortdesc>
+	 This class is used to connect to and manage data coming from an XMPP server that supports TLS.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.core:IXMPPConnection</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.core:XMPPConnection</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class is used to connect to and manage data coming from an XMPP server that supports TLS.
+	 Use one instance of this class per connection.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://tools.ietf.org/html/rfc3920#section-5"><linktext>http://tools.ietf.org/html/rfc3920#section-5</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.core:XMPPTLSConnection:XMPPTLSConnection"><apiName>XMPPTLSConnection</apiName><shortdesc>
+		 Constructor.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/></apiConstructorDef><apiDesc>
+		 Constructor.
+		 <p>The connection socket created in XMPPConnection is used until the server responds as "proceed".</p>
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.core:XMPPTLSConnection:protected:configureTLSSocket"><apiName>configureTLSSocket</apiName><shortdesc>
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 </apiDesc></apiOperationDetail><related-links><link href="" invalidHref="com.hurlant.crypto.tls.TLSSocket.xml"><linktext>com.hurlant.crypto.tls.TLSSocket</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPTLSConnection:connect"><apiName>connect</apiName><shortdesc>
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>streamType</apiItemName><apiType value="uint"/><apiData>0</apiData></apiParam></apiOperationDef><apiDesc>
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPTLSConnection:disconnect"><apiName>disconnect</apiName><shortdesc>
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPTLSConnection:protected:handleNodeType"><apiName>handleNodeType</apiName><shortdesc>
+		 
+		 Calls a appropriate parser base on the nodeName.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>node</apiItemName><apiType value="XML"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 
+		 Calls a appropriate parser base on the nodeName.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPTLSConnection:protected:handleStreamTLS"><apiName>handleStreamTLS</apiName><shortdesc>
+		 In case the user or the server requires the use of TLS, this method
+		 will initiate the handshake.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiIsOverride/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>node</apiItemName><apiType value="XML"/></apiParam></apiOperationDef><apiDesc>
+		 In case the user or the server requires the use of TLS, this method
+		 will initiate the handshake.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:XMPPTLSConnection:protected:removeTLSSocketEventListeners"><apiName>removeTLSSocketEventListeners</apiName><shortdesc>
+		 Remove those listeners that the configureTLSSocket method added.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="protected"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Remove those listeners that the <codeph>configureTLSSocket</codeph> method added.
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.core:XMPPTLSConnection:config:get"><apiName>config</apiName><shortdesc>
+		 TLS configuration.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="com.hurlant.crypto.tls:TLSConfig"/></apiValueDef><apiDesc>
+		 TLS configuration.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:XMPPTLSConnection:tls:get"><apiName>tls</apiName><shortdesc>
+		 Specifies whether to enable TLS.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/><apiDefaultValue>false
+		 </apiDefaultValue></apiValueDef><apiDesc>
+		 Specifies whether to enable TLS.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.core:IListener"><apiName>IListener</apiName><shortdesc/><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseInterface>flash.events:IEventDispatcher</apiBaseInterface><apiBaseClassifier/></apiClassifierDef></apiClassifierDetail><apiValue id="org.igniterealtime.xiff.core:IListener:org.igniterealtime.xiff.core:IListener:connection:get"><apiName>connection</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiValueClassifier></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.core:InBandRegistrator"><apiName>InBandRegistrator</apiName><shortdesc>
+	 Manager for XEP-0077: In-Band Registration
+	 	 Once the connection has been established and the server has provided feature
+	 information, check XMPPConnection.registrationSupported before trying to use
+	 the registration.
+	 	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>flash.events:EventDispatcher</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Manager for XEP-0077: In-Band Registration
+	 	 <p>Once the connection has been established and the server has provided feature
+	 information, check <codeph>XMPPConnection.registrationSupported</codeph> before trying to use
+	 the registration.</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0077.html"><linktext>http://xmpp.org/extensions/xep-0077.html</linktext></link></related-links><adobeApiEvent id="org.igniterealtime.xiff.core:InBandRegistrator_org.igniterealtime.xiff.events.RegistrationFieldsEvent.REG_FIELDS_registrationFields"><apiName>registrationFields</apiName><shortdesc>
+	 Dispatched on when new user account registration is successful.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RegistrationFieldsEvent.REG_FIELDS</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RegistrationFieldsEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched on when new user account registration is successful.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.core:InBandRegistrator_org.igniterealtime.xiff.events.RegistrationSuccessEvent.REGISTRATION_SUCCESS_registrationSuccess"><apiName>registrationSuccess</apiName><shortdesc>
+	 Dispatched on when new user account registration is successful.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.RegistrationSuccessEvent.REGISTRATION_SUCCESS</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.RegistrationSuccessEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched on when new user account registration is successful.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><adobeApiEvent id="org.igniterealtime.xiff.core:InBandRegistrator_org.igniterealtime.xiff.events.ChangePasswordSuccessEvent.PASSWORD_SUCCESS_changePasswordSuccess"><apiName>changePasswordSuccess</apiName><shortdesc>
+	 Dispatched when a password change is successful.</shortdesc><prolog/><adobeApiEventDetail><adobeApiEventDef><apiEventType>org.igniterealtime.xiff.events.ChangePasswordSuccessEvent.PASSWORD_SUCCESS</apiEventType><adobeApiEventClassifier>org.igniterealtime.xiff.events.ChangePasswordSuccessEvent</adobeApiEventClassifier><apiGeneratedEvent/></adobeApiEventDef><apiDesc>
+	 Dispatched when a password change is successful.
+	 	 </apiDesc></adobeApiEventDetail></adobeApiEvent><apiConstructor id="org.igniterealtime.xiff.core:InBandRegistrator:InBandRegistrator"><apiName>InBandRegistrator</apiName><shortdesc>
+		 Manage client registration and password changing.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>aConnection</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiOperationClassifier><apiData>null</apiData><apiDesc>A reference to the <codeph>XMPPConnection</codeph> instance to use.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Manage client registration and password changing.
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.core:InBandRegistrator:changePassword"><apiName>changePassword</apiName><shortdesc>
+		 Changes the user's account password on the server.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>newPassword</apiItemName><apiType value="String"/><apiDesc>The new password
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Changes the user's account password on the server. If the password change is successful,
+		 the class will broadcast a <codeph>ChangePasswordSuccessEvent.PASSWORD_SUCCESS</codeph> event.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:InBandRegistrator:getRegistrationFields"><apiName>getRegistrationFields</apiName><shortdesc>
+		 Issues a request for the information that must be submitted for registration with the server.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef><apiDesc>
+		 Issues a request for the information that must be submitted for registration with the server.
+		 When the data returns, a <codeph>RegistrationFieldsEvent.REG_FIELDS</codeph> event is dispatched
+		 containing the requested data.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:InBandRegistrator:sendRegistrationFields"><apiName>sendRegistrationFields</apiName><shortdesc>
+		 Registers a new account with the server, sending the registration data as specified in the fieldMap</shortdesc><prolog><asCustoms><paramter.>		 </paramter.></asCustoms></prolog><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>fieldMap</apiItemName><apiType value="Object"/><apiDesc>An object map containing the data to use for registration. The map should be composed of
+		 			attribute:value pairs for each registration data item.
+		 </apiDesc></apiParam><apiParam><apiItemName>key</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>This element is obsolete, but is included here for historical completeness.
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Registers a new account with the server, sending the registration data as specified in the fieldMap</apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.core:InBandRegistrator:connection:get"><apiName>connection</apiName><shortdesc>
+		 The instance of the XMPPConnection class to use for sending and
+		 receiving data.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiValueClassifier></apiValueDef><apiDesc>
+		 The instance of the XMPPConnection class to use for sending and
+		 receiving data.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.core:AbstractJID"><apiName>AbstractJID</apiName><shortdesc>
+	 This is a base class for the JID (Jabber Identifier) classes.</shortdesc><prolog><asMetadata/><asCustoms><exampleText>room&#64;service/nick
+	 </exampleText></asCustoms></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This is a base class for the JID (Jabber Identifier) classes.
+	 	 <p>This class should not be instantiated directly, but should be subclassed
+	 instead.</p>
+	 	 <p>It provides functionality to determine if a JID is valid, as well as extract the
+	 node, domain and resource from the JID.</p>
+	 	 <p>The structure of JID is defined in RFC3920:</p>
+	 <ul>
+	 <li><codeph>jid = [ node "@" ] domain [ "/" resource ]</codeph></li>
+	 <li><codeph>domain = fqdn / address-literal</codeph></li>
+	 <li><codeph>fqdn = (sub-domain 1"." sub-domain))</codeph></li>
+	 <li><codeph>sub-domain = (internationalized domain label)</codeph></li>
+	 <li><codeph>address-literal = IPv4address / IPv6address</codeph></li>
+	 </ul>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://tools.ietf.org/html/rfc3920#section-3"><linktext>http://tools.ietf.org/html/rfc3920#section-3</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.core:AbstractJID:AbstractJID"><apiName>AbstractJID</apiName><shortdesc>
+		 Creates a new AbstractJID object.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>inJID</apiItemName><apiType value="String"/><apiDesc>The JID as a String.
+		 </apiDesc></apiParam><apiParam><apiItemName>validate</apiItemName><apiType value="Boolean"/><apiData>false</apiData><apiDesc>True if the JID should be validated.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 Creates a new AbstractJID object. Used via EscapedJID or UnescapedJID.
+		 		 <p>Each allowable portion of a JID (node identifier, domain identifier, and resource identifier)
+		 MUST NOT be more than 1023 bytes in length, resulting in a maximum total size
+		 (including the @ and / separators) of 3071 bytes.</p>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.core:AbstractJID:escapedNode"><apiName>escapedNode</apiName><shortdesc>
+		 Provides functionality to convert a JID to an escaped format.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>The escaped string.
+		 		 TODO: simplify with native methods
+		 </apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>n</apiItemName><apiType value="String"/><apiDesc>The string to escape.
+		 		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Provides functionality to convert a JID to an escaped format.
+		 		 </apiDesc></apiOperationDetail><related-links><link href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/package.html#encodeURIComponent%28%29"><linktext>http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/package.html#encodeURIComponent%28%29</linktext></link></related-links></apiOperation><apiOperation id="org.igniterealtime.xiff.core:AbstractJID:toString"><apiName>toString</apiName><shortdesc>
+		 Converts JID represented by this class to a String.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>The JID as a String.
+		 </apiDesc><apiType value="String"/></apiReturn></apiOperationDef><apiDesc>
+		 Converts JID represented by this class to a String.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:AbstractJID:unescapedNode"><apiName>unescapedNode</apiName><shortdesc>
+		 Provides functionality to return an escaped JID into a normal String.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiStatic/><apiReturn><apiDesc>The unescaped string.
+		 </apiDesc><apiType value="String"/></apiReturn><apiParam><apiItemName>n</apiItemName><apiType value="String"/><apiDesc>The string to unescape.
+		 		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Provides functionality to return an escaped JID into a normal String.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.core:AbstractJID:protected:_domain"><apiName>_domain</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:AbstractJID:protected:_node"><apiName>_node</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:AbstractJID:protected:_resource"><apiName>_resource</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiDynamic/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:AbstractJID:protected:jidNodeValidator"><apiName>jidNodeValidator</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="protected"/><apiStatic/><apiData>unknown</apiData><apiType value="RegExp"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:AbstractJID:bareJID:get"><apiName>bareJID</apiName><shortdesc>
+		 The JID without the resource.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The JID without the resource.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:AbstractJID:domain:get"><apiName>domain</apiName><shortdesc>
+		 The domain portion of the JID.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The domain portion of the JID.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:AbstractJID:node:get"><apiName>node</apiName><shortdesc>
+		 The node portion of the JID.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The node portion of the JID.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:AbstractJID:resource:get"><apiName>resource</apiName><shortdesc>
+		 The resource portion of the JID.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The resource portion of the JID.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.core:IXMPPConnection"><apiName>IXMPPConnection</apiName><shortdesc>
+	 Interface for the XMPP Connection classes
+	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseInterface>flash.events:IEventDispatcher</apiBaseInterface><apiBaseClassifier/></apiClassifierDef><apiDesc>
+	 Interface for the XMPP Connection classes
+	 </apiDesc></apiClassifierDetail><apiOperation id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:connect"><apiName>connect</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>streamType</apiItemName><apiType value="uint"/><apiData>0</apiData></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:disableExtensions"><apiName>disableExtensions</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>exts</apiItemName><apiType value="restParam"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:disconnect"><apiName>disconnect</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:enableExtensions"><apiName>enableExtensions</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>exts</apiItemName><apiType value="restParam"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:sendKeepAlive"><apiName>sendKeepAlive</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:send"><apiName>send</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>data</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.data:IXMPPStanza</apiOperationClassifier></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:active:get"><apiName>active</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:compress:get"><apiName>compress</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:domain:get"><apiName>domain</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:incomingBytes:get"><apiName>incomingBytes</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="uint"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:jid:get"><apiName>jid</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>org.igniterealtime.xiff.core:UnescapedJID</apiValueClassifier></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:loggedIn:get"><apiName>loggedIn</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:outgoingBytes:get"><apiName>outgoingBytes</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="uint"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:password:get"><apiName>password</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:port:get"><apiName>port</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:queuePresences:get"><apiName>queuePresences</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:resource:get"><apiName>resource</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:server:get"><apiName>server</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:useAnonymousLogin:get"><apiName>useAnonymousLogin</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.core:IXMPPConnection:org.igniterealtime.xiff.core:IXMPPConnection:username:get"><apiName>username</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.core:IBrowser"><apiName>IBrowser</apiName><shortdesc/><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseClassifier/></apiClassifierDef></apiClassifierDetail><apiOperation id="org.igniterealtime.xiff.core:IBrowser:org.igniterealtime.xiff.core:IBrowser:browseItem"><apiName>browseItem</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiOperationClassifier>org.igniterealtime.xiff.data:IIQ</apiOperationClassifier></apiReturn><apiParam><apiItemName>id</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier></apiParam><apiParam><apiItemName>callback</apiItemName><apiType value="Function"/></apiParam><apiParam><apiItemName>errorCallback</apiItemName><apiType value="Function"/><apiData>null</apiData></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:IBrowser:org.igniterealtime.xiff.core:IBrowser:getNodeInfo"><apiName>getNodeInfo</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiOperationClassifier>org.igniterealtime.xiff.data:IIQ</apiOperationClassifier></apiReturn><apiParam><apiItemName>service</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier></apiParam><apiParam><apiItemName>node</apiItemName><apiType value="String"/></apiParam><apiParam><apiItemName>callback</apiItemName><apiType value="Function"/></apiParam><apiParam><apiItemName>errorCallback</apiItemName><apiType value="Function"/><apiData>null</apiData></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:IBrowser:org.igniterealtime.xiff.core:IBrowser:getNodeItems"><apiName>getNodeItems</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiOperationClassifier>org.igniterealtime.xiff.data:IIQ</apiOperationClassifier></apiReturn><apiParam><apiItemName>service</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier></apiParam><apiParam><apiItemName>node</apiItemName><apiType value="String"/></apiParam><apiParam><apiItemName>callback</apiItemName><apiType value="Function"/></apiParam><apiParam><apiItemName>errorCallback</apiItemName><apiType value="Function"/><apiData>null</apiData></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:IBrowser:org.igniterealtime.xiff.core:IBrowser:getServiceInfo"><apiName>getServiceInfo</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiOperationClassifier>org.igniterealtime.xiff.data:IIQ</apiOperationClassifier></apiReturn><apiParam><apiItemName>server</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier></apiParam><apiParam><apiItemName>callback</apiItemName><apiType value="Function"/></apiParam><apiParam><apiItemName>errorCallback</apiItemName><apiType value="Function"/><apiData>null</apiData></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.core:IBrowser:org.igniterealtime.xiff.core:IBrowser:getServiceItems"><apiName>getServiceItems</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiOperationClassifier>org.igniterealtime.xiff.data:IIQ</apiOperationClassifier></apiReturn><apiParam><apiItemName>server</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier></apiParam><apiParam><apiItemName>callback</apiItemName><apiType value="Function"/></apiParam><apiParam><apiItemName>errorCallback</apiItemName><apiType value="Function"/><apiData>null</apiData></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.core:IBrowser:org.igniterealtime.xiff.core:IBrowser:connection:get"><apiName>connection</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:IXMPPConnection</apiValueClassifier></apiValueDef></apiValueDetail></apiValue></apiClassifier></apiPackage>

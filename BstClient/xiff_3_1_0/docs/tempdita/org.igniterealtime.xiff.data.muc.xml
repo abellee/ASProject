@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.data.muc"><apiName>org.igniterealtime.xiff.data.muc</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.data.muc:MUCItem"><apiName>MUCItem</apiName><shortdesc>
+	 This class is used by the MUCExtension for internal representation of
+	 information pertaining to occupants in a multi-user conference room.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class is used by the MUCExtension for internal representation of
+	 information pertaining to occupants in a multi-user conference room.
+	 	 <p>The information given inside Precense of a given room user</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0045.html#associations"><linktext>http://xmpp.org/extensions/xep-0045.html#associations</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.muc:MUCItem:MUCItem"><apiName>MUCItem</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiValue id="org.igniterealtime.xiff.data.muc:MUCItem:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>item</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCItem:actorNick:get"><apiName>actorNick</apiName><shortdesc>
+		 Optional.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Optional. Nickname of the room user or server that made changes to the given item.
+		 Most likely when kicking someone from a room.
+		 		 <p>This property was added to Version 1.25 (2012-02-08) of the specification.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0045.html#kick"><linktext>http://xmpp.org/extensions/xep-0045.html#kick</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCItem:actor:get"><apiName>actor</apiName><shortdesc>
+		 Optional.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:EscapedJID</apiValueClassifier></apiValueDef><apiDesc>
+		 Optional. JID of the room user or server that made changes to the given item.
+		 Most likely when kicking someone from a room.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0045.html#kick"><linktext>http://xmpp.org/extensions/xep-0045.html#kick</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCItem:affiliation:get"><apiName>affiliation</apiName><shortdesc>
+		 Can be one of the following: owner, admin, member, outcast, or none.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Can be one of the following: owner, admin, member, outcast, or none.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCItem:jid:get"><apiName>jid</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiValueClassifier>org.igniterealtime.xiff.core:EscapedJID</apiValueClassifier></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCItem:nick:get"><apiName>nick</apiName><shortdesc>
+		 The nickname of the conference occupant.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The nickname of the conference occupant.
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCItem:reason:get"><apiName>reason</apiName><shortdesc>
+		 Rason given by the actor for the action that was made for the given item.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Rason given by the actor for the action that was made for the given item.
+		 Most likely the reson why someone was kicked out from a room.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0045.html#kick"><linktext>http://xmpp.org/extensions/xep-0045.html#kick</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCItem:role:get"><apiName>role</apiName><shortdesc>
+		 Can be one of the following: moderator, participant,
+		 visitor, or none.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Can be one of the following: moderator, participant,
+		 visitor, or none.
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.muc:MUCBaseExtension"><apiName>MUCBaseExtension</apiName><shortdesc>
+	 Implements the base functionality shared by all MUC extensions
+	 	 </shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtendable</apiBaseInterface><apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Implements the base functionality shared by all MUC extensions
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0045.html"><linktext>http://xmpp.org/extensions/xep-0045.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.muc:MUCBaseExtension:MUCBaseExtension"><apiName>MUCBaseExtension</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.muc:MUCBaseExtension:addItem"><apiName>addItem</apiName><shortdesc>
+		 Use this method to create a new item.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>The newly created MUCItem
+		 </apiDesc><apiOperationClassifier>org.igniterealtime.xiff.data.muc:MUCItem</apiOperationClassifier></apiReturn><apiParam><apiItemName>affiliation</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>A predefined string defining the affiliation the JID or nick has in relation to the room
+		 </apiDesc></apiParam><apiParam><apiItemName>role</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The role the jid or nick has in the room
+		 </apiDesc></apiParam><apiParam><apiItemName>nick</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The nickname of the new item
+		 </apiDesc></apiParam><apiParam><apiItemName>jid</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier><apiData>null</apiData><apiDesc>The jid of the new item
+		 </apiDesc></apiParam><apiParam><apiItemName>actor</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The user that is actually creating the request
+		 </apiDesc></apiParam><apiParam><apiItemName>reason</apiItemName><apiType value="String"/><apiData>null</apiData><apiDesc>The reason why the action associated with this item is being preformed
+		 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Use this method to create a new item.  Either the affiliation or role are requried.
+		 		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.muc:MUCBaseExtension:items:get"><apiName>items</apiName><shortdesc>
+		 Item interface to MUCItems if they are contained in this extension
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Array"/></apiValueDef><apiDesc>
+		 Item interface to MUCItems if they are contained in this extension
+		 		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.muc:MUCExtension"><apiName>MUCExtension</apiName><shortdesc>
+	 Implements the base MUC protocol schema from XEP-0045 for multi-user chat.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data.muc:IMUCExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Implements the base MUC protocol schema from <xref href="http://www.xmpp.org/extensions/xep-0045.html">XEP-0045</xref> for multi-user chat.
+	 	 This extension is typically used to test for the presence of MUC enabled conferencing
+	 service, or a MUC related error condition.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://www.xmpp.org/extensions/xep-0045.html"><linktext>http://www.xmpp.org/extensions/xep-0045.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.muc:MUCExtension:MUCExtension"><apiName>MUCExtension</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>(Optional) The containing XML for this extension
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.muc:MUCExtension:addChildNode"><apiName>addChildNode</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>childNode</apiItemName><apiType value="XML"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.muc:MUCExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.muc:MUCExtension:getNS"><apiName>getNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.muc:MUCExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>x</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>http://jabber.org/protocol/muc</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCExtension:history:get"><apiName>history</apiName><shortdesc>
+		 This is property allows a user to retrieve a server defined collection of previous messages.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 This is property allows a user to retrieve a server defined collection of previous messages.
+		 Set this property to "true" to retrieve a history of the dicussions.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCExtension:maxchars:get"><apiName>maxchars</apiName><shortdesc>
+		 Size based condition to evaluate by the server for the maximum
+		 characters to return during history retrieval
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="int"/></apiValueDef><apiDesc>
+		 Size based condition to evaluate by the server for the maximum
+		 characters to return during history retrieval
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCExtension:maxstanzas:get"><apiName>maxstanzas</apiName><shortdesc>
+		 Protocol based condition for the number of stanzas to return during history retrieval
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="int"/></apiValueDef><apiDesc>
+		 Protocol based condition for the number of stanzas to return during history retrieval
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCExtension:password:get"><apiName>password</apiName><shortdesc>
+		 If a room is password protected, add this extension and set the password.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 If a room is password protected, add this extension and set the password.
+		 Use <codeph>null</codeph> to remove.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCExtension:seconds:get"><apiName>seconds</apiName><shortdesc>
+		 Time based condition to retrive all messages for the last N seconds.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Number"/></apiValueDef><apiDesc>
+		 Time based condition to retrive all messages for the last N seconds.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCExtension:since:get"><apiName>since</apiName><shortdesc>
+		 Time base condition to retrieve all messages from a given time formatted in the format described in
+		 XEP-0082.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Time base condition to retrieve all messages from a given time formatted in the format described in
+		 <xref href="http://xmpp.org/extensions/xep-0082.html">XEP-0082</xref>.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0082.html"><linktext>http://xmpp.org/extensions/xep-0082.html</linktext></link></related-links></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.muc:MUC"><apiName>MUC</apiName><shortdesc>
+	 This class contains a series of static constants that are used throughout the
+	 multi-user conferencing extensions.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseClassifier>Object</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 This class contains a series of static constants that are used throughout the
+	 multi-user conferencing extensions.
+	 	 <p>The constants include the following for
+	 conference room affiliations:</p>
+	 <ul>
+	 <li>AFFILIATION_ADMIN</li>
+	 <li>AFFILIATION_MEMBER</li>
+	 <li>AFFILIATION_NONE</li>
+	 <li>AFFILIATION_OUTCAST</li>
+	 <li>AFFILIATION_OWNER</li>
+	 </ul>
+	 	 <p>And the following constants for room roles:</p>
+	 <ul>
+	 <li>ROLE_MODERATOR</li>
+	 <li>ROLE_NONE</li>
+	 <li>ROLE_PARTICIPANT</li>
+	 <li>ROLE_VISITOR</li>
+	 </ul>
+	 	 <p>Support for the owner affiliation is REQUIRED. Support for the admin, member,
+	 and outcast affiliations is RECOMMENDED. (The "None" affiliation is
+	 the absence of an affiliation.)</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://www.xmpp.org/extensions/xep-0045.html"><linktext>http://www.xmpp.org/extensions/xep-0045.html</linktext></link></related-links><apiValue id="org.igniterealtime.xiff.data.muc:MUC:AFFILIATION_ADMIN"><apiName>AFFILIATION_ADMIN</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>admin</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUC:AFFILIATION_MEMBER"><apiName>AFFILIATION_MEMBER</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>member</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUC:AFFILIATION_NONE"><apiName>AFFILIATION_NONE</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>none</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUC:AFFILIATION_OUTCAST"><apiName>AFFILIATION_OUTCAST</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>outcast</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUC:AFFILIATION_OWNER"><apiName>AFFILIATION_OWNER</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>owner</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUC:ROLE_MODERATOR"><apiName>ROLE_MODERATOR</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>moderator</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUC:ROLE_NONE"><apiName>ROLE_NONE</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>none</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUC:ROLE_PARTICIPANT"><apiName>ROLE_PARTICIPANT</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>participant</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUC:ROLE_VISITOR"><apiName>ROLE_VISITOR</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>visitor</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.muc:MUCStatus"><apiName>MUCStatus</apiName><shortdesc>
+	 XEP-0306: Extensible Status Conditions for Multi-User Chat
+	 	 Traditionally, Multi-User Chat [1] has used numerical status codes similar to
+	 those used in HTTP and SMTP.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:INodeProxy</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:XMLStanza</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0306: Extensible Status Conditions for Multi-User Chat
+	 	 <p>Traditionally, Multi-User Chat [1] has used numerical status codes similar to
+	 those used in HTTP and SMTP. Numerical codes were deprecated in the core of
+	 XMPP by RFC 3920 [2] and are no longer even defined in the core schemas provided in
+	 RFC 6120 [3] (see also Error Condition Mappings [4]). In an effort to modernize
+	 the Multi-User Chat (MUC) protocol, this document defines an extensible
+	 format for status conditions in MUC.</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0306.html"><linktext>http://xmpp.org/extensions/xep-0306.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.muc:MUCStatus:MUCStatus"><apiName>MUCStatus</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiValue id="org.igniterealtime.xiff.data.muc:MUCStatus:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>status</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCStatus:NS"><apiName>NS</apiName><shortdesc>
+		 Note that this namespace is for the message element
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>urn:xmpp:muc:conditions:1</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 Note that this namespace is for the message element
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCStatus:code:get"><apiName>code</apiName><shortdesc>
+		 Property used to add or retrieve a status code describing the condition that occurs.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="int"/></apiValueDef><apiDesc>
+		 Property used to add or retrieve a status code describing the condition that occurs.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0306.html#mapping"><linktext>http://xmpp.org/extensions/xep-0306.html#mapping</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCStatus:message:get"><apiName>message</apiName><shortdesc>
+		 Property that contains some text with a description of a condition.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Property that contains some text with a description of a condition.
+		 		 <p> One of the following values:</p>
+		 		 <ul>
+		 <li>affiliation-changed</li>
+		 <li>banned</li>
+		 <li>configuration-changed</li>
+		 <li>fully-anonymous</li>
+		 <li>kicked</li>
+		 <li>logging-disabled</li>
+		 <li>logging-enabled</li>
+		 <li>new-nick</li>
+		 <li>nick-assigned</li>
+		 <li>non-anonymous</li>
+		 <li>realjid-public</li>
+		 <li>removed-affiliation</li>
+		 <li>removed-membership</li>
+		 <li>removed-shutdown</li>
+		 <li>room-created</li>
+		 <li>self-presence</li>
+		 <li>semi-anonymous</li>
+		 <li>unavailable-not-shown</li>
+		 <li>unavailable-shown</li>
+		 </ul>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0306.html#mapping"><linktext>http://xmpp.org/extensions/xep-0306.html#mapping</linktext></link></related-links></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.muc:MUCAdminExtension"><apiName>MUCAdminExtension</apiName><shortdesc>
+	 Implements the administration command data model in XEP-0045 for multi-user chat.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data.muc:MUCBaseExtension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Implements the administration command data model in <xref href="http://xmpp.org/extensions/xep-0045.html">XEP-0045</xref> for multi-user chat.
+	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0045.html"><linktext>http://xmpp.org/extensions/xep-0045.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.muc:MUCAdminExtension:MUCAdminExtension"><apiName>MUCAdminExtension</apiName><shortdesc/><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData></apiParam></apiConstructorDef></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.muc:MUCAdminExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.muc:MUCAdminExtension:getNS"><apiName>getNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.muc:MUCAdminExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>query</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCAdminExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>http://jabber.org/protocol/muc#admin</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.muc:MUCUserExtension"><apiName>MUCUserExtension</apiName><shortdesc>
+	 Implements the base MUC user protocol schema from
+	 XEP-0045 for multi-user chat.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data.muc:MUCBaseExtension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Implements the base MUC user protocol schema from
+	 <xref href="http://www.xmpp.org/extensions/xep-0045.html">XEP-0045</xref> for multi-user chat.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0045.html"><linktext>http://xmpp.org/extensions/xep-0045.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.muc:MUCUserExtension:MUCUserExtension"><apiName>MUCUserExtension</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>(Optional) The containing XML for this extension
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.muc:MUCUserExtension:decline"><apiName>decline</apiName><shortdesc>
+		 Use this extension to decline an invitation
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>to</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier></apiParam><apiParam><apiItemName>from</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier></apiParam><apiParam><apiItemName>reason</apiItemName><apiType value="String"/></apiParam></apiOperationDef><apiDesc>
+		 Use this extension to decline an invitation
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.muc:MUCUserExtension:destroy"><apiName>destroy</apiName><shortdesc>
+		 Use this extension to destroy a room
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>room</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier></apiParam><apiParam><apiItemName>reason</apiItemName><apiType value="String"/></apiParam></apiOperationDef><apiDesc>
+		 Use this extension to destroy a room
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.muc:MUCUserExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.muc:MUCUserExtension:getNS"><apiName>getNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.muc:MUCUserExtension:hasStatusCode"><apiName>hasStatusCode</apiName><shortdesc>
+		 Does the given status code exist in the list of statuses saved in this extension.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc></apiDesc><apiType value="Boolean"/></apiReturn><apiParam><apiItemName>code</apiItemName><apiType value="Number"/><apiDesc>	 </apiDesc></apiParam></apiOperationDef><apiDesc>
+		 Does the given status code exist in the list of statuses saved in this extension.
+		 </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.muc:MUCUserExtension:invite"><apiName>invite</apiName><shortdesc>
+		 Use this extension to invite another user
+		 </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>to</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier></apiParam><apiParam><apiItemName>from</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier></apiParam><apiParam><apiItemName>reason</apiItemName><apiType value="String"/></apiParam></apiOperationDef><apiDesc>
+		 Use this extension to invite another user
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.muc:MUCUserExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>x</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCUserExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>http://jabber.org/protocol/muc#user</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCUserExtension:TYPE_DECLINE"><apiName>TYPE_DECLINE</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>decline</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCUserExtension:TYPE_DESTROY"><apiName>TYPE_DESTROY</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>destroy</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCUserExtension:TYPE_INVITE"><apiName>TYPE_INVITE</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>invite</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCUserExtension:TYPE_OTHER"><apiName>TYPE_OTHER</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>other</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCUserExtension:from:get"><apiName>from</apiName><shortdesc>
+		 The from property for invite and decline action types
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>org.igniterealtime.xiff.core:EscapedJID</apiValueClassifier></apiValueDef><apiDesc>
+		 The from property for invite and decline action types
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCUserExtension:jid:get"><apiName>jid</apiName><shortdesc>
+		 The jid property for destroy the action type
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>org.igniterealtime.xiff.core:EscapedJID</apiValueClassifier></apiValueDef><apiDesc>
+		 The jid property for destroy the action type
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCUserExtension:password:get"><apiName>password</apiName><shortdesc>
+		 Property to use if the concerned room is password protected
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Property to use if the concerned room is password protected
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCUserExtension:reason:get"><apiName>reason</apiName><shortdesc>
+		 The reason for the invite/decline/destroy
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The reason for the invite/decline/destroy
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCUserExtension:statuses:get"><apiName>statuses</apiName><shortdesc>
+		 List of MUCStatus.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Array"/></apiValueDef><apiDesc>
+		 List of MUCStatus.
+		 		 </apiDesc></apiValueDetail><related-links><link href="org.igniterealtime.xiff.data.muc.xml#MUCStatus"><linktext>org.igniterealtime.xiff.data.muc.MUCStatus</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCUserExtension:to:get"><apiName>to</apiName><shortdesc>
+		 The to property for invite and decline action types
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiValueClassifier>org.igniterealtime.xiff.core:EscapedJID</apiValueClassifier></apiValueDef><apiDesc>
+		 The to property for invite and decline action types
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCUserExtension:type:get"><apiName>type</apiName><shortdesc>
+		 The type of user extension this is
+		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="read"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The type of user extension this is
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.muc:MUCOwnerExtension"><apiName>MUCOwnerExtension</apiName><shortdesc>
+	 Implements the administration command data model in XEP-0045 for multi-user chat.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data.muc:MUCBaseExtension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 Implements the administration command data model in <xref href="http://xmpp.org/extensions/xep-0045.html">XEP-0045</xref> for multi-user chat.
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0045.html"><linktext>http://xmpp.org/extensions/xep-0045.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.muc:MUCOwnerExtension:MUCOwnerExtension"><apiName>MUCOwnerExtension</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>(Optional) The containing XML for this extension
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.muc:MUCOwnerExtension:destroy"><apiName>destroy</apiName><shortdesc>
+	     Replaces the destroy node with a new node and sets
+	     the reason element and jid attribute
+	     	     </shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>reason</apiItemName><apiType value="String"/><apiDesc>A string describing the reason for room destruction. Use <codeph>null</codeph> to remove.
+	     </apiDesc></apiParam><apiParam><apiItemName>alternateJID</apiItemName><apiOperationClassifier>org.igniterealtime.xiff.core:EscapedJID</apiOperationClassifier><apiData>null</apiData><apiDesc>A string containing a JID that room members can use instead of this room
+	     </apiDesc></apiParam></apiOperationDef><apiDesc>
+	     Replaces the <codeph>destroy</codeph> node with a new node and sets
+	     the <codeph>reason</codeph> element and <codeph>jid</codeph> attribute
+	     	     </apiDesc></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.muc:MUCOwnerExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.muc:MUCOwnerExtension:getNS"><apiName>getNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.muc:MUCOwnerExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>query</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:MUCOwnerExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>http://jabber.org/protocol/muc#owner</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.muc:IMUCExtension"><apiName>IMUCExtension</apiName><shortdesc/><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiInterface/><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier/></apiClassifierDef></apiClassifierDetail><apiOperation id="org.igniterealtime.xiff.data.muc:IMUCExtension:org.igniterealtime.xiff.data.muc:IMUCExtension:addChildNode"><apiName>addChildNode</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="void"/></apiReturn><apiParam><apiItemName>childNode</apiItemName><apiType value="XML"/></apiParam></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.muc:IMUCExtension:org.igniterealtime.xiff.data.muc:IMUCExtension:history:get"><apiName>history</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:IMUCExtension:org.igniterealtime.xiff.data.muc:IMUCExtension:maxchars:get"><apiName>maxchars</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="int"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:IMUCExtension:org.igniterealtime.xiff.data.muc:IMUCExtension:maxstanzas:get"><apiName>maxstanzas</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="int"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:IMUCExtension:org.igniterealtime.xiff.data.muc:IMUCExtension:password:get"><apiName>password</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:IMUCExtension:org.igniterealtime.xiff.data.muc:IMUCExtension:seconds:get"><apiName>seconds</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Number"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.muc:IMUCExtension:org.igniterealtime.xiff.data.muc:IMUCExtension:since:get"><apiName>since</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef></apiValueDetail></apiValue></apiClassifier></apiPackage>

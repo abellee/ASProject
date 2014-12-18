@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.data.register"><apiName>org.igniterealtime.xiff.data.register</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.data.register:RegisterExtension"><apiName>RegisterExtension</apiName><shortdesc>
+	 XEP-0077: In-Band Registration
+	 	 Implements jabber:iq:register namespace.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0077: In-Band Registration
+	 	 <p>Implements jabber:iq:register namespace.  Use this to create new accounts on the jabber server.
+	 Send an empty IQ.TYPE_GET packet with this extension and the return will either be a conflict,
+	 or the fields you will need to fill out.</p>
+	 	 <p>Send a IQ.TYPE_SET packet to the server and with the fields that are listed in
+	 'getRequiredFieldNames()' set on this extension.
+	 Check the result and re-establish the connection with the new account.</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0077.html"><linktext>http://xmpp.org/extensions/xep-0077.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.register:RegisterExtension:RegisterExtension"><apiName>RegisterExtension</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>(Optional) The parent node used to build the XML tree.
+		 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.register:RegisterExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.register:RegisterExtension:getNS"><apiName>getNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.register:RegisterExtension:getRequiredFieldNames"><apiName>getRequiredFieldNames</apiName><shortdesc>
+		 In order to determine which fields are required for registration with a host,
+		 an entity SHOULD first send an IQ get to the host.</shortdesc><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiDesc>Names of the required fields
+		 </apiDesc><apiType value="Array"/></apiReturn></apiOperationDef><apiDesc>
+		 In order to determine which fields are required for registration with a host,
+		 an entity SHOULD first send an IQ get to the host. The entity SHOULD NOT attempt
+		 to guess at the required fields by first sending an IQ set, since the nature
+		 of the required data is subject to service provisioning.
+		 		 <p>All fields available in this XML, except "key" and "instructions" are required.</p>
+		 </apiDesc></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>query</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>jabber:iq:register</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:address:get"><apiName>address</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:city:get"><apiName>city</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:date:get"><apiName>date</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:email:get"><apiName>email</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:first:get"><apiName>first</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:instructions:get"><apiName>instructions</apiName><shortdesc>
+		 Use null to remove.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Use <codeph>null</codeph> to remove.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:key:get"><apiName>key</apiName><shortdesc>
+		 This element is obsolete, but is included here for historical completeness.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 This element is obsolete, but is included here for historical completeness.
+		 		 <p>The <b>key</b> element was used as a "transaction key" in certain
+		 IQ interactions in order to verify the identity of the sender. In particular,
+		 it was used by servers (but generally not services) during in-band registration,
+		 since normally a user does not yet have a 'from' address before registering.</p>
+		 		 <p>Use <codeph>null</codeph> to remove.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:last:get"><apiName>last</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:misc:get"><apiName>misc</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:nick:get"><apiName>nick</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:password:get"><apiName>password</apiName><shortdesc>
+		 The 'jabber:iq:register' namespace enables a user to change his or her
+		 password with a server or service.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The 'jabber:iq:register' namespace enables a user to change his or her
+		 password with a server or service. Once registered, the user can
+		 change passwords by setting <codeph>username</codeph> and <codeph>password</codeph>.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0077.html#usecases-changepw"><linktext>http://xmpp.org/extensions/xep-0077.html#usecases-changepw</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:phone:get"><apiName>phone</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:state:get"><apiName>state</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:text:get"><apiName>text</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:unregister:get"><apiName>unregister</apiName><shortdesc>
+		 The 'jabber:iq:register' namespace also makes it possible for an entity to cancel a
+		 registration with a host by sending a remove element in an IQ set.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 The 'jabber:iq:register' namespace also makes it possible for an entity to cancel a
+		 registration with a host by sending a <b>remove</b> element in an IQ set.
+		 The host MUST determine the identity of the requesting entity based on the 'from'
+		 address of the IQ get.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:url:get"><apiName>url</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:username:get"><apiName>username</apiName><shortdesc>
+		 The 'jabber:iq:register' namespace enables a user to change his or her
+		 password with a server or service.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The 'jabber:iq:register' namespace enables a user to change his or her
+		 password with a server or service. Once registered, the user can
+		 change passwords by setting <codeph>username</codeph> and <codeph>password</codeph>.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0077.html#usecases-changepw"><linktext>http://xmpp.org/extensions/xep-0077.html#usecases-changepw</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.register:RegisterExtension:zip:get"><apiName>zip</apiName><shortdesc>
+		 		 </shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 		 </apiDesc></apiValueDetail></apiValue></apiClassifier></apiPackage>

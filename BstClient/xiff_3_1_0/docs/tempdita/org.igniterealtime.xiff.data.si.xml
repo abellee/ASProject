@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><apiPackage id="org.igniterealtime.xiff.data.si"><apiName>org.igniterealtime.xiff.data.si</apiName><apiDetail/><apiClassifier id="org.igniterealtime.xiff.data.si:FileTransferExtension"><apiName>FileTransferExtension</apiName><shortdesc>
+	 XEP-0096: SI File Transfer.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0096: SI File Transfer.
+	 	 <p>To be used within XEP-0095: Stream Initiation</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0096.html"><linktext>http://xmpp.org/extensions/xep-0096.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.si:FileTransferExtension:FileTransferExtension"><apiName>FileTransferExtension</apiName><shortdesc>
+		 The size and name attributes MUST be present in the profile.</shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 The size and name attributes MUST be present in the profile.
+		 The other attributes MAY be present.
+		 		 <p>There are two possible child elements of the root: 'desc' and 'range'.
+		 Both are OPTIONAL.</p>
+		 		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.si:FileTransferExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.si:FileTransferExtension:getNS"><apiName>getNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.si:FileTransferExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>file</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.si:FileTransferExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>http://jabber.org/protocol/si/profile/file-transfer</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.si:FileTransferExtension:date:get"><apiName>date</apiName><shortdesc>
+		 The last modification time of the file.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Date"/></apiValueDef><apiDesc>
+		 The last modification time of the file.
+		 		 <p>This is specified using the DateTime profile as described in XMPP
+		 Date and Time Profiles.</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/extensions/xep-0082.html"><linktext>http://xmpp.org/extensions/xep-0082.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.si:FileTransferExtension:desc:get"><apiName>desc</apiName><shortdesc>
+		 Used to provide a sender-generated description of the file so the receiver
+		 can better understand what is being sent.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 Used to provide a sender-generated description of the file so the receiver
+		 can better understand what is being sent. It MUST NOT be sent in the result.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.si:FileTransferExtension:hasRange:get"><apiName>hasRange</apiName><shortdesc>
+		 When range is sent in the offer, it should have no attributes.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="Boolean"/></apiValueDef><apiDesc>
+		 When <codeph>range</codeph> is sent in the offer, it should have no attributes.
+		 This signifies that the sender can do ranged transfers.
+		 		 <p>Both <codeph>rangeOffset</codeph> and <codeph>rangeLength</codeph> attributes are OPTIONAL
+		 on the <codeph>range</codeph> element. Sending no attributes is synonymous with not sending
+		 the <codeph>range</codeph> element.</p>
+		 		 <p>When no <codeph>range</codeph> element is sent in the Stream Initiation result, the Sender MUST send
+		 the complete file starting at offset 0. More generally, data is sent over the stream
+		 byte for byte starting at the offset position for the length specified.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.si:FileTransferExtension:hash:get"><apiName>hash</apiName><shortdesc>
+		 The MD5 sum of the file contents.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The MD5 sum of the file contents.
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.si:FileTransferExtension:name:get"><apiName>name</apiName><shortdesc>
+		 The name of the file that the Sender wishes to send.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The name of the file that the Sender wishes to send.
+		 		 <p>REQUIRED</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.si:FileTransferExtension:rangeLength:get"><apiName>rangeLength</apiName><shortdesc>
+		 Specifies the number of bytes to retrieve starting at offset.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 Specifies the number of bytes to retrieve starting at offset.
+		 This defaults to the length of the file from offset to the end.
+		 		 <p>When a Stream Initiation result is sent with the <codeph>range</codeph> element, it uses this property.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.si:FileTransferExtension:rangeOffset:get"><apiName>rangeOffset</apiName><shortdesc>
+		 Specifies the position, in bytes, to start transferring the file data from.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 Specifies the position, in bytes, to start transferring the file data from.
+		 This defaults to zero (0) if not specified.
+		 		 <p>When a Stream Initiation result is sent with the <codeph>range</codeph> element, it uses this property.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.si:FileTransferExtension:size:get"><apiName>size</apiName><shortdesc>
+		 The size, in bytes, of the data to be sent.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="uint"/></apiValueDef><apiDesc>
+		 The size, in bytes, of the data to be sent.
+		 		 <p>REQUIRED</p>
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier><apiClassifier id="org.igniterealtime.xiff.data.si:StreamInitiationExtension"><apiName>StreamInitiationExtension</apiName><shortdesc>
+	 XEP-0095: Stream Initiation
+	 	 To be used with XEP-0096: SI File Transfer
+	 	 The si element is the root element for this
+	 protocol.</shortdesc><prolog><asMetadata/></prolog><apiClassifierDetail><apiClassifierDef><apiAccess value="public"/><apiStatic/><apiBaseInterface>org.igniterealtime.xiff.data:IExtension</apiBaseInterface><apiBaseClassifier>org.igniterealtime.xiff.data:Extension</apiBaseClassifier></apiClassifierDef><apiDesc>
+	 XEP-0095: Stream Initiation
+	 	 <p>To be used with XEP-0096: SI File Transfer</p>
+	 	 <p>The <b>si</b> element is the root element for this
+	 protocol. It is an identifiable container for all the information
+	 necessary for negotiation and signalling. It contains attributes
+	 for the identifier, intended MIME-type, and profile. The contents
+	 convey stream-negotation and profile information.</p>
+	 	 <p>When the Sender first negotiates a Stream Initiation, all of the
+	 attributes SHOULD be present, and the id" and "profile" MUST be
+	 present. The contents MUST contain one profile, in the namespace
+	 declared in the "profile" attribute, and the feature negotiation
+	 for the stream. The feature negotiation MUST contain at least one
+	 option and use the field var "stream-method".</p>
+	 	 <p>When the Receiver accepts a Stream Initiation, the
+	 <b>si</b> element SHOULD NOT possess any attributes.
+	 The selected stream MUST be in the feature negotiation for the
+	 stream. There MUST only be one selected stream.</p>
+	 	 </apiDesc></apiClassifierDetail><related-links><link href="http://xmpp.org/extensions/xep-0095.html"><linktext>http://xmpp.org/extensions/xep-0095.html</linktext></link></related-links><apiConstructor id="org.igniterealtime.xiff.data.si:StreamInitiationExtension:StreamInitiationExtension"><apiName>StreamInitiationExtension</apiName><shortdesc>
+		 </shortdesc><prolog/><apiConstructorDetail><apiConstructorDef><apiAccess value="public"/><apiParam><apiItemName>parent</apiItemName><apiType value="XML"/><apiData>null</apiData><apiDesc>	 </apiDesc></apiParam></apiConstructorDef><apiDesc>
+		 </apiDesc></apiConstructorDetail></apiConstructor><apiOperation id="org.igniterealtime.xiff.data.si:StreamInitiationExtension:getElementName"><apiName>getElementName</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiOperation id="org.igniterealtime.xiff.data.si:StreamInitiationExtension:getNS"><apiName>getNS</apiName><shortdesc/><prolog/><apiOperationDetail><apiOperationDef><apiAccess value="public"/><apiReturn><apiType value="String"/></apiReturn></apiOperationDef></apiOperationDetail></apiOperation><apiValue id="org.igniterealtime.xiff.data.si:StreamInitiationExtension:ELEMENT_NAME"><apiName>ELEMENT_NAME</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>si</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.si:StreamInitiationExtension:NS"><apiName>NS</apiName><shortdesc/><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>http://jabber.org/protocol/si</apiData><apiType value="String"/></apiValueDef></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.si:StreamInitiationExtension:PROFILE_PREFIX"><apiName>PROFILE_PREFIX</apiName><shortdesc>
+		 The SUGGESTED format for profile namespaces is, followed by the profile name.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiAccess value="public"/><apiStatic/><apiData>http://jabber.org/protocol/si/profile/</apiData><apiType value="String"/></apiValueDef><apiDesc>
+		 The SUGGESTED format for profile namespaces is, followed by the profile name.
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://xmpp.org/registrar/si-profiles.html"><linktext>http://xmpp.org/registrar/si-profiles.html</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.si:StreamInitiationExtension:id:get"><apiName>id</apiName><shortdesc>
+		 The "id" attribute is an opaque identifier.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The "id" attribute is an opaque identifier.
+		 		 <p>This attribute MUST be present on type='set',
+		 and MUST be a valid string. This SHOULD NOT be sent back on
+		 type='result', since the <b>iq</b> "id" attribute
+		 provides the only context needed. This value is generated
+		 by the Sender, and the same value MUST be used throughout
+		 a session when talking to the Receiver.</p>
+		 </apiDesc></apiValueDetail></apiValue><apiValue id="org.igniterealtime.xiff.data.si:StreamInitiationExtension:mimeType:get"><apiName>mimeType</apiName><shortdesc>
+		 The "mime-type" attribute identifies the MIME-type for
+		 the data across the stream.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The "mime-type" attribute identifies the MIME-type for
+		 the data across the stream.
+		 		 <p>This attribute MUST be a valid MIME-type as registered
+		 with the Internet Assigned Numbers Authority (IANA).</p>
+		 		 <p>During negotiation, this attribute SHOULD be present, and is
+		 otherwise not required. If not included during negotiation, its value
+		 is assumed to be "application/octet-stream".</p>
+		 		 </apiDesc></apiValueDetail><related-links><link href="http://www.iana.org/assignments/media-types"><linktext>http://www.iana.org/assignments/media-types</linktext></link></related-links></apiValue><apiValue id="org.igniterealtime.xiff.data.si:StreamInitiationExtension:profile:get"><apiName>profile</apiName><shortdesc>
+		 The "profile" attribute defines the SI profile in use.</shortdesc><prolog/><apiValueDetail><apiValueDef><apiProperty/><apiAccess value="public"/><apiDynamic/><apiValueAccess value="readwrite"/><apiType value="String"/></apiValueDef><apiDesc>
+		 The "profile" attribute defines the SI profile in use.
+		 		 <p>This value MUST be present during negotiation,
+		 and is the namespace of the profile to use.</p>
+		 		 <p>TODO: Check validity against PROFILE_PREFIX.</p>
+		 </apiDesc></apiValueDetail></apiValue></apiClassifier></apiPackage>
