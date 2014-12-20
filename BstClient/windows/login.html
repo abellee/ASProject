@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>百斯特客服系统</title>
+</head>
+<link href="../css/bootstrap.css" media="all" rel="stylesheet"/>
+<link href="../css/ladda-themeless.min.css" media="all" rel="stylesheet"/>
+
+<link href="../css/sco/scojs.css" media="all" rel="stylesheet"/>
+<link href="../css/sco/sco.message.css" media="all" rel="stylesheet"/>
+
+<link href="../css/app.css" media="all" rel="stylesheet"/>
+
+<body>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix" id="dragZone">
+			<h2 class="panel-title system-font pull-left" style="font-size:20px;padding-top:4px;">
+				百斯特客服系统
+			</h2>
+			<div class="btn-group pull-right">
+	        	<a href="#" class="btn btn-primary btn-sm" id="closeBtn">
+	        		<span class="glyphicon glyphicon-remove"></span>
+	        	</a>
+	      	</div>
+		</div>
+		<div class="panel-body">
+			<form role="form">
+				<div class="form-group" style="margin-top:30px;">
+					<img src="../img/logo.png" width="250" class="center-block">
+				</div>
+				<div class="form-group form-group-lg" style="padding-top:10px;">
+					<div class="input-group">
+						<div class="input-group-addon system-font">用户名:</div>
+						<input class="form-control" type="text" placeholder="请输入用户名" id="username">
+					</div>
+				</div>
+				<div class="form-group form-group-lg">
+					<div class="input-group">
+						<div class="input-group-addon system-font">密&nbsp;&nbsp;&nbsp;&nbsp;码:</div>
+						<input class="form-control" type="password" placeholder="请输入密码" id="password">
+					</div>
+				</div>
+				<div class="form-group form-group-lg">
+					<div class="input-group checkbox">
+						<label>
+							<input type="checkbox" id="autoLogin">自动登录
+						</label>
+					</div>
+				</div>
+				<div class="form-group" style="padding-bottom:10px;">
+					<button type="button" class="btn btn-primary system-font btn-block btn-lg ladda-button" id="submitBtn" data-style="expand-right"><span class="ladda-label">登 录</span></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="../js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/spin.min.js"></script>
+<script type="text/javascript" src="../js/ladda.min.js"></script>
+
+<script type="text/javascript" src="../js/sco/sco.message.js"></script>
+
+<script type="text/javascript" src="../js/login.js"></script>
+</html>

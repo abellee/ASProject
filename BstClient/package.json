@@ -1,0 +1,17 @@
+{
+  "name": "百斯特客服系统",
+  "main": "index.html",
+  "version": "0.1",
+  "window": {
+    "title": "百斯特客服系统",
+    "icon": "img/logo.png",
+    "toolbar": false,
+    "frame": false,
+    "transparent": true,
+    "fullscreen": false,
+    "show": false
+  },
+  "webkit": {
+    "plugin": true
+  }
+}

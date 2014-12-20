@@ -1,0 +1,31 @@
+@font-face{
+	font-family: SHSC;
+	src:url(../fonts/SourceHanSansCN-Light.otf);
+}
+
+.system-font{
+	font-family:"SHSC";
+}
+
+.modal-class{
+	text-align: center;
+}
+html, body{overflow-y:hidden !important;background-color:rgba(255,255,255,0);cursor:default;-webkit-user-select:none;height:100%;position:relative;}
+
+@keyframes refresh
+{
+	0%{transform:rotate(0deg);}
+	100%{transform:rotate(360deg);}
+}
+@-webkit-keyframes refresh
+{
+	0%{-webkit-transform:rotate(0deg);}
+	100%{-webkit-transform:rotate(360deg);}
+}
+.refresh-motion{
+	-webkit-animation:refresh 500ms normal 0 infinite;
+	animation:refresh 500ms normal 0 infinite;
+	-webkit-animation-fill-mode:forwards;
+	animation-fill-mode:forwards;
+	line-height: 100px;
+}
