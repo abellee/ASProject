@@ -2,17 +2,21 @@ var gui = require("nw.gui");
 var baseWindow;
 var win = gui.Window.get();
 
+$(".panel-title").text(gui.App.manifest.name);
+
 var startPosX, startPosY;
+
 win.showDevTools("", false);
+
 $("#closeBtn").on("mousedown", function(event){
 	event.stopPropagation();
 });
 
 $("#closeBtn").on("mouseup", function(){
-	if(localStorage.exitType){
-		if(localStorage.isexit){
+	if(localStorage.exitType == "true"){
+		if(localStorage.isexit == "true"){
 			gui.App.quit();
-		}else if(localStorage.hide){
+		}else if(localStorage.hide == "true"){
 			win.hide();
 		}
 		return;
@@ -23,14 +27,14 @@ $("#closeBtn").on("mouseup", function(){
 		action: function(){
 			if($("#quitRadio").is(":checked")){
 				localStorage.exitType = true;
-				gui.App.quit();
 				localStorage.isexit = true;
 				localStorage.hide = false;
+				gui.App.quit();
 			}else if($("#hideRadio").is(":checked")){
 				localStorage.exitType = true;
-				win.hide();
 				localStorage.hide = true;
 				localStorage.isexit = false;
+				win.hide();
 			}
 		}
 	});
@@ -62,10 +66,6 @@ $(document).on("mouseup", function(event){
 	$("#dragZone").css("cursor", "default");
 });
 
-function confirmCloseType(){
-
-}
-
 function onDisconnect(){
 	var modal = $.scojs_modal({
 		content: '<i class="glyphicon glyphicon-repeat refresh-motion" style="font-size:30px;"></i>',
@@ -77,4 +77,51 @@ function onDisconnect(){
 	});
 	modal.show();
 	baseWindow.relogin();
+}
+
+$("#sendBtn").on("click", function(event){
+	var txt = $("#textArea").val();
+	if(txt == ""){
+		return;
+	}
+
+	var time = "";
+	var curDate = new Date();
+	var monthInt = curDate.getMonth() + 1;
+	var monthStr = monthInt < 10 ? "0" + monthInt : monthInt + "";
+	var dateInt = curDate.getDate();
+	var dateStr = dateInt < 10 ? "0" + dateInt : dateInt + "";
+	var hourInt = curDate.getHours();
+	var hourStr = hourInt < 10 ? "0" + hourInt : hourInt + "";
+	var minuteInt = curDate.getMinutes();
+	var minuteStr = minuteInt < 10 ? "0" + minuteInt : minuteInt + "";
+	var secondInt = curDate.getSeconds();
+	var secondStr = secondInt < 10 ? "0" + secondInt : secondInt + "";
+	time = curDate.getFullYear() + "-" + monthStr + "-" + dateStr + " " + hourStr + ":" + minuteStr + ":" + secondStr;
+
+	$("#textArea").val("");
+	var html = template("chatTemp", {name: "百斯特客服", self: 1, msg: txt, company: "", pos: "", time: time, type: "text"});
+	$("#chatList").append(html);
+	scrollToBottom();
+
+	baseWindow.sendMessage("abellee", {name: "百斯特客服", self: 0, msg: txt , company: "", pos: "", jid: "abellee@abeltekimacbook-pro.local", branch: "", t: time, tn: curDate.getTime(), type: "text"});
+});
+
+$("#textArea").on("keydown", function(event){
+	if(event.keyCode == 13){
+		$("#sendBtn").trigger("click");
+		event.preventDefault();
+		return false;
+	}
+});
+
+function onMessage(message){
+	console.log(message);
+	var html = template("chatTemp", {name: message.name, self: 0, msg: message.msg, company: message.company, pos: message.pos, time: message.t, branch: message.branch, type: message.type});
+	$("#chatList").append(html);
+	scrollToBottom();
+}
+
+function scrollToBottom(){
+	$("#chatList").scrollTop($("#chatList")[0].scrollHeight);
 }

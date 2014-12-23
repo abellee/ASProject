@@ -1,15 +1,22 @@
 var gui = require("nw.gui");
+var needle = require("needle");
 var win = gui.Window.get();
 var baseWindow;
 var startPosX, startPosY;
 var ladda;
+var username;
+var password;
+
+// win.showDevTools("", false);
+
+$(".panel-title").text(gui.App.manifest.name);
 
 $("#closeBtn").on("mousedown", function(event){
 	event.stopPropagation();
 });
 
 $("#closeBtn").on("mouseup", function(){
-	win.close();
+	gui.App.quit();
 });
 
 $("#dragZone").on("mousedown", function(event){
@@ -36,8 +43,8 @@ $(window).on("keydown", function(event){
 });
 
 $("#submitBtn").on("click", function(){
-	var username = $("#username").val();
-	var password = $("#password").val();
+	username = $("#username").val();
+	password = $("#password").val();
 	if(username == "" || password == ""){
 		alert("用户名或密码不能为空!");
 		return;
@@ -48,7 +55,14 @@ $("#submitBtn").on("click", function(){
 	ladda = Ladda.create(this);
 	ladda.start();
 	$.scojs_message('正在连接服务器......', $.scojs_message.TYPE_OK);
-	baseWindow.doLogin(username, password);
+	needle.post("http://192.168.2.103/bst/bst/services/login", {un: username, pw: password}, {multipart: true}, function(err, res, body){
+		if(!body || !body.success){
+			loginFailed('登录失败，请稍候再试...');
+		}else{
+			baseWindow.setServiceData(body.data);
+			baseWindow.doLogin(username, password);
+		}
+	});
 });
 
 function loginFailed(msg){
@@ -60,8 +74,6 @@ function loginFailed(msg){
 }
 
 function loginSuccess(){
-	var username = $("#username").val();
-	var password = $("#password").val();
 	if($("#autoLogin").is(":checked")){
 		localStorage.un = username;
 		localStorage.pw = password;

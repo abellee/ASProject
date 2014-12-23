@@ -1,19 +1,33 @@
-var mode = "develop";
-var flash;
-var curUsername;
-var userPassword;
-
-var soundNode;
-
-var messageList = {};
-
 var gui = require("nw.gui");
-// var needle = require("needle");
 var win = gui.Window.get();
-win.showDevTools('', false);
+// win.showDevTools('', false);
 
+var tray = new gui.Tray({title: gui.App.manifest.name, icon: "img/tray.png"});
+var menu = new gui.Menu();
+var logout = new gui.MenuItem({label: '注销'});
+var exit = new gui.MenuItem({label: '退出'});
+menu.append(logout);
+menu.append(exit);
+tray.menu = menu;
+logout.on("click", function(){
+	localStorage.removeItem("auto");
+	disconnect();
+});
+exit.on("click", function(){
+	gui.App.quit();
+});
+
+var flash;
+var user = {};
+var soundNode;
+var messageList = {};
 var login;
 var chat;
+
+tray.on("click", function(){
+	chat.show();
+	chat.focus();
+});
 
 function openLoginWindow(){
 	login = gui.Window.open('windows/login.html', {
@@ -97,11 +111,26 @@ function closeAllWindow(){
 	}
 }
 
+function setServiceData(data){
+	user.data = data;
+}
+
+function cacheHistory(message){
+	if(!messageList[message.jid]){
+		messageList[message.jid] = {
+			name: message.name,
+			jid: message.jid,
+			company: message.company,
+			pos: message.pos,
+			branch: message.branch,
+			history: []
+		};
+	}
+	messageList[message.jid].history.push(message);
+}
+
 
 //for flash api
-function onConnectSuccess(){
-	
-}
 
 function onDisconnect(){
 	chat.window.onDisconnect();
@@ -110,6 +139,10 @@ function onDisconnect(){
 function onLogin(){
 	login.window.loginSuccess();
 	openChatWindow();
+}
+
+function onIncoming(data){
+	console.log(data);
 }
 
 function onError(info){
@@ -127,22 +160,29 @@ function onMessage(message){
 		soundNode.volumn = 1;
 	}
 	soundNode.play();
+	cacheHistory(message);
+	chat.window.onMessage(message);
 }
 
 
 //for js api
 function doLogin(un, pw){
-	curUsername = un;
-	curPassword = pw;
+	user.un = un;
+	user.pw = pw;
 	flash.connect(un, pw);
 }
 
 function relogin(){
-	doLogin(curUsername, curPassword);
+	doLogin(user.un, user.pw);
 }
 
 function disconnect(){
 	flash.disconnect();
 	closeAllWindow();
 	win.reloadIgnoringCache();
+}
+
+function sendMessage(to, content){
+	cacheHistory(content);
+	flash.sendMessage(to, encodeURIComponent(JSON.stringify(content)));
 }

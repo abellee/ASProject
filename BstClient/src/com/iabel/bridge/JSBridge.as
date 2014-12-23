@@ -29,7 +29,6 @@ package com.iabel.bridge
 		}
 		
 		public static function call(cmd:Command):void {
-			var str:String = JSON.stringify(cmd.data);
 			if (!ExternalInterface.available) {
 				return;
 			}

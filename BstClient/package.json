@@ -4,7 +4,7 @@
   "version": "0.1",
   "window": {
     "title": "百斯特客服系统",
-    "icon": "img/logo.png",
+    "icon": "img/icon.png",
     "toolbar": false,
     "frame": false,
     "transparent": true,

@@ -94,7 +94,7 @@ package com.iabel
 		
 		private function sendMessage(to:String, content:String):void {
 			var msg:Message = new Message();
-			msg.to = new EscapedJID(to);
+			msg.to = new EscapedJID(to + "@" + Config.domain);
 			msg.body = content;
 			connection.send(msg);
 		}
@@ -116,15 +116,43 @@ package com.iabel
 		}
 		
 		private function onInCommingData(event:IncomingDataEvent):void {
-			trace(event.data.toString());
+			JSBridge.call(new Command(CommandType.INCOMING, event.data.toString()));
 		}
 		
 		private function onMessage(event:MessageEvent):void {
 			var msg:Message = event.data;
-			JSBridge.call(new Command(CommandType.MESSAGE, {from: msg.from.bareJID, to: msg.to.bareJID, msg: msg.body} ));
+			if (msg.body == "") return;
+			var time:String = "";
+			var curDate:Date = new Date();
+			if (msg.time) {
+				curDate = msg.time;
+			}
+			var monthInt:int = curDate.getMonth() + 1;
+			var monthStr:String = monthInt < 10 ? "0" + monthInt : monthInt + "";
+			var dateInt:int = curDate.getDate();
+			var dateStr:String = dateInt < 10 ? "0" + dateInt : dateInt + "";
+			var hourInt:int = curDate.getHours();
+			var hourStr:String = hourInt < 10 ? "0" + hourInt : hourInt + "";
+			var minuteInt:int = curDate.getMinutes();
+			var minuteStr:String = minuteInt < 10 ? "0" + minuteInt : minuteInt + "";
+			var secondInt:int = curDate.getSeconds();
+			var secondStr:String = secondInt < 10 ? "0" + secondInt : secondInt + "";
+			time = curDate.getFullYear() + "-" + monthStr + "-" + dateStr + " " + hourStr + ":" + minuteStr + ":" + secondStr;
+			
+			var obj:Object = JSON.parse(decodeURIComponent(msg.body));
+			if (obj.msg == "\n") return;
+			var company:String = obj.company;
+			var pos:String = obj.pos;
+			var name:String = obj.name;
+			var duration:Number = 0;
+			if (obj.type == "audio") {
+				duration = obj.duration;
+			}
+			JSBridge.call(new Command(CommandType.MESSAGE, {jid: msg.from.bareJID, to: msg.to.bareJID, msg: obj.msg, t: time, tn: curDate.getTime(), company:company, pos: pos, name: name, brach: obj.branch, type:obj.type, duration: duration} ));
 		}
 		
 		private function onOutgoingData(event:OutgoingDataEvent):void {
+			
 		}
 		
 		private function onPresence(event:PresenceEvent):void {

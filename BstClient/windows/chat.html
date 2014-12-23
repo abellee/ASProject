@@ -15,7 +15,7 @@
 	<div class="panel panel-primary" style="height:100%;">
 		<div class="panel-heading clearfix" id="dragZone">
 			<h2 class="panel-title system-font pull-left" style="font-size:20px;padding-top:4px;">
-				百斯特客服系统
+				
 			</h2>
 			<div class="btn-group pull-right">
 	        	<a href="#" class="btn btn-primary btn-sm" id="closeBtn">
@@ -38,7 +38,7 @@
 							<div class="col-xs-12" style="height:100%;-webkit-user-select:text;padding:0px;">
 								<div class="panel panel-default" style="height:100%;margin:0px;border-radius: 0px 4px 0px 0px;border-left:none;border-bottom:none;">
 									<div class="panel-body" style="height:100%;">
-										
+										<div class="col-xs-12" id="chatList" style="overflow-x:hidden;overflow-y:auto;height:100%;"></div>
 									</div>
 								</div>
 							</div>
@@ -48,7 +48,7 @@
 								<div class="panel panel-default" style="border-radius: 0px 0px 4px 0px;border-left:none;">
 									<div class="panel-body">
 										<div class="input-group">
-											<textarea class="form-control" rows="4" style="resize:none;">123</textarea>
+											<textarea class="form-control" rows="4" style="resize:none;" id="textArea"></textarea>
 											<div class="input-group-btn">
 												<button type="button" class="btn btn-default system-font btn-block btn-lg" id="sendBtn" style="width:80px;height:94px;">发送</button>
 											</div>
@@ -63,11 +63,31 @@
 		</div>
 	</div>
 </body>
+
+<script id="chatTemp" type="text/html">
+<div class="col-xs-12 {{if self == 1}}self{{else}}target{{/if}} name-size">
+{{name}}{{if branch && branch != ""}}({{branch}} {{company}} {{pos}}){{/if}} {{time}}
+</div>
+<div class="col-xs-12" is-self="{{self}}">
+	<ul class="content-size">
+		<li>{{if type == "text"}}
+				{{msg}}
+			{{/if}}
+			{{if type == "image"}}
+				<img src="data:image/jpeg;base64,{{msg}}" width="320" />
+			{{/if}}
+			{{if type == "audio"}}
+				<audio controls="controls"><source src="http://192.168.2.103/bst/public/upload/message/{{msg}}" /></audio>
+			{{/if}}
+		</li>
+	</ul>
+</div>
+</script>
+
 <script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="../js/jquery.cookie.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/template.js"></script>
-<script type="text/javascript" src="../js/template-syntax.js"></script>
 
 <script type="text/javascript" src="../js/sco/sco.modal.js"></script>
 <script type="text/javascript" src="../js/sco/sco.confirm.js"></script>

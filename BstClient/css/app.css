@@ -10,6 +10,20 @@
 .modal-class{
 	text-align: center;
 }
+
+.target{
+	color:blue;
+}
+.self{
+	color:#6fd87b;
+}
+.name-size{
+	font-size:14px;
+}
+.content-size{
+	font-size:12px;
+	padding-left:30px;
+}
 html, body{overflow-y:hidden !important;background-color:rgba(255,255,255,0);cursor:default;-webkit-user-select:none;height:100%;position:relative;}
 
 @keyframes refresh
