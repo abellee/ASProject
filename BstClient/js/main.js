@@ -1,5 +1,7 @@
 var gui = require("nw.gui");
 var win = gui.Window.get();
+var fs = require("fs");
+var path = require("path");
 // win.showDevTools('', false);
 
 var tray = new gui.Tray({title: gui.App.manifest.name, icon: "img/tray.png"});
@@ -14,7 +16,7 @@ logout.on("click", function(){
 	disconnect();
 });
 exit.on("click", function(){
-	gui.App.quit();
+	exitApp();
 });
 
 var flash;
@@ -29,12 +31,21 @@ tray.on("click", function(){
 	chat.focus();
 });
 
+$(document).ready(function(){
+	if(!fs.existsSync("cache")){
+		fs.mkdirSync("cache", 0777);
+	}
+	openLoginWindow();
+	flash = document["xmppLib"];
+});
+
 function openLoginWindow(){
 	login = gui.Window.open('windows/login.html', {
 		"position": 'center',
 		"width": 350,
 		"height": 485,
 		"resizable": false,
+		"icon": "img/icon.png",
 		"toolbar": false,
 		"frame": false,
 		"transparent": true,
@@ -52,10 +63,6 @@ function initLogin(){
 	login.window.baseWindow = window;
 }
 
-function exitApp(){
-	gui.App.quit();
-}
-
 function openChatWindow(){
 	if(login){
 		login.removeAllListeners();
@@ -66,6 +73,7 @@ function openChatWindow(){
 		"position": 'center',
 		"width": 800,
 		"height": 600,
+		"icon": "img/icon.png",
 		"toolbar": false,
 		"frame": false,
 		"transparent": true,
@@ -76,6 +84,22 @@ function openChatWindow(){
 	chat.on("loaded", initChat);
 }
 
+function exitApp(){
+	if(!fs.existsSync("cache")){
+		fs.mkdirSync("cache", 0777);
+	}
+	if(user.un){
+		fs.open("cache/cache_" + user.un + ".json", "w", 0777, function(e, fd){
+			fs.write(fd, JSON.stringify(messageList), 0, 'utf8', function(e){
+				fs.closeSync(fd);
+				gui.App.quit();
+			});
+		});
+	}else{
+		gui.App.quit();
+	}
+}
+
 function initChat(){
 	chat.removeAllListeners();
 	chat.show();
@@ -83,20 +107,19 @@ function initChat(){
 	chat.window.baseWindow = window;
 	chat.on("focus", chatOnFocus);
 	chat.on("blur", chatOnBlur);
+
+	if(messageList){
+		for(var k in messageList){
+			chat.window.newClient(messageList[k]);
+		}
+	}
 }
 
 function chatOnFocus(){
-	console.log("focus");
 }
 
 function chatOnBlur(){
-	console.log("blur");
 }
-
-$(document).ready(function(){
-	openLoginWindow();
-	flash = document["xmppLib"];
-});
 
 function closeAllWindow(){
 	if(chat){
@@ -123,10 +146,28 @@ function cacheHistory(message){
 			company: message.company,
 			pos: message.pos,
 			branch: message.branch,
+			unread: 0,
 			history: []
 		};
 	}
 	messageList[message.jid].history.push(message);
+	messageList[message.jid].unread += 1;
+	if(chat){
+		chat.window.newClient(messageList[message.jid]);
+	}
+}
+
+function clearUnread(jid){
+	if(messageList[jid]){
+		messageList[jid].unread = 0;
+	}
+}
+
+function getMessageHistory(jid){
+	if(messageList[jid]){
+		return messageList[jid].history;
+	}
+	return null;
 }
 
 
@@ -137,12 +178,16 @@ function onDisconnect(){
 }
 
 function onLogin(){
+	if(user.un){
+		var file = fs.readFileSync("cache/cache_" + user.un + ".json", "utf8");
+		messageList = file ? JSON.parse(file) : {};
+	}
+
 	login.window.loginSuccess();
 	openChatWindow();
 }
 
 function onIncoming(data){
-	console.log(data);
 }
 
 function onError(info){

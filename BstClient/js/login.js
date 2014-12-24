@@ -16,7 +16,7 @@ $("#closeBtn").on("mousedown", function(event){
 });
 
 $("#closeBtn").on("mouseup", function(){
-	gui.App.quit();
+	baseWindow.exitApp();
 });
 
 $("#dragZone").on("mousedown", function(event){
@@ -79,7 +79,7 @@ function loginSuccess(){
 		localStorage.pw = password;
 		localStorage.auto = true;
 	}else{
-		localStorage.auto = false;
+		localStorage.removeItem("auto");
 	}
 	ladda.stop();
 }

@@ -28,8 +28,8 @@
 				<div class="row" style="height:100%">
 					<div class="col-xs-2" style="padding:0px;height:90.1%;">
 						<div class="panel panel-default" style="height:100%;margin:0px;border-radius: 4px 0px 0px 4px;">
-							<div class="panel-body" style="height:100%;">
-								
+							<div class="panel-body" style="height:100%;padding:0px;">
+								<ul class="nav nav-pills nav-stacked" role="tablist" id="tabList"></ul>
 							</div>
 						</div>
 					</div>
@@ -82,6 +82,13 @@
 		</li>
 	</ul>
 </div>
+</script>
+
+<script id="clientTab" type="text/html">
+<li role="presentation" full-name="{{name}}" jid="{{jid}}"><a href="#">{{truncName(name)}}{{if unread > 0}}<span class="badge pull-right" style="background-color:#d93539;color:white;">{{unread}}</span>{{/if}}</a></li>
+</script>
+<script id="badgeTemp" type="text/html">
+<span class="badge pull-right" style="background-color:#d93539;color:white;">{{unread}}</span>
 </script>
 
 <script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>

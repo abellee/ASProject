@@ -2,11 +2,20 @@ var gui = require("nw.gui");
 var baseWindow;
 var win = gui.Window.get();
 
+template.helper("truncName", truncName);
+
+function truncName(full){
+	if(full.length > 4){
+		return full.substring(0, 3) + "...";
+	}
+	return full;
+}
+
 $(".panel-title").text(gui.App.manifest.name);
 
 var startPosX, startPosY;
 
-win.showDevTools("", false);
+// win.showDevTools("", false);
 
 $("#closeBtn").on("mousedown", function(event){
 	event.stopPropagation();
@@ -15,7 +24,7 @@ $("#closeBtn").on("mousedown", function(event){
 $("#closeBtn").on("mouseup", function(){
 	if(localStorage.exitType == "true"){
 		if(localStorage.isexit == "true"){
-			gui.App.quit();
+			baseWindow.exitApp();
 		}else if(localStorage.hide == "true"){
 			win.hide();
 		}
@@ -29,7 +38,7 @@ $("#closeBtn").on("mouseup", function(){
 				localStorage.exitType = true;
 				localStorage.isexit = true;
 				localStorage.hide = false;
-				gui.App.quit();
+				baseWindow.exitApp();
 			}else if($("#hideRadio").is(":checked")){
 				localStorage.exitType = true;
 				localStorage.hide = true;
@@ -116,12 +125,62 @@ $("#textArea").on("keydown", function(event){
 });
 
 function onMessage(message){
-	console.log(message);
-	var html = template("chatTemp", {name: message.name, self: 0, msg: message.msg, company: message.company, pos: message.pos, time: message.t, branch: message.branch, type: message.type});
-	$("#chatList").append(html);
-	scrollToBottom();
+	var exist = $('#tabList li[jid="' + message.jid + '"]');
+	if(exist[0] && exist.hasClass("active")){
+		var html = template("chatTemp", {name: message.name, self: 0, msg: message.msg, company: message.company, pos: message.pos, time: message.t, branch: message.branch, type: message.type});
+		baseWindow.clearUnread(message.jid);
+		$("#chatList").append(html);
+		scrollToBottom();
+	}
 }
 
 function scrollToBottom(){
 	$("#chatList").scrollTop($("#chatList")[0].scrollHeight);
 }
+
+function newClient(data){
+	var exist = $('#tabList li[jid="' + data.jid + '"]');
+	if(!exist[0]){
+		var html = template("clientTab", data);
+		$("#tabList").append(html);
+		$("#tabList li").on("click", clientTabClicked);
+	}else{
+		var badgeNode = exist.children("a").children("span");
+		if(!exist.hasClass("active")){
+			if(badgeNode[0]){
+				badgeNode.text(data.unread);
+			}else{
+				exist.children("a").append(template("badgeTemp", data));
+			}
+		}
+	}
+}
+
+function clientTabClicked(event){
+	var node = $(event.currentTarget);
+	if(!node.hasClass("active")){
+		$("#textArea").val("");
+		$("#chatList").empty();
+		node.siblings().removeClass("active");
+		node.addClass("active");
+		var badgeNode = node.children("a").children("span");
+		if(badgeNode[0]){
+			badgeNode.remove();
+		}
+		baseWindow.clearUnread(node.attr("jid"));
+		$("#textArea").removeAttr("readonly");
+		var arr = baseWindow.getMessageHistory(node.attr("jid"));
+		if(arr && arr.length){
+			arr.forEach(function(msg){
+				onMessage(msg);
+			});
+		}
+	}
+}
+
+function resetChat(){
+	$("#textArea").val("");
+	$("#textArea").attr("readonly", "readonly");
+	$("#chatList").empty();
+}
+resetChat();
