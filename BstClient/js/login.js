@@ -55,7 +55,7 @@ $("#submitBtn").on("click", function(){
 	ladda = Ladda.create(this);
 	ladda.start();
 	$.scojs_message('正在连接服务器......', $.scojs_message.TYPE_OK);
-	needle.post("http://192.168.2.103/bst/bst/services/login", {un: username, pw: password}, {multipart: true}, function(err, res, body){
+	needle.post("http://121.40.209.18/bst/bst/services/login", {un: username, pw: password}, {multipart: true}, function(err, res, body){
 		if(!body || !body.success){
 			loginFailed('登录失败，请稍候再试...');
 		}else{

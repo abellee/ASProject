@@ -2,7 +2,25 @@ var gui = require("nw.gui");
 var win = gui.Window.get();
 var fs = require("fs");
 var path = require("path");
+var flashTrust = require('nw-flash-trust');
 // win.showDevTools('', false);
+
+var appName = "aibest";
+
+var filename = global.module.filename;
+var arr = filename.split("/");
+arr.pop();
+var appDir = arr.join("\\");
+try {
+    var trustManager = flashTrust.initSync(appName);
+    var isTrusted = trustManager.isTrusted(path.resolve(appDir, ''));
+    if(!isTrusted){
+    	trustManager.add(path.resolve(appDir, ''));
+    }
+} catch(err) {
+    if (err.message === 'Flash Player config folder not found.') {
+    }
+}
 
 var tray = new gui.Tray({title: gui.App.manifest.name, icon: "img/tray.png"});
 var menu = new gui.Menu();
@@ -115,7 +133,8 @@ function initChat(){
 	}
 }
 
-function chatOnFocus(){
+function chatOnFocus(msg){
+	console.log(msg);
 }
 
 function chatOnBlur(){
@@ -178,11 +197,13 @@ function onDisconnect(){
 }
 
 function onLogin(){
+	console.log("onLogin", user.un);
 	if(user.un){
-		var file = fs.readFileSync("cache/cache_" + user.un + ".json", "utf8");
-		messageList = file ? JSON.parse(file) : {};
+		if(fs.existsSync("cache/cache_" + user.un + ".json")){
+			var file = fs.readFileSync("cache/cache_" + user.un + ".json", "utf8")
+			messageList = JSON.parse(file);
+		}
 	}
-
 	login.window.loginSuccess();
 	openChatWindow();
 }
@@ -212,6 +233,7 @@ function onMessage(message){
 
 //for js api
 function doLogin(un, pw){
+	console.log(un, pw);
 	user.un = un;
 	user.pw = pw;
 	flash.connect(un, pw);

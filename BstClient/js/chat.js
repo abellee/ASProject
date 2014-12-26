@@ -113,7 +113,10 @@ $("#sendBtn").on("click", function(event){
 	$("#chatList").append(html);
 	scrollToBottom();
 
-	baseWindow.sendMessage("abellee", {name: "百斯特客服", self: 0, msg: txt , company: "", pos: "", jid: "abellee@abeltekimacbook-pro.local", branch: "", t: time, tn: curDate.getTime(), type: "text"});
+	var cur = $('#tabList li[class="active"]');
+	var acc = cur.attr("jid");
+	var arr = acc.split("@");
+	baseWindow.sendMessage(arr[0], {name: "百斯特客服", self: 0, msg: txt , company: "", pos: "", jid: acc, branch: "", t: time, tn: curDate.getTime(), type: "text"});
 });
 
 $("#textArea").on("keydown", function(event){
