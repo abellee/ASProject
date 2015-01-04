@@ -59,7 +59,6 @@ package com.iabel
 		}
 		
 		private function init() : void {
-			System.useCodePage = true;
 			Security.loadPolicyFile(Config.host + ":" + Config.crossdomain_port);
 			Security.allowDomain("*");
 			Security.allowInsecureDomain("*");
